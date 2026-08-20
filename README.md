@@ -7,7 +7,8 @@ The first version targets a default 12-team, full-PPR redraft league. A later ph
 
 ## Project status
 
-Work in progress. Project setup, source inspection, historical extraction, MySQL staging, grain validation, join-coverage auditing, and full-PPR reconciliation are complete. Clean analytical tables and leakage-safe feature engineering are next.
+Work in progress. Project setup, source inspection, historical extraction, MySQL staging, clean analytical tables, grain validation, join-coverage
+auditing, and full-PPR reconciliation are complete. Leakage-safe feature engineering and one-week-ahead model dataset construction are next.
 
 ## Decisions supported
 

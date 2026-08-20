@@ -450,11 +450,9 @@ FROM (
         pos_rank
     HAVING COUNT(*) > 1
 ) AS duplicate_groups
-
 UNION ALL
-
 SELECT
-    'timestamped' AS depth_source_format,,
+    'timestamped' AS depth_source_format,
     COUNT(*) AS duplicate_key_groups
 FROM (
     SELECT
