@@ -2,7 +2,7 @@
 
 ## Project status
 
-Planning and data-source validation.
+Source validation complete; historical extraction design in progress.
 
 ## Project objective
 
@@ -44,7 +44,7 @@ The system should help the manager answer:
 
 The FLEX position may contain an RB, WR, or TE.
 
-## Default offensive scoring rules
+## Default player scoring rules
 
 - Passing yards: 0.04 points per yard
 - Passing touchdowns: 4 points
@@ -54,6 +54,7 @@ The FLEX position may contain an RB, WR, or TE.
 - Receptions: 1 point
 - Receiving yards: 0.10 points per yard
 - Receiving touchdowns: 6 points
+- Individual special-teams touchdowns: 6 points
 - Two-point conversions: 2 points
 - Lost fumbles: -2 points
 

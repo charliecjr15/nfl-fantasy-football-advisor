@@ -7,8 +7,7 @@ The first version targets a default 12-team, full-PPR redraft league. A later ph
 
 ## Project status
 
-Work in progress. The project brief, default league configuration, Python environment, dependency versions, and repository safeguards are complete.
-Source-data profiling and extraction are next.
+Work in progress. Project setup, source inspection, grain validation, join-coverage auditing, and full-PPR reconciliation are complete. Historical multi-season extraction is next.
 
 ## Decisions supported
 
@@ -63,7 +62,7 @@ Kicker and defense projections will follow the validated QB, RB, WR, and TE work
 The primary source will be nflverse data (https://github.com/nflverse/nflverse-data), accessed with the maintained nflreadpy
 (https://github.com/nflverse/nflreadpy) Python package.
 
-Source files, update dates, seasons, row counts, licenses, and availability limitations will be documented before analysis begins.
+The validated 2025 source grains, row counts, identifier coverage, join controls, scoring reconciliation, and limitations are documented in [the source profile](docs/source_profile.md).
 
 Large raw and processed files are excluded from Git. Small reproducible samples and final analytical outputs may be included when appropriate.
 
@@ -94,33 +93,19 @@ Large raw and processed files are excluded from Git. Small reproducible samples 
 
 ## Project structure
 
-Path                Purpose
-━━━━━━━━━━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-config/             League, scoring, and future model settings
-──────────────────  ──────────────────────────────────────────────────────────
-data/raw/           Original downloaded source data
-──────────────────  ──────────────────────────────────────────────────────────
-data/cache/         Local nflreadpy download cache
-──────────────────  ──────────────────────────────────────────────────────────
-data/processed/     Cleaned and feature-ready data
-──────────────────  ──────────────────────────────────────────────────────────
-data/sample/        Small GitHub-safe samples
-──────────────────  ──────────────────────────────────────────────────────────
-docs/               Project brief, source profile, methodology, and findings
-──────────────────  ──────────────────────────────────────────────────────────
-models/             Local trained model artifacts
-──────────────────  ──────────────────────────────────────────────────────────
-notebooks/          Reproducible exploration and model experiments
-──────────────────  ──────────────────────────────────────────────────────────
-results/tables/     Validated analytical outputs
-──────────────────  ──────────────────────────────────────────────────────────
-results/figures/    Decision-relevant charts
-──────────────────  ──────────────────────────────────────────────────────────
-scripts/            Extraction, validation, modeling, and export scripts
-──────────────────  ──────────────────────────────────────────────────────────
-sql/                MySQL schema, transformations, audits, and analysis
-──────────────────  ──────────────────────────────────────────────────────────
-tests/              Automated calculation and data-quality tests
+- `config/`: League, scoring, and future model settings
+- `data/raw/`: Original downloaded source data
+- `data/cache/`: Local nflreadpy download cache
+- `data/processed/`: Cleaned and feature-ready data
+- `data/sample/`: Small GitHub-safe samples
+- `docs/`: Project brief, source profile, methodology, and findings
+- `models/`: Local trained model artifacts
+- `notebooks/`: Reproducible exploration and model experiments
+- `results/tables/`: Validated analytical outputs
+- `results/figures/`: Decision-relevant charts
+- `scripts/`: Extraction, validation, modeling, and export scripts
+- `sql/`: MySQL schema, transformations, audits, and analysis
+- `tests/`: Automated calculation and data-quality tests
 
 ## Local setup
 

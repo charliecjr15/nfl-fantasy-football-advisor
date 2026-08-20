@@ -28,5 +28,6 @@ rushing_touchdowns = 6.0
 receptions = 1.0
 receiving_yards = 0.10
 receiving_touchdowns = 6.0
+special_teams_touchdowns = 6.0
 two_point_conversions = 2.0
 fumbles_lost = -2.0
