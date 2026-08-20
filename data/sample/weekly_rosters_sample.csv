@@ -1,0 +1,501 @@
+season,week,game_type,team,position,depth_chart_position,jersey_number,status,status_description_abbr,full_name,football_name,first_name,last_name,gsis_id,pfr_id,espn_id,sleeper_id,years_exp,rookie_year,birth_date,height,weight,college,entry_year,draft_club,draft_number,pfr_id_conflict,pfr_id_source,data_split
+2018,1,REG,ARI,K,K,4,ACT,A01,Phil Dawson,Phil,Philip,Dawson,00-0004091,dawsophi01,1440,229,20,1998,1975-01-23,71.0,200,Texas,1998,,,false,player_identity,training
+2018,1,REG,ARI,P,P,2,ACT,A01,Andy Lee,Andy,Andy,Lee,00-0022824,LeexAn20,5713,112,14,2004,1982-08-11,73.0,185,Pittsburgh,2004,SF,188,false,player_identity,training
+2018,1,REG,ARI,WR,WR,11,ACT,A01,Larry Fitzgerald,Larry,Larry,Fitzgerald,00-0022921,FitzLa00,5528,223,14,2004,1983-08-31,75.0,218,Pittsburgh,2004,ARI,3,false,player_identity,training
+2018,1,REG,ARI,DB,FS,41,ACT,A01,Antoine Bethea,Antoine,Antoine,Bethea,00-0024421,BethAn20,9793,88,12,2006,1984-07-27,71.0,206,Howard,2006,IND,207,false,player_identity,training
+2018,1,REG,ARI,OL,C,53,RES,,A.Q. Shipley,A.Q.,A.Q.,Shipley,00-0026950,ShipA.20,,,9,2009,1986-05-22,73.0,307,Penn State,2009,PIT,,false,player_identity,training
+2018,1,REG,ARI,OL,T,71,ACT,A01,Andre Smith,Andre,Andre,Smith,00-0026982,SmitAn23,,,9,2009,1987-01-25,76.0,325,Alabama,2009,CIN,6,false,player_identity,training
+2018,1,REG,ARI,DL,DT,98,ACT,A01,Corey Peters,Corey,Corey,Peters,00-0027686,PeteCo00,13292,608,8,2010,1988-06-08,75.0,305,Kentucky,2010,ATL,83,false,player_identity,training
+2018,1,REG,ARI,DL,DE,93,RES,,Arthur Moats,Arthur,Arthur,Moats,00-0027777,MoatAr00,13422,702,8,2010,1988-03-14,72.0,246,James Madison,2010,BUF,,false,player_identity,training
+2018,1,REG,ARI,QB,QB,9,ACT,A01,Sam Bradford,Sam,Samuel,Bradford,00-0027854,BradSa00,13197,621,8,2010,1987-11-08,76.0,224,Oklahoma,2010,STL,1,false,player_identity,training
+2018,1,REG,ARI,OL,OG,76,ACT,A01,Mike Iupati,Mike,Mike,Iupati,00-0027869,IupaMi20,,,8,2010,1987-05-12,77.0,331,Idaho,2010,SF,17,false,player_identity,training
+2018,1,REG,ARI,TE,TE,84,ACT,A01,Jermaine Gresham,Jermaine,Jermaine,Gresham,00-0027873,GresJe00,13228,530,8,2010,1988-06-16,77.0,260,Oklahoma,2010,CIN,21,false,player_identity,training
+2018,1,REG,ARI,DB,CB,21,ACT,A01,Patrick Peterson,Patrick,Patrick,Peterson,00-0027943,PetePa00,13980,972,7,2011,1990-07-11,73.0,203,Louisiana State,2011,ARI,5,false,player_identity,training
+2018,1,REG,ARI,WR,WR,18,CUT,,Greg Little,Greg,Greg,Little,00-0027997,LittGr00,14024,835,7,2011,,74.0,220,North Carolina,2011,CLE,,false,player_identity,training
+2018,1,REG,ARI,LB,ILB,57,ACT,A01,Josh Bynes,Josh,Joshua,Bynes,00-0028278,ByneJo00,14519,821,7,2011,1989-08-24,73.0,235,Auburn,2011,,,false,player_identity,training
+2018,1,REG,ARI,LS,LS,46,ACT,A01,Aaron Brewer,Aaron,Aaron,Brewer,00-0028946,BrewAa00,15241,1122,6,2012,1990-07-05,77.0,232,San Diego State,2012,,,false,player_identity,training
+2018,1,REG,ARI,RB,FB,32,ACT,A01,Derrick Coleman,Derrick,Derrick,Coleman,00-0029068,ColeDe00,15351,1716,6,2012,1990-10-18,72.0,233,UCLA,2012,,,false,player_identity,training
+2018,1,REG,ARI,DL,DE,96,ACT,A01,Jacquies Smith,Jacquies,Jacquies,Smith,00-0029112,SmitJa01,15256,1773,6,2012,1990-03-18,74.0,260,Missouri,2012,,,false,player_identity,training
+2018,1,REG,ARI,DL,DE,55,ACT,A01,Chandler Jones,Chandler,Chandler,Jones,00-0029585,JoneCh03,14927,1038,6,2012,1990-02-27,77.0,265,Syracuse,2012,NE,21,false,player_identity,training
+2018,1,REG,ARI,OL,T,73,ACT,A01,John Wetzel,John,John,Wetzel,00-0029762,WetzJo00,,,5,2013,1991-07-18,79.0,328,Boston College,2013,,,false,player_identity,training
+2018,1,REG,ARI,OL,OT,78,CUT,,Vinston Painter,Vinston,Vinston,Painter,00-0030096,PainVi00,,,5,2013,,76.0,318,Virginia Tech,2013,DEN,,false,player_identity,training
+2018,1,REG,ARI,WR,WR,15,CUT,,Rashad Ross,Rashad,Rashad,Ross,00-0030187,RossRa00,16566,1724,5,2013,,72.0,180,Arizona State,2013,,,false,player_identity,training
+2018,1,REG,ARI,DL,DE,91,ACT,A01,Benson Mayowa,Benson,Benson,Mayowa,00-0030380,MayoBe00,16528,1764,5,2013,1991-08-03,75.0,240,Idaho,2013,,,false,player_identity,training
+2018,1,REG,ARI,LB,ILB,51,ACT,A01,Gerald Hodges,Gerald,Gerald,Hodges,00-0030385,HodgGe00,15977,1532,5,2013,1991-01-17,74.0,236,Penn State,2013,MIN,120,false,player_identity,training
+2018,1,REG,ARI,DB,CB,28,ACT,A01,Jamar Taylor,Jamar,Jamar,Taylor,00-0030484,TaylJa01,15866,1359,5,2013,1990-09-29,71.0,192,Boise State,2013,MIA,54,false,player_identity,training
+2018,1,REG,ARI,WR,WR,12,CUT,,Brice Butler,Brice,Brice,Butler,00-0030516,ButlBr00,15896,1471,5,2013,1990-01-29,75.0,220,San Diego State,2013,OAK,,false,player_identity,training
+2018,1,REG,ARI,QB,QB,7,ACT,A01,Mike Glennon,Mike,Michael,Glennon,00-0030520,GlenMi00,15837,1559,5,2013,1989-12-12,78.0,229,North Carolina State,2013,TB,73,false,player_identity,training
+2018,1,REG,ARI,OL,G,67,ACT,A01,Justin Pugh,Justin,Justin,Pugh,00-0030585,PughJu00,,,5,2013,1990-08-15,77.0,301,Syracuse,2013,NYG,19,false,player_identity,training
+2018,1,REG,ARI,OL,G,68,ACT,A01,Jeremy Vujnovich,Jeremy,Jeremy,Vujnovich,00-0030629,VujnJe00,,,5,2014,1990-10-12,77.0,300,Louisiana College,2013,,,false,player_identity,training
+2018,1,REG,ARI,DB,CB,32,CUT,,Lou Young,Lou,Lou,Young,00-0030675,YounLo00,,,4,2014,,73.0,205,Georgia Tech,2014,,,false,player_identity,training
+2018,1,REG,ARI,OL,C,66,CUT,,Josh Allen,Josh,Josh,Allen,00-0030833,AlleJo00,,,4,2014,,75.0,315,Louisiana-Monroe,2014,,,false,player_identity,training
+2018,1,REG,ARI,DL,DT,97,ACT,A01,Garrison Smith,Garrison,Garrison,Smith,00-0030871,SmitGa01,17253,1830,4,2014,1991-10-09,73.0,295,Georgia,2014,,,false,player_identity,training
+2018,1,REG,ARI,DL,DE,56,ACT,A01,Zach Moore,Zach,Zach,Moore,00-0031081,MoorZa00,16959,1843,4,2014,1990-09-05,78.0,275,Concordia-St. Paul,2014,NE,198,false,player_identity,training
+2018,1,REG,ARI,DB,FS,33,ACT,A01,Tre Boston,Tre,Jayestin,Boston,00-0031261,BostTr00,16877,2184,4,2014,1992-06-25,73.0,205,North Carolina,2014,CAR,128,false,player_identity,training
+2018,1,REG,ARI,DB,CB,23,ACT,A01,Bene' Benwikere,Bene',Bene',Benwikere,00-0031262,BenwBe00,16872,2183,4,2014,1991-09-03,72.0,195,San Jose State,2014,CAR,148,false,player_identity,training
+2018,1,REG,ARI,LB,ILB,20,ACT,A01,Deone Bucannon,Deone,Deone,Bucannon,00-0031366,BucaDe00,16723,2240,4,2014,1992-08-30,73.0,211,Washington State,2014,ARI,27,false,player_identity,training
+2018,1,REG,ARI,LB,LB,58,CUT,,Edmond Robinson,Edmond,Edmond,Robinson,00-0031624,RobiEd00,3137087,2531,3,2015,1992-02-23,75.0,245,Newberry,2015,MIN,,false,player_identity,training
+2018,1,REG,ARI,LB,ILB,50,RES,,Gabe Martin,Gabe,Gabe,Martin,00-0031707,MartGa00,2515838,2843,3,2015,1992-06-05,74.0,236,Bowling Green State,2015,,,false,player_identity,training
+2018,1,REG,ARI,DB,DB,45,CUT,,Tim Scott,Tim,Tim,Scott,00-0031754,ScotTi00,,,3,2015,,71.0,195,North Carolina,2015,,,false,player_identity,training
+2018,1,REG,ARI,OL,OT,75,ACT,A01,Blaine Clausell,Blaine,Blaine,Clausell,00-0031764,ClauBl01,,,3,2015,1992-01-31,78.0,330,Mississippi State,2015,,,false,player_identity,training
+2018,1,REG,ARI,TE,TE,85,ACT,A01,Gabe Holmes,Gabe,Gabrison,Holmes,00-0031884,HolmGa00,2468368,2714,3,2015,1991-03-29,77.0,255,Purdue,2015,,,false,player_identity,training
+2018,1,REG,ARI,DL,DT,72,ACT,A01,Olsen Pierre,Olsen,Olsen,Pierre,00-0031914,PierOl00,2579622,3000,3,2015,1991-08-27,77.0,293,Miami,2015,,,false,player_identity,training
+2018,1,REG,ARI,DL,DE,61,CUT,,Cap Capi,Cap,Cap,Capi,00-0031982,CapiNo00,,,3,2015,,75.0,249,Akron,2015,,,false,player_identity,training
+2018,1,REG,ARI,DB,DB,27,CUT,,Travell Dixon,Travell,Travell,Dixon,00-0032014,DixoTr01,,,3,2015,,73.0,210,Washington,2015,,,false,player_identity,training
+2018,1,REG,ARI,WR,WR,14,ACT,A01,J.J. Nelson,J.J.,Jamarcus,Nelson,00-0032112,NelsJJ00,2515759,2462,3,2015,1992-04-24,70.0,160,Alabama-Birmingham,2015,ARI,159,false,player_identity,training
+2018,1,REG,ARI,DL,DE,44,ACT,A01,Markus Golden,Markus,Markus,Golden,00-0032127,GoldMa00,2971432,2363,3,2015,1991-03-13,75.0,260,Missouri,2015,ARI,58,false,player_identity,training
+2018,1,REG,ARI,DL,DT,95,ACT,A01,Rodney Gunter,Rodney,Rodney,Gunter,00-0032131,GuntRo00,2507719,2421,3,2015,1992-01-19,77.0,305,Delaware State,2015,ARI,116,false,player_identity,training
+2018,1,REG,ARI,RB,RB,31,ACT,A01,David Johnson,David,David,Johnson,00-0032187,JohnDa08,2508176,2391,3,2015,1991-12-16,73.0,224,Northern Iowa,2015,ARI,86,false,player_identity,training
+2018,1,REG,ARI,OL,C,62,ACT,A01,Daniel Munyer,Daniel,Daniel,Munyer,00-0032192,MunyDa00,,,3,2015,1992-03-04,73.0,305,Colorado,2015,,,false,player_identity,training
+2018,1,REG,ARI,OL,OT,74,ACT,A01,D.J. Humphries,D.J.,DeMarcus,Humphries,00-0032222,HumpD.00,,,3,2015,1993-12-28,77.0,307,Florida,2015,ARI,24,false,player_identity,training
+2018,1,REG,ARI,DL,DE,59,CUT,,Vontarrius Dora,Vontarrius,Vontarrius,Dora,00-0032484,DoraVo00,2574163,3623,2,2016,1992-09-07,76.0,256,Louisiana Tech,2016,,,false,player_identity,training
+2018,1,REG,ARI,DL,OLB,54,CUT,,Bryson Albright,Bryson,Bryson,Albright,00-0032491,AlbrBr00,,,2,2016,,77.0,235,Miami (Ohio),2016,,,false,player_identity,training
+2018,1,REG,ARI,RB,RB,37,RES,,D.J. Foster,D.J.,D.J.,Foster,00-0032577,FostD.01,2978124,3488,2,2016,1993-11-22,72.0,195,Arizona State,2016,,,false,player_identity,training
+2018,1,REG,ARI,TE,TE,80,CUT,,Bryce Williams,Bryce,Bryce,Williams,00-0032583,WillBr08,,,2,2016,,78.0,260,East Carolina,2016,,,false,player_identity,training
+2018,1,REG,ARI,DL,DT,90,ACT,A01,Robert Nkemdiche,Robert,Robert,Nkemdiche,00-0032761,NkemRo00,3051886,3180,2,2016,1994-09-19,76.0,296,Mississippi,2016,ARI,29,false,player_identity,training
+2018,1,REG,ARI,DB,CB,26,ACT,A01,Brandon Williams,Brandon,Brandon,Williams,00-0032769,WillBr07,2972286,1696,2,2016,1992-09-09,72.0,200,Texas A&amp;M,2016,ARI,92,false,player_identity,training
+2018,1,REG,ARI,DB,CB,35,CUT,,Harlan Miller,Harlan,Harlan,Miller,00-0032798,MillHa00,2974631,3361,2,2016,1994-06-20,72.0,182,Southeastern Louisiana,2016,ARI,,false,player_identity,training
+2018,1,REG,ARI,RB,RB,35,DEV,,Elijhaa Penny,Elijhaa,Elijhaa,Penny,00-0032813,PennEl00,2575965,3803,2,2016,1993-08-17,74.0,234,Idaho,2016,,,false,player_identity,training
+2018,1,REG,ARI,DL,DT,75,CUT,,Tani Tupou,Tani,Tani,Tupou,00-0032852,TupoTa01,,,2,2016,,73.0,284,Washington,2016,,,false,player_identity,training
+2018,1,REG,ARI,LB,ILB,56,CUT,,Scooby Wright,Scooby,Scooby,Wright,00-0032979,WrigSc00,,,2,2016,,72.0,240,Arizona,2016,CLE,,false,player_identity,training
+2018,1,REG,ARI,LB,OLB,52,RES,,Jeremy Cash,Jeremy,Jeremy,Cash,00-0032994,CashJe00,2576378,3436,2,2016,1992-12-09,72.0,230,Duke,2016,,,false,player_identity,training
+2018,1,REG,ARI,DB,DB,36,DEV,,Demetrious Cox,Demetrious,Demetrious,Cox,00-0033339,CoxxDe00,2979535,4363,1,2017,1994-04-20,72.0,200,Michigan State,2017,,,false,player_identity,training
+2018,1,REG,ARI,DL,DE,76,CUT,,Praise Martin-Oguike,Praise,Praise,Martin-Oguike,00-0033404,,,,1,2017,,73.0,256,Temple,2017,,,false,unavailable,training
+2018,1,REG,ARI,DB,CB,25,CUT,,Jonathan Moxey,Jonathan,Jonathan,Moxey,00-0033432,MoxeJo00,,,1,2017,1995-01-14,70.0,188,Boise State,2017,,,false,player_identity,training
+2019,1,REG,ARI,LB,OLB,56,ACT,A01,Terrell Suggs,Terrell,Terrell,Suggs,00-0022161,SuggTe99,4468,296,16,2003,1982-10-11,75.0,265,Arizona State,2003,BAL,10,false,player_identity,training
+2019,1,REG,ARI,P,P,4,ACT,A01,Andy Lee,Andy,Andy,Lee,00-0022824,LeexAn20,5713,112,15,2004,1982-08-11,73.0,185,Pittsburgh,2004,SF,188,false,player_identity,training
+2019,1,REG,ARI,WR,WR,11,ACT,A01,Larry Fitzgerald,Larry,Larry,Fitzgerald,00-0022921,FitzLa00,5528,223,15,2004,1983-08-31,75.0,218,Pittsburgh,2004,ARI,3,false,player_identity,training
+2019,1,REG,ARI,OL,C,53,ACT,A01,A.Q. Shipley,A.Q.,Allan,Shipley,00-0026950,ShipA.20,,,10,2009,1986-05-22,73.0,307,Penn State,2009,PIT,226,false,player_identity,training
+2019,1,REG,ARI,DL,DT,93,ACT,A01,Clinton McDonald,Clinton,Clinton,McDonald,00-0026964,McDoCl99,12692,757,10,2009,1987-01-06,74.0,297,Memphis,2009,CIN,249,false,player_identity,training
+2019,1,REG,ARI,WR,WR,15,ACT,A01,Michael Crabtree,Michael,Michael,Crabtree,00-0026986,CrabMi00,12563,455,10,2009,1987-09-14,73.0,214,Texas Tech,2009,SF,10,false,player_identity,training
+2019,1,REG,ARI,DB,CB,20,ACT,A01,Tramaine Brock,Tramaine,Tramaine,Brock,00-0027375,BrocTr00,13681,633,9,2010,1988-08-20,72.0,188,Belhaven,2010,,,false,player_identity,training
+2019,1,REG,ARI,DL,DT,98,ACT,A01,Corey Peters,Corey,Corey,Peters,00-0027686,PeteCo00,13292,608,9,2010,1988-06-08,75.0,335,Kentucky,2010,ATL,83,false,player_identity,training
+2019,1,REG,ARI,DB,CB,21,SUS,,Patrick Peterson,Patrick,Patrick,Peterson,00-0027943,PetePa00,13980,972,8,2011,1990-07-11,73.0,203,Louisiana State,2011,ARI,,false,player_identity,training
+2019,1,REG,ARI,LB,LB,50,ACT,A01,Brooks Reed,Brooks,Brooks,Reed,00-0027980,ReedBr00,13997,855,8,2011,1987-02-28,75.0,254,Arizona,2011,HOU,42,false,player_identity,training
+2019,1,REG,ARI,OL,OT,76,ACT,A01,Marcus Gilbert,Marcus,Marcus,Gilbert,00-0028001,GilbMa00,,,8,2011,1988-02-15,78.0,330,Florida,2011,PIT,63,false,player_identity,training
+2019,1,REG,ARI,DL,DT,90,CUT,,Terrell McClain,Terrell,Terrell,McClain,00-0028003,McClTe00,14014,953,8,2011,1988-07-20,74.0,302,South Florida,2011,CAR,,false,player_identity,training
+2019,1,REG,ARI,TE,TE,85,ACT,A01,Charles Clay,Charles,Charles,Clay,00-0028112,ClayCh00,14145,801,8,2011,1989-02-13,75.0,246,Tulsa,2011,MIA,174,false,player_identity,training
+2019,1,REG,ARI,LS,LS,46,ACT,A01,Aaron Brewer,Aaron,Aaron,Brewer,00-0028946,BrewAa00,15241,1122,7,2012,1990-07-05,77.0,232,San Diego State,2012,,,false,player_identity,training
+2019,1,REG,ARI,OL,G,64,ACT,A01,J.R. Sweezy,J.R.,Justin,Sweezy,00-0029146,SweeJ.00,15025,1243,7,2012,1989-04-08,77.0,310,North Carolina State,2012,SEA,225,false,player_identity,training
+2019,1,REG,ARI,LB,LB,55,ACT,A01,Chandler Jones,Chandler,Chandler,Jones,00-0029585,JoneCh03,14927,1038,7,2012,1990-02-27,77.0,265,Syracuse,2012,NE,21,false,player_identity,training
+2019,1,REG,ARI,DL,DE,49,CUT,,Andre Branch,Andre,Andre,Branch,00-0029600,BranAn00,14952,1116,7,2012,,77.0,263,Clemson,2012,JAX,,false,player_identity,training
+2019,1,REG,ARI,DB,CB,23,RES,,Robert Alford,Robert,Robert,Alford,00-0030528,AlfoRo00,15817,1540,6,2013,1988-11-01,70.0,186,Southeastern Louisiana,2013,ATL,,false,player_identity,training
+2019,1,REG,ARI,DB,FS,36,ACT,A01,D.J. Swearinger,D.J.,Dayario,Swearinger,00-0030566,SweaDJ00,15865,1429,6,2013,1991-09-01,70.0,205,South Carolina,2013,HOU,57,false,player_identity,training
+2019,1,REG,ARI,OL,G,67,ACT,A01,Justin Pugh,Justin,Justin,Pugh,00-0030585,PughJu00,,,6,2013,1990-08-15,77.0,311,Syracuse,2013,NYG,19,false,player_identity,training
+2019,1,REG,ARI,OL,G,68,ACT,A01,Jeremy Vujnovich,Jeremy,Jeremy,Vujnovich,00-0030629,VujnJe00,,,6,2014,1990-10-12,77.0,300,Louisiana College,2013,,,false,player_identity,training
+2019,1,REG,ARI,DL,DE,54,ACT,A01,Cassius Marsh,Cassius,Cassius,Marsh,00-0031175,MarsCa00,16873,2275,5,2014,1992-07-07,76.0,245,UCLA,2014,SEA,108,false,player_identity,training
+2019,1,REG,ARI,WR,WR,18,CUT,,Kevin White,Kevin,Kevin,White,00-0031545,WhitKe00,3042435,2312,4,2015,1992-06-25,75.0,216,West Virginia,2015,CHI,,false,player_identity,training
+2019,1,REG,ARI,TE,TE,87,ACT,A01,Maxx Williams,Maxx,Maxx,Williams,00-0031558,WillMa04,2970726,2360,4,2015,1994-04-12,76.0,252,Minnesota,2015,BAL,55,false,player_identity,training
+2019,1,REG,ARI,QB,QB,7,ACT,A01,Brett Hundley,Brett,Brett,Hundley,00-0031589,HundBr00,2577189,2450,4,2015,1993-06-15,75.0,226,UCLA,2015,GB,147,false,player_identity,training
+2019,1,REG,ARI,WR,WR,14,ACT,A01,Damiere Byrd,Damiere,Damiere,Byrd,00-0031868,ByrdDa00,2577667,2673,4,2015,1993-01-27,69.0,180,South Carolina,2015,,,false,player_identity,training
+2019,1,REG,ARI,DL,DT,93,CUT,,Darius Philon,Darius,Darius,Philon,00-0032116,PhilDa01,2980071,2493,4,2015,,73.0,286,Arkansas,2015,SD,,false,player_identity,training
+2019,1,REG,ARI,LB,MLB,58,ACT,A01,Jordan Hicks,Jordan,Jordan,Hicks,00-0032129,HickJo00,2514270,2389,4,2015,1992-06-27,73.0,236,Texas,2015,PHI,84,false,player_identity,training
+2019,1,REG,ARI,DL,DT,95,ACT,A01,Rodney Gunter,Rodney,Rodney,Gunter,00-0032131,GuntRo00,2507719,2421,4,2015,1992-01-19,77.0,305,Delaware State,2015,ARI,116,false,player_identity,training
+2019,1,REG,ARI,OL,G,73,PUP,,Max Garcia,Max,Max,Garcia,00-0032132,GarcMa00,,,4,2015,1991-11-09,76.0,309,Florida,2015,DEN,,false,player_identity,training
+2019,1,REG,ARI,DB,CB,27,RES,,Josh Shaw,Josh,Josh,Shaw,00-0032168,ShawJo00,2971605,2425,4,2015,1992-03-27,73.0,197,Southern California,2015,CIN,,false,player_identity,training
+2019,1,REG,ARI,RB,RB,31,ACT,A01,David Johnson,David,David,Johnson,00-0032187,JohnDa08,2508176,2391,4,2015,1991-12-16,73.0,224,Northern Iowa,2015,ARI,86,false,player_identity,training
+2019,1,REG,ARI,OL,OT,74,ACT,A01,D.J. Humphries,D.J.,DeMarcus,Humphries,00-0032222,HumpD.00,,,4,2015,1993-12-28,77.0,307,Florida,2015,ARI,24,false,player_identity,training
+2019,1,REG,ARI,DL,DE,71,CUT,,Sterling Bailey,Sterling,Sterling,Bailey,00-0032344,BailSt02,,,3,2016,,75.0,296,Georgia,2016,,,false,player_identity,training
+2019,1,REG,ARI,DL,DT,96,CUT,,Vincent Valentine,Vincent,Vincent,Valentine,00-0032396,ValeVi00,2974333,3260,3,2016,,75.0,331,Nebraska,2016,NE,,false,player_identity,training
+2019,1,REG,ARI,OL,OT,63,RES,,Rees Odhiambo,Rees,Rees,Odhiambo,00-0032397,OdhiRe00,,,3,2016,,76.0,297,Boise State,2016,SEA,,false,player_identity,training
+2019,1,REG,ARI,DL,DE,54,CUT,,Vontarrius Dora,Vontarrius,Vontarrius,Dora,00-0032484,DoraVo00,2574163,3623,3,2016,1992-09-07,76.0,256,Louisiana Tech,2016,,,false,player_identity,training
+2019,1,REG,ARI,OL,OT,71,ACT,A01,Justin Murray,Justin,Justin,Murray,00-0032528,MurrJu00,,,3,2016,1993-04-19,77.0,315,Cincinnati,2016,,,false,player_identity,training
+2019,1,REG,ARI,DB,FS,28,ACT,A01,Charles Washington,Charles,Charles,Washington,00-0032560,WashCh01,2579163,3714,3,2016,1993-03-10,70.0,192,Fresno State,2016,,,false,player_identity,training
+2019,1,REG,ARI,RB,RB,37,ACT,A01,D.J. Foster,D.J.,Darryll,Foster,00-0032577,FostD.01,2978124,3488,3,2016,1993-11-22,72.0,205,Arizona State,2016,,,false,player_identity,training
+2019,1,REG,ARI,DB,CB,26,RES,,Brandon Williams,Brandon,Brandon,Williams,00-0032769,WillBr07,2972286,1696,3,2016,1992-09-09,72.0,200,Texas A&amp;M,2016,ARI,,false,player_identity,training
+2019,1,REG,ARI,OL,G,78,CUT,,Parker Ehinger,Parker,Parker,Ehinger,00-0032771,EhinPa00,,,3,2016,1992-12-30,78.0,310,Cincinnati,2016,KC,,false,player_identity,training
+2019,1,REG,ARI,LB,MLB,59,ACT,A01,Joe Walker,Joe,Joseph,Walker,00-0032809,WalkJo01,3043184,3406,3,2016,1992-12-11,74.0,236,Oregon,2016,PHI,251,false,player_identity,training
+2019,1,REG,ARI,DB,CB,27,ACT,A01,Kevin Peterson,Kevin,Kevin,Peterson,00-0032848,PeteKe01,2977742,3527,3,2016,1994-03-22,71.0,185,Oklahoma State,2016,,,false,player_identity,training
+2019,1,REG,ARI,LB,LB,45,DEV,,Pete Robertson,Pete,Pete,Robertson,00-0032851,RobePe01,2577651,3818,3,2016,1992-12-02,74.0,243,Texas Tech,2016,,,false,player_identity,training
+2019,1,REG,ARI,DL,DE,90,ACT,A01,Jonathan Bullard,Jonathan,Jonathan,Bullard,00-0033093,BullJo00,2980097,3241,3,2016,1993-10-22,75.0,296,Florida,2016,CHI,72,false,player_identity,training
+2019,1,REG,ARI,TE,TE,81,ACT,A01,Darrell Daniels,Darrell,Darrell,Daniels,00-0033258,DaniDa02,3052166,4323,2,2017,1994-11-22,75.0,256,Washington,2017,,,false,player_identity,training
+2019,1,REG,ARI,LB,LB,57,RES,,Pita Taumoepenu,Pita,Pita,Taumoepenu,00-0033298,TaumPi00,3055105,4279,2,2017,1994-03-09,73.0,245,Utah,2017,SF,,false,player_identity,training
+2019,1,REG,ARI,DL,DT,96,CUT,,Pasoni Tasini,Pasoni,Pasoni,Tasini,00-0033614,TasiPa00,,,2,2017,,75.0,307,Utah,2017,,,false,player_identity,training
+2019,1,REG,ARI,QB,QB,1,DEV,,Kyle Sloter,Kyle,Kyle,Sloter,00-0033672,SlotKy00,2972092,4588,2,2017,1994-02-07,77.0,218,Northern Colorado,2017,,,false,player_identity,training
+2019,1,REG,ARI,RB,RB,33,DEV,,Justin Davis,Justin,Justin,Davis,00-0033760,DaviJu00,3043216,4635,2,2017,1995-11-11,73.0,199,USC,2017,,,false,player_identity,training
+2019,1,REG,ARI,K,K,5,ACT,A01,Zane Gonzalez,Zane,Zane,Gonzalez,00-0033862,GonzZa00,3043234,4233,2,2017,1995-05-07,72.0,202,Arizona State,2017,CLE,224,false,player_identity,training
+2019,1,REG,ARI,LB,ILB,43,ACT,A01,Haason Reddick,Haason,Haason,Reddick,00-0033875,ReddHa00,2980504,4063,2,2017,1994-09-22,73.0,235,Temple,2017,ARI,13,false,player_identity,training
+2019,1,REG,ARI,DB,FS,32,ACT,A01,Budda Baker,Budda,Budda,Baker,00-0033890,BakeBu00,3127287,4081,2,2017,1996-01-10,70.0,195,Washington,2017,ARI,36,false,player_identity,training
+2019,1,REG,ARI,DL,DT,60,CUT,,Peli Anau,Peli,Peli,Anau,00-0034012,AnauPe00,,,2,2017,,75.0,282,Northern Arizona,2017,,,false,player_identity,training
+2019,1,REG,ARI,LB,LB,49,DEV,,Kylie Fitts,Kylie,Kylie,Fitts,00-0034404,FittKy00,3047582,5069,1,2018,1994-10-11,76.0,260,Utah,2018,CHI,,false,player_identity,training
+2019,1,REG,ARI,OL,G,77,DEV,,Sam Jones,Sam,Sam,Jones,00-0034405,JoneSa00,,,1,2018,1996-02-21,77.0,290,Arizona State,2018,DEN,,false,player_identity,training
+2019,1,REG,ARI,DB,CB,36,DEV,,Jalen Davis,Jalen,Jalen,Davis,00-0034446,DaviJa06,3125356,5222,1,2018,1996-02-02,70.0,185,Utah State,2018,,,false,player_identity,training
+2019,1,REG,ARI,LB,LB,42,ACT,A01,Dennis Gardeck,Dennis,Dennis,Gardeck,00-0034473,GardDe01,4334300,5158,1,2018,1994-08-09,72.0,232,Sioux Falls,2018,,,false,player_identity,training
+2019,1,REG,ARI,DB,CB,28,CUT,,Deatrick Nichols,Deatrick,Deatrick,Nichols,00-0034481,NichDe00,3126311,5159,1,2018,1994-06-08,70.0,189,South Florida,2018,,,false,player_identity,training
+2019,1,REG,ARI,DB,DB,42,CUT,,Jonathan Owens,Jonathan,Jonathan,Owens,00-0034485,OwenJo01,4331768,5520,1,2018,1995-07-22,71.0,210,Missouri Western,2018,,,false,player_identity,training
+2019,1,REG,ARI,WR,WR,16,ACT,A01,Trent Sherfield,Trent,Trent,Sherfield,00-0034487,SherTr00,3122168,5154,1,2018,1996-02-26,73.0,219,Vanderbilt,2018,,,false,player_identity,training
+2019,1,REG,ARI,LB,LB,47,ACT,A01,Zeke Turner,Ezekiel,Ezekiel,Turner,00-0034490,TurnZe00,3894901,5161,1,2018,1996-06-09,74.0,214,Washington,2018,,,false,player_identity,training
+2020,1,REG,ARI,P,P,4,ACT,A01,Andy Lee,Andy,Andy,Lee,00-0022824,LeexAn20,5713,112,16,2004,1982-08-11,73.0,185,Pittsburgh,2004,SF,188,false,player_identity,training
+2020,1,REG,ARI,WR,WR,11,ACT,A01,Larry Fitzgerald,Larry,Larry,Fitzgerald,00-0022921,FitzLa00,5528,223,16,2004,1983-08-31,75.0,218,Pittsburgh,2004,ARI,3,false,player_identity,training
+2020,1,REG,ARI,DL,DT,93,UFA,,Clinton McDonald,Clinton,Clinton,McDonald,00-0026964,McDoCl99,12692,757,11,2009,1987-01-06,74.0,297,Memphis,2009,CIN,,false,player_identity,training
+2020,1,REG,ARI,DL,DT,98,ACT,A01,Corey Peters,Corey,Corey,Peters,00-0027686,PeteCo00,13292,608,10,2010,1988-06-08,75.0,335,Kentucky,2010,ATL,83,false,player_identity,training
+2020,1,REG,ARI,DB,CB,21,ACT,A01,Patrick Peterson,Patrick,Patrick,Peterson,00-0027943,PetePa00,13980,972,9,2011,1990-07-11,73.0,203,Louisiana State,2011,ARI,5,false,player_identity,training
+2020,1,REG,ARI,LB,OLB,50,UFA,,Brooks Reed,Brooks,Brooks,Reed,00-0027980,ReedBr00,13997,855,9,2011,1987-02-28,75.0,254,Arizona,2011,HOU,,false,player_identity,training
+2020,1,REG,ARI,OL,OT,76,NWT,,Marcus Gilbert,Marcus,Marcus,Gilbert,00-0028001,GilbMa00,,,9,2011,1988-02-15,78.0,330,Florida,2011,PIT,,false,player_identity,training
+2020,1,REG,ARI,TE,TE,85,UFA,,Charles Clay,Charles,Charles,Clay,00-0028112,ClayCh00,14145,801,9,2011,1989-02-13,75.0,246,Tulsa,2011,MIA,,false,player_identity,training
+2020,1,REG,ARI,LS,LS,46,ACT,A01,Aaron Brewer,Aaron,Aaron,Brewer,00-0028946,BrewAa00,15241,1122,8,2012,1990-07-05,77.0,232,San Diego State,2012,,,false,player_identity,training
+2020,1,REG,ARI,OL,G,64,ACT,A01,J.R. Sweezy,J.R.,Justin,Sweezy,00-0029146,SweeJ.00,15025,1243,8,2012,1989-04-08,77.0,310,North Carolina State,2012,SEA,225,false,player_identity,training
+2020,1,REG,ARI,OL,T,68,ACT,A01,Kelvin Beachum,Kelvin,Kelvin,Beachum,00-0029316,BeacKe00,,,8,2012,1989-06-08,75.0,308,Southern Methodist,2012,PIT,248,false,player_identity,training
+2020,1,REG,ARI,DB,CB,20,ACT,A01,Dre Kirkpatrick,Dre,D'Andre,Kirkpatrick,00-0029560,KirkDr00,14940,1068,8,2012,1989-10-26,74.0,190,Alabama,2012,CIN,17,false,player_identity,training
+2020,1,REG,ARI,LB,OLB,55,ACT,A01,Chandler Jones,Chandler,Chandler,Jones,00-0029585,JoneCh03,14927,1038,8,2012,1990-02-27,77.0,265,Syracuse,2012,NE,21,false,player_identity,training
+2020,1,REG,ARI,DB,SS,31,ACT,A01,Chris Banjo,Chris,Ayorunmi,Banjo,00-0029747,BanjCh00,15782,1442,7,2013,1990-02-26,70.0,207,Southern Methodist,2013,,,false,player_identity,training
+2020,1,REG,ARI,OL,T,79,UFA,,Jordan Mills,Jordan,Jordan,Mills,00-0030046,MillJo02,,,7,2013,1990-12-24,77.0,316,Louisiana Tech,2013,CHI,,false,player_identity,training
+2020,1,REG,ARI,DB,CB,23,RES,,Robert Alford,Robert,Robert,Alford,00-0030528,AlfoRo00,15817,1540,7,2013,1988-11-01,70.0,186,Southeastern Louisiana,2013,ATL,,false,player_identity,training
+2020,1,REG,ARI,WR,WR,10,ACT,A01,DeAndre Hopkins,DeAndre,DeAndre,Hopkins,00-0030564,HopkDe00,15795,1426,7,2013,1992-06-06,73.0,212,Clemson,2013,HOU,27,false,player_identity,training
+2020,1,REG,ARI,OL,G,67,ACT,A01,Justin Pugh,Justin,Justin,Pugh,00-0030585,PughJu00,,,7,2013,1990-08-15,77.0,311,Syracuse,2013,NYG,19,false,player_identity,training
+2020,1,REG,ARI,OL,G,68,UFA,,Jeremy Vujnovich,Jeremy,Jeremy,Vujnovich,00-0030629,VujnJe00,,,7,2014,1990-10-12,77.0,300,Louisiana College,2013,,,false,player_identity,training
+2020,1,REG,ARI,P,P,9,DEV,,Richie Leone,Richie,Richard,Leone,00-0030696,LeonRi01,,,6,2014,1992-03-10,75.0,211,Houston,2014,,,false,player_identity,training
+2020,1,REG,ARI,LB,OLB,42,ACT,A01,Devon Kennard,Devon,Devon,Kennard,00-0031241,KennDe00,16820,2084,6,2014,1991-06-24,75.0,256,Southern California,2014,NYG,174,false,player_identity,training
+2020,1,REG,ARI,DL,DT,97,ACT,A01,Jordan Phillips,Jordan,Jordan,Phillips,00-0031557,PhilJo01,2577466,2357,5,2015,1992-09-21,78.0,341,Oklahoma,2015,MIA,52,false,player_identity,training
+2020,1,REG,ARI,TE,TE,87,ACT,A01,Maxx Williams,Maxx,Maxx,Williams,00-0031558,WillMa04,2970726,2360,5,2015,1994-04-12,76.0,252,Minnesota,2015,BAL,55,false,player_identity,training
+2020,1,REG,ARI,QB,QB,7,INA,A01,Brett Hundley,Brett,Brett,Hundley,00-0031589,HundBr00,2577189,2450,5,2015,1993-06-15,75.0,226,UCLA,2015,GB,147,false,player_identity,training
+2020,1,REG,ARI,DL,DE,96,ACT,A01,Angelo Blackson,Angelo,Angelo,Blackson,00-0032107,BlacAn00,2574582,2405,5,2015,1992-11-14,76.0,318,Auburn,2015,TEN,100,false,player_identity,training
+2020,1,REG,ARI,LB,MLB,58,ACT,A01,Jordan Hicks,Jordan,Jordan,Hicks,00-0032129,HickJo00,2514270,2389,5,2015,1992-06-27,73.0,236,Texas,2015,PHI,84,false,player_identity,training
+2020,1,REG,ARI,DL,DT,95,RET,,Rodney Gunter,Rodney,Rodney,Gunter,00-0032131,GuntRo00,2507719,2421,5,2015,1992-01-19,77.0,305,Delaware State,2015,ARI,,false,player_identity,training
+2020,1,REG,ARI,OL,G,73,ACT,A01,Max Garcia,Max,Max,Garcia,00-0032132,GarcMa00,,,5,2015,1991-11-09,76.0,309,Florida,2015,DEN,133,false,player_identity,training
+2020,1,REG,ARI,OL,OT,74,ACT,A01,D.J. Humphries,D.J.,DeMarcus,Humphries,00-0032222,HumpD.00,,,5,2015,1993-12-28,77.0,307,Florida,2015,ARI,24,false,player_identity,training
+2020,1,REG,ARI,LB,OLB,59,ACT,A01,De'Vondre Campbell,De'Vondre,De'Vondre,Campbell,00-0032401,CampDe00,3040180,3276,4,2016,1993-07-01,75.0,232,Minnesota,2016,ATL,115,false,player_identity,training
+2020,1,REG,ARI,OL,OT,71,ACT,A01,Justin Murray,Justin,Justin,Murray,00-0032528,MurrJu00,,,4,2016,1993-04-19,77.0,315,Cincinnati,2016,,,false,player_identity,training
+2020,1,REG,ARI,DB,FS,28,ACT,A01,Charles Washington,Charles,Charles,Washington,00-0032560,WashCh01,2579163,3714,4,2016,1993-03-10,70.0,192,Fresno State,2016,,,false,player_identity,training
+2020,1,REG,ARI,DL,DT,93,DEV,A01,Trevon Coley,Trevon,Trevon,Coley,00-0032566,ColeTr01,2982880,3676,4,2016,1994-07-13,73.0,310,Florida Atlantic,2016,,,false,player_identity,training
+2020,1,REG,ARI,RB,RB,37,ACT,A01,D.J. Foster,D.J.,Darryll,Foster,00-0032577,FostD.01,2978124,3488,4,2016,1993-11-22,72.0,205,Arizona State,2016,,,false,player_identity,training
+2020,1,REG,ARI,DB,SS,44,DEV,A01,Kentrell Brice,Kentrell,Kentrell,Brice,00-0032628,BricKe00,2971881,3716,4,2016,1994-08-11,71.0,200,Louisiana Tech,2016,,,false,player_identity,training
+2020,1,REG,ARI,DB,CB,34,CUT,,Duke Thomas,Duke,Orlando,Thomas,00-0032735,ThomDu02,,,4,2016,1994-05-21,71.0,185,Texas,2016,,,false,player_identity,training
+2020,1,REG,ARI,DB,CB,27,ACT,A01,Kevin Peterson,Kevin,Kevin,Peterson,00-0032848,PeteKe01,2977742,3527,4,2016,1994-03-22,71.0,185,Oklahoma State,2016,,,false,player_identity,training
+2020,1,REG,ARI,DB,CB,32,CUT,A01,Ken Crawley,Ken,Kenneth,Crawley,00-0032875,CrawKe02,2979612,3426,4,2016,1993-02-08,73.0,180,Colorado,2016,,,false,player_identity,training
+2020,1,REG,ARI,DL,DE,90,DEV,A01,Jonathan Bullard,Jonathan,Jonathan,Bullard,00-0033093,BullJo00,2980097,3241,4,2016,1993-10-22,75.0,296,Florida,2016,CHI,72,false,player_identity,training
+2020,1,REG,ARI,RB,RB,41,ACT,A01,Kenyan Drake,Kenyan,Kenyan,Drake,00-0033118,DrakKe00,2979843,3242,4,2016,1994-01-26,73.0,211,Alabama,2016,MIA,73,false,player_identity,training
+2020,1,REG,ARI,TE,TE,81,ACT,A01,Darrell Daniels,Darrell,Darrell,Daniels,00-0033258,DaniDa02,3052166,4323,3,2017,1994-11-22,75.0,256,Washington,2017,,,false,player_identity,training
+2020,1,REG,ARI,LB,LB,51,ACT,A01,Tanner Vallejo,Tanner,Tanner,Vallejo,00-0033580,VallTa00,3042895,4225,3,2017,1994-12-16,73.0,228,Boise State,2017,BUF,195,false,player_identity,training
+2020,1,REG,ARI,WR,WR,84,DEV,A01,Andre Patton,Andre,Andre,Patton,00-0033705,PattAn00,3047504,4669,3,2017,1994-05-28,74.0,200,Rutgers,2017,,,false,player_identity,training
+2020,1,REG,ARI,K,K,5,ACT,A01,Zane Gonzalez,Zane,Zane,Gonzalez,00-0033862,GonzZa00,3043234,4233,3,2017,1995-05-07,72.0,202,Arizona State,2017,CLE,224,false,player_identity,training
+2020,1,REG,ARI,LB,ILB,43,ACT,A01,Haason Reddick,Haason,Haason,Reddick,00-0033875,ReddHa00,2980504,4063,3,2017,1994-09-22,73.0,235,Temple,2017,ARI,13,false,player_identity,training
+2020,1,REG,ARI,DB,FS,32,ACT,A01,Budda Baker,Budda,Budda,Baker,00-0033890,BakeBu00,3127287,4081,3,2017,1996-01-10,70.0,195,Washington,2017,ARI,36,false,player_identity,training
+2020,1,REG,ARI,TE,TE,85,ACT,A01,Dan Arnold,Dan,Daniel,Arnold,00-0034011,ArnoDa00,4212989,4741,3,2017,1995-03-15,78.0,220,Wisconsin-Platteville,2017,,,false,player_identity,training
+2020,1,REG,ARI,LB,LB,49,ACT,A01,Kylie Fitts,Kylie,Kylie,Fitts,00-0034404,FittKy00,3047582,5069,2,2018,1994-10-11,76.0,260,Utah,2018,CHI,181,false,player_identity,training
+2020,1,REG,ARI,OL,G,77,CUT,A01,Sam Jones,Sam,Samuel,Jones,00-0034405,JoneSa00,,,2,2018,1996-02-21,77.0,290,Arizona State,2018,DEN,183,false,player_identity,training
+2020,1,REG,ARI,WR,WR,84,CUT,A01,Dylan Cantrell,Dylan,Dylan,Cantrell,00-0034409,CantDy00,3052576,5103,2,2018,1994-06-29,75.0,226,Texas Tech,2018,LAC,191,false,player_identity,training
+2020,1,REG,ARI,TE,TE,80,DEV,A01,Jordan Thomas,Jordan,Jordan,Thomas,00-0034420,ThomJo05,4035379,5117,2,2018,1996-08-02,77.0,277,Mississippi State,2018,HOU,211,false,player_identity,training
+2020,1,REG,ARI,DB,CB,30,CUT,,Jalen Davis,Jalen,Jalen,Davis,00-0034446,DaviJa06,3125356,5222,2,2018,1996-02-02,70.0,185,Utah State,2018,,,false,player_identity,training
+2020,1,REG,ARI,LB,LB,45,ACT,A01,Dennis Gardeck,Dennis,Dennis,Gardeck,00-0034473,GardDe01,4334300,5158,2,2018,1994-08-09,72.0,232,Sioux Falls,2018,,,false,player_identity,training
+2020,1,REG,ARI,DB,CB,28,CUT,,Deatrick Nichols,Deatrick,Deatrick,Nichols,00-0034481,NichDe00,3126311,5159,2,2018,1994-06-08,70.0,189,South Florida,2018,,,false,player_identity,training
+2020,1,REG,ARI,WR,WR,16,ACT,A01,Trent Sherfield,Trent,Trent,Sherfield,00-0034487,SherTr00,3122168,5154,2,2018,1996-02-26,73.0,219,Vanderbilt,2018,,,false,player_identity,training
+2020,1,REG,ARI,LB,LB,47,ACT,A01,Zeke Turner,Ezekiel,Ezekiel,Turner,00-0034490,TurnZe00,3894901,5161,2,2018,1996-06-09,74.0,214,Washington,2018,,,false,player_identity,training
+2020,1,REG,ARI,P,P,9,CUT,A01,Ryan Winslow,Ryan,Ryan,Winslow,00-0034606,WinsRy00,3045166,5639,2,2018,1994-04-30,77.0,217,Pittsburgh,2018,,,false,player_identity,training
+2020,1,REG,ARI,DB,CB,25,DEV,A01,Chris Jones,Chris,Christopher,Jones,00-0034641,JoneCh06,3116104,2682,2,2018,1995-08-13,72.0,200,Nebraska,2018,,,false,player_identity,training
+2020,1,REG,ARI,RB,RB,29,ACT,A01,Chase Edmonds,Chase,Chase,Edmonds,00-0034681,EdmoCh00,3119195,5000,2,2018,1996-04-13,69.0,210,Fordham,2018,ARI,134,false,player_identity,training
+2020,1,REG,ARI,WR,WR,13,ACT,A01,Christian Kirk,Christian,Christian,Kirk,00-0034775,KirkCh01,3895856,4950,2,2018,1996-11-18,71.0,200,Texas A&amp;M,2018,ARI,47,false,player_identity,training
+2020,1,REG,ARI,OL,C,52,ACT,A01,Mason Cole,Mason,Mason,Cole,00-0034785,ColeMa02,,,2,2018,1996-03-28,77.0,292,Michigan,2018,ARI,97,false,player_identity,training
+2020,1,REG,ARI,QB,QB,1,ACT,A01,Kyler Murray,Kyler,Kyler,Murray,00-0035228,MurrKy00,3917315,5849,1,2019,1997-08-07,70.0,207,Oklahoma,2019,ARI,1,false,player_identity,training
+2020,1,REG,ARI,DB,CB,33,ACT,A01,Byron Murphy,Byron,Byron,Murphy,00-0035236,MurpBy00,4038999,5864,1,2019,1998-01-18,71.0,190,Washington,2019,ARI,33,false,player_identity,training
+2021,1,REG,ARI,P,P,14,ACT,A01,Andy Lee,Andy,Andy,Lee,00-0022824,LeexAn20,5713,112,17,2004,1982-08-11,73.0,185,Pittsburgh,2004,SF,188,false,player_identity,training
+2021,1,REG,ARI,K,K,5,ACT,A01,Matt Prater,Matt,Matt,Prater,00-0023853,PratMa20,11122,17,15,2006,1984-08-10,70.0,201,Central Florida,2006,,,false,player_identity,training
+2021,1,REG,ARI,DL,DT,98,ACT,A01,Corey Peters,Corey,Corey,Peters,00-0027686,PeteCo00,13292,608,11,2010,1988-06-08,75.0,335,Kentucky,2010,ATL,83,false,player_identity,training
+2021,1,REG,ARI,QB,QB,12,ACT,A01,Colt McCoy,Colt,Daniel,McCoy,00-0027688,McCoCo00,13199,533,11,2010,1986-09-05,73.0,212,Texas,2010,CLE,85,false,player_identity,training
+2021,1,REG,ARI,WR,WR,18,ACT,A01,A.J. Green,A.J.,Adriel,Green,00-0027942,GreeA.00,13983,830,10,2011,1988-07-31,76.0,210,Georgia,2011,CIN,4,false,player_identity,training
+2021,1,REG,ARI,DL,DE,99,ACT,A01,J.J. Watt,J.J.,Justin,Watt,00-0027949,WattJ.00,13979,856,10,2011,1989-03-22,77.0,288,Wisconsin,2011,HOU,11,false,player_identity,training
+2021,1,REG,ARI,OL,C,61,ACT,A01,Rodney Hudson,Rodney,Rodney,Hudson,00-0027993,HudsRo00,,,10,2011,1989-07-12,74.0,315,Florida State,2011,KC,55,false,player_identity,training
+2021,1,REG,ARI,OL,T,76,RET,R02,Marcus Gilbert,Marcus,Marcus,Gilbert,00-0028001,GilbMa00,,,10,2011,1988-02-15,78.0,330,Florida,2011,PIT,63,false,player_identity,training
+2021,1,REG,ARI,LS,LS,46,ACT,A01,Aaron Brewer,Aaron,Aaron,Brewer,00-0028946,BrewAa00,15241,1122,9,2012,1990-07-05,77.0,232,San Diego State,2012,,,false,player_identity,training
+2021,1,REG,ARI,OL,T,68,ACT,A01,Kelvin Beachum,Kelvin,Kelvin,Beachum,00-0029316,BeacKe00,,,9,2012,1989-06-08,75.0,308,Southern Methodist,2012,PIT,248,false,player_identity,training
+2021,1,REG,ARI,LB,OLB,55,ACT,A01,Chandler Jones,Chandler,Chandler,Jones,00-0029585,JoneCh03,14927,1038,9,2012,1990-02-27,77.0,265,Syracuse,2012,NE,21,false,player_identity,training
+2021,1,REG,ARI,DL,DE,69,RES,R01,Jack Crawford,Jack,Jack,Crawford,00-0029627,CrawJa00,15090,1136,9,2012,1988-09-07,77.0,288,Penn State,2012,OAK,158,false,player_identity,training
+2021,1,REG,ARI,DB,FS,31,DEV,P07,Chris Banjo,Chris,Ayorunmi,Banjo,00-0029747,BanjCh00,15782,1442,8,2013,1990-02-26,70.0,207,Southern Methodist,2013,,,false,player_identity,training
+2021,1,REG,ARI,OL,G,65,ACT,A01,Brian Winters,Brian,Brian,Winters,00-0030066,WintBr00,,,8,2013,1991-07-10,76.0,320,Kent State,2013,NYJ,72,false,player_identity,training
+2021,1,REG,ARI,TE,TE,86,ACT,A01,Demetrius Harris,Demetrius,Demetrius,Harris,00-0030155,HarrDe03,16318,1619,8,2013,1991-07-29,79.0,230,Wisconsin-Milwaukee,2013,,,false,player_identity,training
+2021,1,REG,ARI,DB,SS,36,CUT,A01,Shawn Williams,Shawn,Shawn,Williams,00-0030471,WillSh02,15877,1395,8,2013,1991-05-13,72.0,210,Georgia,2013,CIN,84,false,player_identity,training
+2021,1,REG,ARI,DB,CB,23,ACT,A01,Robert Alford,Robert,Robert,Alford,00-0030528,AlfoRo00,15817,1540,8,2013,1988-11-01,70.0,186,Southeastern Louisiana,2013,ATL,60,false,player_identity,training
+2021,1,REG,ARI,WR,WR,10,ACT,A01,DeAndre Hopkins,DeAndre,DeAndre,Hopkins,00-0030564,HopkDe00,15795,1426,8,2013,1992-06-06,73.0,212,Clemson,2013,HOU,27,false,player_identity,training
+2021,1,REG,ARI,OL,G,67,ACT,A01,Justin Pugh,Justin,Justin,Pugh,00-0030585,PughJu00,,,8,2013,1990-08-15,77.0,311,Syracuse,2013,NYG,19,false,player_identity,training
+2021,1,REG,ARI,DL,DE,96,CUT,A01,Josh Mauro,Josh,Josh,Mauro,00-0030883,MaurJo00,17017,1920,7,2014,1991-02-17,78.0,290,Stanford,2014,,,false,player_identity,training
+2021,1,REG,ARI,DB,CB,21,RET,R02,Malcolm Butler,Malcolm,Malcolm,Butler,00-0031218,ButlMa01,17435,1834,7,2014,1990-03-02,71.0,190,West Alabama,2014,,,false,player_identity,training
+2021,1,REG,ARI,LB,OLB,42,ACT,A01,Devon Kennard,Devon,Devon,Kennard,00-0031241,KennDe00,16820,2084,7,2014,1991-06-24,75.0,256,Southern California,2014,NYG,174,false,player_identity,training
+2021,1,REG,ARI,DB,CB,30,RES,R01,Darqueze Dennard,Darqueze,Darqueze,Dennard,00-0031380,DennDa00,16718,1887,7,2014,1991-10-10,71.0,205,Michigan State,2014,CIN,24,false,player_identity,training
+2021,1,REG,ARI,DL,DE,97,RES,R01,Jordan Phillips,Jordan,Jordan,Phillips,00-0031557,PhilJo01,2577466,2357,6,2015,1992-09-21,78.0,341,Oklahoma,2015,MIA,52,false,player_identity,training
+2021,1,REG,ARI,TE,TE,87,ACT,A01,Maxx Williams,Maxx,Maxx,Williams,00-0031558,WillMa04,2970726,2360,6,2015,1994-04-12,76.0,252,Minnesota,2015,BAL,55,false,player_identity,training
+2021,1,REG,ARI,LB,OLB,44,ACT,A01,Markus Golden,Markus,Markus,Golden,00-0032127,GoldMa00,2971432,2363,6,2015,1991-03-13,75.0,260,Missouri,2015,ARI,58,false,player_identity,training
+2021,1,REG,ARI,LB,ILB,58,ACT,A01,Jordan Hicks,Jordan,Jordan,Hicks,00-0032129,HickJo00,2514270,2389,6,2015,1992-06-27,73.0,236,Texas,2015,PHI,84,false,player_identity,training
+2021,1,REG,ARI,OL,G,73,ACT,A01,Max Garcia,Max,Max,Garcia,00-0032132,GarcMa00,,,6,2015,1991-11-09,76.0,309,Florida,2015,DEN,133,false,player_identity,training
+2021,1,REG,ARI,OL,T,74,ACT,A01,D.J. Humphries,D.J.,DeMarcus,Humphries,00-0032222,HumpD.00,,,6,2015,1993-12-28,77.0,307,Florida,2015,ARI,24,false,player_identity,training
+2021,1,REG,ARI,TE,TE,43,DEV,P07,Ross Travis,Ross,Ross,Travis,00-0032319,TravRo00,3936647,3041,6,2016,1993-01-09,79.0,248,Penn State,2015,,,false,player_identity,training
+2021,1,REG,ARI,OL,T,71,ACT,A01,Justin Murray,Justin,Justin,Murray,00-0032528,MurrJu00,,,5,2016,1993-04-19,77.0,315,Cincinnati,2016,,,false,player_identity,training
+2021,1,REG,ARI,DB,FS,28,ACT,A01,Charles Washington,Charles,Charles,Washington,00-0032560,WashCh01,2579163,3714,5,2016,1993-03-10,70.0,192,Fresno State,2016,,,false,player_identity,training
+2021,1,REG,ARI,WR,WR,89,DEV,P07,Josh Doctson,Josh,Joshua,Doctson,00-0032760,DoctJo00,2576019,3178,5,2016,1992-12-03,74.0,206,Texas Christian,2016,WAS,22,false,player_identity,training
+2021,1,REG,ARI,LB,ILB,54,CUT,A01,Terrance Smith,Terrance,Terrance,Smith,00-0032820,SmitTe04,2576809,3417,5,2016,,74.0,235,Florida State,2016,,,false,player_identity,training
+2021,1,REG,ARI,OL,C,53,DEV,W03,Marcus Henry,Marcus,Marcus,Henry,00-0032877,,,,5,2016,1993-02-11,74.0,303,Boise State,2016,,,false,unavailable,training
+2021,1,REG,ARI,DB,CB,27,CUT,A01,Daryl Worley,Daryl,Daryl,Worley,00-0032891,WorlDa00,3042436,3246,5,2016,1995-02-22,73.0,215,West Virginia,2016,CAR,77,false,player_identity,training
+2021,1,REG,ARI,DB,CB,33,ACT,A01,Antonio Hamilton,Antonio,Antonio,Hamilton,00-0032933,HamiAn01,3056354,3838,5,2016,1993-01-24,72.0,190,South Carolina State,2016,,,false,player_identity,training
+2021,1,REG,ARI,TE,TE,81,ACT,A01,Darrell Daniels,Darrell,Darrell,Daniels,00-0033258,DaniDa02,3052166,4323,4,2017,1994-11-22,75.0,256,Washington,2017,,,false,player_identity,training
+2021,1,REG,ARI,OL,T,72,DEV,P01,Eric Smith,Eric,Eric,Smith,00-0033414,SmitEr00,,,4,2017,1995-09-02,76.0,308,Virginia,2017,,,false,player_identity,training
+2021,1,REG,ARI,OL,G,64,DEV,P01,Sean Harlow,Sean,Sean,Harlow,00-0033511,HarlSe00,,,4,2017,1995-03-28,76.0,284,Oregon State,2017,ATL,136,false,player_identity,training
+2021,1,REG,ARI,DB,CB,24,DEV,P12,Rasul Douglas,Rasul,Rasul,Douglas,00-0033551,DougRa00,3943270,4136,4,2017,1994-08-29,74.0,209,West Virginia,2017,PHI,99,false,player_identity,training
+2021,1,REG,ARI,RB,RB,6,ACT,A01,James Conner,James,James,Conner,00-0033553,ConnJa00,3045147,4137,4,2017,1995-05-05,73.0,233,Pittsburgh,2017,PIT,105,false,player_identity,training
+2021,1,REG,ARI,LB,ILB,51,ACT,A01,Tanner Vallejo,Tanner,Tanner,Vallejo,00-0033580,VallTa00,3042895,4225,4,2017,1994-12-16,73.0,228,Boise State,2017,BUF,195,false,player_identity,training
+2021,1,REG,ARI,DL,DE,92,DEV,P06,Jeremiah Ledbetter,Jeremiah,Jeremiah,Ledbetter,00-0033582,LedbJe00,3892689,4240,4,2017,1994-05-29,75.0,295,Arkansas,2017,DET,205,false,player_identity,training
+2021,1,REG,ARI,DB,SS,3,ACT,A01,Budda Baker,Budda,Budda,Baker,00-0033890,BakeBu00,3127287,4081,4,2017,1996-01-10,70.0,195,Washington,2017,ARI,36,false,player_identity,training
+2021,1,REG,ARI,LB,OLB,49,ACT,A01,Kylie Fitts,Kylie,Kylie,Fitts,00-0034404,FittKy00,3047582,5069,3,2018,1994-10-11,76.0,260,Utah,2018,CHI,181,false,player_identity,training
+2021,1,REG,ARI,LB,OLB,45,RES,R01,Dennis Gardeck,Dennis,Dennis,Gardeck,00-0034473,GardDe01,4334300,5158,3,2018,1994-08-09,72.0,232,Sioux Falls,2018,,,false,player_identity,training
+2021,1,REG,ARI,LB,ILB,47,ACT,A01,Ezekiel Turner,Ezekiel,Ezekiel,Turner,00-0034490,TurnZe00,3894901,5161,3,2018,1996-06-09,74.0,214,Washington,2018,,,false,player_identity,training
+2021,1,REG,ARI,P,P,16,CUT,W03,Ryan Winslow,Ryan,Ryan,Winslow,00-0034606,WinsRy00,3045166,5639,3,2018,1994-04-30,77.0,217,Pittsburgh,2018,,,false,player_identity,training
+2021,1,REG,ARI,RB,RB,2,ACT,A01,Chase Edmonds,Chase,Chase,Edmonds,00-0034681,EdmoCh00,3119195,5000,3,2018,1996-04-13,69.0,210,Fordham,2018,ARI,134,false,player_identity,training
+2021,1,REG,ARI,WR,WR,13,ACT,A01,Christian Kirk,Christian,Christian,Kirk,00-0034775,KirkCh01,3895856,4950,3,2018,1996-11-18,71.0,200,Texas A&amp;M,2018,ARI,47,false,player_identity,training
+2021,1,REG,ARI,DL,DE,57,DEV,W03,Jamell Garcia-Williams,Jamell,Jamell,Garcia-Williams,00-0035023,,,,2,2019,,80.0,255,Alabama-Birmingham,2019,,,false,unavailable,training
+2021,1,REG,ARI,WR,WR,33,RES,R59,Antoine Wesley,Antoine,Antoine,Wesley,00-0035126,WeslAn01,4043161,6165,2,2019,1997-10-22,76.0,206,Texas Tech,2019,,,false,player_identity,training
+2021,1,REG,ARI,QB,QB,1,ACT,A01,Kyler Murray,Kyler,Kyler,Murray,00-0035228,MurrKy00,3917315,5849,2,2019,1997-08-07,70.0,207,Oklahoma,2019,ARI,1,false,player_identity,training
+2021,1,REG,ARI,DB,CB,7,ACT,A01,Byron Murphy,Byron,Byron,Murphy,00-0035236,MurpBy00,4038999,5864,2,2019,1998-01-18,71.0,190,Washington,2019,ARI,33,false,player_identity,training
+2021,1,REG,ARI,DL,DE,94,ACT,A01,Zach Allen,Zach,Zachary,Allen,00-0035248,AlleZa01,3915282,5871,2,2019,1997-08-20,77.0,281,Boston College,2019,ARI,65,false,player_identity,training
+2021,1,REG,ARI,OL,T,66,INA,A01,Joshua Miles,Joshua,Joshua,Miles,00-0035317,MileJo00,,,2,2019,1996-01-04,77.0,314,Morgan State,2019,ARI,248,false,player_identity,training
+2021,1,REG,ARI,OL,G,62,CUT,W03,Deion Calhoun,Deion,Deion,Calhoun,00-0035336,CalhSh01,,,2,2019,1996-02-20,75.0,310,Mississippi State,2019,,,false,player_identity,training
+2021,1,REG,ARI,DL,DE,93,DEV,P01,Jonathan Ledbetter,Jonathan,Jonathan,Ledbetter,00-0035343,LedbJo01,3728308,5945,2,2019,1997-09-12,76.0,280,Georgia,2019,,,false,player_identity,training
+2021,1,REG,ARI,DB,DB,35,CUT,W03,Picasso Nelson,Picasso,Picasso,Nelson,00-0035368,NelsPi00,,,2,2019,1996-04-15,70.0,195,Southern Mississippi,2019,,,false,player_identity,training
+2021,1,REG,ARI,OL,G,60,DEV,P01,Koda Martin,Koda,Koda,Martin,00-0035431,MartKo00,,,2,2019,1995-08-21,79.0,304,Syracuse,2019,,,false,player_identity,training
+2021,1,REG,ARI,WR,WR,83,CUT,W03,A.J. Richardson,A.J.,A.J.,Richardson,00-0035491,RichAJ00,3124369,6373,2,2019,1995-06-02,72.0,212,Boise State,2019,,,false,player_identity,training
+2021,1,REG,ARI,WR,WR,83,DEV,P01,Greg Dortch,Greg,Greg,Dortch,00-0035500,DortGr01,4037235,5970,2,2019,1998-05-29,67.0,173,Wake Forest,2019,,,false,player_identity,training
+2022,1,REG,ARI,P,P,14,ACT,A01,Andy Lee,Andy,Andy,Lee,00-0022824,LeexAn20,5713,112,18,2004,1982-08-11,73.0,185,Pittsburgh,2004,SF,188,false,player_identity,training
+2022,1,REG,ARI,K,K,5,ACT,A01,Matt Prater,Matt,Matt,Prater,00-0023853,PratMa20,11122,17,16,2006,1984-08-10,70.0,201,Central Florida,2006,,,false,player_identity,training
+2022,1,REG,ARI,QB,QB,12,RES,R01,Colt McCoy,Colt,Daniel,McCoy,00-0027688,McCoCo00,13199,533,12,2010,1986-09-05,73.0,212,Texas,2010,CLE,85,false,player_identity,training
+2022,1,REG,ARI,WR,WR,18,ACT,A01,A.J. Green,A.J.,Adriel,Green,00-0027942,GreeA.00,13983,830,11,2011,1988-07-31,76.0,210,Georgia,2011,CIN,4,false,player_identity,training
+2022,1,REG,ARI,DL,DE,99,INA,A01,J.J. Watt,J.J.,Justin,Watt,00-0027949,WattJ.00,13979,856,11,2011,1989-03-22,77.0,288,Wisconsin,2011,HOU,11,false,player_identity,training
+2022,1,REG,ARI,OL,C,61,ACT,A01,Rodney Hudson,Rodney,Rodney,Hudson,00-0027993,HudsRo00,,,11,2011,1989-07-12,74.0,315,Florida State,2011,KC,55,false,player_identity,training
+2022,1,REG,ARI,LS,LS,46,ACT,A01,Aaron Brewer,Aaron,Aaron,Brewer,00-0028946,BrewAa00,15241,1122,10,2012,1990-07-05,77.0,232,San Diego State,2012,,,false,player_identity,training
+2022,1,REG,ARI,OL,T,68,ACT,A01,Kelvin Beachum,Kelvin,Kelvin,Beachum,00-0029316,BeacKe00,,,10,2012,1989-06-08,75.0,308,Southern Methodist,2012,PIT,248,false,player_identity,training
+2022,1,REG,ARI,TE,TE,86,ACT,A01,Zach Ertz,Zach,Zachary,Ertz,00-0030061,ErtzZa00,15835,1339,9,2013,1990-11-10,77.0,250,Stanford,2013,PHI,35,false,player_identity,training
+2022,1,REG,ARI,WR,WR,10,RES,R40,DeAndre Hopkins,DeAndre,DeAndre,Hopkins,00-0030564,HopkDe00,15795,1426,9,2013,1992-06-06,73.0,212,Clemson,2013,HOU,27,false,player_identity,training
+2022,1,REG,ARI,OL,G,67,INA,A01,Justin Pugh,Justin,Justin,Pugh,00-0030585,PughJu00,,,9,2013,1990-08-15,77.0,311,Syracuse,2013,NYG,19,false,player_identity,training
+2022,1,REG,ARI,LB,OLB,42,ACT,A01,Devon Kennard,Devon,Devon,Kennard,00-0031241,KennDe00,16820,2084,8,2014,1991-06-24,75.0,256,Southern California,2014,NYG,174,false,player_identity,training
+2022,1,REG,ARI,TE,TE,87,ACT,A01,Maxx Williams,Maxx,Maxx,Williams,00-0031558,WillMa04,2970726,2360,7,2015,1994-04-12,76.0,252,Minnesota,2015,BAL,55,false,player_identity,training
+2022,1,REG,ARI,LB,OLB,44,ACT,A01,Markus Golden,Markus,Markus,Golden,00-0032127,GoldMa00,2971432,2363,7,2015,1991-03-13,75.0,260,Missouri,2015,ARI,58,false,player_identity,training
+2022,1,REG,ARI,OL,G,75,ACT,A01,Max Garcia,Max,Max,Garcia,00-0032132,GarcMa00,,,7,2015,1991-11-09,76.0,309,Florida,2015,DEN,133,false,player_identity,training
+2022,1,REG,ARI,OL,T,74,ACT,A01,D.J. Humphries,D.J.,DeMarcus,Humphries,00-0032222,HumpD.00,,,7,2015,1993-12-28,77.0,307,Florida,2015,ARI,24,false,player_identity,training
+2022,1,REG,ARI,OL,T,71,CUT,A01,Justin Murray,Justin,Justin,Murray,00-0032528,MurrJu00,,,6,2016,1993-04-19,77.0,315,Cincinnati,2016,,,false,player_identity,training
+2022,1,REG,ARI,DB,FS,28,RES,R01,Charles Washington,Charles,Charles,Washington,00-0032560,WashCh01,2579163,3714,6,2016,1993-03-10,70.0,192,Fresno State,2016,,,false,player_identity,training
+2022,1,REG,ARI,TE,TE,89,ACT,A01,Stephen Anderson,Stephen,Stephen,Anderson,00-0032725,AndeSt01,2576854,3496,6,2016,1993-01-30,75.0,230,California,2016,,,false,player_identity,training
+2022,1,REG,ARI,LB,ILB,59,CUT,A01,Joe Walker,Joe,Joseph,Walker,00-0032809,WalkJo01,3043184,3406,6,2016,1992-12-11,74.0,236,Oregon,2016,PHI,251,false,player_identity,training
+2022,1,REG,ARI,TE,TE,36,RES,R42,Alex Ellis,Alex,Alexander,Ellis,00-0032864,ElliAl01,2577731,3824,6,2016,1993-02-10,76.0,245,Tennessee,2016,,,false,player_identity,training
+2022,1,REG,ARI,DL,DT,92,DEV,P07,Antwaun Woods,Antwaun,Antwaun,Woods,00-0032871,WoodAn02,2577278,3479,6,2016,1993-01-03,73.0,318,Southern California,2016,,,false,player_identity,training
+2022,1,REG,ARI,LB,OLB,59,ACT,A01,Nick Vigil,Nick,Nicholas,Vigil,00-0032892,VigiNi00,2971816,3254,6,2016,1993-08-20,74.0,235,Utah State,2016,CIN,87,false,player_identity,training
+2022,1,REG,ARI,DB,CB,33,RES,R05,Antonio Hamilton,Antonio,Antonio,Hamilton,00-0032933,HamiAn01,3056354,3838,6,2016,1993-01-24,72.0,190,South Carolina State,2016,,,false,player_identity,training
+2022,1,REG,ARI,WR,WR,81,DEV,P06,Victor Bolden,Victor,Victor,Bolden,00-0033306,BoldVi00,3056476,4453,5,2017,1995-04-04,68.0,178,Oregon State,2017,,,false,player_identity,training
+2022,1,REG,ARI,DB,CB,21,CUT,A01,Breon Borders,Breon,Breon,Borders,00-0033435,BordBr00,3048663,4439,5,2017,1995-07-22,72.0,189,Duke,2017,,,false,player_identity,training
+2022,1,REG,ARI,OL,G,64,ACT,A01,Sean Harlow,Sean,Sean,Harlow,00-0033511,HarlSe00,,,5,2017,1995-03-28,76.0,284,Oregon State,2017,ATL,136,false,player_identity,training
+2022,1,REG,ARI,RB,RB,6,ACT,A01,James Conner,James,James,Conner,00-0033553,ConnJa00,3045147,4137,5,2017,1995-05-05,73.0,233,Pittsburgh,2017,PIT,105,false,player_identity,training
+2022,1,REG,ARI,LB,ILB,51,ACT,A01,Tanner Vallejo,Tanner,Tanner,Vallejo,00-0033580,VallTa00,3042895,4225,5,2017,1994-12-16,73.0,228,Boise State,2017,BUF,195,false,player_identity,training
+2022,1,REG,ARI,OL,T,73,DEV,P07,Rashaad Coward,Rashaad,Rashaad,Coward,00-0033631,CowaRa00,,,5,2017,1994-11-06,77.0,326,Old Dominion,2017,,,false,player_identity,training
+2022,1,REG,ARI,DB,SS,3,ACT,A01,Budda Baker,Budda,Budda,Baker,00-0033890,BakeBu00,3127287,4081,5,2017,1996-01-10,70.0,195,Washington,2017,ARI,36,false,player_identity,training
+2022,1,REG,ARI,OL,G,63,DEV,P07,Danny Isidora,Danny,Daniel,Isidora,00-0033960,IsidDa00,,,5,2017,1994-06-05,75.0,306,Miami,2017,MIN,180,false,player_identity,training
+2022,1,REG,ARI,WR,WR,39,CUT,A01,Christian Blake,Christian,Christian,Blake,00-0034132,BlakCh00,3126002,5241,4,2018,1996-06-08,73.0,181,Northern Illinois,2018,,,false,player_identity,training
+2022,1,REG,ARI,LB,ILB,56,ACT,A01,Ben Niemann,Ben,Ben,Niemann,00-0034296,NiemBe00,3140643,5576,4,2018,1995-07-27,74.0,233,Iowa,2018,,,false,player_identity,training
+2022,1,REG,ARI,RB,RB,24,ACT,A01,Darrel Williams,Darrel,Darrel,Williams,00-0034301,WillDa10,3115375,5549,4,2018,1995-04-15,71.0,224,Louisiana State,2018,,,false,player_identity,training
+2022,1,REG,ARI,TE,TE,81,CUT,A01,Deon Yelder,Deon,Deon,Yelder,00-0034319,YeldDe00,3059766,5277,4,2018,1995-03-06,76.0,255,Western Kentucky,2018,,,false,player_identity,training
+2022,1,REG,ARI,OL,G,76,ACT,A01,Will Hernandez,Will,William,Hernandez,00-0034346,HernWi00,,,4,2018,1995-09-02,74.0,327,Texas-El Paso,2018,NYG,34,false,player_identity,training
+2022,1,REG,ARI,DL,NT,71,DEV,P06,Andrew Brown,Andrew,Andrew,Brown,00-0034394,BrowAn05,3116761,5077,4,2018,1995-12-30,75.0,290,Virginia,2018,CIN,158,false,player_identity,training
+2022,1,REG,ARI,LB,OLB,45,ACT,A01,Dennis Gardeck,Dennis,Dennis,Gardeck,00-0034473,GardDe01,4334300,5158,4,2018,1994-08-09,72.0,232,Sioux Falls,2018,,,false,player_identity,training
+2022,1,REG,ARI,LB,ILB,47,ACT,A01,Ezekiel Turner,Ezekiel,Ezekiel,Turner,00-0034490,TurnZe00,3894901,5161,4,2018,1996-06-09,74.0,214,Washington,2018,,,false,player_identity,training
+2022,1,REG,ARI,DB,FS,38,DEV,P07,Steven Parker,Steven,Steven,Parker,00-0034736,,3116387,5741,4,2018,1995-12-14,73.0,210,Oklahoma,2018,,,false,unavailable,training
+2022,1,REG,ARI,DL,DE,96,CUT,A01,Kingsley Keke,Kingsley,Kingsley,Keke,00-0034984,KekeKi00,3917340,6103,3,2019,1996-09-26,75.0,288,Texas A&amp;M,2019,GB,150,false,player_identity,training
+2022,1,REG,ARI,WR,WR,13,RES,R01,Antoine Wesley,Antoine,Antoine,Wesley,00-0035126,WeslAn01,4043161,6165,3,2019,1997-10-22,76.0,206,Texas Tech,2019,,,false,player_identity,training
+2022,1,REG,ARI,QB,QB,19,ACT,A01,Trace McSorley,Trace,Trace,McSorley,00-0035146,McSoTr00,3116172,5974,3,2019,1995-08-23,72.0,202,Penn State,2019,BAL,197,false,player_identity,training
+2022,1,REG,ARI,QB,QB,1,ACT,A01,Kyler Murray,Kyler,Kyler,Murray,00-0035228,MurrKy00,3917315,5849,3,2019,1997-08-07,70.0,207,Oklahoma,2019,ARI,1,false,player_identity,training
+2022,1,REG,ARI,DB,CB,7,ACT,A01,Byron Murphy,Byron,Byron,Murphy,00-0035236,MurpBy00,4038999,5864,3,2019,1998-01-18,71.0,190,Washington,2019,ARI,33,false,player_identity,training
+2022,1,REG,ARI,OL,G,72,RES,R01,Cody Ford,Cody,Cody,Ford,00-0035238,FordCo00,,,3,2019,1996-12-28,75.0,329,Oklahoma,2019,BUF,38,false,player_identity,training
+2022,1,REG,ARI,DL,DE,94,ACT,A01,Zach Allen,Zach,Zachary,Allen,00-0035248,AlleZa01,3915282,5871,3,2019,1997-08-20,76.0,281,Boston College,2019,ARI,65,false,player_identity,training
+2022,1,REG,ARI,OL,T,66,RES,R01,Joshua Miles,Joshua,Joshua,Miles,00-0035317,MileJo00,,,3,2019,1996-01-04,77.0,314,Morgan State,2019,ARI,248,false,player_identity,training
+2022,1,REG,ARI,DL,DE,93,ACT,A01,Jonathan Ledbetter,Jonathan,Jonathan,Ledbetter,00-0035343,LedbJo01,3728308,5945,3,2019,1997-09-12,76.0,280,Georgia,2019,,,false,player_identity,training
+2022,1,REG,ARI,OL,G,60,CUT,W03,Koda Martin,Koda,Koda,Martin,00-0035431,MartKo00,,,3,2019,1995-08-21,78.0,304,Syracuse,2019,,,false,player_identity,training
+2022,1,REG,ARI,DB,DB,37,CUT,A01,Nate Brooks,Nate,Nate,Brooks,00-0035485,BrooNa00,3914477,6634,3,2019,1996-09-05,72.0,192,North Texas,2019,,,false,player_identity,training
+2022,1,REG,ARI,WR,WR,83,ACT,A01,Greg Dortch,Greg,Greg,Dortch,00-0035500,DortGr01,4037235,5970,3,2019,1998-05-29,67.0,173,Wake Forest,2019,,,false,player_identity,training
+2022,1,REG,ARI,WR,WR,17,ACT,A01,Andy Isabella,Andy,Andrew,Isabella,00-0035527,IsabAn00,3914328,5915,3,2019,1996-11-18,69.0,190,Massachusetts,2019,ARI,62,false,player_identity,training
+2022,1,REG,ARI,DB,SS,22,ACT,A01,Deionte Thompson,Deionte,Deionte,Thompson,00-0035532,ThomDe06,3859100,5866,3,2019,1997-02-11,73.0,196,Alabama,2019,ARI,139,false,player_identity,training
+2022,1,REG,ARI,DL,DE,91,ACT,A01,Michael Dogbe,Michael,Michael,Dogbe,00-0035541,DogbMi00,3138765,6304,3,2019,1996-05-05,75.0,284,Temple,2019,ARI,249,false,player_identity,training
+2022,1,REG,ARI,DB,CB,39,DEV,P07,Corey Ballentine,Corey,Corey,Ballentine,00-0035633,BallCo00,4411769,6283,3,2019,1996-04-13,72.0,196,Washburn,2019,NYG,180,false,player_identity,training
+2022,1,REG,ARI,WR,WR,2,ACT,A01,Marquise Brown,Marquise,Marquise,Brown,00-0035662,BrowMa04,4241372,5848,3,2019,1997-06-04,69.0,170,Oklahoma,2019,BAL,25,false,player_identity,training
+2022,1,REG,ARI,DB,CB,21,INA,A01,Trayvon Mullen,Trayvon,Trayvon,Mullen,00-0035695,MullTr00,4035458,5853,3,2019,1997-09-20,74.0,200,Clemson,2019,OAK,40,false,player_identity,training
+2022,1,REG,ARI,DB,FS,34,ACT,A01,Jalen Thompson,Jalen,Jalen,Thompson,00-0035705,ThomJa04,4043089,6711,3,2019,1998-07-18,71.0,190,Washington State,2019,ARI,132,false,player_identity,training
+2022,1,REG,ARI,WR,WR,82,ACT,A01,Andre Baccellia,Andre,Andre,Baccellia,00-0035876,BaccAn00,3886809,7233,2,2020,1997-01-07,70.0,175,Washington,2020,,,false,player_identity,training
+2022,1,REG,ARI,DL,DE,53,CUT,A01,Jessie Lemonier,Jessie,Jessie,Lemonier,00-0035906,LemoJe00,4365493,7324,2,2020,1997-01-31,75.0,240,Liberty,2020,,,false,player_identity,training
+2022,1,REG,ARI,RB,RB,29,ACT,A01,Jonathan Ward,Jonathan,Jonathan,Ward,00-0035924,WardJo00,4039274,7087,2,2020,1997-09-30,72.0,202,Central Michigan,2020,,,false,player_identity,training
+2023,1,REG,ARI,K,K,5,ACT,A01,Matt Prater,Matt,Matt,Prater,00-0023853,PratMa20,11122,17,17,2006,1984-08-10,70.0,201,Central Florida,2006,,,false,player_identity,training
+2023,1,REG,ARI,QB,QB,12,CUT,A01,Colt McCoy,Colt,Daniel,McCoy,00-0027688,McCoCo00,13199,533,13,2010,1986-09-05,73.0,212,Texas,2010,CLE,85,false,player_identity,training
+2023,1,REG,ARI,LS,LS,46,ACT,A01,Aaron Brewer,Aaron,Aaron,Brewer,00-0028946,BrewAa00,15241,1122,11,2012,1990-07-05,77.0,232,San Diego State,2012,,,false,player_identity,training
+2023,1,REG,ARI,OL,T,68,INA,A01,Kelvin Beachum,Kelvin,Kelvin,Beachum,00-0029316,BeacKe00,,,11,2012,1989-06-08,75.0,308,Southern Methodist,2012,PIT,248,false,player_identity,training
+2023,1,REG,ARI,TE,TE,86,ACT,A01,Zach Ertz,Zach,Zachary,Ertz,00-0030061,ErtzZa00,15835,1339,10,2013,1990-11-10,77.0,250,Stanford,2013,PHI,35,false,player_identity,training
+2023,1,REG,ARI,TE,TE,87,ACT,A01,Geoff Swaim,Geoff,Geoffrey,Swaim,00-0032141,SwaiGe00,3046704,2545,8,2015,1993-09-16,76.0,260,Texas,2015,DAL,246,false,player_identity,training
+2023,1,REG,ARI,OL,T,74,ACT,A01,D.J. Humphries,D.J.,DeMarcus,Humphries,00-0032222,HumpD.00,,,8,2015,1993-12-28,77.0,307,Florida,2015,ARI,24,false,player_identity,training
+2023,1,REG,ARI,QB,QB,19,DEV,P07,Jeff Driskel,Jeff,Jeffrey,Driskel,00-0032436,DrisJe00,2574630,3362,7,2016,1993-04-23,76.0,235,Louisiana Tech,2016,SF,207,false,player_identity,training
+2023,1,REG,ARI,DB,CB,33,ACT,A01,Antonio Hamilton,Antonio,Antonio,Hamilton,00-0032933,HamiAn01,3056354,3838,7,2016,1993-01-24,72.0,190,South Carolina State,2016,,,false,player_identity,training
+2023,1,REG,ARI,WR,WR,0,ACT,A01,Zach Pascal,Zach,Zachary,Pascal,00-0033251,PascZa00,2978109,4319,6,2017,1994-12-18,74.0,214,Old Dominion,2017,,,false,player_identity,training
+2023,1,REG,ARI,RB,RB,6,ACT,A01,James Conner,James,James,Conner,00-0033553,ConnJa00,3045147,4137,6,2017,1995-05-05,73.0,233,Pittsburgh,2017,PIT,105,false,player_identity,training
+2023,1,REG,ARI,DL,DE,94,ACT,A01,Carlos Watkins,Carlos,Carlos,Watkins,00-0033563,WatkCa00,2977681,4166,6,2017,1993-12-05,75.0,297,Clemson,2017,HOU,142,false,player_identity,training
+2023,1,REG,ARI,DB,CB,27,CUT,A01,Nate Hairston,Nate,Nathan,Hairston,00-0033568,HairNa00,2976259,4202,6,2017,1994-06-30,72.0,185,Temple,2017,IND,158,false,player_identity,training
+2023,1,REG,ARI,OL,T,65,ACT,A01,Elijah Wilkinson,Elijah,Elijah,Wilkinson,00-0033676,WilkEl00,,,6,2017,1995-02-10,78.0,329,Massachusetts,2017,,,false,player_identity,training
+2023,1,REG,ARI,RB,RB,23,DEV,P07,Corey Clement,Corey,Corey,Clement,00-0033725,ClemCo00,3045260,4651,6,2017,1994-11-02,70.0,220,Wisconsin,2017,,,false,player_identity,training
+2023,1,REG,ARI,DB,SS,3,ACT,A01,Budda Baker,Budda,Budda,Baker,00-0033890,BakeBu00,3127287,4081,6,2017,1996-01-10,70.0,195,Washington,2017,ARI,36,false,player_identity,training
+2023,1,REG,ARI,OL,C,50,RES,R01,Pat Elflein,Pat,Patrick,Elflein,00-0033909,ElflPa00,,,6,2017,1994-07-06,75.0,303,Ohio State,2017,MIN,70,false,player_identity,training
+2023,1,REG,ARI,QB,QB,9,ACT,A01,Joshua Dobbs,Joshua,Robert,Dobbs,00-0033949,DobbJo00,3044720,4179,6,2017,1995-01-26,75.0,216,Tennessee,2017,PIT,135,false,player_identity,training
+2023,1,REG,ARI,RB,RB,37,RES,R01,Marlon Mack,Marlon,Marlon,Mack,00-0033951,MackMa00,3139605,4152,6,2017,1996-03-07,71.0,210,South Florida,2017,IND,143,false,player_identity,training
+2023,1,REG,ARI,OL,G,76,ACT,A01,Will Hernandez,Will,William,Hernandez,00-0034346,HernWi00,,,5,2018,1995-09-02,75.0,327,Texas-El Paso,2018,NYG,34,false,player_identity,training
+2023,1,REG,ARI,LB,ILB,7,ACT,A01,Kyzir White,Kyzir,Kyzir,White,00-0034375,WhitKy00,4039254,5348,5,2018,1996-03-24,74.0,216,West Virginia,2018,LAC,119,false,player_identity,training
+2023,1,REG,ARI,LB,OLB,45,ACT,A01,Dennis Gardeck,Dennis,Dennis,Gardeck,00-0034473,GardDe01,4334300,5158,5,2018,1994-08-09,72.0,232,Sioux Falls,2018,,,false,player_identity,training
+2023,1,REG,ARI,LB,ILB,47,ACT,A01,Ezekiel Turner,Ezekiel,Ezekiel,Turner,00-0034490,TurnZe00,3894901,5161,5,2018,1996-06-09,74.0,214,Washington,2018,,,false,player_identity,training
+2023,1,REG,ARI,DB,SS,32,CUT,A01,Sean Chandler,Sean,Sean,Chandler,00-0034496,ChanSe00,3138733,5178,5,2018,1996-04-27,70.0,205,Temple,2018,,,false,player_identity,training
+2023,1,REG,ARI,DB,CB,36,ACT,A01,Andre Chachere,Andre,Andre,Chachere,00-0034623,ChacAn00,3125287,5674,5,2018,1996-02-10,72.0,195,San Jose State,2018,,,false,player_identity,training
+2023,1,REG,ARI,LB,ILB,10,ACT,A01,Josh Woods,Josh,Josh,Woods,00-0034801,WoodJo02,3128303,5757,5,2018,1996-07-01,73.0,236,Maryland,2018,,,false,player_identity,training
+2023,1,REG,ARI,OL,T,66,ACT,A01,Jackson Barton,Jackson,Jackson,Barton,00-0035003,BartJa00,,,4,2019,1995-08-08,79.0,302,Utah,2019,IND,240,false,player_identity,training
+2023,1,REG,ARI,WR,WR,10,CUT,W03,Davion Davis,Davion,Davion,Davis,00-0035101,DaviDa03,3933568,6380,4,2019,1996-10-23,71.0,195,Sam Houston State,2019,,,false,player_identity,training
+2023,1,REG,ARI,DB,CB,24,RES,R01,Rashad Fenton,Rashad,Rashad,Fenton,00-0035147,FentRa00,3924364,6014,4,2019,1997-02-17,71.0,188,South Carolina,2019,KC,201,false,player_identity,training
+2023,1,REG,ARI,DB,CB,29,ACT,A01,Kris Boyd,Kris,Kris,Boyd,00-0035150,BoydKr00,3929845,5921,4,2019,1996-09-12,71.0,201,Texas,2019,MIN,217,false,player_identity,training
+2023,1,REG,ARI,QB,QB,1,RES,R04,Kyler Murray,Kyler,Kyler,Murray,00-0035228,MurrKy00,3917315,5849,4,2019,1997-08-07,70.0,207,Oklahoma,2019,ARI,1,false,player_identity,training
+2023,1,REG,ARI,OL,C,72,ACT,A01,Hjalte Froholdt,Hjalte,Hjalte,Froholdt,00-0035258,FrohHj00,,,4,2019,1996-08-20,77.0,310,Arkansas,2019,NE,118,false,player_identity,training
+2023,1,REG,ARI,OL,T,71,RES,R01,Dennis Daley,Dennis,Dennis,Daley,00-0035300,DaleDe00,,,4,2019,1996-08-07,78.0,324,South Carolina,2019,CAR,212,false,player_identity,training
+2023,1,REG,ARI,DL,DE,92,ACT,A01,Kevin Strong,Kevin,Kevin,Strong,00-0035334,StroKe00,3124052,6536,4,2019,1996-08-05,76.0,285,Texas-San Antonio,2019,,,false,player_identity,training
+2023,1,REG,ARI,DL,DE,93,ACT,A01,Jonathan Ledbetter,Jonathan,Jonathan,Ledbetter,00-0035343,LedbJo01,3728308,5945,4,2019,1997-09-12,76.0,280,Georgia,2019,,,false,player_identity,training
+2023,1,REG,ARI,WR,WR,83,ACT,A01,Greg Dortch,Greg,Greg,Dortch,00-0035500,DortGr01,4037235,5970,4,2019,1998-05-29,67.0,173,Wake Forest,2019,,,false,player_identity,training
+2023,1,REG,ARI,DL,DE,91,ACT,A01,L.J. Collier,L.J.,Lawrence,Collier,00-0035636,CollLJ00,3116449,5861,4,2019,1995-09-12,75.0,291,Texas Christian,2019,SEA,29,false,player_identity,training
+2023,1,REG,ARI,WR,WR,2,ACT,A01,Marquise Brown,Marquise,Marquise,Brown,00-0035662,BrowMa04,4241372,5848,4,2019,1997-06-04,69.0,170,Oklahoma,2019,BAL,25,false,player_identity,training
+2023,1,REG,ARI,DB,FS,34,ACT,A01,Jalen Thompson,Jalen,Jalen,Thompson,00-0035705,ThomJa04,4043089,6711,4,2019,1998-07-18,71.0,190,Washington State,2019,ARI,132,false,player_identity,training
+2023,1,REG,ARI,OL,G,61,INA,A01,Carter O'Donnell,Carter,Carter,O'Donnell,00-0035853,ODonCa00,,,3,2020,1998-12-23,77.0,315,"Alberta, Can.",2020,,,false,player_identity,training
+2023,1,REG,ARI,WR,WR,82,DEV,P01,Andre Baccellia,Andre,Andre,Baccellia,00-0035876,BaccAn00,3886809,7233,3,2020,1997-01-07,70.0,175,Washington,2020,,,false,player_identity,training
+2023,1,REG,ARI,DL,DT,96,DEV,P01,Eric Banks,Eric,Eric,Banks,00-0035928,BankEr00,4040703,7341,3,2020,1998-01-30,77.0,270,Texas-San Antonio,2020,,,false,player_identity,training
+2023,1,REG,ARI,OL,C,79,CUT,W03,Cohl Cabral,Cohl,Cohl,Cabral,00-0035930,CabrCo01,,,3,2020,1998-02-11,77.0,295,Arizona State,2020,,,false,player_identity,training
+2023,1,REG,ARI,LB,ILB,51,ACT,A01,Krys Barnes,Krys,Krystopher,Barnes,00-0035961,BarnKr00,4035817,7268,3,2020,1998-04-02,74.0,235,UCLA,2020,,,false,player_identity,training
+2023,1,REG,ARI,OL,C,63,ACT,A01,Trystan Colon,Trystan,Trystan,Colon,00-0035992,ColoTr01,,,3,2020,1998-03-23,75.0,315,Missouri,2020,,,false,player_identity,training
+2023,1,REG,ARI,TE,TE,81,CUT,W03,Noah Togiai,Noah,Noah,Togiai,00-0036005,TogiNo00,3930298,7404,3,2020,1997-07-06,76.0,246,Oregon State,2020,,,false,player_identity,training
+2023,1,REG,ARI,DB,FS,26,DEV,P07,Bobby Price,Bobby,Bobby,Price,00-0036011,PricBo00,4030779,7259,3,2020,1998-04-25,75.0,205,Norfolk State,2020,,,false,player_identity,training
+2023,1,REG,ARI,DB,FS,36,CUT,W03,Juju Hughes,Juju,Juwuane,Hughes,00-0036077,HughJu00,4040901,7347,3,2020,1998-07-19,71.0,188,Fresno State,2020,,,false,player_identity,training
+2023,1,REG,ARI,DB,SS,38,DEV,P06,Jovante Moffatt,Jovante,Jovante,Moffatt,00-0036118,MoffJo01,3914450,7251,3,2020,1996-12-25,71.0,210,Middle Tennessee,2020,,,false,player_identity,training
+2023,1,REG,ARI,OL,T,67,CUT,W03,Badara Traore,Badara,Badara,Traore,00-0036210,TraoBa00,,,3,2020,1997-03-12,79.0,320,Louisiana State,2020,,,false,player_identity,training
+2023,1,REG,ARI,OL,G,73,RES,W03,Lachavious Simmons,Lachavious,Lachavious,Simmons,00-0036318,SimmLa00,,,3,2020,1996-09-26,77.0,315,Tennessee State,2020,CHI,227,false,player_identity,training
+2023,1,REG,ARI,OL,C,60,ACT,A01,Keith Ismael,Keith,Keith,Ismael,00-0036342,IsmaKe00,,,3,2020,1998-07-25,75.0,310,San Diego State,2020,WAS,156,false,player_identity,training
+2023,1,REG,ARI,DL,DT,95,ACT,A01,Leki Fotu,Leki,George,Fotu,00-0036371,FotuLe00,4035666,6948,3,2020,1998-08-23,77.0,335,Utah,2020,ARI,114,false,player_identity,training
+2023,1,REG,ARI,DB,SS,22,ACT,A01,K'Von Wallace,K'Von,K'Von,Wallace,00-0036395,WallKV00,4035463,6947,3,2020,1997-07-25,71.0,208,Clemson,2020,PHI,127,false,player_identity,training
+2023,1,REG,ARI,RB,RB,22,CUT,W03,Ty'Son Williams,Ty'Son,Ty'Son,Williams,00-0036457,WillTy01,3895827,7098,3,2020,,72.0,220,Brigham Young,2020,,,false,player_identity,training
+2023,1,REG,ARI,P,P,16,ACT,A01,Nolan Cooney,Nolan,Nolan,Cooney,00-0036539,CoonNo00,4047860,7909,2,2021,1996-09-18,75.0,202,Syracuse,2021,,,false,player_identity,training
+2023,1,REG,ARI,RB,RB,49,CUT,W03,Stevie Scott,Stevie,Stevie,Scott,00-0036548,,,7904,2,2021,,74.0,231,Indiana,2021,,,false,unavailable,training
+2023,1,REG,ARI,OL,C,63,CUT,W03,Braylon Jones,Braylon,Braylon,Jones,00-0036770,JoneBr07,,,2,2021,,76.0,315,Houston,2021,,,false,player_identity,training
+2023,1,REG,ARI,WR,WR,89,CUT,W03,Brandon Smith,Brandon,Brandon,Smith,00-0036775,SmitBr07,,,2,2021,,74.0,215,Iowa,2021,,,false,player_identity,training
+2023,1,REG,ARI,DB,CB,20,ACT,A01,Marco Wilson,Marco,Marco,Wilson,00-0036884,WilsMa04,4240595,7708,2,2021,1999-03-03,72.0,191,Florida,2021,ARI,136,false,player_identity,training
+2023,1,REG,ARI,LB,OLB,52,ACT,A01,Victor Dimukeje,Victor,Victor,Dimukeje,00-0036896,DimuVi00,4240464,7788,2,2021,1999-11-18,74.0,265,Duke,2021,ARI,210,false,player_identity,training
+2023,1,REG,ARI,LB,OLB,25,ACT,A01,Zaven Collins,Zaven,Zaven,Collins,00-0036933,CollZa00,4244606,7637,2,2021,1999-05-19,76.0,260,Tulsa,2021,ARI,16,false,player_identity,training
+2023,1,REG,ARI,WR,WR,4,ACT,A01,Rondale Moore,Rondale,Rondale,Moore,00-0036936,MoorRo02,4372485,7601,2,2021,2000-06-09,67.0,180,Purdue,2021,ARI,49,false,player_identity,training
+2024,1,REG,ARI,K,K,5,ACT,A01,Matt Prater,Matt,Matt,Prater,00-0023853,PratMa20,11122,17,18,2006,1984-08-10,70.0,201,Central Florida,2006,,,false,player_identity,validation
+2024,1,REG,ARI,LS,LS,46,ACT,A01,Aaron Brewer,Aaron,Aaron,Brewer,00-0028946,BrewAa00,15241,1122,12,2012,1990-07-05,77.0,232,San Diego State,2012,,,false,player_identity,validation
+2024,1,REG,ARI,OL,T,68,ACT,A01,Kelvin Beachum,Kelvin,Kelvin,Beachum,00-0029316,BeacKe00,,,12,2012,1989-06-08,75.0,308,Southern Methodist,2012,PIT,248,false,player_identity,validation
+2024,1,REG,ARI,WR,WR,10,ACT,A01,Chris Moore,Chris,Christopher,Moore,00-0032398,MoorCh00,2576581,3269,8,2016,1993-06-16,73.0,200,Cincinnati,2016,BAL,107,false,player_identity,validation
+2024,1,REG,ARI,WR,WR,0,ACT,A01,Zach Pascal,Zach,Zachary,Pascal,00-0033251,PascZa00,2978109,4319,7,2017,1994-12-18,74.0,214,Old Dominion,2017,,,false,player_identity,validation
+2024,1,REG,ARI,RB,RB,6,ACT,A01,James Conner,James,James,Conner,00-0033553,ConnJa00,3045147,4137,7,2017,1995-05-05,73.0,233,Pittsburgh,2017,PIT,105,false,player_identity,validation
+2024,1,REG,ARI,DB,SS,3,ACT,A01,Budda Baker,Budda,Budda,Baker,00-0033890,BakeBu00,3127287,4081,7,2017,1996-01-10,70.0,195,Washington,2017,ARI,36,false,player_identity,validation
+2024,1,REG,ARI,WR,WR,17,RES,R40,Zay Jones,Zay,Isaiah,Jones,00-0033891,JoneZa00,3059722,4080,7,2017,1995-03-30,74.0,200,East Carolina,2017,BUF,37,false,player_identity,validation
+2024,1,REG,ARI,OL,G,76,ACT,A01,Will Hernandez,Will,William,Hernandez,00-0034346,HernWi00,,,6,2018,1995-09-02,75.0,327,Texas-El Paso,2018,NYG,34,false,player_identity,validation
+2024,1,REG,ARI,LB,ILB,7,ACT,A01,Kyzir White,Kyzir,Kyzir,White,00-0034375,WhitKy00,4039254,5348,6,2018,1996-03-24,74.0,216,West Virginia,2018,LAC,119,false,player_identity,validation
+2024,1,REG,ARI,DL,DT,92,ACT,A01,Bilal Nichols,Bilal,Bilal,Nichols,00-0034387,NichBi00,3117922,5302,6,2018,1996-09-14,75.0,313,Delaware,2018,CHI,145,false,player_identity,validation
+2024,1,REG,ARI,LB,OLB,45,ACT,A01,Dennis Gardeck,Dennis,Dennis,Gardeck,00-0034473,GardDe01,4334300,5158,6,2018,1994-08-09,72.0,232,Sioux Falls,2018,,,false,player_identity,validation
+2024,1,REG,ARI,OL,C,62,ACT,A01,Evan Brown,Evan,Evan,Brown,00-0034495,BrowEv00,,,6,2018,1996-09-16,75.0,302,Southern Methodist,2018,,,false,player_identity,validation
+2024,1,REG,ARI,DB,SS,36,CUT,A01,Andre Chachere,Andre,Andre,Chachere,00-0034623,ChacAn00,3125287,5674,6,2018,1996-02-10,72.0,195,San Jose State,2018,,,false,player_identity,validation
+2024,1,REG,ARI,DL,DT,93,ACT,A01,Justin Jones,Justin,Justin,Jones,00-0034677,JoneJu03,3116746,5063,6,2018,1996-08-28,75.0,309,North Carolina State,2018,LAC,84,false,player_identity,validation
+2024,1,REG,ARI,OL,T,66,DEV,P01,Jackson Barton,Jackson,Jackson,Barton,00-0035003,BartJa00,,,5,2019,1995-08-08,79.0,302,Utah,2019,IND,240,false,player_identity,validation
+2024,1,REG,ARI,LB,ILB,2,ACT,A01,Mack Wilson,Mack,Mack,Wilson,00-0035144,WilsMa03,4040983,6131,5,2019,1998-02-14,73.0,240,Alabama,2019,CLE,155,false,player_identity,validation
+2024,1,REG,ARI,QB,QB,1,ACT,A01,Kyler Murray,Kyler,Kyler,Murray,00-0035228,MurrKy00,3917315,5849,5,2019,1997-08-07,70.0,207,Oklahoma,2019,ARI,1,false,player_identity,validation
+2024,1,REG,ARI,DB,CB,23,ACT,A01,Sean Murphy-Bunting,Sean,Sean,Murphy-Bunting,00-0035239,BuntSe00,3932886,6060,5,2019,1997-06-19,72.0,195,Central Michigan,2019,TB,39,false,player_identity,validation
+2024,1,REG,ARI,OL,C,72,ACT,A01,Hjalte Froholdt,Hjalte,Hjalte,Froholdt,00-0035258,FrohHj00,,,5,2019,1996-08-20,77.0,310,Arkansas,2019,NE,118,false,player_identity,validation
+2024,1,REG,ARI,OL,T,71,CUT,A01,Dennis Daley,Dennis,Dennis,Daley,00-0035300,DaleDe00,,,5,2019,1996-08-07,78.0,324,South Carolina,2019,CAR,212,false,player_identity,validation
+2024,1,REG,ARI,WR,WR,4,ACT,A01,Greg Dortch,Greg,Greg,Dortch,00-0035500,DortGr01,4037235,5970,5,2019,1998-05-29,67.0,173,Wake Forest,2019,,,false,player_identity,validation
+2024,1,REG,ARI,WR,WR,86,CUT,A01,Jeff Smith,Jeff,Jeffrey,Smith,00-0035510,SmitJe03,3929118,6557,5,2019,1997-04-21,73.0,195,Boston College,2019,,,false,player_identity,validation
+2024,1,REG,ARI,OL,T,73,ACT,A01,Jonah Williams,Jonah,Jonah,Williams,00-0035629,WillJo16,,,5,2019,1997-11-17,77.0,305,Alabama,2019,CIN,11,false,player_identity,validation
+2024,1,REG,ARI,DL,DT,91,ACT,A01,L.J. Collier,L.J.,Lawrence,Collier,00-0035636,CollLJ00,3116449,5861,5,2019,1995-09-12,75.0,291,Texas Christian,2019,SEA,29,false,player_identity,validation
+2024,1,REG,ARI,DB,FS,34,ACT,A01,Jalen Thompson,Jalen,Jalen,Thompson,00-0035705,ThomJa04,4043089,6711,5,2019,1998-07-18,71.0,190,Washington State,2019,ARI,132,false,player_identity,validation
+2024,1,REG,ARI,OL,T,67,CUT,W03,Austen Pleasants,Austen,Austen,Pleasants,00-0035829,PleaAu00,,,4,2020,1997-08-22,79.0,312,Ohio,2020,,,false,player_identity,validation
+2024,1,REG,ARI,OL,G,61,RES,R01,Carter O'Donnell,Carter,Carter,O'Donnell,00-0035853,ODonCa00,,,4,2020,1998-12-23,77.0,315,"Alberta, Can.",2020,,,false,player_identity,validation
+2024,1,REG,ARI,P,P,12,ACT,A01,Blake Gillikin,Blake,Blake,Gillikin,00-0035859,GillBl00,4045180,7467,4,2020,1998-01-21,74.0,196,Penn State,2020,,,false,player_identity,validation
+2024,1,REG,ARI,RB,RB,37,CUT,R01,Tony Jones,Tony,Tony,Jones,00-0035860,JoneTo04,4046676,6984,4,2020,1997-11-24,71.0,225,Notre Dame,2020,,,false,player_identity,validation
+2024,1,REG,ARI,WR,WR,82,DEV,P01,Andre Baccellia,Andre,Andre,Baccellia,00-0035876,BaccAn00,3886809,7233,4,2020,1997-01-07,70.0,175,Washington,2020,,,false,player_identity,validation
+2024,1,REG,ARI,DL,DT,94,CUT,W03,T.J. Carter,T.J.,T.J.,Carter,00-0035916,,,,4,2020,1998-09-15,76.0,289,Kentucky,2020,,,false,unavailable,validation
+2024,1,REG,ARI,LB,ILB,51,ACT,A01,Krys Barnes,Krys,Krystopher,Barnes,00-0035961,BarnKr00,4035817,7268,4,2020,1998-04-02,74.0,235,UCLA,2020,,,false,player_identity,validation
+2024,1,REG,ARI,WR,WR,17,DEV,P06,Dan Chisena,Dan,Daniel,Chisena,00-0035976,ChisDa00,3929637,7357,4,2020,1997-02-25,75.0,202,Penn State,2020,,,false,player_identity,validation
+2024,1,REG,ARI,OL,C,63,ACT,A01,Trystan Colon,Trystan,Trystan,Colon,00-0035992,ColoTr01,,,4,2020,1998-03-23,75.0,315,Missouri,2020,,,false,player_identity,validation
+2024,1,REG,ARI,LB,OLB,58,DEV,P07,Julian Okwara,Julian,Julian,Okwara,00-0036249,OkwaJu00,4046690,6851,4,2020,1997-12-27,76.0,241,Notre Dame,2020,DET,67,false,player_identity,validation
+2024,1,REG,ARI,LB,ILB,41,DEV,P07,Markus Bailey,Markus,Markus,Bailey,00-0036314,BailMa01,3917992,6891,4,2020,1997-03-07,73.0,240,Purdue,2020,CIN,215,false,player_identity,validation
+2024,1,REG,ARI,OL,C,60,DEV,P07,Keith Ismael,Keith,Keith,Ismael,00-0036342,IsmaKe00,,,4,2020,1998-07-25,75.0,310,San Diego State,2020,WAS,156,false,player_identity,validation
+2024,1,REG,ARI,DB,CB,29,CUT,A01,Michael Ojemudia,Michael,Michael,Ojemudia,00-0036390,OjemMi00,3894830,6983,4,2020,1997-09-12,73.0,200,Iowa,2020,DEN,77,false,player_identity,validation
+2024,1,REG,ARI,RB,RB,20,ACT,A01,DeeJay Dallas,DeeJay,Demetrius,Dallas,00-0036425,DallDe00,4240631,6931,4,2020,1998-09-16,70.0,214,Miami,2020,SEA,144,false,player_identity,validation
+2024,1,REG,ARI,DL,NT,98,ACT,A01,Roy Lopez,Roy,Roy,Lopez,00-0036568,LopeRo00,4040805,7799,3,2021,1997-08-07,74.0,318,Arizona,2021,HOU,195,false,player_identity,validation
+2024,1,REG,ARI,TE,TE,47,CUT,W03,Sage Surratt,Sage,Sage,Surratt,00-0036753,SurrSa00,,,3,2021,1998-04-13,75.0,215,Wake Forest,2021,,,false,player_identity,validation
+2024,1,REG,ARI,LB,LB,49,CUT,W03,Chris Garrett,Chris,Christopher,Garrett,00-0036863,GarrCh00,4820589,7945,3,2021,1998-06-12,76.0,245,"Concordia, St. Paul",2021,LA,252,false,player_identity,validation
+2024,1,REG,ARI,LB,OLB,52,ACT,A01,Victor Dimukeje,Victor,Victor,Dimukeje,00-0036896,DimuVi00,4240464,7788,3,2021,1999-11-18,74.0,265,Duke,2021,ARI,210,false,player_identity,validation
+2024,1,REG,ARI,DL,NT,95,ACT,A01,Khyiris Tonga,Khyiris,Khyiris,Tonga,00-0036909,TongKh00,4256074,7756,3,2021,1996-07-07,76.0,340,Brigham Young,2021,CHI,250,false,player_identity,validation
+2024,1,REG,ARI,RB,RB,22,DEV,P07,Michael Carter,Michael,Michael,Carter,00-0036924,CartMi03,4240657,7607,3,2021,1999-05-07,68.0,200,North Carolina,2021,NYJ,107,false,player_identity,validation
+2024,1,REG,ARI,LB,OLB,25,ACT,A01,Zaven Collins,Zaven,Zaven,Collins,00-0036933,CollZa00,4244606,7637,3,2021,1999-05-19,76.0,260,Tulsa,2021,ARI,16,false,player_identity,validation
+2024,1,REG,ARI,DB,FS,30,INA,I01,Darren Hall,Darren,Darren,Hall,00-0036956,HallDa03,4261606,7730,3,2021,2000-05-02,72.0,190,San Diego State,2021,ATL,108,false,player_identity,validation
+2024,1,REG,ARI,TE,TE,80,DEV,P03,Bernhard Seikovits,Bernhard,Bernhard,Seikovits,00-0037020,SeikBe00,,,3,2021,1997-07-24,77.0,262,No College,2021,,,false,player_identity,validation
+2024,1,REG,ARI,DB,FS,32,ACT,A01,Joey Blount,Joey,Joey,Blount,00-0037141,BlouJo00,4240824,8683,2,2022,1998-11-16,73.0,205,Virginia,2022,,,false,player_identity,validation
+2024,1,REG,ARI,OL,T,71,DEV,P01,Luke Tenuta,Luke,Luke,Tenuta,00-0037305,TenuLu00,,,2,2022,1999-09-01,80.0,322,Virginia Tech,2022,BUF,209,false,player_identity,validation
+2024,1,REG,ARI,LB,OLB,43,INA,I01,Jesse Luketa,Jesse,Jesse,Luketa,00-0037330,LukeJe00,4361419,8322,2,2022,1999-01-15,75.0,242,Penn State,2022,ARI,256,false,player_identity,validation
+2024,1,REG,ARI,DB,SS,35,CUT,W03,Verone McKinley III,Verone,Verone,McKinley,00-0037354,McKiVe00,4360692,8353,2,2022,1999-06-29,71.0,194,Oregon,2022,,,false,player_identity,validation
+2024,1,REG,ARI,DB,CB,38,CUT,W03,Delonte Hood,Delonte,Delonte,Hood,00-0037418,HoodDe00,,,2,2022,2000-10-17,72.0,185,Peru State,2022,,,false,player_identity,validation
+2024,1,REG,ARI,LB,LB,58,CUT,W03,Tyreek Maddox-Williams,Tyreek,Tyreek,Maddox-Williams,00-0037469,MaddTy00,,,2,2022,1997-10-28,72.0,235,Rutgers,2022,,,false,player_identity,validation
+2024,1,REG,ARI,TE,TE,85,ACT,A01,Trey McBride,Trey,Trey,McBride,00-0037744,McBrTr01,4361307,8130,2,2022,1999-11-22,76.0,245,Colorado State,2022,ARI,55,false,player_identity,validation
+2024,1,REG,ARI,OL,G,78,DEV,P01,Marquis Hayes,Marquis,Marquis,Hayes,00-0037748,HayeMa00,,,2,2022,1999-02-14,77.0,324,Oklahoma,2022,ARI,257,false,player_identity,validation
+2024,1,REG,ARI,QB,QB,19,DEV,P06,Desmond Ridder,Desmond,Desmond,Ridder,00-0038122,RiddDe00,4239086,8159,2,2022,1999-08-31,75.0,215,Cincinnati,2022,ATL,74,false,player_identity,validation
+2024,1,REG,ARI,WR,WR,86,CUT,W03,Daylen Baldwin,Daylen,Daylen,Baldwin,00-0038147,BaldDa01,4262900,8928,2,2022,1999-11-24,74.0,219,Michigan,2022,,,false,player_identity,validation
+2024,1,REG,ARI,TE,TE,81,INA,I01,Travis Vokolek,Travis,Travis,Vokolek,00-0038456,VokoTr00,4259324,11381,1,2023,1998-06-04,78.0,260,Nebraska,2023,,,false,player_identity,validation
+2024,1,REG,ARI,OL,T,70,ACT,A01,Paris Johnson Jr.,Paris,Paris,Johnson,00-0038540,JohnPa03,,,1,2023,2001-07-03,78.0,315,Ohio State,2023,ARI,6,false,player_identity,validation
+2024,1,REG,ARI,WR,WR,14,ACT,A01,Michael Wilson,Michael,Michael,Wilson,00-0038559,WilsMi02,4360761,10232,1,2023,2000-02-23,74.0,209,Stanford,2023,ARI,94,false,player_identity,validation
+2024,1,REG,ARI,OL,G,59,INA,I01,Jon Gaines II,Jon,Jon,Gaines,00-0038571,GainJo00,,,1,2023,1999-05-24,76.0,300,UCLA,2023,ARI,122,false,player_identity,validation
+2025,1,REG,ARI,DL,DE,93,ACT,A01,Calais Campbell,Calais,Calais,Campbell,00-0026190,CampCa99,11284,125,17,2008,1986-09-01,80.0,300,Miami,2008,ARI,50,false,player_identity,test
+2025,1,REG,ARI,LS,LS,46,ACT,A01,Aaron Brewer,Aaron,Aaron,Brewer,00-0028946,BrewAa00,15241,1122,13,2012,1990-07-05,77.0,232,San Diego State,2012,,,false,player_identity,test
+2025,1,REG,ARI,OL,T,68,ACT,A01,Kelvin Beachum,Kelvin,Kelvin,Beachum,00-0029316,BeacKe00,,,13,2012,1989-06-08,75.0,308,SMU,2012,PIT,248,false,player_identity,test
+2025,1,REG,ARI,QB,QB,7,ACT,A01,Jacoby Brissett,Jacoby,Jacoby,Brissett,00-0033119,BrisJa00,2578570,3257,9,2016,1992-12-11,76.0,235,N.C. State; Florida,2016,NE,91,false,player_identity,test
+2025,1,REG,ARI,DL,DT,94,ACT,A01,Dalvin Tomlinson,Dalvin,Dalvin,Tomlinson,00-0033546,TomlDa00,2979860,4092,8,2017,1994-02-18,75.0,318,Alabama,2017,NYG,55,false,player_identity,test
+2025,1,REG,ARI,RB,RB,6,ACT,A01,James Conner,James,James,Conner,00-0033553,ConnJa00,3045147,4137,8,2017,1995-05-05,73.0,233,Pittsburgh,2017,PIT,105,false,player_identity,test
+2025,1,REG,ARI,DB,SS,3,ACT,A01,Budda Baker,Budda,Budda,Baker,00-0033890,BakeBu00,3127287,4081,8,2017,1996-01-10,70.0,195,Washington,2017,ARI,36,false,player_identity,test
+2025,1,REG,ARI,WR,WR,17,ACT,A01,Zay Jones,Zay,Isaiah,Jones,00-0033891,JoneZa00,3059722,4080,8,2017,1995-03-30,74.0,200,East Carolina,2017,BUF,37,false,player_identity,test
+2025,1,REG,ARI,OL,G,76,INA,I01,Will Hernandez,Will,William,Hernandez,00-0034346,HernWi00,,,7,2018,1995-09-02,75.0,327,Texas-El Paso,2018,NYG,34,false,player_identity,test
+2025,1,REG,ARI,LB,OLB,10,ACT,A01,Josh Sweat,Josh,Josh,Sweat,00-0034381,SweaJo00,3693166,4999,7,2018,1997-03-29,77.0,253,Florida State,2018,PHI,130,false,player_identity,test
+2025,1,REG,ARI,DL,DT,92,RES,R04,Bilal Nichols,Bilal,Bilal,Nichols,00-0034387,NichBi00,3117922,5302,7,2018,1996-09-14,75.0,313,Delaware,2018,CHI,145,false,player_identity,test
+2025,1,REG,ARI,OL,G,63,ACT,A01,Evan Brown,Evan,Evan,Brown,00-0034495,BrowEv00,,,7,2018,1996-09-16,75.0,302,SMU,2018,,,false,player_identity,test
+2025,1,REG,ARI,DL,DT,98,RES,R01,Justin Jones,Justin,Justin,Jones,00-0034677,JoneJu03,3116746,5063,7,2018,1996-08-28,75.0,309,N.C. State,2018,LAC,84,false,player_identity,test
+2025,1,REG,ARI,LB,ILB,2,ACT,A01,Mack Wilson,Mack,Mack,Wilson,00-0035144,WilsMa03,4040983,6131,6,2019,1998-02-14,73.0,240,Alabama,2019,CLE,155,false,player_identity,test
+2025,1,REG,ARI,QB,QB,1,ACT,A01,Kyler Murray,Kyler,Kyler,Murray,00-0035228,MurrKy00,3917315,5849,6,2019,1997-08-07,70.0,207,Oklahoma; Texas A&M,2019,ARI,1,false,player_identity,test
+2025,1,REG,ARI,DB,CB,23,RES,R05,Sean Murphy-Bunting,Sean,Sean,Murphy-Bunting,00-0035239,BuntSe00,3932886,6060,6,2019,1997-06-19,72.0,195,Central Michigan,2019,TB,39,false,player_identity,test
+2025,1,REG,ARI,OL,C,72,ACT,A01,Hjalte Froholdt,Hjalte,Hjalte,Froholdt,00-0035258,FrohHj00,,,6,2019,1996-08-20,77.0,310,Arkansas,2019,NE,118,false,player_identity,test
+2025,1,REG,ARI,WR,WR,4,ACT,A01,Greg Dortch,Greg,Greg,Dortch,00-0035500,DortGr01,4037235,5970,6,2019,1998-05-29,67.0,173,Wake Forest,2019,,,false,player_identity,test
+2025,1,REG,ARI,OL,T,73,ACT,A01,Jonah Williams,Jonah,Jonah,Williams,00-0035629,WillJo16,,,6,2019,1997-11-17,77.0,305,Alabama,2019,CIN,11,false,player_identity,test
+2025,1,REG,ARI,DL,DT,91,ACT,A01,L.J. Collier,L.J.,Lawrence,Collier,00-0035636,CollLJ00,3116449,5861,6,2019,1995-09-12,74.0,291,TCU,2019,SEA,29,false,player_identity,test
+2025,1,REG,ARI,DB,FS,34,ACT,A01,Jalen Thompson,Jalen,Jalen,Thompson,00-0035705,ThomJa04,4043089,6711,6,2019,1998-07-18,71.0,190,Washington State,2019,ARI,132,false,player_identity,test
+2025,1,REG,ARI,P,P,12,ACT,A01,Blake Gillikin,Blake,Blake,Gillikin,00-0035859,GillBl00,4045180,7467,5,2020,1998-01-21,74.0,196,Penn State,2020,,,false,player_identity,test
+2025,1,REG,ARI,WR,WR,82,DEV,P01,Andre Baccellia,Andre,Andre,Baccellia,00-0035876,BaccAn00,3886809,7233,5,2020,1997-01-07,70.0,175,Washington,2020,,,false,player_identity,test
+2025,1,REG,ARI,WR,WR,86,RES,R01,Trishton Jackson,Trishton,Trishton,Jackson,00-0035934,JackTr02,4046715,7009,5,2020,1998-03-09,73.0,191,Syracuse,2020,,,false,player_identity,test
+2025,1,REG,ARI,OL,G,60,DEV,P07,Nick Leverett,Nick,Nick,Leverett,00-0036105,LeveNi00,,,5,2020,1997-11-11,76.0,310,Rice; North Carolina Central,2020,,,false,player_identity,test
+2025,1,REG,ARI,LB,ILB,27,ACT,A01,Akeem Davis-Gaither,Akeem,Akeem,Davis-Gaither,00-0036298,DaviAk01,3917142,6860,5,2020,1997-09-21,74.0,215,Appalachian State,2020,CIN,107,false,player_identity,test
+2025,1,REG,ARI,TE,TE,47,DEV,P07,Josiah Deguara,Josiah,Josiah,Deguara,00-0036332,DeguJo00,3914151,7050,5,2020,1997-02-14,74.0,240,Cincinnati,2020,GB,94,false,player_identity,test
+2025,1,REG,ARI,OL,G,71,CUT,A01,Royce Newman,Royce,Royce,Newman,00-0036631,NewmRo00,,,4,2021,1997-08-17,77.0,305,Mississippi,2021,GB,142,false,player_identity,test
+2025,1,REG,ARI,WR,WR,80,DEV,P01,Simi Fehoko,Simi,Simione,Fehoko,00-0036646,FehoSi00,4360739,7812,4,2021,1997-11-05,76.0,227,Stanford,2021,DAL,179,false,player_identity,test
+2025,1,REG,ARI,OL,T,64,DEV,P07,Jake Curhan,Jake,Jake,Curhan,00-0036795,CurhJa00,,,4,2021,1998-02-09,78.0,330,California,2021,,,false,player_identity,test
+2025,1,REG,ARI,RB,RB,22,DEV,P07,Michael Carter,Michael,Michael,Carter,00-0036924,CartMi03,4240657,7607,4,2021,1999-05-07,68.0,200,North Carolina,2021,NYJ,107,false,player_identity,test
+2025,1,REG,ARI,LB,OLB,25,ACT,A01,Zaven Collins,Zaven,Zaven,Collins,00-0036933,CollZa00,4244606,7637,4,2021,1999-05-19,76.0,260,Tulsa,2021,ARI,16,false,player_identity,test
+2025,1,REG,ARI,DB,FS,30,DEV,P07,Darren Hall,Darren,Darren,Hall,00-0036956,HallDa03,4261606,7730,4,2021,2000-05-02,72.0,190,San Diego State,2021,ATL,108,false,player_identity,test
+2025,1,REG,ARI,LB,OLB,5,ACT,A01,Baron Browning,Baron,Baron,Browning,00-0036995,BrowBa01,4241987,7681,4,2021,1999-02-19,75.0,240,Ohio State,2021,DEN,105,false,player_identity,test
+2025,1,REG,ARI,OL,T,79,CUT,P03,Roy Mbaeteka,Roy,Roy,Mbaeteka,00-0037040,MbaeRo00,,,4,2022,2000-02-13,80.0,309,"",2021,,,false,player_identity,test
+2025,1,REG,ARI,DB,FS,32,ACT,A01,Joey Blount,Joey,Joey,Blount,00-0037141,BlouJo00,4240824,8683,3,2022,1998-11-16,73.0,205,Virginia,2022,,,false,player_identity,test
+2025,1,REG,ARI,LB,ILB,53,CUT,W03,Vi Jones,Vi,Levi,Jones,00-0037153,JoneVi00,4259636,8691,3,2022,1998-05-05,74.0,220,N.C. State,2022,,,false,player_identity,test
+2025,1,REG,ARI,RB,RB,20,INA,I01,Bam Knight,Zonovan,Zonovan,Knight,00-0037157,KnigZo00,4427728,8122,3,2022,2001-04-11,71.0,210,N.C. State,2022,,,false,player_identity,test
+2025,1,REG,ARI,LB,ILB,51,RES,R01,J.J. Russell,J.J.,Javarius,Russell,00-0037491,RussJJ00,4243366,8869,3,2022,1998-10-12,73.0,225,Memphis,2022,,,false,player_identity,test
+2025,1,REG,ARI,OL,C,62,CUT,W03,Dohnovan West,Dohnovan,Dohnovan,West,00-0037531,,,,3,2022,,,300,,2022,,,false,unavailable,test
+2025,1,REG,ARI,LB,OLB,49,CUT,W03,Benton Whitley,Benton,Benton,Whitley,00-0037638,WhitBe00,4247722,8746,3,2022,1999-02-12,76.0,250,Holy Cross,2022,,,false,player_identity,test
+2025,1,REG,ARI,TE,TE,85,ACT,A01,Trey McBride,Trey,Trey,McBride,00-0037744,McBrTr01,4361307,8130,3,2022,1999-11-22,76.0,245,Colorado State,2022,ARI,55,false,player_identity,test
+2025,1,REG,ARI,TE,TE,81,ACT,A01,Travis Vokolek,Travis,Travis,Vokolek,00-0038456,VokoTr00,4259324,11381,2,2023,1998-06-04,78.0,260,Nebraska; Rutgers,2023,,,false,player_identity,test
+2025,1,REG,ARI,OL,T,70,ACT,A01,Paris Johnson Jr.,Paris,Paris,Johnson,00-0038540,JohnPa03,,,2,2023,2001-07-03,78.0,315,Ohio State,2023,ARI,6,false,player_identity,test
+2025,1,REG,ARI,WR,WR,14,ACT,A01,Michael Wilson,Michael,Michael,Wilson,00-0038559,WilsMi02,4360761,10232,2,2023,2000-02-23,74.0,209,Stanford,2023,ARI,94,false,player_identity,test
+2025,1,REG,ARI,K,K,38,ACT,A01,Chad Ryland,Chad,Chad,Ryland,00-0038567,RylaCh00,4363538,10955,2,2023,1999-10-15,72.0,183,Maryland; Eastern Michigan,2023,NE,112,false,player_identity,test
+2025,1,REG,ARI,OL,G,71,ACT,A01,Jon Gaines II,Jon,Jon,Gaines,00-0038571,GainJo00,,,2,2023,1999-05-24,76.0,300,UCLA,2023,ARI,122,false,player_identity,test
+2025,1,REG,ARI,LB,ILB,44,ACT,A01,Owen Pappoe,Owen,Owen,Pappoe,00-0038600,PappOw00,4567219,10969,2,2023,2000-09-29,72.0,226,Auburn,2023,ARI,168,false,player_identity,test
+2025,1,REG,ARI,DL,DT,55,ACT,A01,Dante Stills,Dante,Dante,Stills,00-0038623,StilDa01,4362225,11015,2,2023,1999-12-14,76.0,285,West Virginia,2023,ARI,213,false,player_identity,test
+2025,1,REG,ARI,DB,CB,38,CUT,W03,Steven Gilmore,Steven,Steven,Gilmore,00-0038655,GilmSt01,4374338,11487,2,2023,1999-09-17,72.0,170,Marshall,2023,,,false,player_identity,test
+2025,1,REG,ARI,DB,CB,24,RES,R01,Starling Thomas V,Starling,Starling,Thomas,00-0038663,ThomSt01,4363408,11343,2,2023,2000-01-25,70.0,195,UAB,2023,,,false,player_identity,test
+2025,1,REG,ARI,RB,RB,31,ACT,A01,Emari Demercado,Emari,Emari,Demercado,00-0038705,DemeEm00,4362478,11199,2,2023,1999-01-20,69.0,210,TCU,2023,,,false,player_identity,test
+2025,1,REG,ARI,OL,T,66,DEV,P06,Demontrey Jacobs,Demontrey,Demontrey,Jacobs,00-0038792,JacoDe00,,,2,2023,1998-11-22,78.0,315,South Florida Community College; Grambling State,2023,,,false,player_identity,test
+2025,1,REG,ARI,DL,NT,79,ACT,A01,PJ Mustipher,P.J.,P.J.,Mustipher,00-0038795,MustPJ00,4361421,11436,2,2023,1998-11-10,76.0,318,Penn State,2023,,,false,player_identity,test
+2025,1,REG,ARI,DB,CB,35,CUT,W03,Ekow Boye-Doe,Ekow,Ekow,Boye-Doe,00-0038956,BoyeEk00,,,2,2023,1999-11-04,72.0,171,Kansas State,2023,,,false,player_identity,test
+2025,1,REG,ARI,DB,CB,13,INA,I01,Kei'Trel Clark,Kei'Trel,Kei'Trel,Clark,00-0038984,ClarKe02,4426923,11014,2,2023,2001-03-19,70.0,177,Louisville,2023,ARI,180,false,player_identity,test
+2025,1,REG,ARI,DB,CB,21,ACT,A01,Garrett Williams,Garrett,Garrett,Williams,00-0039007,WillGa00,4568506,10932,2,2023,2001-06-01,70.0,189,Syracuse,2023,ARI,72,false,player_identity,test
+2025,1,REG,ARI,TE,TE,84,ACT,A01,Elijah Higgins,Elijah,Elijah,Higgins,00-0039041,HiggEl00,4426844,10231,2,2023,2000-10-27,75.0,234,Stanford,2023,MIA,197,false,player_identity,test
+2025,1,REG,ARI,LB,OLB,9,RES,R04,BJ Ojulari,B.J.,Jamiu,Ojulari,00-0039155,OjulBJ00,4429111,10908,2,2023,2002-04-05,74.0,250,LSU,2023,ARI,41,false,player_identity,test

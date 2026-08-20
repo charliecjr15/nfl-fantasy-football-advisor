@@ -1,0 +1,43 @@
+[data]
+start_season = 2018
+end_season = 2025
+seasons = [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
+season_type = "REG"
+core_positions = ["QB", "RB", "WR", "TE"]
+prediction_target = "fantasy_points_ppr"
+prediction_horizon_weeks = 1
+
+[split]
+training_seasons = [2018, 2019, 2020, 2021, 2022, 2023]
+validation_seasons = [2024]
+test_seasons = [2025]
+allow_random_split = false
+
+[sources]
+weekly_player_stats = true
+schedules = true
+weekly_rosters = true
+injuries = true
+depth_charts = true
+snap_counts = true
+players = true
+
+[temporal]
+timezone = "UTC"
+depth_chart_join_rule = "latest_before_game"
+allow_future_features = false
+
+[output]
+processed_directory = "data/processed"
+sample_directory = "data/sample"
+file_format = "parquet"
+write_csv_samples = true
+sample_row_limit = 500
+
+[quality]
+fantasy_point_tolerance = 0.01
+minimum_stats_schedule_match_pct = 100.0
+minimum_stats_roster_match_pct = 100.0
+minimum_stats_snap_match_pct = 98.0
+fail_on_duplicate_player_week = true
+fail_on_future_feature = true

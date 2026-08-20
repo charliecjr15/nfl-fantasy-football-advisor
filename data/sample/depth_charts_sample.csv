@@ -1,0 +1,515 @@
+source_season,depth_source_format,season,week,game_type,dt,depth_timestamp,team,player_name,espn_id,gsis_id,roster_position,pos_grp_id,pos_grp,pos_id,pos_name,pos_abb,pos_slot,pos_rank,data_split
+2018,legacy_weekly,2018,1,REG,,,ARI,Phil Dawson,,00-0004091,K,,Special Teams,,K,K,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Andy Lee,,00-0022824,P,,Special Teams,,H,H,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Andy Lee,,00-0022824,P,,Special Teams,,P,P,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Larry Fitzgerald,,00-0022921,WR,,Offense,,WR,WR,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Antoine Bethea,,00-0024421,FS,,Defense,,FS,FS,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Andre Smith,,00-0026982,T,,Offense,,RT,RT,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Corey Peters,,00-0027686,DT,,Defense,,DT,DT,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Sam Bradford,,00-0027854,QB,,Offense,,QB,QB,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Mike Iupati,,00-0027869,G,,Offense,,LG,LG,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Jermaine Gresham,,00-0027873,TE,,Offense,,TE,TE,,3,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Patrick Peterson,,00-0027943,CB,,Defense,,CB,CB,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Josh Bynes,,00-0028278,ILB,,Defense,,MLB,MLB,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Aaron Brewer,,00-0028946,LS,,Special Teams,,LS,LS,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Derrick Coleman,,00-0029068,FB,,Offense,,FB,FB,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Jacquies Smith,,00-0029112,DE,,Defense,,DE,DE,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Chandler Jones,,00-0029585,DE,,Defense,,DE,DE,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,John Wetzel,,00-0029762,T,,Offense,,LT,LT,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Benson Mayowa,,00-0030380,OLB,,Defense,,DE,DE,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Gerald Hodges,,00-0030385,ILB,,Defense,,MLB,MLB,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Jamar Taylor,,00-0030484,CB,,Defense,,CB,CB,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Mike Glennon,,00-0030520,QB,,Offense,,QB,QB,,3,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Justin Pugh,,00-0030585,G,,Offense,,RG,RG,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Jeremy Vujnovich,,00-0030629,G,,Offense,,LG,LG,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Jeremy Vujnovich,,00-0030629,G,,Offense,,RG,RG,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Garrison Smith,,00-0030871,DT,,Defense,,DT,DT,,3,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Zach Moore,,00-0031081,DE,,Defense,,DE,DE,,3,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Tre Boston,,00-0031261,FS,,Defense,,FS,FS,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Bene' Benwikere,,00-0031262,CB,,Defense,,CB,CB,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Deone Bucannon,,00-0031366,ILB,,Defense,,WLB,WLB,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Blaine Clausell,,00-0031764,T,,Offense,,RT,RT,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Gabe Holmes,,00-0031884,TE,,Offense,,TE,TE,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Olsen Pierre,,00-0031914,DE,,Defense,,DT,DT,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,J.J. Nelson,,00-0032112,WR,,Offense,,WR,WR,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,J.J. Nelson,,00-0032112,WR,,Special Teams,,KR,KR,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Markus Golden,,00-0032127,OLB,,Defense,,DE,DE,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Rodney Gunter,,00-0032131,DE,,Defense,,DT,DT,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,David Johnson,,00-0032187,RB,,Offense,,RB,RB,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Daniel Munyer,,00-0032192,C,,Offense,,C,C,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,D.J. Humphries,,00-0032222,T,,Offense,,LT,LT,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Robert Nkemdiche,,00-0032761,DT,,Defense,,DT,DT,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Brandon Williams,,00-0032769,CB,,Defense,,CB,CB,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Ricky Seals-Jones,,00-0033611,TE,,Offense,,TE,TE,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,T.J. Logan,,00-0033789,RB,,Offense,,RB,RB,,3,training
+2018,legacy_weekly,2018,1,REG,,,ARI,T.J. Logan,,00-0033789,RB,,Special Teams,,KR,KR,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,T.J. Logan,,00-0033789,RB,,Special Teams,,PR,PR,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Rudy Ford,,00-0033792,FS,,Defense,,SS,SS,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Haason Reddick,,00-0033875,OLB,,Defense,,SLB,SLB,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Budda Baker,,00-0033890,SS,,Defense,,SS,SS,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Chad Williams,,00-0033933,WR,,Offense,,WR,WR,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Josh Rosen,,00-0034343,QB,,Offense,,QB,QB,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Dennis Gardeck,,00-0034473,OLB,,Defense,,SLB,SLB,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Deatrick Nichols,,00-0034481,CB,,Defense,,CB,CB,,3,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Trent Sherfield,,00-0034487,WR,,Offense,,WR,WR,,3,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Ezekiel Turner,,00-0034490,ILB,,Defense,,SS,SS,,3,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Ezekiel Turner,,00-0034490,ILB,,Defense,,WLB,WLB,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Chase Edmonds,,00-0034681,RB,,Offense,,RB,RB,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Korey Cunningham,,00-0034687,T,,Offense,,LT,LT,,3,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Christian Kirk,,00-0034775,WR,,Offense,,WR,WR,,2,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Christian Kirk,,00-0034775,WR,,Special Teams,,PR,PR,,1,training
+2018,legacy_weekly,2018,1,REG,,,ARI,Mason Cole,,00-0034785,C,,Offense,,C,C,,1,training
+2018,legacy_weekly,2018,1,REG,,,ATL,Matt Bryant,,00-0020578,K,,Special Teams,,K,K,,1,training
+2018,legacy_weekly,2018,1,REG,,,ATL,Matt Schaub,,00-0022787,QB,,Offense,,QB,QB,,2,training
+2018,legacy_weekly,2018,1,REG,,,ATL,Matt Ryan,,00-0026143,QB,,Offense,,QB,QB,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Terrell Suggs,,00-0022161,OLB,,Defense,,WILL,WILL,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Andy Lee,,00-0022824,P,,Special Teams,,H,H,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Andy Lee,,00-0022824,P,,Special Teams,,P,P,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Larry Fitzgerald,,00-0022921,WR,,Offense,,WR,WR,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,A.Q. Shipley,,00-0026950,C,,Offense,,C,C,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Clinton McDonald,,00-0026964,DE,,Defense,,DE,DE,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Michael Crabtree,,00-0026986,WR,,Offense,,WR,WR,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Tramaine Brock,,00-0027375,CB,,Defense,,CB,CB,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Corey Peters,,00-0027686,DT,,Defense,,NT,NT,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Brooks Reed,,00-0027980,OLB,,Defense,,SAM,SAM,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Marcus Gilbert,,00-0028001,T,,Offense,,RT,RT,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Charles Clay,,00-0028112,TE,,Offense,,TE,TE,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Aaron Brewer,,00-0028946,LS,,Special Teams,,LS,LS,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,J.R. Sweezy,,00-0029146,G,,Offense,,RG,RG,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Chandler Jones,,00-0029585,DE,,Defense,,SAM,SAM,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,D.J. Swearinger,,00-0030566,FS,,Defense,,SS,SS,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Justin Pugh,,00-0030585,G,,Offense,,LG,LG,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Cassius Marsh,,00-0031175,OLB,,Defense,,WILL,WILL,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Maxx Williams,,00-0031558,TE,,Offense,,TE,TE,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Brett Hundley,,00-0031589,QB,,Offense,,QB,QB,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Damiere Byrd,,00-0031868,WR,,Offense,,WR,WR,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Damiere Byrd,,00-0031868,WR,,Special Teams,,KR,KR,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Damiere Byrd,,00-0031868,WR,,Special Teams,,PR,PR,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Jordan Hicks,,00-0032129,ILB,,Defense,,ILB,ILB,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Rodney Gunter,,00-0032131,DE,,Defense,,DE,DE,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,David Johnson,,00-0032187,RB,,Offense,,RB,RB,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,D.J. Humphries,,00-0032222,T,,Offense,,LT,LT,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Justin Murray,,00-0032528,T,,Offense,,LT,LT,,3,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Charles Washington,,00-0032560,FS,,Defense,,FS,FS,,3,training
+2019,legacy_weekly,2019,1,REG,,,ARI,D.J. Foster,,00-0032577,RB,,Offense,,RB,RB,,3,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Joe Walker,,00-0032809,ILB,,Defense,,ILB,ILB,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Kevin Peterson,,00-0032848,CB,,Defense,,CB,CB,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Jonathan Bullard,,00-0033093,DE,,Defense,,DE,DE,,3,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Zane Gonzalez,,00-0033862,K,,Special Teams,,K,K,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Haason Reddick,,00-0033875,OLB,,Defense,,ILB,ILB,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Budda Baker,,00-0033890,SS,,Defense,,FS,FS,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Dennis Gardeck,,00-0034473,OLB,,Defense,,ILB,ILB,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Trent Sherfield,,00-0034487,WR,,Offense,,WR,WR,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Ezekiel Turner,,00-0034490,ILB,,Defense,,ILB,ILB,,3,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Chris Jones,,00-0034641,CB,,Defense,,CB,CB,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Chase Edmonds,,00-0034681,RB,,Offense,,RB,RB,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Christian Kirk,,00-0034775,WR,,Offense,,WR,WR,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Christian Kirk,,00-0034775,WR,,Special Teams,,PR,PR,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Mason Cole,,00-0034785,C,,Offense,,C,C,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Mason Cole,,00-0034785,C,,Offense,,LG,LG,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Kyler Murray,,00-0035228,QB,,Offense,,QB,QB,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Byron Murphy,,00-0035236,CB,,Defense,,CB,CB,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Zach Allen,,00-0035248,DE,,Defense,,DE,DE,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,KeeSean Johnson,,00-0035287,WR,,Offense,,WR,WR,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Joshua Miles,,00-0035317,T,,Offense,,LT,LT,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Miles Brown,,00-0035486,NT,,Defense,,NT,NT,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Andy Isabella,,00-0035527,WR,,Offense,,WR,WR,,3,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Andy Isabella,,00-0035527,WR,,Special Teams,,KR,KR,,1,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Deionte Thompson,,00-0035532,SS,,Defense,,SS,SS,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Lamont Gaillard,,00-0035536,C,,Offense,,LG,LG,,3,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Michael Dogbe,,00-0035541,DE,,Defense,,DE,DE,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Jalen Thompson,,00-0035705,FS,,Defense,,FS,FS,,2,training
+2019,legacy_weekly,2019,1,REG,,,ARI,Brett Toth,,00-0035743,T,,Offense,,RT,RT,,2,training
+2019,legacy_weekly,2019,1,REG,,,ATL,Matt Bryant,,00-0020578,K,,Special Teams,,K,K,,1,training
+2019,legacy_weekly,2019,1,REG,,,ATL,Matt Schaub,,00-0022787,QB,,Offense,,QB,QB,,2,training
+2019,legacy_weekly,2019,1,REG,,,ATL,Matt Ryan,,00-0026143,QB,,Offense,,QB,QB,,1,training
+2019,legacy_weekly,2019,1,REG,,,ATL,Alex Mack,,00-0026997,C,,Offense,,C,C,,1,training
+2019,legacy_weekly,2019,1,REG,,,ATL,Julio Jones,,00-0027944,WR,,Offense,,WR,WR,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Andy Lee,,00-0022824,P,,Special Teams,,H,H,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Andy Lee,,00-0022824,P,,Special Teams,,P,P,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Larry Fitzgerald,,00-0022921,WR,,Offense,,WR,WR,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Corey Peters,,00-0027686,DT,,Defense,,NT,NT,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Patrick Peterson,,00-0027943,CB,,Defense,,CB,CB,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Aaron Brewer,,00-0028946,LS,,Special Teams,,LS,LS,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,J.R. Sweezy,,00-0029146,G,,Offense,,RG,RG,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Kelvin Beachum,,00-0029316,T,,Offense,,RT,RT,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Dre Kirkpatrick,,00-0029560,CB,,Defense,,CB,CB,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Chandler Jones,,00-0029585,DE,,Defense,,OLB,OLB,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Chris Banjo,,00-0029747,FS,,Defense,,S,S,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,DeAndre Hopkins,,00-0030564,WR,,Offense,,WR,WR,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Justin Pugh,,00-0030585,G,,Offense,,LG,LG,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Devon Kennard,,00-0031241,OLB,,Defense,,OLB,OLB,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Jordan Phillips,,00-0031557,DT,,Defense,,DT,DT,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Maxx Williams,,00-0031558,TE,,Offense,,TE,TE,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Brett Hundley,,00-0031589,QB,,Offense,,QB,QB,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Angelo Blackson,,00-0032107,DT,,Defense,,DT,DT,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Jordan Hicks,,00-0032129,ILB,,Defense,,ILB,ILB,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Max Garcia,,00-0032132,G,,Offense,,LG,LG,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,D.J. Humphries,,00-0032222,T,,Offense,,LT,LT,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,De'Vondre Campbell,,00-0032401,ILB,,Defense,,ILB,ILB,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Justin Murray,,00-0032528,T,,Offense,,RG,RG,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Justin Murray,,00-0032528,T,,Offense,,RT,RT,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Charles Washington,,00-0032560,FS,,Defense,,S,S,,3,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Kevin Peterson,,00-0032848,CB,,Defense,,CB,CB,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Kenyan Drake,,00-0033118,RB,,Offense,,RB,RB,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Darrell Daniels,,00-0033258,TE,,Offense,,TE,TE,,3,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Tanner Vallejo,,00-0033580,ILB,,Defense,,ILB,ILB,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Zane Gonzalez,,00-0033862,K,,Special Teams,,K,K,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Haason Reddick,,00-0033875,OLB,,Defense,,OLB,OLB,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Budda Baker,,00-0033890,SS,,Defense,,S,S,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Dan Arnold,,00-0034011,TE,,Offense,,TE,TE,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Kylie Fitts,,00-0034404,OLB,,Defense,,OLB,OLB,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Dennis Gardeck,,00-0034473,OLB,,Defense,,OLB,OLB,,3,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Trent Sherfield,,00-0034487,WR,,Offense,,WR,WR,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Ezekiel Turner,,00-0034490,ILB,,Defense,,ILB,ILB,,3,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Chase Edmonds,,00-0034681,RB,,Offense,,RB,RB,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Chase Edmonds,,00-0034681,RB,,Special Teams,,KOR,KOR,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Christian Kirk,,00-0034775,WR,,Offense,,WR,WR,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Christian Kirk,,00-0034775,WR,,Special Teams,,PR,PR,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Mason Cole,,00-0034785,C,,Offense,,C,C,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Kyler Murray,,00-0035228,QB,,Offense,,QB,QB,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Byron Murphy,,00-0035236,CB,,Defense,,CB,CB,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Zach Allen,,00-0035248,DE,,Defense,,DT,DT,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Joshua Miles,,00-0035317,T,,Offense,,LT,LT,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Andy Isabella,,00-0035527,WR,,Offense,,WR,WR,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Andy Isabella,,00-0035527,WR,,Special Teams,,KOR,KOR,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Andy Isabella,,00-0035527,WR,,Special Teams,,PR,PR,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Deionte Thompson,,00-0035532,SS,,Defense,,S,S,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Lamont Gaillard,,00-0035536,C,,Offense,,C,C,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Jalen Thompson,,00-0035705,FS,,Defense,,S,S,,1,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Chris Streveler,,00-0035752,QB,,Offense,,QB,QB,,3,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Isaiah Simmons,,00-0036356,MLB,,Defense,,ILB,ILB,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Josh Jones,,00-0036363,G,,Offense,,LT,LT,,3,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Leki Fotu,,00-0036371,NT,,Defense,,DT,DT,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Rashard Lawrence,,00-0036373,NT,,Defense,,NT,NT,,2,training
+2020,legacy_weekly,2020,1,REG,,,ARI,Eno Benjamin,,00-0036383,RB,,Offense,,RB,RB,,3,training
+2020,legacy_weekly,2020,1,REG,,,ATL,Matt Schaub,,00-0022787,QB,,Offense,,QB,QB,,2,training
+2020,legacy_weekly,2020,1,REG,,,ATL,Matt Ryan,,00-0026143,QB,,Offense,,QB,QB,,1,training
+2020,legacy_weekly,2020,1,REG,,,ATL,Alex Mack,,00-0026997,C,,Offense,,C,C,,1,training
+2020,legacy_weekly,2020,1,REG,,,ATL,Julio Jones,,00-0027944,WR,,Offense,,WR,WR,,1,training
+2020,legacy_weekly,2020,1,REG,,,ATL,James Carpenter,,00-0027963,G,,Offense,,LG,LG,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Andy Lee,,00-0022824,P,,Special Teams,,H,H,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Andy Lee,,00-0022824,P,,Special Teams,,P,P,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Matt Prater,,00-0023853,K,,Special Teams,,K,K,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Matt Prater,,00-0023853,K,,Special Teams,,KO,KO,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Corey Peters,,00-0027686,DT,,Defense,,NT,NT,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Colt McCoy,,00-0027688,QB,,Offense,,QB,QB,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,A.J. Green,,00-0027942,WR,,Offense,,WR,WR,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,J.J. Watt,,00-0027949,DE,,Defense,,DE,DE,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Rodney Hudson,,00-0027993,C,,Offense,,C,C,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Aaron Brewer,,00-0028946,LS,,Special Teams,,LS,LS,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Kelvin Beachum,,00-0029316,T,,Offense,,RT,RT,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Chandler Jones,,00-0029585,DE,,Defense,,OLB,OLB,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Brian Winters,,00-0030066,G,,Offense,,RG,RG,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Demetrius Harris,,00-0030155,TE,,Offense,,TE,TE,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Robert Alford,,00-0030528,CB,,Defense,,CB,CB,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,DeAndre Hopkins,,00-0030564,WR,,Offense,,WR,WR,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Devon Kennard,,00-0031241,OLB,,Defense,,OLB,OLB,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Maxx Williams,,00-0031558,TE,,Offense,,TE,TE,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Markus Golden,,00-0032127,OLB,,Defense,,OLB,OLB,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Jordan Hicks,,00-0032129,ILB,,Defense,,ILB,ILB,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Max Garcia,,00-0032132,G,,Offense,,C,C,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,D.J. Humphries,,00-0032222,T,,Offense,,LT,LT,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Justin Murray,,00-0032528,T,,Offense,,RT,RT,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Charles Washington,,00-0032560,FS,,Defense,,S,S,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Darrell Daniels,,00-0033258,TE,,Offense,,TE,TE,,3,training
+2021,legacy_weekly,2021,1,REG,,,ARI,James Conner,,00-0033553,RB,,Offense,,RB,RB,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Tanner Vallejo,,00-0033580,ILB,,Defense,,ILB,ILB,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Budda Baker,,00-0033890,SS,,Defense,,S,S,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Ezekiel Turner,,00-0034490,ILB,,Defense,,ILB,ILB,,3,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Chase Edmonds,,00-0034681,RB,,Offense,,RB,RB,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Christian Kirk,,00-0034775,WR,,Offense,,WR,WR,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Christian Kirk,,00-0034775,WR,,Special Teams,,PR,PR,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Kyler Murray,,00-0035228,QB,,Offense,,QB,QB,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Byron Murphy,,00-0035236,CB,,Defense,,CB,CB,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Zach Allen,,00-0035248,DE,,Defense,,DT,DT,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Joshua Miles,,00-0035317,T,,Offense,,LT,LT,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Andy Isabella,,00-0035527,WR,,Offense,,WR,WR,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Deionte Thompson,,00-0035532,SS,,Defense,,S,S,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Michael Dogbe,,00-0035541,DE,,Defense,,DE,DE,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Jalen Thompson,,00-0035705,FS,,Defense,,S,S,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Chris Streveler,,00-0035752,QB,,Offense,,QB,QB,,3,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Jonathan Ward,,00-0035924,RB,,Offense,,RB,RB,,3,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Luq Barcoo,,00-0036101,CB,,Defense,,CB,CB,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Isaiah Simmons,,00-0036356,MLB,,Defense,,ILB,ILB,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Josh Jones,,00-0036363,G,,Offense,,RG,RG,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Leki Fotu,,00-0036371,NT,,Defense,,DT,DT,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Rashard Lawrence,,00-0036373,NT,,Defense,,NT,NT,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Eno Benjamin,,00-0036383,RB,,Offense,,"
+    ","
+    ",,3,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Eno Benjamin,,00-0036383,RB,,Special Teams,,KR,KR,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Marco Wilson,,00-0036884,CB,,Defense,,CB,CB,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Victor Dimukeje,,00-0036896,OLB,,Defense,,OLB,OLB,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Tay Gowan,,00-0036897,CB,,Defense,,CB,CB,,3,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Zaven Collins,,00-0036933,OLB,,Defense,,ILB,ILB,,1,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Rondale Moore,,00-0036936,WR,,Offense,,WR,WR,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Rondale Moore,,00-0036936,WR,,Special Teams,,KR,KR,,2,training
+2021,legacy_weekly,2021,1,REG,,,ARI,Rondale Moore,,00-0036936,WR,,Special Teams,,PR,PR,,2,training
+2021,legacy_weekly,2021,1,REG,,,ATL,Matt Ryan,,00-0026143,QB,,Offense,,QB,QB,,1,training
+2021,legacy_weekly,2021,1,REG,,,ATL,Lee Smith,,00-0028097,TE,,Offense,,TE,TE,,2,training
+2021,legacy_weekly,2021,1,REG,,,ATL,Josh Harris,,00-0028845,LS,,Special Teams,,LS,LS,,1,training
+2021,legacy_weekly,2021,1,REG,,,ATL,Duron Harmon,,00-0030383,SS,,Defense,,S,S,,1,training
+2021,legacy_weekly,2021,1,REG,,,ATL,Steven Means,,00-0030387,OLB,,Defense,,OLB,OLB,,1,training
+2021,legacy_weekly,2021,1,REG,,,ATL,Cordarrelle Patterson,,00-0030578,RB,,Offense,,RB,RB,,2,training
+2021,legacy_weekly,2021,1,REG,,,ATL,Cordarrelle Patterson,,00-0030578,RB,,Special Teams,,KOR,KOR,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Andy Lee,,00-0022824,P,,Special Teams,,H,H,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Andy Lee,,00-0022824,P,,Special Teams,,P,P,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Matt Prater,,00-0023853,K,,Special Teams,,K,K,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,A.J. Green,,00-0027942,WR,,Offense,,WR,WR,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,J.J. Watt,,00-0027949,DE,,Defense,,DE,DE,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Rodney Hudson,,00-0027993,C,,Offense,,C,C,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Aaron Brewer,,00-0028946,LS,,Special Teams,,LS,LS,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Kelvin Beachum,,00-0029316,T,,Offense,,RT,RT,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Zach Ertz,,00-0030061,TE,,Offense,,TE,TE,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Justin Pugh,,00-0030585,G,,Offense,,LG,LG,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Devon Kennard,,00-0031241,OLB,,Defense,,OLB,OLB,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Maxx Williams,,00-0031558,TE,,Offense,,TE,TE,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Markus Golden,,00-0032127,OLB,,Defense,,OLB,OLB,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,D.J. Humphries,,00-0032222,T,,Offense,,LT,LT,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Stephen Anderson,,00-0032725,TE,,Offense,,"
+    ","
+    ",,3,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Nick Vigil,,00-0032892,ILB,,Defense,,ILB,ILB,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Sean Harlow,,00-0033511,C,,Offense,,C,C,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,James Conner,,00-0033553,RB,,Offense,,RB,RB,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Tanner Vallejo,,00-0033580,ILB,,Defense,,ILB,ILB,,3,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Budda Baker,,00-0033890,SS,,Defense,,S,S,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Ben Niemann,,00-0034296,ILB,,Defense,,ILB,ILB,,3,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Darrel Williams,,00-0034301,RB,,Offense,,RB,RB,,3,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Will Hernandez,,00-0034346,G,,Offense,,RG,RG,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Dennis Gardeck,,00-0034473,OLB,,Defense,,OLB,OLB,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Ezekiel Turner,,00-0034490,ILB,,Defense,,ILB,ILB,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Trace McSorley,,00-0035146,QB,,Offense,,QB,QB,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Kyler Murray,,00-0035228,QB,,Offense,,QB,QB,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Byron Murphy,,00-0035236,CB,,Defense,,CB,CB,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Zach Allen,,00-0035248,DE,,Defense,,DT,DT,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Jonathan Ledbetter,,00-0035343,DE,,Defense,,DT,DT,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Greg Dortch,,00-0035500,WR,,Offense,,WR,WR,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Greg Dortch,,00-0035500,WR,,Special Teams,,PR,PR,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Andy Isabella,,00-0035527,WR,,Offense,,WR,WR,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Deionte Thompson,,00-0035532,SS,,Defense,,S,S,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Michael Dogbe,,00-0035541,DE,,Defense,,DE,DE,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Marquise Brown,,00-0035662,WR,,Offense,,WR,WR,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Trayvon Mullen,,00-0035695,CB,,Defense,,CB,CB,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Jalen Thompson,,00-0035705,FS,,Defense,,S,S,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Jonathan Ward,,00-0035924,RB,,Offense,,"
+    ","
+    ",,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Jonathan Ward,,00-0035924,RB,,Special Teams,,KR,KR,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Isaiah Simmons,,00-0036356,MLB,,Defense,,ILB,ILB,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Josh Jones,,00-0036363,G,,Offense,,LT,LT,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Josh Jones,,00-0036363,G,,Offense,,RT,RT,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Leki Fotu,,00-0036371,NT,,Defense,,NT,NT,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Rashard Lawrence,,00-0036373,NT,,Defense,,NT,NT,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Eno Benjamin,,00-0036383,RB,,Offense,,RB,RB,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Eno Benjamin,,00-0036383,RB,,Special Teams,,KR,KR,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Marco Wilson,,00-0036884,CB,,Defense,,CB,CB,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Victor Dimukeje,,00-0036896,OLB,,Defense,,OLB,OLB,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Zaven Collins,,00-0036933,OLB,,Defense,,ILB,ILB,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Rondale Moore,,00-0036936,WR,,Offense,,WR,WR,,1,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Rondale Moore,,00-0036936,WR,,Offense,,WR,WR,,3,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Rondale Moore,,00-0036936,WR,,Special Teams,,PR,PR,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Keaontay Ingram,,00-0037299,RB,,Offense,,"
+    ","
+    ",,3,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Lecitus Smith,,00-0037308,C,,Offense,,C,C,,3,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Trey McBride,,00-0037744,TE,,Offense,,TE,TE,,3,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Christian Matthew,,00-0037747,CB,,Defense,,CB,CB,,2,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Myjai Sanders,,00-0037751,OLB,,Defense,,OLB,OLB,,3,training
+2022,legacy_weekly,2022,1,REG,,,ARI,Cameron Thomas,,00-0037815,OLB,,Defense,,OLB,OLB,,3,training
+2022,legacy_weekly,2022,1,REG,,,ATL,Casey Hayward,,00-0029261,CB,,Defense,,CB,CB,,1,training
+2022,legacy_weekly,2022,1,REG,,,ATL,Cordarrelle Patterson,,00-0030578,RB,,Offense,,RB,RB,,1,training
+2022,legacy_weekly,2022,1,REG,,,ATL,Damien Williams,,00-0030874,RB,,Offense,,RB,RB,,2,training
+2022,legacy_weekly,2022,1,REG,,,ATL,Keith Smith,,00-0030968,FB,,Offense,,FB,FB,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Matt Prater,,00-0023853,K,,Special Teams,,K,K,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Aaron Brewer,,00-0028946,LS,,Special Teams,,LS,LS,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Kelvin Beachum,,00-0029316,T,,Offense,,RT,RT,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Zach Ertz,,00-0030061,TE,,Offense,,TE,TE,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Geoff Swaim,,00-0032141,TE,,Offense,,TE,TE,,3,training
+2023,legacy_weekly,2023,1,REG,,,ARI,D.J. Humphries,,00-0032222,T,,Offense,,LT,LT,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Antonio Hamilton,,00-0032933,CB,,Defense,,CB,CB,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Zach Pascal,,00-0033251,WR,,Offense,,WR,WR,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,James Conner,,00-0033553,RB,,Offense,,RB,RB,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Carlos Watkins,,00-0033563,DE,,Defense,,DE,DE,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Elijah Wilkinson,,00-0033676,G,,Offense,,LG,LG,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Budda Baker,,00-0033890,SS,,Defense,,S,S,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Joshua Dobbs,,00-0033949,QB,,Offense,,QB,QB,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Will Hernandez,,00-0034346,G,,Offense,,RG,RG,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Kyzir White,,00-0034375,ILB,,Defense,,ILB,ILB,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Dennis Gardeck,,00-0034473,OLB,,Defense,,OLB,OLB,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Ezekiel Turner,,00-0034490,ILB,,Defense,,ILB,ILB,,3,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Andre Chachere,,00-0034623,SS,,Defense,,S,S,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Josh Woods,,00-0034801,ILB,,Defense,,ILB,ILB,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Jackson Barton,,00-0035003,T,,Offense,,LT,LT,,3,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Kris Boyd,,00-0035150,CB,,Defense,,CB,CB,,3,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Hjalte Froholdt,,00-0035258,C,,Offense,,C,C,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Kevin Strong,,00-0035334,NT,,Defense,,NT,NT,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Jonathan Ledbetter,,00-0035343,DE,,Defense,,DE,DE,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Greg Dortch,,00-0035500,WR,,Offense,,WR,WR,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Greg Dortch,,00-0035500,WR,,Special Teams,,KR,KR,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Greg Dortch,,00-0035500,WR,,Special Teams,,PR,PR,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,L.J. Collier,,00-0035636,DE,,Defense,,DE,DE,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Marquise Brown,,00-0035662,WR,,Offense,,WR,WR,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Jalen Thompson,,00-0035705,FS,,Defense,,S,S,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Carter O'Donnell,,00-0035853,T,,Offense,,LT,LT,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Krys Barnes,,00-0035961,ILB,,Defense,,ILB,ILB,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Trystan Colon,,00-0035992,C,,Offense,,C,C,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Keith Ismael,,00-0036342,G,,Offense,,RG,RG,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Leki Fotu,,00-0036371,NT,,Defense,,NT,NT,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,K'Von Wallace,,00-0036395,FS,,Defense,,S,S,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Nolan Cooney,,00-0036539,P,,Special Teams,,H,H,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Nolan Cooney,,00-0036539,P,,Special Teams,,P,P,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Marco Wilson,,00-0036884,CB,,Defense,,CB,CB,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Victor Dimukeje,,00-0036896,OLB,,Defense,,OLB,OLB,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Zaven Collins,,00-0036933,OLB,,Defense,,OLB,OLB,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Rondale Moore,,00-0036936,WR,,Offense,,WR,WR,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Keaontay Ingram,,00-0037299,RB,,Offense,,RB,RB,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Jesse Luketa,,00-0037330,OLB,,Defense,,OLB,OLB,,3,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Trey McBride,,00-0037744,TE,,Offense,,TE,TE,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Christian Matthew,,00-0037747,CB,,Defense,,CB,CB,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Cameron Thomas,,00-0037815,OLB,,Defense,,OLB,OLB,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Paris Johnson,,00-0038540,T,,Offense,,RT,RT,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Michael Wilson,,00-0038559,WR,,Offense,,WR,WR,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Clayton Tune,,00-0038582,QB,,Offense,,QB,QB,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Owen Pappoe,,00-0038600,ILB,,Defense,,ILB,ILB,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Dante Stills,,00-0038623,DE,,Defense,,DE,DE,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Starling Thomas,,00-0038663,CB,,Defense,,CB,CB,,3,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Emari Demercado,,00-0038705,RB,,Offense,,RB,RB,,3,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Ilm Manning,,00-0038880,G,,Offense,,LG,LG,,2,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Kei'Trel Clark,,00-0038984,CB,,Defense,,CB,CB,,1,training
+2023,legacy_weekly,2023,1,REG,,,ARI,Elijah Higgins,,00-0039041,TE,,Offense,,"
+    ","
+    ",,3,training
+2023,legacy_weekly,2023,1,REG,,,ARI,B.J. Ojulari,,00-0039155,OLB,,Defense,,OLB,OLB,,3,training
+2023,legacy_weekly,2023,1,REG,,,ATL,Calais Campbell,,00-0026190,DE,,Defense,,DL,DL,,1,training
+2023,legacy_weekly,2023,1,REG,,,ATL,Cordarrelle Patterson,,00-0030578,RB,,Offense,,J,J,,1,training
+2023,legacy_weekly,2023,1,REG,,,ATL,Cordarrelle Patterson,,00-0030578,RB,,Special Teams,,KR,KR,,1,training
+2023,legacy_weekly,2023,1,REG,,,ATL,Keith Smith,,00-0030968,FB,,Offense,,FB,FB,,1,training
+2023,legacy_weekly,2023,1,REG,,,ATL,Keith Smith,,00-0030968,FB,,Offense,,TE,TE,,2,training
+2024,legacy_weekly,2024,1,REG,,,ARI,Matt Prater,,00-0023853,K,,Special Teams,,K,K,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Aaron Brewer,,00-0028946,LS,,Special Teams,,LS,LS,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Kelvin Beachum,,00-0029316,T,,Offense,,LT,LT,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Kelvin Beachum,,00-0029316,T,,Offense,,RT,RT,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Chris Moore,,00-0032398,WR,,Offense,,WR,WR,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Zach Pascal,,00-0033251,WR,,Offense,,WR,WR,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,James Conner,,00-0033553,RB,,Offense,,RB,RB,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Budda Baker,,00-0033890,SS,,Defense,,S,S,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Will Hernandez,,00-0034346,G,,Offense,,RG,RG,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Kyzir White,,00-0034375,ILB,,Defense,,ILB,ILB,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Bilal Nichols,,00-0034387,DT,,Defense,,DT,DT,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Dennis Gardeck,,00-0034473,OLB,,Defense,,OLB,OLB,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Evan Brown,,00-0034495,C,,Offense,,LG,LG,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Justin Jones,,00-0034677,DT,,Defense,,DT,DT,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Mack Wilson,,00-0035144,ILB,,Defense,,ILB,ILB,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Kyler Murray,,00-0035228,QB,,Offense,,QB,QB,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Sean Murphy-Bunting,,00-0035239,CB,,Defense,,CB,CB,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Hjalte Froholdt,,00-0035258,C,,Offense,,C,C,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Greg Dortch,,00-0035500,WR,,Offense,,WR,WR,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Greg Dortch,,00-0035500,WR,,Special Teams,,KR,KR,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Greg Dortch,,00-0035500,WR,,Special Teams,,PR,PR,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Jonah Williams,,00-0035629,T,,Offense,,RT,RT,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,L.J. Collier,,00-0035636,DT,,Defense,,DT,DT,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Jalen Thompson,,00-0035705,FS,,Defense,,S,S,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Blake Gillikin,,00-0035859,P,,Special Teams,,H,H,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Blake Gillikin,,00-0035859,P,,Special Teams,,P,P,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Krys Barnes,,00-0035961,ILB,,Defense,,ILB,ILB,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Trystan Colon,,00-0035992,C,,Offense,,RG,RG,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,DeeJay Dallas,,00-0036425,RB,,Offense,,"
+    ","
+    ",,3,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,DeeJay Dallas,,00-0036425,RB,,Special Teams,,KR,KR,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,DeeJay Dallas,,00-0036425,RB,,Special Teams,,PR,PR,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Roy Lopez,,00-0036568,NT,,Defense,,NT,NT,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Victor Dimukeje,,00-0036896,OLB,,Defense,,OLB,OLB,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Khyiris Tonga,,00-0036909,NT,,Defense,,NT,NT,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Zaven Collins,,00-0036933,OLB,,Defense,,OLB,OLB,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Darren Hall,,00-0036956,FS,,Defense,,CB,CB,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Joey Blount,,00-0037141,FS,,Defense,,S,S,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Jesse Luketa,,00-0037330,OLB,,Defense,,OLB,OLB,,3,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Trey McBride,,00-0037744,TE,,Offense,,TE,TE,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Travis Vokolek,,00-0038456,TE,,Offense,,"
+    ","
+    ",,3,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Paris Johnson,,00-0038540,T,,Offense,,LT,LT,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Michael Wilson,,00-0038559,WR,,Offense,,WR,WR,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Jon Gaines,,00-0038571,G,,Offense,,C,C,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Clayton Tune,,00-0038582,QB,,Offense,,QB,QB,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Owen Pappoe,,00-0038600,ILB,,Defense,,ILB,ILB,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Dante Stills,,00-0038623,DT,,Defense,,DT,DT,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Starling Thomas,,00-0038663,CB,,Defense,,CB,CB,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Emari Demercado,,00-0038705,RB,,Offense,,RB,RB,,3,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Kei'Trel Clark,,00-0038984,CB,,Defense,,CB,CB,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Garrett Williams,,00-0039007,CB,,Defense,,CB,CB,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Elijah Higgins,,00-0039041,TE,,Offense,,TE,TE,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Xavier Thomas,,00-0039367,OLB,,Defense,,OLB,OLB,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Xavier Weaver,,00-0039521,WR,,Offense,,WR,WR,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Tip Reiman,,00-0039737,TE,,Offense,,TE,TE,,3,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Max Melton,,00-0039807,CB,,Defense,,CB,CB,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Isaiah Adams,,00-0039808,G,,Offense,,LG,LG,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Marvin Harrison,,00-0039849,WR,,Offense,,WR,WR,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Dadrion Taylor-Demerson,,00-0039864,FS,,Defense,,S,S,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ARI,Trey Benson,,00-0039921,RB,,Offense,,RB,RB,,2,validation
+2024,legacy_weekly,2024,1,REG,,,ATL,Kirk Cousins,,00-0029604,QB,,Offense,,QB,QB,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ATL,Jake Matthews,,00-0031279,T,,Offense,,LT,LT,,1,validation
+2024,legacy_weekly,2024,1,REG,,,ATL,Eddie Goldman,,00-0031551,NT,,Defense,,DL,DL,,3,validation
+2024,legacy_weekly,2024,1,REG,,,ATL,Grady Jarrett,,00-0031583,DT,,Defense,,DL,DL,,1,validation
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Jaylon Jones,4241278,,,16,Base 4-3 D,18,Left Cornerback,LCB,8,2,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Oscar Cardenas,4426857,,,21,3WR 1TE,7,Tight End,TE,10,6,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Nate McCollum,4432387,,,21,3WR 1TE,1,Wide Receiver,WR,2,11,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Calais Campbell,11284,00-0026190,,16,Base 4-3 D,24,Left Defensive Tackle,LDT,2,2,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Aaron Brewer,15241,00-0028946,,18,Special Teams,39,Long Snapper,LS,6,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Kelvin Beachum,15035,00-0029316,,21,3WR 1TE,2,Left Tackle,LT,3,2,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Jacoby Brissett,2578570,00-0033119,,21,3WR 1TE,8,Quarterback,QB,9,2,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Dalvin Tomlinson,2979860,00-0033546,,16,Base 4-3 D,25,Right Defensive Tackle,RDT,3,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,James Conner,3045147,00-0033553,,21,3WR 1TE,9,Running Back,RB,11,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Budda Baker,3127287,00-0033890,,16,Base 4-3 D,21,Free Safety,FS,10,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Zay Jones,3059722,00-0033891,,21,3WR 1TE,1,Wide Receiver,WR,1,4,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Josh Sweat,3693166,00-0034381,,16,Base 4-3 D,11,Left Defensive End,LDE,1,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Bilal Nichols,3117922,00-0034387,,16,Base 4-3 D,24,Left Defensive Tackle,LDT,2,3,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Evan Brown,3128412,00-0034495,,21,3WR 1TE,3,Left Guard,LG,4,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Justin Jones,3116746,00-0034677,,16,Base 4-3 D,13,Right Defensive End,RDE,4,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Mack Wilson Sr.,4040983,00-0035144,,16,Base 4-3 D,27,Middle Linebacker,MLB,6,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Kyler Murray,3917315,00-0035228,,21,3WR 1TE,8,Quarterback,QB,9,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Sean Murphy-Bunting,3932886,00-0035239,,16,Base 4-3 D,18,Left Cornerback,LCB,8,5,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Hjalte Froholdt,3886633,00-0035258,,21,3WR 1TE,4,Center,C,5,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Greg Dortch,4037235,00-0035500,,18,Special Teams,77,Kick Returner,KR,5,2,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Greg Dortch,4037235,00-0035500,,18,Special Teams,76,Punt Returner,PR,4,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Greg Dortch,4037235,00-0035500,,21,3WR 1TE,1,Wide Receiver,WR,8,3,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Jonah Williams,4040726,00-0035629,,21,3WR 1TE,6,Right Tackle,RT,7,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,L.J. Collier,3116449,00-0035636,,16,Base 4-3 D,13,Right Defensive End,RDE,4,4,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Jalen Thompson,4043089,00-0035705,,16,Base 4-3 D,20,Strong Safety,SS,9,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Blake Gillikin,4045180,00-0035859,,18,Special Teams,79,Holder,H,3,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Blake Gillikin,4045180,00-0035859,,18,Special Teams,23,Punter,P,2,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Andre Baccellia,3886809,00-0035876,,21,3WR 1TE,1,Wide Receiver,WR,1,7,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Trishton Jackson,4046715,00-0035934,,21,3WR 1TE,1,Wide Receiver,WR,8,9,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Nick Leverett,3920591,00-0036105,,21,3WR 1TE,5,Right Guard,RG,6,3,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Quez Watkins,4050373,00-0036271,,21,3WR 1TE,1,Wide Receiver,WR,8,12,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Akeem Davis-Gaither,3917142,00-0036298,,16,Base 4-3 D,26,Weakside Linebacker,WLB,5,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Mykal Walker,4243009,00-0036300,,16,Base 4-3 D,26,Weakside Linebacker,WLB,5,3,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Josiah Deguara,3914151,00-0036332,,21,3WR 1TE,7,Tight End,TE,10,4,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,DeeJay Dallas,4240631,00-0036425,,18,Special Teams,77,Kick Returner,KR,5,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,DeeJay Dallas,4240631,00-0036425,,18,Special Teams,76,Punt Returner,PR,4,2,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,DeeJay Dallas,4240631,00-0036425,,21,3WR 1TE,9,Running Back,RB,11,5,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Royce Newman,4047660,00-0036631,,21,3WR 1TE,5,Right Guard,RG,6,2,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Simi Fehoko,4360739,00-0036646,,21,3WR 1TE,1,Wide Receiver,WR,2,5,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Jake Curhan,4035870,00-0036795,,21,3WR 1TE,3,Left Guard,LG,4,3,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Michael Carter,4240657,00-0036924,,21,3WR 1TE,9,Running Back,RB,11,4,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Zaven Collins,4244606,00-0036933,,16,Base 4-3 D,11,Left Defensive End,LDE,1,2,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Darren Hall,4261606,00-0036956,,16,Base 4-3 D,34,Nickel Back,NB,12,2,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Baron Browning,4241987,00-0036995,,16,Base 4-3 D,28,Strongside Linebacker,SLB,7,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Joey Blount,4240824,00-0037141,,16,Base 4-3 D,21,Free Safety,FS,10,2,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Vi Jones,4259636,00-0037153,,16,Base 4-3 D,27,Middle Linebacker,MLB,6,4,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Bam Knight,4427728,00-0037157,,21,3WR 1TE,9,Running Back,RB,11,6,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,J.J. Russell,4243366,00-0037491,,16,Base 4-3 D,27,Middle Linebacker,MLB,6,2,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Benton Whitley,4247722,00-0037638,,16,Base 4-3 D,11,Left Defensive End,LDE,1,5,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Trey McBride,4361307,00-0037744,,21,3WR 1TE,7,Tight End,TE,10,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Travis Vokolek,4259324,00-0038456,,21,3WR 1TE,7,Tight End,TE,10,5,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Paris Johnson Jr.,4428991,00-0038540,,21,3WR 1TE,2,Left Tackle,LT,3,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Michael Wilson,4360761,00-0038559,,21,3WR 1TE,1,Wide Receiver,WR,2,2,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Chad Ryland,4363538,00-0038567,,18,Special Teams,22,Place kicker,PK,1,1,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Jon Gaines II,4367199,00-0038571,,21,3WR 1TE,4,Center,C,5,2,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Clayton Tune,4360175,00-0038582,,21,3WR 1TE,8,Quarterback,QB,9,3,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Jammie Robinson,4430411,00-0038587,,16,Base 4-3 D,21,Free Safety,FS,10,3,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Owen Pappoe,4567219,00-0038600,,16,Base 4-3 D,26,Weakside Linebacker,WLB,5,2,test
+2025,timestamped,2025,,,2025-08-03T10:09:07Z,2025-08-03T10:09:07.000000+0000,ARI,Dante Stills,4362225,00-0038623,,16,Base 4-3 D,11,Left Defensive End,LDE,1,4,test
