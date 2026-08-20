@@ -1,0 +1,23 @@
+# Normalize text files to LF in the repository
+* text=auto
+
+*.py text eol=lf
+*.sql text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.csv text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+
+# Binary analytical artifacts
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.parquet binary
+*.joblib binary
+*.pkl binary
+*.pickle binary
+*.onnx binary

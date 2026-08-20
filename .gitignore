@@ -1,0 +1,65 @@
+# Raw, processed, and cached NFL data
+data/raw/*
+!data/raw/README.md
+data/processed/*
+!data/processed/README.md
+data/cache/*
+!data/cache/README.md
+
+# Local model artifacts
+models/*
+!models/README.md
+*.joblib
+*.pkl
+*.pickle
+*.onnx
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+config/*.local.*
+.streamlit/secrets.toml
+
+# Python environments
+.venv/
+venv/
+env/
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Jupyter-generated files
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+
+# nflreadpy and other local caches
+.cache/
+.nfl_cache/
+
+# Database files and machine-specific SQL
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+*.bak
+*.sql.gz
+sql/*.local.sql
+
+# Logs
+*.log
+
+# Editor settings
+.vscode/
+.idea/
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,32 @@
+[league]
+name = "Default 12-Team Full-PPR"
+league_type = "redraft"
+team_count = 12
+draft_type = "snake"
+scoring_format = "full_ppr"
+
+[roster]
+quarterbacks = 1
+running_backs = 2
+wide_receivers = 2
+tight_ends = 1
+flex = 1
+kickers = 1
+defenses = 1
+bench = 6
+injured_reserve = 1
+
+flex_eligible_positions = ["RB", "WR", "TE"]
+core_projection_positions = ["QB", "RB", "WR", "TE"]
+
+[scoring]
+passing_yards = 0.04
+passing_touchdowns = 4.0
+interceptions = -2.0
+rushing_yards = 0.10
+rushing_touchdowns = 6.0
+receptions = 1.0
+receiving_yards = 0.10
+receiving_touchdowns = 6.0
+two_point_conversions = 2.0
+fumbles_lost = -2.0
