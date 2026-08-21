@@ -9,22 +9,33 @@ The first version targets a default 12-team, full-PPR redraft league. A later ph
 
 Work in progress. Project setup, source inspection, historical extraction, MySQL
 staging, clean analytical tables, full-PPR reconciliation, leakage-safe feature
-engineering, model-data export, and validation-only baseline evaluation are
-complete.
+engineering, model-data export, baseline evaluation, and validation-only trained
+model selection are complete.
 
 The Version 1 model dataset contains 45,693 player-week observations, 116
 columns, and a strict 102-feature predictor allowlist. Its schema, chronological
 splits, keys, targets, feature timing, missingness, and written artifacts passed
 the documented validation controls.
 
-Four baseline projection methods were evaluated on the 2024 validation season.
-The rolling five-game baseline was selected as the primary benchmark with a
-4.6813 MAE, 6.4654 RMSE, 0.6489 Spearman rank correlation, and 52.95% mean
-top-N overlap.
+The rolling five-game benchmark produced a 4.6813 MAE on the 2024 validation
+season. Ridge regression, random forest, and histogram gradient boosting were
+then fitted separately for QB, RB, WR, and TE using only 2018-2023 training
+data.
 
-The 2025 test season remains untouched. The next phase is training candidate
-models using the 2018-2023 training data and comparing them against the selected
-baseline on the 2024 validation data.
+The selected `position_champion` combines histogram gradient boosting for QB,
+random forest for RB, and Ridge for WR and TE. It achieved a 4.4580 validation
+MAE, 6.1075 RMSE, 0.6933 Spearman rank correlation, and 53.88% mean top-N
+overlap.
+
+The 2025 test season remains untouched. The next phase is freezing the selected
+specification, refitting its position pipelines with the allowed development
+data, and evaluating the test season once without model reselection.
+
+After the baseline report link, add:
+
+The trained candidate definitions, position-level selection rules, validation
+results, safeguards, and remaining limitations are documented in
+[the trained-model evaluation report](docs/model_training_evaluation.md).
 
 ## Decisions supported
 
@@ -102,6 +113,8 @@ Large raw and processed files are excluded from Git. Small reproducible samples 
 - Missing values will not automatically be treated as zero.
 - Projections will include uncertainty and plain-language explanations.
 - Recommendations will be tailored to the documented league settings.
+- Position-model selection uses MAE with RMSE, rank correlation, and top-N overlap guardrails.
+- The selected specification will be committed before the 2025 test season is evaluated once.
 
 ## Technology
 

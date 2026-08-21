@@ -61,6 +61,48 @@ predictions_path = "results/tables/baseline_validation_predictions.csv"
 metrics_path = "results/tables/baseline_validation_metrics.csv"
 weekly_metrics_path = "results/tables/baseline_validation_weekly_metrics.csv"
 
+[training]
+candidate_models = [
+    "ridge",
+    "random_forest",
+    "hist_gradient_boosting",
+]
+evaluation_split = "validation"
+allow_test_evaluation = false
+train_separate_position_models = true
+selection_scope = "position"
+composite_model_name = "position_champion"
+selection_metric = "mae"
+selection_tiebreaker = "rmse"
+minimum_mae_improvement_vs_baseline = 0.0
+maximum_spearman_drop_vs_baseline = 0.01
+maximum_top_n_overlap_drop_pct_vs_baseline = 2.0
+
+[training.ridge]
+alpha = 10.0
+fit_intercept = true
+
+[training.random_forest]
+n_estimators = 300
+min_samples_leaf = 5
+max_features = 0.7
+n_jobs = -1
+
+[training.hist_gradient_boosting]
+learning_rate = 0.05
+max_iter = 300
+max_leaf_nodes = 31
+min_samples_leaf = 20
+l2_regularization = 1.0
+early_stopping = false
+
+[training.output]
+predictions_path = "results/tables/model_validation_predictions.csv"
+metrics_path = "results/tables/model_validation_metrics.csv"
+weekly_metrics_path = "results/tables/model_validation_weekly_metrics.csv"
+comparison_path = "results/tables/model_vs_baseline_comparison.csv"
+position_selection_path = "results/tables/model_position_selection.csv"
+
 [evaluation]
 regression_metrics = ["mae", "rmse"]
 ranking_metrics = ["spearman_rank_correlation"]

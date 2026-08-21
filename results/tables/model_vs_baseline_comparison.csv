@@ -1,0 +1,5 @@
+evaluation_split,candidate_model,baseline_model,row_count,candidate_mae,baseline_mae,mae_improvement,mae_improvement_pct,candidate_rmse,baseline_rmse,rmse_improvement,candidate_spearman,baseline_spearman,spearman_difference,candidate_top_n_overlap_pct,baseline_top_n_overlap_pct,top_n_overlap_difference_pct,passes_mae_requirement,passes_spearman_guardrail,passes_top_n_guardrail,eligible_for_selection,selected_validation_model,is_selected_model
+validation,position_champion,rolling_5_game,5864,4.458,4.6813,0.2234,4.7714,6.1075,6.4654,0.3579,0.6933,0.6489,0.0443,53.8773,52.9514,0.9259,True,True,True,True,position_champion,True
+validation,ridge,rolling_5_game,5864,4.4813,4.6813,0.2,4.2722,6.1562,6.4654,0.3092,0.6862,0.6489,0.0372,54.3981,52.9514,1.4468,True,True,True,True,position_champion,False
+validation,random_forest,rolling_5_game,5864,4.5175,4.6813,0.1639,3.5002,6.0939,6.4654,0.3715,0.6942,0.6489,0.0453,53.0671,52.9514,0.1157,True,True,True,True,position_champion,False
+validation,hist_gradient_boosting,rolling_5_game,5864,4.5465,4.6813,0.1348,2.8796,6.2,6.4654,0.2654,0.684,0.6489,0.035,52.2569,52.9514,-0.6944,True,True,True,True,position_champion,False
