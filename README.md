@@ -7,16 +7,24 @@ The first version targets a default 12-team, full-PPR redraft league. A later ph
 
 ## Project status
 
-Work in progress. Project setup, source inspection, historical extraction, MySQL staging, clean analytical tables, full-PPR reconciliation, leakage-safe
-feature engineering, and independent model-table validation are complete.
+Work in progress. Project setup, source inspection, historical extraction, MySQL
+staging, clean analytical tables, full-PPR reconciliation, leakage-safe feature
+engineering, model-data export, and validation-only baseline evaluation are
+complete.
 
-The Version 1 `model_player_weeks` table contains 45,693 player-week observations and 116 columns. It passed all grain, target, split, chronology,
-leakage, missingness, range, and boundary-case controls and returned `READY_FOR_MODEL_EXPORT`.
+The Version 1 model dataset contains 45,693 player-week observations, 116
+columns, and a strict 102-feature predictor allowlist. Its schema, chronological
+splits, keys, targets, feature timing, missingness, and written artifacts passed
+the documented validation controls.
 
-The validated model dataset has been exported to a local Parquet file with 45,693 rows, 116 columns, and a strict 102-feature predictor allowlist. The
-export schema, split counts, keys, targets, numeric types, and written artifacts all reconciled successfully.
+Four baseline projection methods were evaluated on the 2024 validation season.
+The rolling five-game baseline was selected as the primary benchmark with a
+4.6813 MAE, 6.4654 RMSE, 0.6489 Spearman rank correlation, and 52.95% mean
+top-N overlap.
 
-The next phase is building and evaluating chronological baseline projection models.
+The 2025 test season remains untouched. The next phase is training candidate
+models using the 2018-2023 training data and comparing them against the selected
+baseline on the 2024 validation data.
 
 ## Decisions supported
 
@@ -36,6 +44,9 @@ The leakage-safe feature definitions and timing rules are documented in [the fea
 See [model feature validation](docs/model_feature_validation.md) for the completed evidence, limitations, and readiness decision.
 
 The model configuration, export artifacts, and reproducibility controls are documented in [the model export guide](docs/model_export.md).
+
+The baseline definitions, validation results, selection decision, and limitations
+are documented in [the baseline evaluation report](docs/baseline_evaluation.md).
 
 ## Default league
 
@@ -87,7 +98,7 @@ Large raw and processed files are excluded from Git. Small reproducible samples 
 - Weekly features may use only information available before the predicted game.
 - Future-week information must not leak into training or backtesting.
 - Model evaluation will use chronological validation rather than random row splits.
-- Every projection model will be compared with a simple rolling-average baseline.
+- Every trained projection model will be compared with the selected rolling five-game baseline.
 - Missing values will not automatically be treated as zero.
 - Projections will include uncertainty and plain-language explanations.
 - Recommendations will be tailored to the documented league settings.

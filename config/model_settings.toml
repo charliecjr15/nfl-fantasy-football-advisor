@@ -46,12 +46,20 @@ models = [
     "rolling_3_game",
     "rolling_5_game",
 ]
-primary_baseline = "rolling_3_game"
+primary_baseline = "rolling_5_game"
+evaluation_split = "validation"
+allow_test_evaluation = false
 fallback_order = [
+    "rolling_5_game",
     "rolling_3_game",
     "previous_game",
     "training_position_mean",
 ]
+
+[baseline.output]
+predictions_path = "results/tables/baseline_validation_predictions.csv"
+metrics_path = "results/tables/baseline_validation_metrics.csv"
+weekly_metrics_path = "results/tables/baseline_validation_weekly_metrics.csv"
 
 [evaluation]
 regression_metrics = ["mae", "rmse"]
