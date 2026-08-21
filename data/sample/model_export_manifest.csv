@@ -1,0 +1,13 @@
+exported_at_utc,source_database,source_table,feature_version,parquet_file,source_column_count,predictor_count,data_split,position,minimum_season,maximum_season,row_count,distinct_players,missing_target_rows,average_target_ppr
+2026-08-21T10:36:13+00:00,nfl_fantasy_advisor,model_player_weeks,v1_prior_game,data/processed/modeling/model_player_weeks.parquet,116,102,training,QB,2018,2023,3764,146,0,14.122
+2026-08-21T10:36:13+00:00,nfl_fantasy_advisor,model_player_weeks,v1_prior_game,data/processed/modeling/model_player_weeks.parquet,116,102,training,RB,2018,2023,8892,324,0,8.1366
+2026-08-21T10:36:13+00:00,nfl_fantasy_advisor,model_player_weeks,v1_prior_game,data/processed/modeling/model_player_weeks.parquet,116,102,training,WR,2018,2023,14133,504,0,7.7184
+2026-08-21T10:36:13+00:00,nfl_fantasy_advisor,model_player_weeks,v1_prior_game,data/processed/modeling/model_player_weeks.parquet,116,102,training,TE,2018,2023,7003,269,0,5.5676
+2026-08-21T10:36:13+00:00,nfl_fantasy_advisor,model_player_weeks,v1_prior_game,data/processed/modeling/model_player_weeks.parquet,116,102,validation,QB,2024,2024,664,78,0,13.7732
+2026-08-21T10:36:13+00:00,nfl_fantasy_advisor,model_player_weeks,v1_prior_game,data/processed/modeling/model_player_weeks.parquet,116,102,validation,RB,2024,2024,1536,148,0,7.741
+2026-08-21T10:36:13+00:00,nfl_fantasy_advisor,model_player_weeks,v1_prior_game,data/processed/modeling/model_player_weeks.parquet,116,102,validation,WR,2024,2024,2441,236,0,7.4607
+2026-08-21T10:36:13+00:00,nfl_fantasy_advisor,model_player_weeks,v1_prior_game,data/processed/modeling/model_player_weeks.parquet,116,102,validation,TE,2024,2024,1223,127,0,5.4426
+2026-08-21T10:36:13+00:00,nfl_fantasy_advisor,model_player_weeks,v1_prior_game,data/processed/modeling/model_player_weeks.parquet,116,102,test,QB,2025,2025,664,81,0,13.3561
+2026-08-21T10:36:13+00:00,nfl_fantasy_advisor,model_player_weeks,v1_prior_game,data/processed/modeling/model_player_weeks.parquet,116,102,test,RB,2025,2025,1575,151,0,7.5856
+2026-08-21T10:36:13+00:00,nfl_fantasy_advisor,model_player_weeks,v1_prior_game,data/processed/modeling/model_player_weeks.parquet,116,102,test,WR,2025,2025,2511,241,0,6.6676
+2026-08-21T10:36:13+00:00,nfl_fantasy_advisor,model_player_weeks,v1_prior_game,data/processed/modeling/model_player_weeks.parquet,116,102,test,TE,2025,2025,1287,137,0,5.6031

@@ -13,7 +13,10 @@ feature engineering, and independent model-table validation are complete.
 The Version 1 `model_player_weeks` table contains 45,693 player-week observations and 116 columns. It passed all grain, target, split, chronology,
 leakage, missingness, range, and boundary-case controls and returned `READY_FOR_MODEL_EXPORT`.
 
-The next phase is exporting the model-ready data and building chronological baseline projection models.
+The validated model dataset has been exported to a local Parquet file with 45,693 rows, 116 columns, and a strict 102-feature predictor allowlist. The
+export schema, split counts, keys, targets, numeric types, and written artifacts all reconciled successfully.
+
+The next phase is building and evaluating chronological baseline projection models.
 
 ## Decisions supported
 
@@ -30,8 +33,9 @@ See the complete project brief (docs/project_brief.md).
 
 The leakage-safe feature definitions and timing rules are documented in [the feature-engineering specification](docs/feature_engineering.md).
 
-The completed validation evidence, limitations, and model-readiness decision are documented in [the model feature validation report](docs/
-model_feature_validation.md).
+See [model feature validation](docs/model_feature_validation.md) for the completed evidence, limitations, and readiness decision.
+
+The model configuration, export artifacts, and reproducibility controls are documented in [the model export guide](docs/model_export.md).
 
 ## Default league
 

@@ -1,0 +1,220 @@
+[model]
+name = "NFL Full-PPR Player-Week Projection"
+version = "v1_prior_game"
+target = "target_fantasy_points_ppr"
+prediction_unit = "player_game"
+prediction_horizon = "one_game_ahead"
+positions = ["QB", "RB", "WR", "TE"]
+train_separate_position_models = true
+random_seed = 42
+
+[split]
+training_label = "training"
+validation_label = "validation"
+test_label = "test"
+training_seasons = [2018, 2019, 2020, 2021, 2022, 2023]
+validation_seasons = [2024]
+test_seasons = [2025]
+allow_random_split = false
+fit_preprocessing_on_training_only = true
+tune_on_validation_only = true
+evaluate_test_once = true
+
+[export]
+source_table = "model_player_weeks"
+parquet_path = "data/processed/modeling/model_player_weeks.parquet"
+sample_path = "data/sample/model_player_weeks_model_sample.csv"
+manifest_path = "data/sample/model_export_manifest.csv"
+sample_row_limit = 500
+
+[quality]
+expected_source_rows = 45693
+expected_source_columns = 116
+expected_training_rows = 33792
+expected_validation_rows = 5864
+expected_test_rows = 6037
+fail_on_duplicate_key = true
+fail_on_missing_target = true
+fail_on_split_mismatch = true
+fail_on_unexpected_column = true
+fail_on_forbidden_predictor = true
+
+[baseline]
+models = [
+    "training_position_mean",
+    "previous_game",
+    "rolling_3_game",
+    "rolling_5_game",
+]
+primary_baseline = "rolling_3_game"
+fallback_order = [
+    "rolling_3_game",
+    "previous_game",
+    "training_position_mean",
+]
+
+[evaluation]
+regression_metrics = ["mae", "rmse"]
+ranking_metrics = ["spearman_rank_correlation"]
+report_overall = true
+report_by_position = true
+report_by_week = true
+
+[evaluation.starter_cutoffs]
+QB = 12
+RB = 24
+WR = 24
+TE = 12
+
+[preprocessing]
+numeric_missing_strategy = "median"
+categorical_missing_strategy = "most_frequent"
+categorical_encoding = "one_hot"
+scale_numeric_for_linear_models = true
+preserve_missingness_flags = true
+
+[columns]
+key = ["season", "week", "player_id"]
+
+target = "target_fantasy_points_ppr"
+
+metadata = [
+    "season",
+    "game_id",
+    "game_date",
+    "player_id",
+    "player_name",
+    "player_display_name",
+    "data_split",
+    "feature_version",
+    "previous_game_season",
+    "previous_game_week",
+    "previous_game_date",
+    "previous_team",
+    "created_at",
+]
+
+categorical_features = [
+    "position",
+    "team",
+    "opponent",
+    "game_location",
+    "roof",
+    "surface",
+]
+
+numeric_features = [
+    "week",
+    "is_home",
+    "team_rest",
+    "opponent_rest",
+    "source_spread_line",
+    "total_line",
+    "div_game",
+    "prior_games_count",
+    "prior_games_current_season",
+    "days_since_previous_game",
+    "is_first_observed_game",
+    "is_first_observed_game_of_season",
+    "has_previous_game",
+    "has_3_prior_games",
+    "has_5_prior_games",
+    "team_changed_since_previous_game",
+    "fantasy_points_ppr_prev_game",
+    "fantasy_points_ppr_avg_last_3_games",
+    "fantasy_points_ppr_avg_last_5_games",
+    "fantasy_points_ppr_stddev_last_5_games",
+    "fantasy_points_ppr_min_last_5_games",
+    "fantasy_points_ppr_max_last_5_games",
+    "fantasy_points_ppr_season_to_date",
+    "fantasy_points_ppr_stddev_season_to_date",
+    "attempts_prev_game",
+    "attempts_avg_last_3_games",
+    "attempts_avg_last_5_games",
+    "attempts_season_to_date",
+    "carries_prev_game",
+    "carries_avg_last_3_games",
+    "carries_avg_last_5_games",
+    "carries_season_to_date",
+    "targets_prev_game",
+    "targets_avg_last_3_games",
+    "targets_avg_last_5_games",
+    "targets_season_to_date",
+    "receptions_prev_game",
+    "receptions_avg_last_3_games",
+    "receptions_avg_last_5_games",
+    "touches_prev_game",
+    "touches_avg_last_3_games",
+    "touches_avg_last_5_games",
+    "opportunities_prev_game",
+    "opportunities_avg_last_3_games",
+    "opportunities_avg_last_5_games",
+    "opportunities_season_to_date",
+    "passing_yards_prev_game",
+    "passing_yards_avg_last_3_games",
+    "rushing_yards_prev_game",
+    "rushing_yards_avg_last_3_games",
+    "receiving_yards_prev_game",
+    "receiving_yards_avg_last_3_games",
+    "yards_from_scrimmage_prev_game",
+    "yards_from_scrimmage_avg_last_3_games",
+    "total_offensive_tds_prev_game",
+    "total_offensive_tds_avg_last_3_games",
+    "target_share_prev_game",
+    "target_share_avg_last_3_games",
+    "target_share_avg_last_5_games",
+    "target_share_season_to_date",
+    "air_yards_share_prev_game",
+    "air_yards_share_avg_last_3_games",
+    "air_yards_share_avg_last_5_games",
+    "wopr_prev_game",
+    "wopr_avg_last_3_games",
+    "wopr_avg_last_5_games",
+    "has_previous_snap_record",
+    "snap_records_last_3_games",
+    "snap_records_last_5_games",
+    "offense_snaps_prev_game",
+    "offense_snaps_avg_last_3_games",
+    "offense_snaps_avg_last_5_games",
+    "offense_pct_prev_game",
+    "offense_pct_avg_last_3_games",
+    "offense_pct_avg_last_5_games",
+    "completion_pct_avg_last_3_games",
+    "passing_yards_per_attempt_avg_last_3_games",
+    "rushing_yards_per_carry_avg_last_3_games",
+    "receiving_yards_per_target_avg_last_3_games",
+    "receiving_yards_per_reception_avg_last_3_games",
+    "fantasy_points_per_opportunity_avg_last_3_games",
+    "total_yards_per_opportunity_avg_last_3_games",
+    "opponent_prior_position_games",
+    "opponent_prior_position_games_current_season",
+    "has_opponent_history",
+    "opp_ppr_allowed_prev_game",
+    "opp_ppr_allowed_avg_last_3_games",
+    "opp_ppr_allowed_avg_last_5_games",
+    "opp_ppr_allowed_season_to_date",
+    "opp_opportunities_allowed_prev_game",
+    "opp_opportunities_allowed_avg_last_3_games",
+    "opp_opportunities_allowed_season_to_date",
+    "opp_passing_yards_allowed_season_to_date",
+    "opp_rushing_yards_allowed_season_to_date",
+    "opp_receiving_yards_allowed_season_to_date",
+    "opp_offensive_tds_allowed_season_to_date",
+]
+
+forbidden_predictors = [
+    "season",
+    "game_id",
+    "game_date",
+    "player_id",
+    "player_name",
+    "player_display_name",
+    "target_fantasy_points_ppr",
+    "data_split",
+    "feature_version",
+    "previous_game_season",
+    "previous_game_week",
+    "previous_game_date",
+    "previous_team",
+    "created_at",
+]
