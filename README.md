@@ -41,6 +41,12 @@ limitations are documented in
 execution rules remain documented in
 [the final-test protocol](docs/final_test_protocol.md).
 
+The evaluated Version 1 model-bundle workflow is prepared but has not yet been
+executed. It will refit the frozen position pipelines using 2018-2024 data and
+must reproduce the committed 2025 predictions before saving any reusable model
+artifacts. The artifact contract, security rules, and reproducibility controls
+are documented in [the model-bundle guide](docs/model_bundle.md).
+
 ## Decisions supported
 
 The completed advisor will help a fantasy manager decide:
@@ -62,6 +68,10 @@ The model configuration, export artifacts, and reproducibility controls are docu
 
 The baseline definitions, validation results, selection decision, and limitations
 are documented in [the baseline evaluation report](docs/baseline_evaluation.md).
+
+The trained candidate definitions, position-level selection rules, validation
+results, and remaining limitations are documented in
+[the trained-model evaluation report](docs/model_training_evaluation.md).
 
 ## Default league
 
@@ -120,6 +130,7 @@ Large raw and processed files are excluded from Git. Small reproducible samples 
 - Position-model selection uses MAE with RMSE, rank correlation, and top-N overlap guardrails.
 - The selected specification was frozen at commit `d47de6a` and evaluated once under protocol commit `5d4bc9e`; the final outputs are locked against
 accidental overwrite.
+- The evaluated local model bundle must reproduce every committed 2025 prediction within `1e-10` before its artifacts are accepted.
 
 ## Technology
 
@@ -134,6 +145,7 @@ accidental overwrite.
 - Matplotlib and Seaborn
 - pytest
 - Git and GitHub
+- joblib
 
 ## Project structure
 

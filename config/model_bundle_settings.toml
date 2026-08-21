@@ -1,0 +1,57 @@
+[bundle]
+name = "NFL Full-PPR Position Champion"
+version = "v1_evaluated_2025"
+bundle_type = "evaluation_reproduction"
+confirmation_token = "BUILD_V1_EVALUATED_BUNDLE"
+fit_splits = ["training", "validation"]
+verification_split = "test"
+allow_model_reselection = false
+refit_preprocessing = true
+require_clean_worktree = true
+fail_if_output_exists = true
+reload_artifacts_after_write = true
+
+[lineage]
+selection_commit = "d47de6a"
+protocol_commit = "5d4bc9e"
+evidence_commit = "cff6832"
+model_settings_sha256 = "67cda074536f1c047b752567eb62e7332a6c240b7ee5785dc6c6f7a3479bf623"
+model_data_sha256 = "6733ff26d86b8966d0c3aa76c592c2f41b35e555433c99738ccb4c01b42f3fe3"
+final_predictions_sha256 = "b371778f5dc51963292d97e0fe977b9353540f13170e48874b84310e3843f1c4"
+final_run_manifest_sha256 = "b2771660ee52526872f644179281876b013275936da8749e954435a091d25ae1"
+
+[inputs]
+model_settings_path = "config/model_settings.toml"
+model_data_path = "data/processed/modeling/model_player_weeks.parquet"
+final_predictions_path = "results/tables/final_test_predictions.csv"
+final_run_manifest_path = "results/tables/final_test_run_manifest.csv"
+
+[position_models]
+QB = "hist_gradient_boosting"
+RB = "random_forest"
+WR = "ridge"
+TE = "ridge"
+
+[quality]
+expected_fit_rows = 39656
+expected_verification_rows = 6037
+expected_positions = ["QB", "RB", "WR", "TE"]
+expected_predictor_features = 102
+expected_artifact_files = 4
+expected_verification_summary_rows = 5
+prediction_absolute_tolerance = 0.0000000001
+require_zero_duplicate_keys = true
+require_zero_missing_predictions = true
+require_exact_source_model_assignments = true
+
+[output]
+artifact_directory = "models/v1_evaluated_2025"
+metadata_path = "models/v1_evaluated_2025/bundle_metadata.json"
+manifest_path = "results/tables/model_bundle_manifest.csv"
+verification_path = "results/tables/model_bundle_verification.csv"
+
+[output.artifact_files]
+QB = "qb_pipeline.joblib"
+RB = "rb_pipeline.joblib"
+WR = "wr_pipeline.joblib"
+TE = "te_pipeline.joblib"
