@@ -9,9 +9,11 @@ The first version targets a default 12-team, full-PPR redraft league. A later ph
 
 Work in progress. The Version 1 historical data pipeline, MySQL staging layer,
 clean analytical tables, leakage-safe feature engineering, model-data export,
-baseline evaluation, validation-only model selection, and one-time final test
-evaluation are complete. The next phase is converting the frozen projections
-into a usable fantasy-football decision workflow.
+baseline evaluation, validation-only model selection, one-time final test
+evaluation, and reproducible evaluated model bundle are complete. A target-free
+inference workflow is implemented and documented, but its historical smoke test
+has not yet been executed. The next phase is committing the inference protocol,
+then running and validating that smoke test.
 
 The Version 1 model dataset contains 45,693 player-week observations, 116
 columns, and a strict 102-feature predictor allowlist. Its schema, chronological
@@ -48,6 +50,14 @@ a maximum absolute difference of `7.11e-15`. The binary artifacts remain local
 and Git-ignored, while their hashes and verification results are tracked. The
 artifact contract, security rules, and reproducibility evidence are documented
 in [the model-bundle guide](docs/model_bundle.md).
+
+The target-free inference workflow verifies the tracked bundle evidence and
+model-artifact hashes before deserialization, loads only the permitted metadata
+and 102 predictors, routes rows through the frozen position-specific models, and
+prevents output replacement. Its input contract and execution modes are
+documented in [the inference guide](docs/model_inference.md). The historical
+smoke test remains pending and will not fit models, reselect models, or
+recalculate test metrics.
 
 ## Decisions supported
 
@@ -133,6 +143,8 @@ Large raw and processed files are excluded from Git. Small reproducible samples 
 - The selected specification was frozen at commit `d47de6a` and evaluated once under protocol commit `5d4bc9e`; the final outputs are locked against
 accidental overwrite.
 - The evaluated local model bundle must reproduce every committed 2025 prediction within `1e-10` before its artifacts are accepted.
+- Inference verifies every evidence and model-artifact hash before calling `joblib.load()`, excludes `target_fantasy_points_ppr` from the inference frame,
+and never fits or reselects a model.
 
 ## Technology
 
@@ -151,7 +163,7 @@ accidental overwrite.
 
 ## Project structure
 
-- `config/`: League, scoring, and future model settings
+- `config/`: League, extraction, modeling, bundle, and inference settings
 - `data/raw/`: Original downloaded source data
 - `data/cache/`: Local nflreadpy download cache
 - `data/processed/`: Cleaned and feature-ready data

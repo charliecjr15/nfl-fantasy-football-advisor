@@ -1,0 +1,74 @@
+[inference]
+name = "NFL Full-PPR Bundle Inference"
+version = "v1_bundle_inference"
+bundle_version = "v1_evaluated_2025"
+confirmation_token = "RUN_V1_BUNDLE_INFERENCE"
+prediction_column = "projected_fantasy_points_ppr"
+source_model_column = "projection_source_model"
+preserve_input_order = true
+allow_model_reselection = false
+require_clean_worktree = true
+fail_if_output_exists = true
+verify_artifact_hashes = true
+verify_metadata_hash = true
+load_target_column = false
+supported_input_formats = [".parquet", ".csv"]
+
+[lineage]
+bundle_protocol_commit = "9f8f72b"
+bundle_evidence_commit = "11730dc"
+bundle_manifest_sha256 = "f9b222521a7bd04bca879537ebe80432fe1ea29bfebeaf74e2a90cabf92d6ce9"
+bundle_verification_sha256 = "a4478a73a94d47f9928aafddcf9fe2edb99995bfaa9908cc2522af67eb7772c5"
+bundle_metadata_sha256 = "96c8d238c16bf2d1e34a7059273243480b083464bd8a07725abacb9e4be9ad31"
+smoke_input_sha256 = "6733ff26d86b8966d0c3aa76c592c2f41b35e555433c99738ccb4c01b42f3fe3"
+reference_predictions_sha256 = "b371778f5dc51963292d97e0fe977b9353540f13170e48874b84310e3843f1c4"
+
+[inputs]
+model_settings_path = "config/model_settings.toml"
+bundle_manifest_path = "results/tables/model_bundle_manifest.csv"
+bundle_verification_path = "results/tables/model_bundle_verification.csv"
+bundle_metadata_path = "models/v1_evaluated_2025/bundle_metadata.json"
+
+[position_models]
+QB = "hist_gradient_boosting"
+RB = "random_forest"
+WR = "ridge"
+TE = "ridge"
+
+[quality]
+expected_predictor_features = 102
+expected_bundle_manifest_rows = 4
+expected_bundle_verification_rows = 5
+expected_artifact_files = 4
+required_metadata_columns = [
+    "season",
+    "week",
+    "game_id",
+    "game_date",
+    "player_id",
+    "player_display_name",
+    "position",
+    "team",
+    "opponent",
+]
+key_columns = ["season", "week", "player_id"]
+supported_positions = ["QB", "RB", "WR", "TE"]
+prediction_absolute_tolerance = 0.0000000001
+require_zero_duplicate_keys = true
+require_zero_unavailable_keys = true
+require_zero_missing_predictions = true
+require_finite_predictions = true
+
+[smoke_test]
+input_path = "data/processed/modeling/model_player_weeks.parquet"
+data_split_column = "data_split"
+data_split_value = "test"
+reference_predictions_path = "results/tables/final_test_predictions.csv"
+reference_prediction_column = "prediction_position_champion"
+reference_source_model_column = "position_champion_source_model"
+expected_rows = 6037
+predictions_path = "data/processed/inference/v1_evaluated_2025_smoke_predictions.parquet"
+sample_path = "data/sample/model_inference_smoke_sample.csv"
+sample_rows = 500
+verification_path = "results/tables/model_inference_smoke_verification.csv"
+run_manifest_path = "results/tables/model_inference_smoke_manifest.csv"
