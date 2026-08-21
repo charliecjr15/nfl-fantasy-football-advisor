@@ -1,0 +1,2 @@
+evaluation_split,selected_model,baseline_model,row_count,selected_mae,baseline_mae,mae_improvement,mae_improvement_pct,selected_rmse,baseline_rmse,rmse_improvement,selected_spearman,baseline_spearman,spearman_difference,selected_top_n_overlap_pct,baseline_top_n_overlap_pct,top_n_overlap_difference_pct,test_outperformed_baseline_mae
+test,position_champion,rolling_5_game,6037,4.447,4.6177,0.1708,3.6981,6.0605,6.4469,0.3863,0.6813,0.6393,0.042,51.2153,49.8843,1.331,True

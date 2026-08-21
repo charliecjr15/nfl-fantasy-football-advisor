@@ -7,10 +7,11 @@ The first version targets a default 12-team, full-PPR redraft league. A later ph
 
 ## Project status
 
-Work in progress. Project setup, source inspection, historical extraction, MySQL
-staging, clean analytical tables, full-PPR reconciliation, leakage-safe feature
-engineering, model-data export, baseline evaluation, and validation-only trained
-model selection are complete.
+Work in progress. The Version 1 historical data pipeline, MySQL staging layer,
+clean analytical tables, leakage-safe feature engineering, model-data export,
+baseline evaluation, validation-only model selection, and one-time final test
+evaluation are complete. The next phase is converting the frozen projections
+into a usable fantasy-football decision workflow.
 
 The Version 1 model dataset contains 45,693 player-week observations, 116
 columns, and a strict 102-feature predictor allowlist. Its schema, chronological
@@ -27,17 +28,18 @@ random forest for RB, and Ridge for WR and TE. It achieved a 4.4580 validation
 MAE, 6.1075 RMSE, 0.6933 Spearman rank correlation, and 53.88% mean top-N
 overlap.
 
-The one-time 2025 final-test protocol is prepared but has not been executed.
-The selected position-specific specification is frozen at commit `d47de6a`. It
-will be refitted using the 2018-2024 development data and evaluated once on the
-2025 test season without model reselection or output overwriting.
 
-The execution safeguards, expected controls, output contract, and interpretation
-rules are documented in [the final-test protocol](docs/final_test_protocol.md).
+The frozen `position_champion` was refitted using the 2018-2024 development
+data and evaluated once on the reserved 2025 test season. It achieved a 4.4470
+MAE, 6.0605 RMSE, 0.6813 Spearman rank correlation, and 51.22% mean top-N
+overlap. It outperformed the rolling five-game baseline on every reported
+overall test metric, and no model reselection was performed.
 
-The trained candidate definitions, position-level selection rules, validation
-results, safeguards, and remaining limitations are documented in
-[the trained-model evaluation report](docs/model_training_evaluation.md).
+The complete results, position-level findings, validation controls, and
+limitations are documented in
+[the final-test evaluation report](docs/final_test_evaluation.md). The frozen
+execution rules remain documented in
+[the final-test protocol](docs/final_test_protocol.md).
 
 ## Decisions supported
 
@@ -116,8 +118,9 @@ Large raw and processed files are excluded from Git. Small reproducible samples 
 - Projections will include uncertainty and plain-language explanations.
 - Recommendations will be tailored to the documented league settings.
 - Position-model selection uses MAE with RMSE, rank correlation, and top-N overlap guardrails.
-- The selected specification is frozen at commit `d47de6a`; the 2025 test workflow requires an explicit confirmation token, a clean working tree, and
-absent final outputs.
+- The selected specification was frozen at commit `d47de6a` and evaluated once under protocol commit `5d4bc9e`; the final outputs are locked against
+accidental overwrite.
+
 ## Technology
 
 - Python 3.11

@@ -1,0 +1,21 @@
+manifest_key,manifest_value
+run_timestamp_utc,2026-08-21T12:23:57.441578+00:00
+protocol_commit,5d4bc9ef9340df83cc81f5e659cdbabded67379a
+selection_commit,d47de6a9c995cbca3c64e7cc1c77cee43d2a89cf
+configuration_sha256,67cda074536f1c047b752567eb62e7332a6c240b7ee5785dc6c6f7a3479bf623
+script_sha256,2fe98347ed4a7a9ade2c2b8384cfb6b83d07050219b3e30c4cef8d7c4f6020a9
+input_parquet_sha256,6733ff26d86b8966d0c3aa76c592c2f41b35e555433c99738ccb4c01b42f3fe3
+fit_splits,"[""training"", ""validation""]"
+evaluation_split,test
+selected_model,position_champion
+baseline_model,rolling_5_game
+position_models,"{""QB"": ""hist_gradient_boosting"", ""RB"": ""random_forest"", ""TE"": ""ridge"", ""WR"": ""ridge""}"
+development_rows,39656
+test_rows,6037
+selected_test_mae,4.4469670124
+baseline_test_mae,4.6177367052
+selected_test_rmse,6.0605485298
+baseline_test_rmse,6.4468526293
+selected_test_spearman,0.6812789312
+baseline_test_spearman,0.6393199388
+test_evaluation_completed_once,true
