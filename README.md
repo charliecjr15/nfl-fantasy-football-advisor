@@ -7,8 +7,13 @@ The first version targets a default 12-team, full-PPR redraft league. A later ph
 
 ## Project status
 
-Work in progress. Project setup, source inspection, historical extraction, MySQL staging, clean analytical tables, grain validation, join-coverage
-auditing, and full-PPR reconciliation are complete. Leakage-safe feature engineering and one-week-ahead model dataset construction are next.
+Work in progress. Project setup, source inspection, historical extraction, MySQL staging, clean analytical tables, full-PPR reconciliation, leakage-safe
+feature engineering, and independent model-table validation are complete.
+
+The Version 1 `model_player_weeks` table contains 45,693 player-week observations and 116 columns. It passed all grain, target, split, chronology,
+leakage, missingness, range, and boundary-case controls and returned `READY_FOR_MODEL_EXPORT`.
+
+The next phase is exporting the model-ready data and building chronological baseline projection models.
 
 ## Decisions supported
 
@@ -22,6 +27,11 @@ The completed advisor will help a fantasy manager decide:
 - Why one player is recommended over another
 
 See the complete project brief (docs/project_brief.md).
+
+The leakage-safe feature definitions and timing rules are documented in [the feature-engineering specification](docs/feature_engineering.md).
+
+The completed validation evidence, limitations, and model-readiness decision are documented in [the model feature validation report](docs/
+model_feature_validation.md).
 
 ## Default league
 
@@ -60,8 +70,8 @@ Kicker and defense projections will follow the validated QB, RB, WR, and TE work
 
 ## Data source
 
-The primary source will be nflverse data (https://github.com/nflverse/nflverse-data), accessed with the maintained nflreadpy
-(https://github.com/nflverse/nflreadpy) Python package.
+The primary source is [nflverse data](https://github.com/nflverse/nflverse-data), accessed with the maintained [nflreadpy](https://github.com/nflverse/
+nflreadpy) Python package.
 
 The validated 2025 source grains, row counts, identifier coverage, join controls, scoring reconciliation, and limitations are documented in [the source profile](docs/source_profile.md).
 
