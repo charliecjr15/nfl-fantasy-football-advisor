@@ -2,10 +2,19 @@
 
 ## Status
 
-The Version 1 model-bundle procedure is prepared but has not yet been executed.
+The evaluated Version 1 model bundle was built and validated on August 21,
+2026.
 
-The bundle must be committed as a reproducible protocol before its confirmation
-token is supplied.
+The build protocol was committed at `9f8f72b` before the confirmation token was
+supplied. Four local position pipelines were created, saved, reopened, and
+verified against all 6,037 committed 2025 predictions.
+
+The completed bundle produced zero prediction mismatches and zero
+reloaded-artifact mismatches. The maximum absolute difference was
+`7.105427357601002e-15`, far below the required `1e-10` tolerance.
+
+The binary model files remain local and Git-ignored. Their tracked evidence is
+stored in the bundle manifest and verification CSV.
 
 ## Purpose
 
@@ -131,13 +140,31 @@ For each position, the script will:
 Only after all four position pipelines pass may the temporary directory become
 the final bundle directory.
 
-## Expected model artifacts
+## Observed reproduction results
 
-The local bundle directory will be:
+Scope      Algorithm                     Fit rows    Verification rows    Mismatch rows    Maximum absolute difference    Reload mismatch rows    Status
+━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ━━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━  ━━━━━━━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━━  ━━━━━━━━
+QB         Histogram gradient               4,428                  664                0                   3.552714e-15                       0    PASS
+            boosting
+─────────  ────────────────────────────  ──────────  ───────────────────  ───────────────  ─────────────────────────────  ──────────────────────  ────────
+RB         Random forest                   10,428                1,575                0                   7.105427e-15                       0    PASS
+─────────  ────────────────────────────  ──────────  ───────────────────  ───────────────  ─────────────────────────────  ──────────────────────  ────────
+WR         Ridge regression                16,574                2,511                0                   3.552714e-15                       0    PASS
+─────────  ────────────────────────────  ──────────  ───────────────────  ───────────────  ─────────────────────────────  ──────────────────────  ────────
+TE         Ridge regression                 8,226                1,287                0                   1.776357e-15                       0    PASS
+─────────  ────────────────────────────  ──────────  ───────────────────  ───────────────  ─────────────────────────────  ──────────────────────  ────────
+Overall    Position champion               39,656                6,037                0                   7.105427e-15                       0    PASS
+
+All observed differences were floating-point noise well within the frozen
+acceptance tolerance.
+
+## Created model artifacts
+
+The local bundle directory is:
 
 models/v1_evaluated_2025/
 
-It will contain:
+It contains:
 
 - `qb_pipeline.joblib`
 - `rb_pipeline.joblib`
@@ -167,7 +194,7 @@ The metadata file records:
 
 ## Tracked verification evidence
 
-The bundle build will create two Git-trackable CSV files:
+The bundle build created two Git-trackable CSV files:
 
 - `results/tables/model_bundle_manifest.csv`
 - `results/tables/model_bundle_verification.csv`
@@ -225,18 +252,20 @@ Environment versions are recorded so the evaluated artifact can be recreated.
 
 ## Authorized build command
 
-Only after the bundle configuration, script, dependency declaration, this
-document, and the model-directory README have been committed with a clean
-working tree, run:
+The bundle was built once after the protocol commit using:
 
 ```text
 python scripts\build_model_bundle.py --confirm-build BUILD_V1_EVALUATED_BUNDLE
 
+The Version 1 artifact directory and verification outputs now exist. The script
+will refuse to overwrite them, so this command should not be rerun for the
+current bundle.
+
 The command should be run once for this local Version 1 bundle.
 
-## Expected completion controls
+## Observed completion controls
 
-A successful run must finish with:
+The completed run finished with:
 
 frozen_input_hashes=PASS
 development_refit_quality=PASS

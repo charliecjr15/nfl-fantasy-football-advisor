@@ -41,11 +41,13 @@ limitations are documented in
 execution rules remain documented in
 [the final-test protocol](docs/final_test_protocol.md).
 
-The evaluated Version 1 model-bundle workflow is prepared but has not yet been
-executed. It will refit the frozen position pipelines using 2018-2024 data and
-must reproduce the committed 2025 predictions before saving any reusable model
-artifacts. The artifact contract, security rules, and reproducibility controls
-are documented in [the model-bundle guide](docs/model_bundle.md).
+The evaluated Version 1 model bundle was built from the frozen 2018-2024
+development fit and validated against all 6,037 committed 2025 predictions.
+All four saved pipelines reproduced their predictions with zero mismatches and
+a maximum absolute difference of `7.11e-15`. The binary artifacts remain local
+and Git-ignored, while their hashes and verification results are tracked. The
+artifact contract, security rules, and reproducibility evidence are documented
+in [the model-bundle guide](docs/model_bundle.md).
 
 ## Decisions supported
 
