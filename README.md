@@ -27,11 +27,13 @@ random forest for RB, and Ridge for WR and TE. It achieved a 4.4580 validation
 MAE, 6.1075 RMSE, 0.6933 Spearman rank correlation, and 53.88% mean top-N
 overlap.
 
-The 2025 test season remains untouched. The next phase is freezing the selected
-specification, refitting its position pipelines with the allowed development
-data, and evaluating the test season once without model reselection.
+The one-time 2025 final-test protocol is prepared but has not been executed.
+The selected position-specific specification is frozen at commit `d47de6a`. It
+will be refitted using the 2018-2024 development data and evaluated once on the
+2025 test season without model reselection or output overwriting.
 
-After the baseline report link, add:
+The execution safeguards, expected controls, output contract, and interpretation
+rules are documented in [the final-test protocol](docs/final_test_protocol.md).
 
 The trained candidate definitions, position-level selection rules, validation
 results, safeguards, and remaining limitations are documented in
@@ -114,8 +116,8 @@ Large raw and processed files are excluded from Git. Small reproducible samples 
 - Projections will include uncertainty and plain-language explanations.
 - Recommendations will be tailored to the documented league settings.
 - Position-model selection uses MAE with RMSE, rank correlation, and top-N overlap guardrails.
-- The selected specification will be committed before the 2025 test season is evaluated once.
-
+- The selected specification is frozen at commit `d47de6a`; the 2025 test workflow requires an explicit confirmation token, a clean working tree, and
+absent final outputs.
 ## Technology
 
 - Python 3.11

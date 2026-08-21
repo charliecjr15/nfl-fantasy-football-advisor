@@ -103,6 +103,30 @@ weekly_metrics_path = "results/tables/model_validation_weekly_metrics.csv"
 comparison_path = "results/tables/model_vs_baseline_comparison.csv"
 position_selection_path = "results/tables/model_position_selection.csv"
 
+[final_evaluation]
+selected_model = "position_champion"
+selection_commit = "d47de6a"
+fit_splits = ["training", "validation"]
+evaluation_split = "test"
+allow_test_evaluation = true
+evaluate_once = true
+fail_if_output_exists = true
+confirmation_token = "FINAL_TEST_2025"
+refit_preprocessing_on_development_data = true
+
+[final_evaluation.position_models]
+QB = "hist_gradient_boosting"
+RB = "random_forest"
+WR = "ridge"
+TE = "ridge"
+
+[final_evaluation.output]
+predictions_path = "results/tables/final_test_predictions.csv"
+metrics_path = "results/tables/final_test_metrics.csv"
+weekly_metrics_path = "results/tables/final_test_weekly_metrics.csv"
+comparison_path = "results/tables/final_test_vs_baseline.csv"
+run_manifest_path = "results/tables/final_test_run_manifest.csv"
+
 [evaluation]
 regression_metrics = ["mae", "rmse"]
 ranking_metrics = ["spearman_rank_correlation"]
