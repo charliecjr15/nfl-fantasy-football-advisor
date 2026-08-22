@@ -15,6 +15,44 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
 import build_future_features as future  # noqa: E402
+import refresh_weekly_history as refresh  # noqa: E402
+
+
+def test_completed_results_keep_names_and_actual_points_separate() -> None:
+    sources = {
+        "weekly_player_stats": pd.DataFrame(
+            [
+                {
+                    "season": 2025,
+                    "week": 18,
+                    "game_id": "2025_18_AAA_BBB",
+                    "player_id": "player-1",
+                    "player_display_name": "Example Player",
+                    "position": "RB",
+                    "team": "AAA",
+                    "opponent_team": "BBB",
+                    "fantasy_points_ppr": 21.5,
+                }
+            ]
+        ),
+        "schedules": pd.DataFrame(
+            [
+                {
+                    "season": 2025,
+                    "week": 18,
+                    "game_id": "2025_18_AAA_BBB",
+                    "gameday": "2026-01-03",
+                }
+            ]
+        ),
+    }
+
+    completed = refresh.build_completed_results(sources, target_season=2026)
+
+    assert list(completed.columns) == refresh.COMPLETED_RESULTS_COLUMNS
+    assert completed["player_display_name"].item() == "Example Player"
+    assert completed["fantasy_points_ppr"].item() == 21.5
+    assert "target_fantasy_points_ppr" not in completed.columns
 
 
 def test_portable_history_reproduces_week_18_replay() -> None:

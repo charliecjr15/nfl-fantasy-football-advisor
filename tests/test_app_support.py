@@ -6,9 +6,13 @@ import pandas as pd
 
 from app_support import (
     comparison_frame,
+    current_games,
+    filter_completed_results,
     filter_rankings,
+    normalize_completed_results,
     normalize_rankings,
     optimize_lineup,
+    top_projections,
 )
 
 
@@ -33,6 +37,10 @@ def sample_rankings() -> pd.DataFrame:
         rows.append(
             {
                 "player_id": player_id,
+                "season": 2026,
+                "week": 1,
+                "game_id": "2026_01_AAA_BBB",
+                "game_date": "2026-09-10",
                 "player_display_name": name,
                 "position": position,
                 "team": "AAA",
@@ -93,3 +101,60 @@ def test_filter_and_comparison_preserve_requested_players() -> None:
         "Quarter Back",
         "Tight One",
     ]
+    assert list(comparison.columns) == [
+        "player_display_name",
+        "position",
+        "team",
+        "opponent",
+        "display_projected_fantasy_points_ppr",
+    ]
+
+
+def test_top_projections_and_games_are_compact() -> None:
+    rankings = sample_rankings()
+
+    leaders = top_projections(rankings, position="WR", limit=2)
+    games = current_games(rankings)
+
+    assert leaders["player_id"].tolist() == ["wr1", "wr2"]
+    assert games.to_dict("records") == [
+        {"game_date": "Thu, Sep 10", "matchup": "AAA vs BBB"}
+    ]
+
+
+def test_previous_week_results_filter_to_requested_week_and_position() -> None:
+    completed = normalize_completed_results(
+        pd.DataFrame(
+            [
+                {
+                    "season": 2025,
+                    "week": 18,
+                    "game_id": "game-1",
+                    "game_date": "2026-01-03",
+                    "player_id": "rb1",
+                    "player_display_name": "Running One",
+                    "position": "RB",
+                    "team": "AAA",
+                    "opponent": "BBB",
+                    "fantasy_points_ppr": 22.5,
+                },
+                {
+                    "season": 2025,
+                    "week": 18,
+                    "game_id": "game-1",
+                    "game_date": "2026-01-03",
+                    "player_id": "wr1",
+                    "player_display_name": "Wide One",
+                    "position": "WR",
+                    "team": "AAA",
+                    "opponent": "BBB",
+                    "fantasy_points_ppr": 18.0,
+                },
+            ]
+        )
+    )
+
+    selected = filter_completed_results(completed, 2025, 18, "RB")
+
+    assert selected["player_id"].tolist() == ["rb1"]
+    assert selected["fantasy_points_ppr"].item() == 22.5

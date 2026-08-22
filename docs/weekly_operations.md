@@ -11,7 +11,8 @@ One successful weekly run performs these operations in order:
 1. Download completed regular-season statistics, schedules, weekly rosters, and
    snap counts through the prior week.
 2. Rebuild portable player and opponent history at the exact grains required by
-   the future-feature builder.
+   the future-feature builder, plus a separate display-only completed-results
+   table for the prior season and completed current-season weeks.
 3. Download target-week schedule, roster, and depth-chart context.
 4. Build the 102 target-free predictors using strict prior-week history.
 5. Score the frozen position-specific model bundle.
@@ -37,6 +38,7 @@ Open the local URL printed by Streamlit, normally `http://localhost:8501`.
 The app reads only:
 
 - `results/public/latest_rankings.csv`
+- `results/public/completed_week_results.csv`
 - `results/public/latest_run.json`
 
 It does not connect to MySQL, load model objects, or expose credentials to a
@@ -135,8 +137,8 @@ After the project is pushed to GitHub:
 5. Deploy the app.
 
 No Streamlit secrets are required for the read-only public application. A
-successful GitHub Actions commit updates the two public result files, which
-causes the deployed app to refresh from the repository.
+successful GitHub Actions commit updates the public result files, which causes
+the deployed app to refresh from the repository.
 
 ## Publication gates
 
@@ -150,6 +152,9 @@ The public snapshot is rejected when any of these conditions occurs:
 - Display projections are missing or negative.
 - Team, game, row, or lineup coverage differs from the upstream evidence.
 - An observed target outcome appears in the public ranking file.
+- Completed results include the projection week or a future week.
+- Completed results have missing fields, duplicate player-game keys, invalid
+  positions, non-finite actual points, or an unexpected schema.
 
 Schedule coverage is derived from the target-week source evidence rather than
 hard-coded to 32 teams and 16 games, so regular-season bye weeks remain valid.

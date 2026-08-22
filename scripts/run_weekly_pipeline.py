@@ -28,6 +28,16 @@ OPPONENT_HISTORY = (
     / "runtime_history"
     / "opponent_position_week_history.parquet"
 )
+COMPLETED_RESULTS = (
+    PROJECT_ROOT
+    / "data"
+    / "processed"
+    / "runtime_history"
+    / "completed_week_results.csv"
+)
+PUBLIC_COMPLETED_RESULTS = (
+    PROJECT_ROOT / "results" / "public" / "completed_week_results.csv"
+)
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -146,10 +156,14 @@ def run_command(arguments: list[str]) -> None:
     subprocess.run(arguments, cwd=PROJECT_ROOT, check=True)
 
 
-def publish_command(season: int, week: int) -> list[str]:
+def publish_command(
+    season: int,
+    week: int,
+    completed_results: Path | None = None,
+) -> list[str]:
     """Return the validated-publication command."""
 
-    return [
+    command = [
         sys.executable,
         str(PROJECT_ROOT / "scripts" / "publish_latest.py"),
         "--season",
@@ -157,6 +171,11 @@ def publish_command(season: int, week: int) -> list[str]:
         "--week",
         str(week),
     ]
+    if completed_results is not None:
+        command.extend(
+            ["--completed-results", str(completed_results)]
+        )
+    return command
 
 
 def output_paths(season: int, week: int) -> dict[str, Path]:
@@ -210,7 +229,11 @@ def main() -> None:
         else int(arguments.week)
     )
     if arguments.publish_existing:
-        run_command(publish_command(arguments.season, week))
+        run_command(
+            publish_command(
+                arguments.season, week, PUBLIC_COMPLETED_RESULTS
+            )
+        )
         return
 
     paths = output_paths(arguments.season, week)
@@ -223,7 +246,11 @@ def main() -> None:
                 "Only part of the archived ranking evidence exists for the "
                 "target week. Repair the archive before automation continues."
             )
-        run_command(publish_command(arguments.season, week))
+        run_command(
+            publish_command(
+                arguments.season, week, PUBLIC_COMPLETED_RESULTS
+            )
+        )
         print("weekly_pipeline_status=ALREADY_PUBLISHED")
         return
 
@@ -253,6 +280,8 @@ def main() -> None:
             str(PLAYER_HISTORY),
             "--opponent-output",
             str(OPPONENT_HISTORY),
+            "--completed-results-output",
+            str(COMPLETED_RESULTS),
             "--manifest-output",
             str(refresh_manifest),
         ]
@@ -308,7 +337,11 @@ def main() -> None:
             revision,
         ]
     )
-    run_command(publish_command(arguments.season, week))
+    run_command(
+        publish_command(
+            arguments.season, week, COMPLETED_RESULTS
+        )
+    )
     print("weekly_pipeline_status=PASS")
 
 

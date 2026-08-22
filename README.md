@@ -104,12 +104,15 @@ Current 2026 injury context remains unavailable, so these are not final start/si
 calls. See [the weekly-ranking guide](docs/weekly_rankings.md).
 
 The public application reads only the last manifest-validated snapshot. It
-provides interactive rankings, a manual-roster lineup optimizer, player
-comparison, filtered CSV downloads, freshness metadata, and visible risk
-caveats. The portable history path reproduced the complete 2025 Week 18 frozen
-feature replay with zero text or numeric mismatches at the `1e-10` acceptance
-tolerance. See [weekly app operations](docs/weekly_operations.md) for local use,
-weekly scoring, model-release packaging, GitHub automation, and deployment.
+uses a compact five-tab layout for top projections, a manual-roster lineup
+optimizer, player comparison, all target-week games, and actual points from
+previous weeks. Projection tables show only player, position, team, opponent,
+and projected PPR. Completed outcomes are published in a separate display-only
+file and cannot enter target-week model inputs. The portable history path
+reproduced the complete 2025 Week 18 frozen feature replay with zero text or
+numeric mismatches at the `1e-10` acceptance tolerance. See
+[weekly app operations](docs/weekly_operations.md) for local use, weekly
+scoring, model-release packaging, GitHub automation, and deployment.
 
 ## Run the application
 

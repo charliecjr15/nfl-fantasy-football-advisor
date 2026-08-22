@@ -6,6 +6,7 @@ import argparse
 import copy
 import hashlib
 import json
+import math
 import os
 import sys
 import tomllib
@@ -73,6 +74,19 @@ OPPONENT_HISTORY_COLUMNS = [
     "total_offensive_tds_allowed",
 ]
 
+COMPLETED_RESULTS_COLUMNS = [
+    "season",
+    "week",
+    "game_id",
+    "game_date",
+    "player_id",
+    "player_display_name",
+    "position",
+    "team",
+    "opponent",
+    "fantasy_points_ppr",
+]
+
 SOURCE_DATASETS = (
     "weekly_player_stats",
     "schedules",
@@ -122,6 +136,16 @@ def parse_arguments() -> argparse.Namespace:
         default=(
             "data/processed/runtime_history/"
             "opponent_position_week_history.parquet"
+        ),
+    )
+    parser.add_argument(
+        "--completed-results-output",
+        default=(
+            "data/processed/runtime_history/completed_week_results.csv"
+        ),
+        help=(
+            "Observed full-PPR results for the prior season and completed "
+            "weeks of the target season. This is a display-only artifact."
         ),
     )
     parser.add_argument(
@@ -585,13 +609,79 @@ def build_opponent_history(player_history: pd.DataFrame) -> pd.DataFrame:
     return grouped.reset_index(drop=True)
 
 
+def build_completed_results(
+    sources: dict[str, pd.DataFrame],
+    target_season: int,
+) -> pd.DataFrame:
+    """Build a compact, display-only table of completed player outcomes."""
+
+    stats = sources["weekly_player_stats"].copy()
+    stats = stats.loc[
+        stats["season"].between(target_season - 1, target_season)
+        & stats["position"].isin(["QB", "RB", "WR", "TE"])
+    ].copy()
+    schedules = sources["schedules"].loc[
+        :, ["season", "week", "game_id", "gameday"]
+    ].copy()
+    require_unique(
+        schedules, ["season", "week", "game_id"], "Completed schedules"
+    )
+    completed = stats.merge(
+        schedules,
+        on=["season", "week", "game_id"],
+        how="left",
+        validate="many_to_one",
+        indicator=True,
+    )
+    unmatched = int(completed["_merge"].ne("both").sum())
+    if unmatched:
+        raise ValueError(
+            f"Completed results have {unmatched} unmatched schedule rows."
+        )
+    completed = completed.drop(columns="_merge").rename(
+        columns={"gameday": "game_date", "opponent_team": "opponent"}
+    )
+    completed["game_date"] = pd.to_datetime(
+        completed["game_date"], errors="raise"
+    ).dt.strftime("%Y-%m-%d")
+    completed["fantasy_points_ppr"] = pd.to_numeric(
+        completed["fantasy_points_ppr"], errors="raise"
+    )
+    valid_points = completed["fantasy_points_ppr"].map(
+        lambda value: pd.notna(value) and math.isfinite(value)
+    )
+    if not valid_points.all():
+        raise ValueError("Completed results contain non-finite PPR points.")
+    completed = completed.loc[:, COMPLETED_RESULTS_COLUMNS].sort_values(
+        [
+            "season",
+            "week",
+            "game_id",
+            "fantasy_points_ppr",
+            "player_display_name",
+        ],
+        ascending=[True, True, True, False, True],
+        kind="stable",
+    )
+    require_unique(
+        completed,
+        ["season", "week", "game_id", "player_id"],
+        "Completed results",
+    )
+    if completed[COMPLETED_RESULTS_COLUMNS[:-1]].isna().any(axis=1).any():
+        raise ValueError("Completed results contain unavailable display fields.")
+    return completed.reset_index(drop=True)
+
+
 def build_manifest(
     arguments: argparse.Namespace,
     player_history: pd.DataFrame,
     opponent_history: pd.DataFrame,
+    completed_results: pd.DataFrame,
     source_hashes: dict[str, str],
     player_output: Path,
     opponent_output: Path,
+    completed_results_output: Path,
 ) -> pd.DataFrame:
     """Build compact history lineage and quality evidence."""
 
@@ -641,6 +731,15 @@ def build_manifest(
         ("player_history_sha256", sha256_file(player_output)),
         ("opponent_history_path", display_path(opponent_output)),
         ("opponent_history_sha256", sha256_file(opponent_output)),
+        ("completed_results_rows", len(completed_results)),
+        (
+            "completed_results_path",
+            display_path(completed_results_output),
+        ),
+        (
+            "completed_results_sha256",
+            sha256_file(completed_results_output),
+        ),
         ("history_refresh_status", "PASS"),
     ]
     return pd.DataFrame(rows, columns=["manifest_key", "manifest_value"])
@@ -652,6 +751,9 @@ def main() -> None:
     arguments = parse_arguments()
     player_output = resolve_project_path(arguments.player_output)
     opponent_output = resolve_project_path(arguments.opponent_output)
+    completed_results_output = resolve_project_path(
+        arguments.completed_results_output
+    )
     manifest_output = resolve_project_path(
         arguments.manifest_output
         or (
@@ -669,23 +771,32 @@ def main() -> None:
     )
     player_history = build_player_history(sources)
     opponent_history = build_opponent_history(player_history)
+    completed_results = build_completed_results(sources, arguments.season)
 
     atomic_write_parquet(player_history, player_output)
     atomic_write_parquet(opponent_history, opponent_output)
+    atomic_write_csv(completed_results, completed_results_output)
     manifest = build_manifest(
         arguments,
         player_history,
         opponent_history,
+        completed_results,
         source_hashes,
         player_output,
         opponent_output,
+        completed_results_output,
     )
     atomic_write_csv(manifest, manifest_output)
 
     print(f"player_history_rows={len(player_history):,}")
     print(f"opponent_history_rows={len(opponent_history):,}")
+    print(f"completed_results_rows={len(completed_results):,}")
     print(f"player_history={display_path(player_output)}")
     print(f"opponent_history={display_path(opponent_output)}")
+    print(
+        "completed_results="
+        f"{display_path(completed_results_output)}"
+    )
     print(f"manifest={display_path(manifest_output)}")
     print("history_refresh_status=PASS")
 

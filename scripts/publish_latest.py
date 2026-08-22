@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import os
 import shutil
 from datetime import datetime, timezone
@@ -17,6 +18,9 @@ import pandas as pd
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_RANKINGS = PROJECT_ROOT / "results" / "public" / "latest_rankings.csv"
 PUBLIC_METADATA = PROJECT_ROOT / "results" / "public" / "latest_run.json"
+PUBLIC_COMPLETED_RESULTS = (
+    PROJECT_ROOT / "results" / "public" / "completed_week_results.csv"
+)
 
 REQUIRED_COLUMNS = {
     "season",
@@ -54,6 +58,20 @@ ALLOWED_TIERS = {
     "ROLE_FILTERED",
 }
 
+COMPLETED_RESULTS_COLUMNS = [
+    "season",
+    "week",
+    "game_id",
+    "game_date",
+    "player_id",
+    "player_display_name",
+    "position",
+    "team",
+    "opponent",
+    "fantasy_points_ppr",
+]
+ALLOWED_POSITIONS = {"QB", "RB", "WR", "TE"}
+
 
 def parse_arguments() -> argparse.Namespace:
     """Parse publication inputs."""
@@ -65,8 +83,16 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument("--week", type=int, required=True)
     parser.add_argument("--rankings")
     parser.add_argument("--manifest")
+    parser.add_argument(
+        "--completed-results",
+        help="Validated display-only actual results produced by history refresh.",
+    )
     parser.add_argument("--public-rankings", default=str(PUBLIC_RANKINGS))
     parser.add_argument("--public-metadata", default=str(PUBLIC_METADATA))
+    parser.add_argument(
+        "--public-completed-results",
+        default=str(PUBLIC_COMPLETED_RESULTS),
+    )
     return parser.parse_args()
 
 
@@ -217,6 +243,85 @@ def validate_publication(
     return rankings, manifest, summary
 
 
+def validate_completed_results(
+    path: Path,
+    season: int,
+    week: int,
+) -> tuple[pd.DataFrame, dict[str, Any]]:
+    """Validate observed results kept separate from projection inputs."""
+
+    if not path.exists():
+        raise FileNotFoundError(f"Completed-results CSV not found: {path}")
+    completed = pd.read_csv(path, low_memory=False)
+    if list(completed.columns) != COMPLETED_RESULTS_COLUMNS:
+        raise ValueError("Completed-results CSV has an unexpected schema.")
+    if completed.empty:
+        raise ValueError("Completed-results CSV is empty.")
+    if "target_fantasy_points_ppr" in completed.columns:
+        raise ValueError("Model target names cannot appear in public results.")
+
+    integer_seasons = pd.to_numeric(completed["season"], errors="raise")
+    integer_weeks = pd.to_numeric(completed["week"], errors="raise")
+    if not set(integer_seasons).issubset({season - 1, season}):
+        raise ValueError("Completed results contain an unexpected season.")
+    current = integer_seasons.eq(season)
+    if (integer_weeks.loc[current] >= week).any():
+        raise ValueError(
+            "Completed results include the projection week or a future week."
+        )
+    if integer_weeks.lt(1).any() or integer_weeks.gt(18).any():
+        raise ValueError("Completed results contain an invalid week.")
+    previous_weeks = set(integer_weeks.loc[integer_seasons.eq(season - 1)])
+    current_weeks = set(integer_weeks.loc[current])
+    if previous_weeks != set(range(1, 19)):
+        raise ValueError("Completed results do not cover the prior season.")
+    if current_weeks != set(range(1, week)):
+        raise ValueError(
+            "Completed results do not cover every prior current-season week."
+        )
+
+    key_columns = ["season", "week", "game_id", "player_id"]
+    display_columns = key_columns + [
+        "game_date",
+        "player_display_name",
+        "position",
+        "team",
+        "opponent",
+    ]
+    if completed[display_columns].isna().any(axis=1).any():
+        raise ValueError("Completed results contain unavailable display fields.")
+    blank = completed[display_columns].astype(str).apply(
+        lambda column: column.str.strip().eq("")
+    )
+    if blank.any(axis=1).any():
+        raise ValueError("Completed results contain blank display fields.")
+    if completed.duplicated(key_columns).any():
+        raise ValueError("Completed results contain duplicate player-game keys.")
+    unexpected_positions = sorted(
+        set(completed["position"].astype(str)) - ALLOWED_POSITIONS
+    )
+    if unexpected_positions:
+        raise ValueError(
+            f"Completed results contain unexpected positions: {unexpected_positions}"
+        )
+    pd.to_datetime(completed["game_date"], errors="raise")
+    actual_points = pd.to_numeric(
+        completed["fantasy_points_ppr"], errors="coerce"
+    )
+    if actual_points.isna().any() or not actual_points.map(math.isfinite).all():
+        raise ValueError("Completed PPR points must be finite.")
+
+    latest = completed.sort_values(
+        ["season", "week"], ascending=[False, False], kind="stable"
+    ).iloc[0]
+    summary = {
+        "completed_results_rows": len(completed),
+        "completed_results_latest_season": int(latest["season"]),
+        "completed_results_latest_week": int(latest["week"]),
+    }
+    return completed, summary
+
+
 def atomic_copy(source: Path, destination: Path) -> None:
     """Copy a validated file atomically."""
 
@@ -244,12 +349,28 @@ def publish(
     public_metadata: Path,
     season: int,
     week: int,
+    completed_results_path: Path | None = None,
+    public_completed_results: Path | None = None,
 ) -> dict[str, Any]:
     """Validate and atomically promote one snapshot."""
 
     _, manifest, summary = validate_publication(
         rankings_path, manifest_path, season, week
     )
+    completed_summary: dict[str, Any] = {}
+    completed_hash: str | None = None
+    if completed_results_path is not None:
+        if public_completed_results is None:
+            raise ValueError("A public completed-results path is required.")
+        _, completed_summary = validate_completed_results(
+            completed_results_path, season, week
+        )
+        completed_hash = sha256_file(completed_results_path)
+        completed_summary = {
+            **completed_summary,
+            "completed_results_sha256": completed_hash,
+            "completed_results_path": display_path(public_completed_results),
+        }
     if public_rankings.exists() and public_metadata.exists():
         try:
             existing_payload = json.loads(
@@ -266,10 +387,20 @@ def publish(
             "injury_context_status": manifest["injury_context_status"],
             "rankings_sha256": manifest["rankings_csv_sha256"],
             **summary,
+            **completed_summary,
         }
+        completed_unchanged = (
+            completed_results_path is None
+            or (
+                public_completed_results is not None
+                and public_completed_results.exists()
+                and sha256_file(public_completed_results) == completed_hash
+            )
+        )
         if (
             isinstance(existing_payload, dict)
             and sha256_file(public_rankings) == manifest["rankings_csv_sha256"]
+            and completed_unchanged
             and all(
                 existing_payload.get(key) == value
                 for key, value in unchanged_fields.items()
@@ -278,8 +409,12 @@ def publish(
             return existing_payload
 
     atomic_copy(rankings_path, public_rankings)
+    if completed_results_path is not None:
+        if public_completed_results is None:
+            raise ValueError("A public completed-results path is required.")
+        atomic_copy(completed_results_path, public_completed_results)
     payload = {
-        "publication_version": "v1_public_snapshot",
+        "publication_version": "v2_public_snapshot",
         "publication_status": manifest["ranking_status"],
         "published_at_utc": datetime.now(timezone.utc).isoformat(),
         "season": season,
@@ -292,10 +427,17 @@ def publish(
         "archive_rankings_path": display_path(rankings_path),
         "archive_manifest_path": display_path(manifest_path),
         **summary,
+        **completed_summary,
     }
     atomic_write_json(payload, public_metadata)
     if sha256_file(public_rankings) != payload["rankings_sha256"]:
         raise ValueError("Public copy hash does not match validated rankings.")
+    if (
+        completed_results_path is not None
+        and public_completed_results is not None
+        and sha256_file(public_completed_results) != completed_hash
+    ):
+        raise ValueError("Public completed-results copy has an invalid hash.")
     return payload
 
 
@@ -319,6 +461,14 @@ def main() -> None:
     )
     public_rankings = resolve_project_path(arguments.public_rankings)
     public_metadata = resolve_project_path(arguments.public_metadata)
+    completed_results_path = (
+        resolve_project_path(arguments.completed_results)
+        if arguments.completed_results
+        else None
+    )
+    public_completed_results = resolve_project_path(
+        arguments.public_completed_results
+    )
     payload = publish(
         rankings_path,
         manifest_path,
@@ -326,12 +476,19 @@ def main() -> None:
         public_metadata,
         arguments.season,
         arguments.week,
+        completed_results_path,
+        public_completed_results,
     )
     print(f"published_season={payload['season']}")
     print(f"published_week={payload['week']}")
     print(f"published_rows={payload['row_count']:,}")
     print(f"publication_status={payload['publication_status']}")
     print(f"public_rankings={display_path(public_rankings)}")
+    if completed_results_path is not None:
+        print(
+            "public_completed_results="
+            f"{display_path(public_completed_results)}"
+        )
     print(f"public_metadata={display_path(public_metadata)}")
 
 

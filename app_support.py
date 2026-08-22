@@ -10,6 +10,18 @@ import pandas as pd
 POSITION_ORDER = {"QB": 0, "RB": 1, "WR": 2, "TE": 3}
 SLOT_REQUIREMENTS = {"QB": 1, "RB": 2, "WR": 2, "TE": 1}
 FLEX_POSITIONS = {"RB", "WR", "TE"}
+COMPLETED_RESULTS_COLUMNS = {
+    "season",
+    "week",
+    "game_id",
+    "game_date",
+    "player_id",
+    "player_display_name",
+    "position",
+    "team",
+    "opponent",
+    "fantasy_points_ppr",
+}
 
 
 def normalize_rankings(dataframe: pd.DataFrame) -> pd.DataFrame:
@@ -39,14 +51,102 @@ def normalize_rankings(dataframe: pd.DataFrame) -> pd.DataFrame:
             )
     rankings["player_label"] = (
         rankings["player_display_name"].astype(str)
-        + " · "
+        + " | "
         + rankings["position"].astype(str)
-        + " · "
+        + " | "
         + rankings["team"].astype(str)
-        + " · "
+        + " | "
         + rankings["player_id"].astype(str)
     )
     return rankings
+
+
+def top_projections(
+    rankings: pd.DataFrame,
+    position: str = "All",
+    limit: int = 25,
+) -> pd.DataFrame:
+    """Return the highest role-eligible projections for display."""
+
+    selected = rankings.loc[rankings["role_eligible"]].copy()
+    if position != "All":
+        selected = selected.loc[selected["position"].eq(position)]
+    return selected.sort_values(
+        [
+            "display_projected_fantasy_points_ppr",
+            "player_display_name",
+        ],
+        ascending=[False, True],
+        kind="stable",
+    ).head(limit).reset_index(drop=True)
+
+
+def current_games(rankings: pd.DataFrame) -> pd.DataFrame:
+    """Return one compact matchup row per target-week game."""
+
+    rows: list[dict[str, object]] = []
+    for game_id, game in rankings.groupby("game_id", sort=False):
+        teams = sorted(
+            set(game["team"].dropna().astype(str))
+            | set(game["opponent"].dropna().astype(str))
+        )
+        if len(teams) != 2:
+            raise ValueError(
+                f"Game {game_id} does not resolve to exactly two teams."
+            )
+        game_date = pd.to_datetime(
+            game["game_date"].iloc[0], errors="raise"
+        )
+        rows.append(
+            {
+                "game_date": game_date.strftime("%a, %b %d"),
+                "matchup": f"{teams[0]} vs {teams[1]}",
+                "_sort_date": game_date,
+            }
+        )
+    return (
+        pd.DataFrame(rows)
+        .sort_values(["_sort_date", "matchup"], kind="stable")
+        .drop(columns="_sort_date")
+        .reset_index(drop=True)
+    )
+
+
+def normalize_completed_results(dataframe: pd.DataFrame) -> pd.DataFrame:
+    """Normalize the separately published observed-results table."""
+
+    missing = sorted(COMPLETED_RESULTS_COLUMNS - set(dataframe.columns))
+    if missing:
+        raise ValueError(
+            "Completed results are missing columns: " + ", ".join(missing)
+        )
+    completed = dataframe.copy()
+    for column in ["season", "week", "fantasy_points_ppr"]:
+        completed[column] = pd.to_numeric(completed[column], errors="raise")
+    completed["game_date"] = pd.to_datetime(
+        completed["game_date"], errors="raise"
+    )
+    return completed
+
+
+def filter_completed_results(
+    completed: pd.DataFrame,
+    season: int,
+    week: int,
+    position: str = "All",
+) -> pd.DataFrame:
+    """Return actual PPR results for one completed week."""
+
+    selected = completed.loc[
+        completed["season"].eq(season) & completed["week"].eq(week)
+    ].copy()
+    if position != "All":
+        selected = selected.loc[selected["position"].eq(position)]
+    return selected.sort_values(
+        ["fantasy_points_ppr", "player_display_name"],
+        ascending=[False, True],
+        kind="stable",
+    ).reset_index(drop=True)
 
 
 def filter_rankings(
@@ -189,12 +289,6 @@ def comparison_frame(
                 "team",
                 "opponent",
                 "display_projected_fantasy_points_ppr",
-                "position_rank",
-                "overall_flex_rank",
-                "evidence_confidence",
-                "role_eligible",
-                "risk_flags",
-                "recommendation_reason",
             ],
         ]
         .sort_values(

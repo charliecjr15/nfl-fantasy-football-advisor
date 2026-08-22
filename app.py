@@ -1,4 +1,4 @@
-"""Public Streamlit interface for the NFL fantasy-football advisor."""
+"""Simple public Streamlit interface for the NFL fantasy advisor."""
 
 from __future__ import annotations
 
@@ -10,23 +10,45 @@ import streamlit as st
 
 from app_support import (
     comparison_frame,
-    filter_rankings,
+    current_games,
+    filter_completed_results,
+    normalize_completed_results,
     normalize_rankings,
     optimize_lineup,
     selectable_players,
+    top_projections,
 )
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent
-RANKINGS_PATH = PROJECT_ROOT / "results" / "public" / "latest_rankings.csv"
-METADATA_PATH = PROJECT_ROOT / "results" / "public" / "latest_run.json"
+PUBLIC_DIRECTORY = PROJECT_ROOT / "results" / "public"
+RANKINGS_PATH = PUBLIC_DIRECTORY / "latest_rankings.csv"
+METADATA_PATH = PUBLIC_DIRECTORY / "latest_run.json"
+COMPLETED_RESULTS_PATH = PUBLIC_DIRECTORY / "completed_week_results.csv"
+
+PLAYER_COLUMNS = [
+    "player_display_name",
+    "position",
+    "team",
+    "opponent",
+    "display_projected_fantasy_points_ppr",
+]
+PLAYER_COLUMN_CONFIG = {
+    "player_display_name": "Player",
+    "position": "POS",
+    "team": "Team",
+    "opponent": "Opponent",
+    "display_projected_fantasy_points_ppr": st.column_config.NumberColumn(
+        "Projected PPR", format="%.2f"
+    ),
+}
 
 
 st.set_page_config(
     page_title="Sunday Edge Fantasy Advisor",
     page_icon="🏈",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
 
 
@@ -45,196 +67,99 @@ def load_public_metadata(path: str) -> dict[str, object]:
         return json.load(file_handle)
 
 
-def show_source_error() -> None:
-    """Render a useful empty state when publication artifacts are absent."""
+@st.cache_data(show_spinner=False)
+def load_completed_results(path: str) -> pd.DataFrame:
+    """Read and normalize the separately published actual results."""
 
-    st.error(
-        "No validated public rankings are available. Run "
-        "`python scripts/publish_latest.py --season YEAR --week WEEK` first."
+    return normalize_completed_results(pd.read_csv(path, low_memory=False))
+
+
+def projection_table(dataframe: pd.DataFrame) -> None:
+    """Display only the five requested player projection fields."""
+
+    st.dataframe(
+        dataframe[PLAYER_COLUMNS],
+        hide_index=True,
+        width="stretch",
+        column_config=PLAYER_COLUMN_CONFIG,
     )
-    st.stop()
 
 
 if not RANKINGS_PATH.exists() or not METADATA_PATH.exists():
-    show_source_error()
+    st.error("No validated weekly projections are available yet.")
+    st.stop()
 
 try:
     rankings = load_public_rankings(str(RANKINGS_PATH))
     metadata = load_public_metadata(str(METADATA_PATH))
+    completed_results = (
+        load_completed_results(str(COMPLETED_RESULTS_PATH))
+        if COMPLETED_RESULTS_PATH.exists()
+        else pd.DataFrame()
+    )
 except (OSError, ValueError, json.JSONDecodeError) as error:
-    st.error(f"The published snapshot could not be loaded: {error}")
+    st.error(f"The weekly data could not be loaded: {error}")
     st.stop()
 
 
+season = int(metadata["season"])
+week = int(metadata["week"])
 st.title("Sunday Edge Fantasy Advisor")
-st.caption(
-    "Weekly full-PPR projections from a frozen, leakage-safe model bundle."
-)
+st.caption(f"{season} Week {week} full-PPR projections")
 
 status = str(metadata.get("publication_status", "UNKNOWN"))
 if "INJURY_CAVEAT" in status:
     st.warning(
-        "Current injury-report data was unavailable for this build. Check "
-        "official player availability before setting a lineup."
+        "Injury data is unavailable for this update. Check player status "
+        "before setting your lineup."
     )
 elif not status.startswith("PASS"):
-    st.error("This snapshot is not marked ready for lineup decisions.")
+    st.error("This weekly update is not ready for lineup decisions.")
 
-metric_columns = st.columns(5)
-metric_columns[0].metric(
-    "Projection week",
-    f"{int(metadata['season'])} · Week {int(metadata['week'])}",
-)
-metric_columns[1].metric("Players scored", f"{len(rankings):,}")
-metric_columns[2].metric(
-    "Role eligible", f"{int(rankings['role_eligible'].sum()):,}"
-)
-metric_columns[3].metric(
-    "Starter + FLEX pool",
-    f"{int(rankings['lineup_tier'].isin(['PROVISIONAL_STARTER', 'PROVISIONAL_FLEX']).sum()):,}",
-)
-metric_columns[4].metric(
-    "Games covered", f"{int(rankings['game_id'].nunique())}"
-)
-
-with st.sidebar:
-    st.header("Rankings filters")
-    position_values = sorted(
-        rankings["position"].dropna().unique(),
-        key=lambda value: {"QB": 0, "RB": 1, "WR": 2, "TE": 3}.get(
-            value, 9
-        ),
-    )
-    selected_positions = st.multiselect(
-        "Position", position_values, default=position_values
-    )
-    team_values = sorted(rankings["team"].dropna().unique())
-    selected_teams = st.multiselect(
-        "Team", team_values, default=team_values
-    )
-    tier_values = [
-        value
-        for value in [
-            "PROVISIONAL_STARTER",
-            "PROVISIONAL_FLEX",
-            "BENCH_DEPTH",
-            "ROLE_FILTERED",
-        ]
-        if value in set(rankings["lineup_tier"])
+(
+    projections_tab,
+    lineup_tab,
+    compare_tab,
+    games_tab,
+    previous_tab,
+) = st.tabs(
+    [
+        "Top projections",
+        "My lineup",
+        "Compare players",
+        "This week's games",
+        "Previous weeks",
     ]
-    selected_tiers = st.multiselect(
-        "Recommendation tier", tier_values, default=tier_values
-    )
-    confidence_values = sorted(
-        rankings["evidence_confidence"].dropna().unique()
-    )
-    selected_confidence = st.multiselect(
-        "Evidence confidence",
-        confidence_values,
-        default=confidence_values,
-    )
-    player_search = st.text_input("Search player")
-    st.divider()
-    st.caption(
-        f"Source cutoff: {metadata.get('source_as_of_utc', 'Unavailable')}"
-    )
-    st.caption(
-        "Evidence confidence describes historical coverage, not prediction "
-        "certainty."
-    )
-
-
-filtered = filter_rankings(
-    rankings,
-    selected_positions,
-    selected_teams,
-    selected_tiers,
-    selected_confidence,
-    player_search,
 )
 
-rankings_tab, lineup_tab, compare_tab, method_tab = st.tabs(
-    ["Weekly rankings", "My lineup", "Compare players", "Methodology"]
-)
-
-with rankings_tab:
+with projections_tab:
     st.subheader("Highest projected players")
-    if filtered.empty:
-        st.info("No players match the selected filters.")
+    filter_column, count_column = st.columns(2)
+    with filter_column:
+        selected_position = st.selectbox(
+            "Position", ["All", "QB", "RB", "WR", "TE"]
+        )
+    with count_column:
+        player_limit = st.selectbox(
+            "Players to show", [10, 25, 50], index=1
+        )
+    leaders = top_projections(rankings, selected_position, player_limit)
+    if leaders.empty:
+        st.info("No players are available for this position.")
     else:
-        chart_rows = filtered.head(20).copy()
-        chart_rows["player"] = (
-            chart_rows["player_display_name"]
-            + " ("
-            + chart_rows["position"]
-            + ")"
-        )
-        st.bar_chart(
-            chart_rows.set_index("player")[
-                "display_projected_fantasy_points_ppr"
-            ],
-            horizontal=True,
-            x_label="Projected full-PPR points",
-            y_label="Player",
-        )
-        st.dataframe(
-            filtered[
-                [
-                    "player_display_name",
-                    "position",
-                    "team",
-                    "opponent",
-                    "display_projected_fantasy_points_ppr",
-                    "position_rank",
-                    "overall_flex_rank",
-                    "projected_lineup_slot",
-                    "lineup_tier",
-                    "evidence_confidence",
-                    "risk_flags",
-                ]
-            ],
-            hide_index=True,
-            width="stretch",
-            column_config={
-                "player_display_name": "Player",
-                "position": "POS",
-                "team": "Team",
-                "opponent": "Opponent",
-                "display_projected_fantasy_points_ppr": st.column_config.NumberColumn(
-                    "Projected PPR", format="%.2f"
-                ),
-                "position_rank": st.column_config.NumberColumn(
-                    "Position rank", format="%d"
-                ),
-                "overall_flex_rank": st.column_config.NumberColumn(
-                    "FLEX rank", format="%d"
-                ),
-            },
-        )
-        st.download_button(
-            "Download filtered rankings",
-            data=filtered.drop(columns="player_label").to_csv(index=False),
-            file_name=(
-                f"fantasy_rankings_{int(metadata['season'])}_"
-                f"week_{int(metadata['week']):02d}.csv"
-            ),
-            mime="text/csv",
-        )
+        projection_table(leaders)
 
 with lineup_tab:
-    st.subheader("Choose your roster")
-    st.write(
-        "Select your players. The advisor fills 1 QB, 2 RB, 2 WR, 1 TE, "
-        "and 1 FLEX using the displayed projections."
-    )
+    st.subheader("My lineup")
+    st.caption("Choose your roster to see the highest projected legal lineup.")
     player_map = selectable_players(rankings)
     selected_labels = st.multiselect(
         "Roster players",
         list(player_map),
-        placeholder="Search and select players",
+        placeholder="Search and select your players",
     )
     if not selected_labels:
-        st.info("Select roster players to generate a lineup.")
+        st.info("Select your roster players to build a lineup.")
     else:
         lineup, gaps = optimize_lineup(
             rankings, [player_map[label] for label in selected_labels]
@@ -246,36 +171,26 @@ with lineup_tab:
                 [
                     "recommended_slot",
                     "lineup_status",
-                    "player_display_name",
-                    "position",
-                    "team",
-                    "opponent",
-                    "display_projected_fantasy_points_ppr",
-                    "evidence_confidence",
-                    "risk_flags",
+                    *PLAYER_COLUMNS,
                 ]
             ],
             hide_index=True,
             width="stretch",
             column_config={
-                "recommended_slot": "Recommended slot",
+                "recommended_slot": "Slot",
                 "lineup_status": "Decision",
-                "player_display_name": "Player",
-                "display_projected_fantasy_points_ppr": st.column_config.NumberColumn(
-                    "Projected PPR", format="%.2f"
-                ),
+                **PLAYER_COLUMN_CONFIG,
             },
         )
 
 with compare_tab:
-    st.subheader("Compare up to four players")
+    st.subheader("Compare players")
     comparison_map = selectable_players(rankings)
-    default_comparisons = list(comparison_map)[:2]
     comparison_labels = st.multiselect(
         "Players to compare",
         list(comparison_map),
-        default=default_comparisons,
         max_selections=4,
+        placeholder="Select up to four players",
     )
     comparison = comparison_frame(
         rankings,
@@ -284,43 +199,68 @@ with compare_tab:
     if comparison.empty:
         st.info("Select at least one player to compare.")
     else:
-        st.bar_chart(
-            comparison.set_index("player_display_name")[
-                "display_projected_fantasy_points_ppr"
-            ],
-            x_label="Player",
-            y_label="Projected full-PPR points",
+        projection_table(comparison)
+
+with games_tab:
+    st.subheader(f"All games — Week {week}")
+    games = current_games(rankings)
+    st.dataframe(
+        games,
+        hide_index=True,
+        width="stretch",
+        column_config={"game_date": "Date", "matchup": "Matchup"},
+    )
+
+with previous_tab:
+    st.subheader("Previous weeks")
+    st.caption("Actual full-PPR points from completed games.")
+    if completed_results.empty:
+        st.info("Completed-week results will appear after games are played.")
+    else:
+        prior_seasons = sorted(
+            completed_results["season"].astype(int).unique(), reverse=True
+        )
+        previous_filter_columns = st.columns(3)
+        with previous_filter_columns[0]:
+            prior_season = st.selectbox("Season", prior_seasons)
+        available_weeks = sorted(
+            completed_results.loc[
+                completed_results["season"].eq(prior_season), "week"
+            ]
+            .astype(int)
+            .unique(),
+            reverse=True,
+        )
+        with previous_filter_columns[1]:
+            prior_week = st.selectbox("Week", available_weeks)
+        with previous_filter_columns[2]:
+            prior_position = st.selectbox(
+                "Position",
+                ["All", "QB", "RB", "WR", "TE"],
+                key="previous_position",
+            )
+        previous = filter_completed_results(
+            completed_results, prior_season, prior_week, prior_position
         )
         st.dataframe(
-            comparison,
+            previous[
+                [
+                    "player_display_name",
+                    "position",
+                    "team",
+                    "opponent",
+                    "fantasy_points_ppr",
+                ]
+            ],
             hide_index=True,
             width="stretch",
             column_config={
                 "player_display_name": "Player",
-                "display_projected_fantasy_points_ppr": st.column_config.NumberColumn(
-                    "Projected PPR", format="%.2f"
+                "position": "POS",
+                "team": "Team",
+                "opponent": "Opponent",
+                "fantasy_points_ppr": st.column_config.NumberColumn(
+                    "Actual PPR", format="%.2f"
                 ),
             },
         )
-
-with method_tab:
-    st.subheader("How to use these projections")
-    st.markdown(
-        """
-        - Projections estimate full-PPR points conditional on a player appearing.
-        - Position rank compares role-eligible players at the same position.
-        - Overall FLEX rank compares role-eligible RB, WR, and TE players.
-        - Recommendations support lineup decisions; they are not guarantees.
-        - Verify injuries, inactive lists, weather, and late role changes before kickoff.
-        """
-    )
-    st.json(
-        {
-            "model_bundle": metadata.get("model_bundle_version"),
-            "ranking_version": metadata.get("ranking_version"),
-            "ranking_run_utc": metadata.get("ranking_run_timestamp_utc"),
-            "published_utc": metadata.get("published_at_utc"),
-            "status": metadata.get("publication_status"),
-        },
-        expanded=False,
-    )
