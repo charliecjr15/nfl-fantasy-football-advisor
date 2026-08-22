@@ -11,9 +11,10 @@ Work in progress. The Version 1 historical data pipeline, MySQL staging layer,
 clean analytical tables, leakage-safe feature engineering, model-data export,
 baseline evaluation, validation-only model selection, one-time final test
 evaluation, reproducible evaluated model bundle, and target-free historical
-inference smoke test are complete. The next phase is building a leakage-safe
-future-week feature-preparation workflow, then using its projections in the
-fantasy-football decision workflow.
+inference smoke test are complete. A leakage-safe future-week feature builder is
+implemented and documented, but its historical parity replay has not yet been
+executed as a controlled run. The next phase is committing that protocol, then
+running the replay before preparing live inputs.
 
 The Version 1 model dataset contains 45,693 player-week observations, 116
 columns, and a strict 102-feature predictor allowlist. Its schema, chronological
@@ -59,6 +60,13 @@ documented in [the inference guide](docs/model_inference.md). The historical
 smoke test reproduced all 6,037 frozen 2025 projections with zero prediction or
 source-model mismatches and a maximum absolute difference of `7.11e-15`. It did
 not load the target, fit models, reselect models, or recalculate test metrics.
+
+The future-week feature builder reads only strictly earlier-week rows from the
+validated player and opponent history tables, combines them with target-week
+candidate and schedule context, and emits the exact frozen target-free feature
+contract. Its timing rules, replay controls, live candidate policy, and current
+limitations are documented in
+[the future-feature preparation guide](docs/future_feature_preparation.md).
 
 ## Decisions supported
 
@@ -164,7 +172,7 @@ and never fits or reselects a model.
 
 ## Project structure
 
-- `config/`: League, extraction, modeling, bundle, and inference settings
+- `config/`: League, extraction, modeling, bundle, inference, and future-feature settings
 - `data/raw/`: Original downloaded source data
 - `data/cache/`: Local nflreadpy download cache
 - `data/processed/`: Cleaned and feature-ready data

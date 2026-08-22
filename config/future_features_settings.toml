@@ -1,0 +1,67 @@
+[future_features]
+name = "NFL Full-PPR Future-Week Feature Preparation"
+version = "v1_prior_game_future"
+model_feature_version = "v1_prior_game"
+confirmation_token = "BUILD_V1_FUTURE_FEATURES"
+history_cutoff_rule = "strict_prior_week"
+allow_same_week_history = false
+load_target_week_outcome = false
+require_clean_worktree = true
+fail_if_output_exists = true
+supported_positions = ["QB", "RB", "WR", "TE"]
+candidate_roster_statuses = ["ACT"]
+require_depth_chart_match = true
+source_timezone = "UTC"
+
+[lineage]
+feature_pipeline_commit = "75db96b"
+model_settings_sha256 = "67cda074536f1c047b752567eb62e7332a6c240b7ee5785dc6c6f7a3479bf623"
+feature_sql_sha256 = "b684da06d5e1df447e5e585efd5b552fdfd1c4ea75f4a60f29709b3e844d48b6"
+replay_reference_sha256 = "6733ff26d86b8966d0c3aa76c592c2f41b35e555433c99738ccb4c01b42f3fe3"
+
+[inputs]
+model_settings_path = "config/model_settings.toml"
+feature_sql_path = "sql/06_create_model_features.sql"
+replay_reference_path = "data/processed/modeling/model_player_weeks.parquet"
+player_history_table = "player_game_history"
+opponent_history_table = "opponent_position_week_history"
+
+[quality]
+expected_predictor_features = 102
+required_metadata_columns = [
+    "season",
+    "week",
+    "game_id",
+    "game_date",
+    "player_id",
+    "player_display_name",
+    "position",
+    "team",
+    "opponent",
+]
+key_columns = ["season", "week", "player_id"]
+numeric_comparison_tolerance = 0.0000000001
+require_zero_duplicate_keys = true
+require_zero_unavailable_keys = true
+require_finite_nonmissing_values = true
+minimum_player_history_rows = 1
+minimum_opponent_history_rows = 1
+
+[replay]
+season = 2025
+week = 18
+expected_rows = 350
+features_path = "data/processed/future_features/2025_week_18_replay_features.parquet"
+sample_path = "data/sample/future_features_2025_week_18_replay_sample.csv"
+sample_rows = 350
+verification_path = "results/tables/future_features_2025_week_18_replay_verification.csv"
+run_manifest_path = "results/tables/future_features_2025_week_18_replay_manifest.csv"
+
+[live]
+season = 2026
+week = 1
+features_path_template = "data/processed/future_features/{season}_week_{week:02d}_features.parquet"
+sample_path_template = "data/sample/future_features_{season}_week_{week:02d}_sample.csv"
+sample_rows = 500
+run_manifest_path_template = "results/tables/future_features_{season}_week_{week:02d}_manifest.csv"
+snapshot_directory_template = "data/processed/future_features/snapshots/{season}_week_{week:02d}"
