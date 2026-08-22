@@ -63,4 +63,3 @@ require_zero_unavailable_keys = true
 require_all_depth_matches = true
 expected_team_count = 32
 expected_game_count = 16
-
