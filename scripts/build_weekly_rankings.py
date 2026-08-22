@@ -60,6 +60,13 @@ def parse_arguments() -> argparse.Namespace:
         required=True,
         help="Required confirmation token from the configuration.",
     )
+    parser.add_argument(
+        "--orchestrated-revision",
+        help=(
+            "Git revision verified by run_weekly_pipeline.py before any "
+            "weekly outputs were created. Manual runs should omit this."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -113,17 +120,64 @@ def run_git_command(*arguments: str) -> str:
     return completed.stdout.strip()
 
 
-def require_clean_worktree(configuration: dict[str, Any]) -> str:
+def validate_orchestrated_changes() -> None:
+    """Allow only generated weekly evidence after the clean start gate."""
+
+    commands = [
+        ("diff", "--name-only"),
+        ("diff", "--cached", "--name-only"),
+        ("ls-files", "--others", "--exclude-standard"),
+    ]
+    changed = {
+        path.replace("\\", "/")
+        for command in commands
+        for path in run_git_command(*command).splitlines()
+        if path.strip()
+    }
+    allowed_prefixes = (
+        "data/sample/future_features_",
+        "results/public/",
+        "results/reports/weekly_rankings_",
+        "results/tables/future_features_",
+        "results/tables/history_refresh_",
+        "results/tables/inference_",
+        "results/tables/weekly_rankings_",
+    )
+    unexpected = sorted(
+        path for path in changed if not path.startswith(allowed_prefixes)
+    )
+    if unexpected:
+        raise ValueError(
+            "The orchestrated worktree contains non-output changes: "
+            + ", ".join(unexpected)
+        )
+
+
+def require_clean_worktree(
+    configuration: dict[str, Any],
+    orchestrated_revision: str | None = None,
+) -> str:
     """Require a committed protocol before creating evidence."""
 
-    if configuration["rankings"]["require_clean_worktree"]:
+    current_commit = run_git_command("rev-parse", "HEAD")
+    if orchestrated_revision is not None:
+        expected_commit = run_git_command(
+            "rev-parse", str(orchestrated_revision)
+        )
+        if current_commit != expected_commit:
+            raise ValueError(
+                "The orchestrated revision no longer matches HEAD."
+            )
+        validate_orchestrated_changes()
+        print(f"orchestrated_revision={expected_commit}")
+    elif configuration["rankings"]["require_clean_worktree"]:
         status = run_git_command("status", "--porcelain")
         if status:
             raise ValueError(
                 "The worktree must be clean before ranking evidence is "
                 "created. Commit the protocol or remove unrelated changes."
             )
-    return run_git_command("rev-parse", "HEAD")
+    return current_commit
 
 
 def unavailable_rows(
@@ -292,6 +346,41 @@ def validate_frame_keys(
         raise ValueError(f"{label} has {unavailable} unavailable key rows.")
     if duplicates:
         raise ValueError(f"{label} has {duplicates} duplicate key rows.")
+
+
+def validate_schedule_coverage(
+    rankings: pd.DataFrame,
+    feature_manifest: dict[str, str],
+    configuration: dict[str, Any],
+) -> tuple[int, int]:
+    """Reconcile ranking coverage to schedule-derived feature evidence."""
+
+    source_summary = json.loads(feature_manifest["source_summary"])
+    expected_team_count = int(source_summary["candidate_teams"])
+    expected_game_count = int(source_summary["candidate_games"])
+    actual_team_count = int(rankings["team"].nunique())
+    actual_game_count = int(rankings["game_id"].nunique())
+    if expected_team_count > int(
+        configuration["quality"]["maximum_team_count"]
+    ):
+        raise ValueError("Feature evidence exceeds the NFL team maximum.")
+    if expected_game_count > int(
+        configuration["quality"]["maximum_game_count"]
+    ):
+        raise ValueError("Feature evidence exceeds the weekly game maximum.")
+    if expected_team_count != 2 * expected_game_count:
+        raise ValueError("Feature evidence has inconsistent team/game coverage.")
+    if actual_team_count != expected_team_count:
+        raise ValueError(
+            "Ranking team coverage differs from feature evidence: "
+            f"expected {expected_team_count}, observed {actual_team_count}."
+        )
+    if actual_game_count != expected_game_count:
+        raise ValueError(
+            "Ranking game coverage differs from feature evidence: "
+            f"expected {expected_game_count}, observed {actual_game_count}."
+        )
+    return actual_team_count, actual_game_count
 
 
 def load_projection_context(
@@ -1329,7 +1418,9 @@ def main() -> None:
     league_settings = load_toml(
         resolve_project_path(configuration["inputs"]["league_settings_path"])
     )
-    ranking_commit = require_clean_worktree(configuration)
+    ranking_commit = require_clean_worktree(
+        configuration, arguments.orchestrated_revision
+    )
     paths = build_run_paths(configuration, arguments.season, arguments.week)
     ensure_outputs_available(
         paths,
@@ -1371,14 +1462,7 @@ def main() -> None:
         inference_manifest,
     )
 
-    if rankings["team"].nunique() != configuration["quality"][
-        "expected_team_count"
-    ]:
-        raise ValueError("Ranking candidates do not cover all 32 teams.")
-    if rankings["game_id"].nunique() != configuration["quality"][
-        "expected_game_count"
-    ]:
-        raise ValueError("Ranking candidates do not cover all 16 games.")
+    validate_schedule_coverage(rankings, feature_manifest, configuration)
     validate_frame_keys(
         rankings,
         ["season", "week", "game_id", "player_id"],

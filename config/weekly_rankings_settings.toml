@@ -61,5 +61,5 @@ source_model_column = "projection_source_model"
 require_zero_duplicate_keys = true
 require_zero_unavailable_keys = true
 require_all_depth_matches = true
-expected_team_count = 32
-expected_game_count = 16
+maximum_team_count = 32
+maximum_game_count = 16

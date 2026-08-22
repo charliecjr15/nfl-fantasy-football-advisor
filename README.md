@@ -15,9 +15,12 @@ inference smoke test are complete. A leakage-safe future-week feature builder is
 implemented, documented, and validated by a controlled historical parity
 replay. The first live 2026 Week 1 target-free feature snapshot is also complete
 and validated. The frozen Version 1 bundle has scored that snapshot, producing
-the first live 2026 Week 1 projections. The next phase is converting the raw
-model output into a decision-focused fantasy workflow; that phase is now under
-way with the first protected position and FLEX ranking snapshot.
+the first live 2026 Week 1 projections. A protected position and FLEX ranking
+workflow, portable weekly history refresh, one-command scoring orchestrator,
+publication gate, Streamlit application, and scheduled GitHub Actions workflow
+are now implemented. The remaining external launch steps are publishing the
+repository and model release, configuring repository variables, and deploying
+`app.py` through Streamlit Community Cloud.
 
 The Version 1 model dataset contains 45,693 player-week observations, 116
 columns, and a strict 102-feature predictor allowlist. Its schema, chronological
@@ -95,6 +98,27 @@ availability caveats. The 808-row output contains 283 role-eligible players and
 exactly 84 provisional lineup slots: 12 QB, 24 RB, 24 WR, 12 TE, and 12 FLEX.
 Current 2026 injury context remains unavailable, so these are not final start/sit
 calls. See [the weekly-ranking guide](docs/weekly_rankings.md).
+
+The public application reads only the last manifest-validated snapshot. It
+provides interactive rankings, a manual-roster lineup optimizer, player
+comparison, filtered CSV downloads, freshness metadata, and visible risk
+caveats. The portable history path reproduced the complete 2025 Week 18 frozen
+feature replay with zero text or numeric mismatches at the `1e-10` acceptance
+tolerance. See [weekly app operations](docs/weekly_operations.md) for local use,
+weekly scoring, model-release packaging, GitHub automation, and deployment.
+
+## Run the application
+
+From PowerShell in the repository root:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+python -m pip install --requirement requirements.txt
+python scripts\publish_latest.py --season 2026 --week 1
+python -m streamlit run app.py
+```
+
+Open the local URL printed by Streamlit, normally `http://localhost:8501`.
 
 ## Decisions supported
 
@@ -195,6 +219,8 @@ and never fits or reselects a model.
 - scikit-learn
 - Matplotlib and Seaborn
 - pytest
+- Streamlit
+- GitHub Actions
 - Git and GitHub
 - joblib
 
@@ -209,8 +235,9 @@ and never fits or reselects a model.
 - `models/`: Local trained model artifacts
 - `notebooks/`: Reproducible exploration and model experiments
 - `results/tables/`: Validated analytical outputs
+- `results/public/`: Last validated snapshot served by the application
 - `results/figures/`: Decision-relevant charts
-- `scripts/`: Extraction, validation, modeling, and export scripts
+- `scripts/`: Extraction, validation, modeling, weekly automation, and export scripts
 - `sql/`: MySQL schema, transformations, audits, and analysis
 - `tests/`: Automated calculation and data-quality tests
 
@@ -218,10 +245,12 @@ and never fits or reselects a model.
 
 From PowerShell in the repository root:
 
+```powershell
 py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 Copy-Item .env.example .env
+```
 
 Open .env and replace the placeholder MySQL credentials with local values. Never commit the real .env file.
 

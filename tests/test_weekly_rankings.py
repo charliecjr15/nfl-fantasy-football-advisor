@@ -11,7 +11,11 @@ import pandas as pd
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
-from build_weekly_rankings import assign_confidence, assign_rankings  # noqa: E402
+from build_weekly_rankings import (  # noqa: E402
+    assign_confidence,
+    assign_rankings,
+    validate_schedule_coverage,
+)
 
 
 def configuration() -> dict:
@@ -27,6 +31,8 @@ def configuration() -> dict:
         "quality": {
             "supported_positions": ["QB", "RB", "WR", "TE"],
             "prediction_column": "projected_fantasy_points_ppr",
+            "maximum_team_count": 32,
+            "maximum_game_count": 16,
         },
         "role_eligibility": {"QB": 1, "RB": 3, "WR": 3, "TE": 2},
         "confidence": {
@@ -37,6 +43,25 @@ def configuration() -> dict:
             "require_previous_snap_record_for_high": True,
         },
     }
+
+
+def test_bye_week_coverage_uses_feature_evidence() -> None:
+    rows = []
+    for game_number in range(14):
+        for side in ["A", "B"]:
+            rows.append(
+                {
+                    "game_id": f"game-{game_number}",
+                    "team": f"{side}{game_number:02d}",
+                }
+            )
+    rankings = pd.DataFrame(rows)
+    feature_manifest = {
+        "source_summary": '{"candidate_teams": 28, "candidate_games": 14}'
+    }
+    assert validate_schedule_coverage(
+        rankings, feature_manifest, configuration()
+    ) == (28, 14)
 
 
 def league_settings() -> dict:

@@ -201,7 +201,33 @@ def parse_arguments() -> argparse.Namespace:
         required=True,
         help="Required confirmation token from the configuration.",
     )
-    return parser.parse_args()
+    parser.add_argument(
+        "--orchestrated-revision",
+        help=(
+            "Git revision verified by run_weekly_pipeline.py before any "
+            "weekly outputs were created. Manual runs should omit this."
+        ),
+    )
+    parser.add_argument(
+        "--player-history",
+        help=(
+            "Optional portable player-history Parquet file. Must be used "
+            "with --opponent-history; otherwise MySQL remains the source."
+        ),
+    )
+    parser.add_argument(
+        "--opponent-history",
+        help=(
+            "Optional portable opponent-history Parquet file. Must be used "
+            "with --player-history; otherwise MySQL remains the source."
+        ),
+    )
+    arguments = parser.parse_args()
+    if bool(arguments.player_history) != bool(arguments.opponent_history):
+        parser.error(
+            "--player-history and --opponent-history must be supplied together."
+        )
+    return arguments
 
 
 def load_toml(path: Path) -> dict[str, Any]:
@@ -311,10 +337,57 @@ def run_git(arguments: list[str]) -> str:
     return result.stdout.strip()
 
 
-def validate_git_state(configuration: dict[str, Any]) -> str:
+def validate_orchestrated_changes() -> None:
+    """Allow only generated weekly evidence after the clean start gate."""
+
+    commands = [
+        ["diff", "--name-only"],
+        ["diff", "--cached", "--name-only"],
+        ["ls-files", "--others", "--exclude-standard"],
+    ]
+    changed = {
+        path.replace("\\", "/")
+        for command in commands
+        for path in run_git(command).splitlines()
+        if path.strip()
+    }
+    allowed_prefixes = (
+        "data/sample/future_features_",
+        "results/public/",
+        "results/reports/weekly_rankings_",
+        "results/tables/future_features_",
+        "results/tables/history_refresh_",
+        "results/tables/inference_",
+        "results/tables/weekly_rankings_",
+    )
+    unexpected = sorted(
+        path for path in changed if not path.startswith(allowed_prefixes)
+    )
+    if unexpected:
+        raise RuntimeError(
+            "The orchestrated worktree contains non-output changes: "
+            + ", ".join(unexpected)
+        )
+
+
+def validate_git_state(
+    configuration: dict[str, Any],
+    orchestrated_revision: str | None = None,
+) -> str:
     """Require a committed protocol and a clean worktree."""
 
-    if configuration["future_features"]["require_clean_worktree"]:
+    current_commit = run_git(["rev-parse", "HEAD"])
+    if orchestrated_revision is not None:
+        expected_commit = run_git(
+            ["rev-parse", str(orchestrated_revision)]
+        )
+        if current_commit != expected_commit:
+            raise RuntimeError(
+                "The orchestrated revision no longer matches HEAD."
+            )
+        validate_orchestrated_changes()
+        print(f"orchestrated_revision={expected_commit}")
+    elif configuration["future_features"]["require_clean_worktree"]:
         status = run_git(["status", "--porcelain"])
         if status:
             raise RuntimeError(
@@ -322,7 +395,6 @@ def validate_git_state(configuration: dict[str, Any]) -> str:
                 "protocol before executing a controlled run."
             )
 
-    current_commit = run_git(["rev-parse", "HEAD"])
     lineage_commit = configuration["lineage"][
         "feature_pipeline_commit"
     ]
@@ -569,6 +641,40 @@ def load_prior_history(
             opponent_query, connection, params=params
         )
 
+    return validate_prior_history_frames(
+        player_history,
+        opponent_history,
+        configuration,
+        season,
+        week,
+        str(database_name),
+    )
+
+
+def validate_prior_history_frames(
+    player_history: pd.DataFrame,
+    opponent_history: pd.DataFrame,
+    configuration: dict[str, Any],
+    season: int,
+    week: int,
+    source_name: str,
+) -> tuple[pd.DataFrame, pd.DataFrame, dict[str, Any]]:
+    """Validate portable or database history at the required grains."""
+
+    missing_player = sorted(
+        set(PLAYER_HISTORY_COLUMNS) - set(player_history.columns)
+    )
+    missing_opponent = sorted(
+        set(OPPONENT_HISTORY_COLUMNS) - set(opponent_history.columns)
+    )
+    if missing_player or missing_opponent:
+        raise ValueError(
+            "History contract columns are missing: "
+            f"player={missing_player}, opponent={missing_opponent}"
+        )
+
+    player_history = player_history.loc[:, PLAYER_HISTORY_COLUMNS].copy()
+    opponent_history = opponent_history.loc[:, OPPONENT_HISTORY_COLUMNS].copy()
     for dataframe in (player_history, opponent_history):
         dataframe["game_date"] = pd.to_datetime(
             dataframe["game_date"]
@@ -615,7 +721,7 @@ def load_prior_history(
         raise ValueError("Same-week or future history rows were loaded.")
 
     history_summary = {
-        "database_name": str(database_name),
+        "database_name": source_name,
         "player_history_rows": len(player_history),
         "opponent_history_rows": len(opponent_history),
         "maximum_player_history_date": player_history[
@@ -630,12 +736,75 @@ def load_prior_history(
             invalid_player_cutoff + invalid_opponent_cutoff
         ),
     }
-    print(f"database_name={database_name}")
+    print(f"database_name={source_name}")
     print(f"player_history_rows={len(player_history):,}")
     print(f"opponent_history_rows={len(opponent_history):,}")
     print("same_week_history_rows_loaded=0")
     print("history_grain_validation=PASS")
     return player_history, opponent_history, history_summary
+
+
+def load_prior_history_files(
+    player_path: Path,
+    opponent_path: Path,
+    configuration: dict[str, Any],
+    season: int,
+    week: int,
+) -> tuple[pd.DataFrame, pd.DataFrame, dict[str, Any]]:
+    """Load strict-prior-week history from portable Parquet files."""
+
+    for label, path in {
+        "player history": player_path,
+        "opponent history": opponent_path,
+    }.items():
+        if not path.exists():
+            raise FileNotFoundError(f"Portable {label} not found: {path}")
+        if path.suffix.lower() != ".parquet":
+            raise ValueError(f"Portable {label} must be Parquet: {path}")
+
+    player_history = pd.read_parquet(
+        player_path, columns=PLAYER_HISTORY_COLUMNS
+    )
+    opponent_history = pd.read_parquet(
+        opponent_path, columns=OPPONENT_HISTORY_COLUMNS
+    )
+    player_history = player_history.loc[
+        (player_history["season"] < season)
+        | (
+            player_history["season"].eq(season)
+            & player_history["week"].lt(week)
+        )
+    ]
+    opponent_history = opponent_history.loc[
+        (opponent_history["season"] < season)
+        | (
+            opponent_history["season"].eq(season)
+            & opponent_history["week"].lt(week)
+        )
+    ]
+    player_history = player_history.sort_values(
+        ["player_id", "season", "week", "game_date", "game_id"],
+        kind="stable",
+    ).reset_index(drop=True)
+    opponent_history = opponent_history.sort_values(
+        [
+            "defensive_team",
+            "position",
+            "season",
+            "week",
+            "game_date",
+            "game_id",
+        ],
+        kind="stable",
+    ).reset_index(drop=True)
+    return validate_prior_history_frames(
+        player_history,
+        opponent_history,
+        configuration,
+        season,
+        week,
+        "PORTABLE_PARQUET",
+    )
 
 
 def atomic_write_parquet(dataframe: pd.DataFrame, path: Path) -> None:
@@ -821,13 +990,19 @@ def load_live_candidates(
         & (pl.col("game_type") == "REG")
         & (pl.col("week") == week)
     )
-    if schedule_week.height != 16:
+    if schedule_week.is_empty() or schedule_week.height > 16:
         raise ValueError(
-            f"Expected 16 regular-season games but found "
+            "The target regular-season schedule has an invalid game count: "
             f"{schedule_week.height}."
         )
     if schedule_week["game_id"].n_unique() != schedule_week.height:
         raise ValueError("The target schedule contains duplicate games.")
+    scheduled_teams = sorted(
+        set(schedule_week["away_team"].to_list())
+        | set(schedule_week["home_team"].to_list())
+    )
+    if len(scheduled_teams) != 2 * schedule_week.height:
+        raise ValueError("A target-week team appears in multiple games.")
 
     game_dates = pd.to_datetime(
         schedule_week["gameday"].to_list(), errors="raise"
@@ -844,7 +1019,8 @@ def load_live_candidates(
         configuration["future_features"]["candidate_roster_statuses"]
     )
     roster_candidates = normalized_rosters.filter(
-        pl.col("position").is_in(supported_positions)
+        pl.col("team").is_in(scheduled_teams)
+        & pl.col("position").is_in(supported_positions)
         & pl.col("status").is_in(statuses)
         & pl.col("gsis_id").is_not_null()
         & (pl.col("gsis_id").str.strip_chars() != "")
@@ -858,12 +1034,15 @@ def load_live_candidates(
     if depth_with_time.is_empty():
         raise ValueError("No depth-chart snapshot exists at the cutoff.")
 
-    latest_by_team = depth_with_time.group_by("team").agg(
-        pl.col("depth_timestamp").max().alias("latest_timestamp")
+    latest_by_team = (
+        depth_with_time.filter(pl.col("team").is_in(scheduled_teams))
+        .group_by("team")
+        .agg(pl.col("depth_timestamp").max().alias("latest_timestamp"))
     )
-    if latest_by_team.height != 32:
+    if latest_by_team.height != len(scheduled_teams):
         raise ValueError(
-            "A latest depth-chart snapshot was not found for all 32 teams."
+            "A latest depth-chart snapshot was not found for every "
+            "target-week team."
         )
 
     latest_depth = (
@@ -919,10 +1098,14 @@ def load_live_candidates(
 
     candidate_teams = candidates["team"].nunique()
     candidate_games = candidates["game_id"].nunique()
-    if candidate_teams != 32 or candidate_games != 16:
+    if (
+        candidate_teams != len(scheduled_teams)
+        or candidate_games != schedule_week.height
+    ):
         raise ValueError(
-            "Live candidates do not cover all 32 teams and 16 games: "
-            f"teams={candidate_teams}, games={candidate_games}."
+            "Live candidate coverage differs from the target schedule: "
+            f"teams={candidate_teams}/{len(scheduled_teams)}, "
+            f"games={candidate_games}/{schedule_week.height}."
         )
 
     candidates = candidates.rename(
@@ -1966,7 +2149,9 @@ def main() -> None:
 
     print_section("EXECUTION AND LINEAGE GUARDS")
     validate_output_paths(run_specification)
-    current_commit = validate_git_state(configuration)
+    current_commit = validate_git_state(
+        configuration, arguments.orchestrated_revision
+    )
     lineage_hashes = validate_lineage_hashes(
         configuration, run_specification["mode"]
     )
@@ -1985,18 +2170,39 @@ def main() -> None:
         }
 
     print_section("STRICT PRIOR-WEEK HISTORY LOAD")
-    engine = build_database_engine()
-    try:
+    if arguments.player_history:
+        player_history_path = resolve_project_path(arguments.player_history)
+        opponent_history_path = resolve_project_path(
+            arguments.opponent_history
+        )
         player_history, opponent_history, history_summary = (
-            load_prior_history(
-                engine,
+            load_prior_history_files(
+                player_history_path,
+                opponent_history_path,
                 configuration,
                 run_specification["season"],
                 run_specification["week"],
             )
         )
-    finally:
-        engine.dispose()
+        source_hashes["player_history"] = sha256_file(
+            player_history_path
+        )
+        source_hashes["opponent_history"] = sha256_file(
+            opponent_history_path
+        )
+    else:
+        engine = build_database_engine()
+        try:
+            player_history, opponent_history, history_summary = (
+                load_prior_history(
+                    engine,
+                    configuration,
+                    run_specification["season"],
+                    run_specification["week"],
+                )
+            )
+        finally:
+            engine.dispose()
 
     earliest_target_date = pd.to_datetime(candidates["game_date"]).min()
     if history_summary["maximum_player_history_date"] >= earliest_target_date:

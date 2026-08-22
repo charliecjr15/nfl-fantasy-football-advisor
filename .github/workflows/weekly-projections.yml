@@ -1,0 +1,96 @@
+name: Weekly fantasy projections
+
+on:
+  schedule:
+    - cron: "17 10 * * 3"
+  workflow_dispatch:
+    inputs:
+      season:
+        description: "NFL season"
+        required: true
+        default: "2026"
+      week:
+        description: "Week 1-18; leave blank to resolve from the schedule"
+        required: false
+        default: ""
+      publish_existing:
+        description: "Publish an existing validated snapshot only"
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-fantasy-projections
+  cancel-in-progress: false
+
+jobs:
+  project-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      NFL_SEASON: ${{ inputs.season || vars.NFL_SEASON || '2026' }}
+      NFL_WEEK: ${{ inputs.week || '' }}
+      PUBLISH_EXISTING: ${{ inputs.publish_existing || 'false' }}
+
+    steps:
+      - name: Check out the committed pipeline
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install pinned dependencies
+        run: python -m pip install --requirement requirements.txt
+
+      - name: Run application and pipeline tests
+        run: python -m pytest -q
+
+      - name: Download and verify the frozen model bundle
+        if: env.PUBLISH_EXISTING != 'true'
+        env:
+          MODEL_BUNDLE_URL: ${{ vars.MODEL_BUNDLE_URL }}
+          MODEL_BUNDLE_ARCHIVE_SHA256: ${{ vars.MODEL_BUNDLE_ARCHIVE_SHA256 }}
+        run: |
+          test -n "$MODEL_BUNDLE_URL" || (echo "MODEL_BUNDLE_URL is not configured" && exit 1)
+          test -n "$MODEL_BUNDLE_ARCHIVE_SHA256" || (echo "MODEL_BUNDLE_ARCHIVE_SHA256 is not configured" && exit 1)
+          curl --fail --location "$MODEL_BUNDLE_URL" --output /tmp/model-bundle.zip
+          echo "$MODEL_BUNDLE_ARCHIVE_SHA256  /tmp/model-bundle.zip" | sha256sum --check --strict
+          mkdir -p models
+          unzip -q /tmp/model-bundle.zip -d models
+
+      - name: Build or publish the target week
+        shell: bash
+        run: |
+          arguments=(--season "$NFL_SEASON")
+          if [ -n "$NFL_WEEK" ]; then
+            arguments+=(--week "$NFL_WEEK")
+          else
+            arguments+=(--auto-week)
+          fi
+          if [ "$PUBLISH_EXISTING" = "true" ]; then
+            arguments+=(--publish-existing)
+          else
+            arguments+=(--history-source-mode download)
+          fi
+          python scripts/run_weekly_pipeline.py "${arguments[@]}"
+
+      - name: Commit validated public evidence
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/public results/tables results/reports data/sample
+          if git diff --cached --quiet; then
+            echo "No validated publication changes were produced."
+            exit 0
+          fi
+          git commit -m "Publish ${NFL_SEASON} weekly fantasy projections"
+          git push

@@ -107,6 +107,13 @@ def parse_arguments() -> argparse.Namespace:
             "configuration."
         ),
     )
+    parser.add_argument(
+        "--orchestrated-revision",
+        help=(
+            "Git revision verified by run_weekly_pipeline.py before any "
+            "weekly outputs were created. Manual runs should omit this."
+        ),
+    )
 
     arguments = parser.parse_args()
 
@@ -458,8 +465,42 @@ def run_git_command(*arguments: str) -> str:
     return completed.stdout.strip()
 
 
+def validate_orchestrated_changes() -> None:
+    """Allow only generated weekly evidence after the clean start gate."""
+
+    commands = [
+        ("diff", "--name-only"),
+        ("diff", "--cached", "--name-only"),
+        ("ls-files", "--others", "--exclude-standard"),
+    ]
+    changed = {
+        path.replace("\\", "/")
+        for command in commands
+        for path in run_git_command(*command).splitlines()
+        if path.strip()
+    }
+    allowed_prefixes = (
+        "data/sample/future_features_",
+        "results/public/",
+        "results/reports/weekly_rankings_",
+        "results/tables/future_features_",
+        "results/tables/history_refresh_",
+        "results/tables/inference_",
+        "results/tables/weekly_rankings_",
+    )
+    unexpected = sorted(
+        path for path in changed if not path.startswith(allowed_prefixes)
+    )
+    if unexpected:
+        raise ValueError(
+            "The orchestrated worktree contains non-output changes: "
+            + ", ".join(unexpected)
+        )
+
+
 def validate_git_state(
     configuration: dict[str, Any],
+    orchestrated_revision: str | None = None,
 ) -> tuple[str, dict[str, str]]:
     """Require a clean repository containing bundle commits."""
 
@@ -506,9 +547,21 @@ def validate_git_state(
         full_commits[commit_key] = full_commit
 
     print(f"current_commit={current_commit}")
-    print(f"worktree_clean={worktree_status == ''}")
+    if orchestrated_revision is not None:
+        expected_commit = run_git_command(
+            "rev-parse", str(orchestrated_revision)
+        )
+        if current_commit != expected_commit:
+            raise ValueError(
+                "The orchestrated revision no longer matches HEAD."
+            )
+        validate_orchestrated_changes()
+        print(f"orchestrated_revision={expected_commit}")
+        print("worktree_clean=ORCHESTRATOR_VERIFIED_AT_START")
+    else:
+        print(f"worktree_clean={worktree_status == ''}")
 
-    if worktree_status:
+    if worktree_status and orchestrated_revision is None:
         raise ValueError(
             "Commit the inference protocol before loading models."
         )
@@ -2388,7 +2441,8 @@ def main() -> None:
         configuration,
     )
     current_commit, full_commits = validate_git_state(
-        configuration
+        configuration,
+        arguments.orchestrated_revision,
     )
 
     print_section("BUNDLE EVIDENCE AND HASH VALIDATION")

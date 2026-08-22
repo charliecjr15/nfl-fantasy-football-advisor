@@ -1,0 +1,20 @@
+manifest_key,manifest_value
+run_timestamp_utc,2026-08-22T10:53:26.484791+00:00
+source_mode,download
+nflreadpy_version,0.1.5
+start_season,2018
+target_season,2026
+through_week,0
+player_history_rows,45693
+opponent_history_rows,16994
+current_season_player_rows,0
+maximum_completed_week,0
+maximum_game_date,2026-01-04T00:00:00
+player_history_duplicate_keys,0
+opponent_history_duplicate_keys,0
+source_sha256,"{""schedules_2018"": ""9f9ab787d26879799fd47f6f8376cc0f51b95b4028cb7b65e5be440e98eb5592"", ""schedules_2019"": ""bb635effe0182036ef5f5ff8ad08eee000732345596c09877fdbdbad79a36f19"", ""schedules_2020"": ""fb95687bbd4407a8d8316cfd3ceb35966b0ecc1dcbba3b4d4841307d2d30815a"", ""schedules_2021"": ""b68e17dbb2e567f4bef271ccba0de20e4585a9ee767411993d1a6ba2d6c57f6a"", ""schedules_2022"": ""68d25f8977f03844812338f388ec6f4ba4c8d2a60067e2ebdc02aecc940db1c0"", ""schedules_2023"": ""a20cde42a020234c853363ded6b8bf527130722ac9a424ce45fc53d6ec1c5a18"", ""schedules_2024"": ""54d9e7b3255c8c6a4c03b2fa612af3529d1c43cece8b3a7e9a9f27527af15914"", ""schedules_2025"": ""9bbfd9bec941079d65a60aa3de624a86de83e68ff08a562ea44d3ffc4bc40620"", ""snap_counts_2018"": ""35598e627aa06c81dded71b30dfa716042d1ee57b14c9bd9286cbd0f8b75a9e8"", ""snap_counts_2019"": ""cd0c1cc23668a66d98a1ecc7d03cdee204bcbcf229ddb0bbdf69ebbb9c4c036b"", ""snap_counts_2020"": ""a3df79f4b8ccce0ba3daad751fedabffcb780ab0de537d7ed945685eec0149c1"", ""snap_counts_2021"": ""82fa93667b52d2ae1b750a2465af53c279dc8e19cb9dea16f706c14ac8f629e6"", ""snap_counts_2022"": ""bbd1f6ba491000f790dd33c52b80aac062630969bc16a77e9a3878962d25ae95"", ""snap_counts_2023"": ""7158a87a29295e1dfda1f1b670d78311ce298d6b768d6bda374d82721bfe58d4"", ""snap_counts_2024"": ""2dd2f86f4ac63b93f6b31bf124e3b1f55bff7a49960a1990760d66dab7f7bffc"", ""snap_counts_2025"": ""4855b320ba9b20a345ade2ae5a8ff259eb4fb946c542b70789b60e05479e7f2c"", ""weekly_player_stats_2018"": ""4e0ef48c34324d2a86d35a2f2fda27c55eff9e5820170b045c87317603f1ed74"", ""weekly_player_stats_2019"": ""bf9177cd82bd8699e21e4a457c5a5b3bcdefed93e812ffcf5dbc4ca4532d6996"", ""weekly_player_stats_2020"": ""757266b20ddfaa84afc7ae0bed0c77885f2129153828c8f7996e2752397d210f"", ""weekly_player_stats_2021"": ""1c4d0d48e38952ebabe1fee7bb4941598c61377ed1a656adc9e01f58198688b1"", ""weekly_player_stats_2022"": ""d90159aff6ded68be6a4795e19bb7e379e36e2c50f7b4dafa5a46835481ff940"", ""weekly_player_stats_2023"": ""91021b89c12c57e90912ce50429c12fd5be54b9317337ea382a4caed2ee6b23b"", ""weekly_player_stats_2024"": ""f3ae7de17e7af3c81bc384c691edaf270ab6dc1b3dc96aab63c466251bcc5617"", ""weekly_player_stats_2025"": ""647e9c830db65b0b10f4abf2cd6b2ea72ed9b888f53174d4f201a9bf09d4978f"", ""weekly_rosters_2018"": ""14ea0c136e63a2ec0327bb42cd0859623d2ab038bb5382f02de85aa4a008d00e"", ""weekly_rosters_2019"": ""89cced719c4f1291395c0f465bedb002b0246bc4a7d9a576b09bd6ff56d1890b"", ""weekly_rosters_2020"": ""be5d144fcb7ad9280349a56d8c4705c92260ca7c82e57ae878a4fbf7a556271d"", ""weekly_rosters_2021"": ""f531318cc4ddaea6b7c2ed8d678da2ec37900024bcee114bdb968f6baa891bd6"", ""weekly_rosters_2022"": ""4fb18ef9e36c3ea58fdcc46b14145b8b12798bacad72c28ab7b2617d67819da6"", ""weekly_rosters_2023"": ""e4820c01551f4b241ac20ea13e4ca096bb3ad19ecd09ab67e3d043d6b057673b"", ""weekly_rosters_2024"": ""11aa929a1be46e40a30a3571f54c5057b8d0f83baffd0fe036c22de9bc9005e8"", ""weekly_rosters_2025"": ""490280a50cb752551bd09157f3a704fbacac90578747008128b4c8fc75e2852e""}"
+player_history_path,data/processed/runtime_history/player_game_history.parquet
+player_history_sha256,54ac2a51e795b6024ed0259f91c61f80f3361cd3ffb0c56be725964857164fbb
+opponent_history_path,data/processed/runtime_history/opponent_position_week_history.parquet
+opponent_history_sha256,cd39fda580a7fb2d2de3d27888e9f24ce283eecfee3c8f12fa3489aff569f5c8
+history_refresh_status,PASS
