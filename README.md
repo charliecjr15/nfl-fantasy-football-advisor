@@ -1,5 +1,9 @@
 # NFL Fantasy Football Advisor
 
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://sunday-edge-fantasy-advisor.streamlit.app/)
+
+[Launch the live Sunday Edge Fantasy Advisor](https://sunday-edge-fantasy-advisor.streamlit.app/)
+
 A SQL and Python portfolio project that analyzes NFL player performance and produces transparent, data-supported recommendations for season-long fantasy
 football.
 
@@ -18,9 +22,9 @@ and validated. The frozen Version 1 bundle has scored that snapshot, producing
 the first live 2026 Week 1 projections. A protected position and FLEX ranking
 workflow, portable weekly history refresh, one-command scoring orchestrator,
 publication gate, Streamlit application, and scheduled GitHub Actions workflow
-are now implemented. The remaining external launch steps are publishing the
-repository and model release, configuring repository variables, and deploying
-`app.py` through Streamlit Community Cloud.
+are now implemented. The repository, verified model release, configured weekly
+GitHub Actions workflow, and public Streamlit deployment are live. The first
+cloud workflow completed successfully on August 22, 2026.
 
 The Version 1 model dataset contains 45,693 player-week observations, 116
 columns, and a strict 102-feature predictor allowlist. Its schema, chronological

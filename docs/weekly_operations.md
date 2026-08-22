@@ -122,6 +122,10 @@ Do not enable the schedule until all three repository variables above are set.
 
 ## Streamlit Community Cloud
 
+Live application:
+
+<https://sunday-edge-fantasy-advisor.streamlit.app/>
+
 After the project is pushed to GitHub:
 
 1. Sign in to Streamlit Community Cloud with GitHub.
