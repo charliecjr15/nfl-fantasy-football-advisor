@@ -1,0 +1,38 @@
+manifest_key,manifest_value
+run_timestamp_utc,2026-08-22T07:47:05.999356+00:00
+run_mode,live
+future_feature_commit,d585a92de764f90e3944c796591a52e371995c87
+feature_pipeline_commit,75db96b
+future_feature_configuration_sha256,0e7594d3f57332188439ea542db836c9e6968b960baf7af80fe66915a2d44625
+model_settings_sha256,67cda074536f1c047b752567eb62e7332a6c240b7ee5785dc6c6f7a3479bf623
+feature_sql_sha256,b684da06d5e1df447e5e585efd5b552fdfd1c4ea75f4a60f29709b3e844d48b6
+future_feature_version,v1_prior_game_future
+model_feature_version,v1_prior_game
+target_season,2026
+target_week,1
+as_of_utc,2026-08-22T07:46:47.668866+00:00
+history_cutoff_rule,strict_prior_week
+same_week_history_rows_loaded,0
+target_week_outcome_loaded,false
+prior_completed_outcomes_used_as_history,true
+database_name,nfl_fantasy_advisor
+player_history_rows,45693
+opponent_history_rows,16994
+maximum_player_history_date,2026-01-04T00:00:00
+maximum_opponent_history_date,2026-01-04T00:00:00
+source_sha256,"{""depth_chart"": ""6a5e9f8b9122d769c8d047d1ff4c9ea1ff137916d48b04ed70d2169c835a521a"", ""roster"": ""d3338dd043dbb5c0d204affcfade05d3cb9f18c8a019e6757aa49c26f6a95a9d"", ""schedule"": ""a024e34de22ce5fa567bdacc88e784e4feae36dab103a74c834c983cf090ab33""}"
+source_summary,"{""candidate_games"": 16, ""candidate_rows"": 808, ""candidate_teams"": 32, ""depth_matched_candidate_rows"": 808, ""depth_source_rows"": 459221, ""depth_team_alias_rows"": 0, ""depth_unmatched_candidate_rows"": 87, ""eligible_roster_rows"": 895, ""latest_depth_teams"": 32, ""maximum_selected_depth_timestamp"": ""2026-08-22 07:26:29+00:00"", ""nflreadpy_version"": ""0.1.5"", ""roster_source_rows"": 2930, ""roster_team_alias_rows"": 91, ""schedule_source_rows"": 272, ""schedule_team_alias_rows"": 0, ""target_schedule_games"": 16}"
+output_rows,808
+output_columns,107
+predictor_count,102
+position_counts,"{""QB"": 110, ""RB"": 179, ""TE"": 175, ""WR"": 344}"
+players_without_prior_games,252
+players_without_current_season_history,808
+missing_numeric_values,26535
+duplicate_keys,0
+unavailable_keys,0
+infinite_numeric_values,0
+features_path,data/processed/future_features/2026_week_01_features.parquet
+features_sha256,f88aac8b6e29e445728c5004e8a3263839b0c1443ae8a9d45d15a08e78cfb207
+sample_path,data/sample/future_features_2026_week_01_sample.csv
+sample_sha256,4ba9efc83255f6cadc955305b68582e6e0faf67984cd1b25cd2fe2e25665e824

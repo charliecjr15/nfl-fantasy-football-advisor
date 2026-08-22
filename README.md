@@ -13,8 +13,9 @@ baseline evaluation, validation-only model selection, one-time final test
 evaluation, reproducible evaluated model bundle, and target-free historical
 inference smoke test are complete. A leakage-safe future-week feature builder is
 implemented, documented, and validated by a controlled historical parity
-replay. The next phase is preparing and validating the live 2026 Week 1 feature
-snapshot before generating current projections.
+replay. The first live 2026 Week 1 target-free feature snapshot is also complete
+and validated. The next phase is generating current projections from that frozen
+snapshot, then converting them into a decision-focused fantasy workflow.
 
 The Version 1 model dataset contains 45,693 player-week observations, 116
 columns, and a strict 102-feature predictor allowlist. Its schema, chronological
@@ -70,6 +71,11 @@ limitations are documented in
 The 2025 Week 18 replay rebuilt all 350 rows and reconciled all 107 unique output
 columns with zero mismatched rows and a maximum absolute numeric difference of
 `7.11e-15`.
+
+The live 2026 Week 1 snapshot was frozen at `2026-08-22 07:46:47 UTC`. It
+contains 808 active-roster, depth-matched candidates across all 32 teams and 16
+games. The 107-column target-free frame passed its key, timing, contract,
+missingness, infinity, reopened-output, and hash controls.
 
 ## Decisions supported
 

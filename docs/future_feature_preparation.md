@@ -15,8 +15,23 @@ from weeks strictly earlier than the target. It loaded no target-week outcome,
 produced no duplicate or unavailable key, contained no infinite value, and
 passed its reopened-output and hash controls.
 
-Live 2026 Week 1 feature preparation remains pending until the tracked replay
-evidence is committed with a clean Git worktree.
+Live 2026 Week 1 feature preparation is also complete. The corrected run used
+future-feature commit `d585a92` and a source cutoff of
+`2026-08-22 07:46:47.668866 UTC`.
+
+It produced 808 candidates across all 32 teams and 16 games:
+
+Position  Candidates
+--------  ----------
+QB        110
+RB        179
+WR        344
+TE        175
+
+The live output contains 252 players without prior validated game history. All
+808 rows correctly lack 2026 season-to-date history before Week 1. These values
+remain missing for the frozen model pipelines to impute; they are not treated as
+zero.
 
 ## Purpose
 
@@ -201,12 +216,36 @@ python scripts\build_future_features.py --replay --confirm-build BUILD_V1_FUTURE
 Do not rerun it now that the protected replay outputs exist. Prior evidence must
 not be replaced.
 
-After the replay evidence is committed, live 2026 Week 1 preparation requires
-an explicit UTC-aware cutoff:
+The completed live 2026 Week 1 preparation used an explicit UTC-aware cutoff:
 
 ```powershell
 $asOfUtc = (Get-Date).ToUniversalTime().ToString('o')
 python scripts\build_future_features.py --live --season 2026 --week 1 --as-of $asOfUtc --confirm-build BUILD_V1_FUTURE_FEATURES
+```
+
+Do not rerun the live build now that its protected snapshot and evidence exist.
+Later source updates require a newly versioned snapshot rather than replacement
+of this cutoff.
+
+### Observed live controls
+
+```text
+eligible_active_roster_rows=895
+depth_matched_candidate_rows=808
+depth_unmatched_candidate_rows=87
+live_candidate_rows=808
+candidate_teams=32
+candidate_games=16
+player_history_rows=45,693
+opponent_history_rows=16,994
+same_week_history_rows_loaded=0
+future_feature_columns=107
+predictor_count=102
+future_feature_duplicate_keys=0
+future_feature_unavailable_keys=0
+future_feature_infinite_values=0
+target_week_outcome_loaded=False
+future_feature_status=PASS
 ```
 
 The live feature Parquet can later be supplied to
