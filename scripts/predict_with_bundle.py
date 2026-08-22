@@ -578,7 +578,7 @@ def build_run_specification(
     return {
         "mode": "general_inference",
         "input": input_path,
-        "output": manifest_path.parent / output_path.name,
+        "output": output_path,
         "manifest": manifest_path,
         "sample": None,
         "verification": None,

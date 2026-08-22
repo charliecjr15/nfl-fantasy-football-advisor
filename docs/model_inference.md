@@ -257,6 +257,10 @@ A CSV input is also supported:
 python scripts\predict_with_bundle.py --input path\to\future_features.csv --output path\to\future_predictions.csv --confirm-inference
 RUN_V1_BUNDLE_INFERENCE
 
+An optional `--manifest-output` may place the run manifest in a separate tracked
+evidence directory. It does not change the prediction path supplied through
+`--output`.
+
 An optional split can be selected with:
 
 --data-split SPLIT_NAME
