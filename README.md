@@ -86,6 +86,11 @@ were negative because the ridge model extrapolated for players with unusually
 long gaps since their last recorded game. Those raw values remain unchanged for
 auditability and will be flagged and floored only in the later decision layer.
 
+The protected weekly ranking protocol is now implemented. It separates raw
+conditional-on-appearance projections from depth-based role eligibility, applies
+the documented 12-team position and FLEX demand, and preserves confidence and
+availability caveats. See [the weekly-ranking guide](docs/weekly_rankings.md).
+
 ## Decisions supported
 
 The completed advisor will help a fantasy manager decide:

@@ -1,0 +1,66 @@
+[rankings]
+name = "NFL Weekly Projection Rankings"
+version = "v1_weekly_rankings"
+confirmation_token = "BUILD_V1_WEEKLY_RANKINGS"
+require_clean_worktree = true
+fail_if_output_exists = true
+display_projection_floor = 0.0
+injury_context_status = "SOURCE_UNAVAILABLE_FOR_2026_AT_BUILD"
+
+[inputs]
+league_settings_path = "config/league_settings.toml"
+predictions_template = "data/processed/inference/{season}_week_{week}_projections.parquet"
+features_template = "data/processed/future_features/{season}_week_{week}_features.parquet"
+depth_snapshot_template = "data/processed/future_features/snapshots/{season}_week_{week}/depth_chart.parquet"
+feature_manifest_template = "results/tables/future_features_{season}_week_{week}_manifest.csv"
+inference_manifest_template = "results/tables/inference_{season}_week_{week}_manifest.csv"
+
+[outputs]
+rankings_parquet_template = "data/processed/recommendations/{season}_week_{week}_rankings.parquet"
+rankings_csv_template = "results/tables/weekly_rankings_{season}_week_{week}.csv"
+manifest_template = "results/tables/weekly_rankings_{season}_week_{week}_manifest.csv"
+report_artifact_template = "results/reports/weekly_rankings_{season}_week_{week}_artifact.json"
+
+[role_eligibility]
+QB = 1
+RB = 3
+WR = 3
+TE = 2
+
+[confidence]
+high_minimum_prior_games = 5
+high_maximum_days_since_previous_game = 365
+medium_minimum_prior_games = 3
+medium_maximum_days_since_previous_game = 730
+require_previous_snap_record_for_high = true
+
+[quality]
+supported_positions = ["QB", "RB", "WR", "TE"]
+required_metadata_columns = [
+    "season",
+    "week",
+    "game_id",
+    "game_date",
+    "player_id",
+    "player_display_name",
+    "position",
+    "team",
+    "opponent",
+]
+required_feature_columns = [
+    "prior_games_count",
+    "prior_games_current_season",
+    "days_since_previous_game",
+    "has_previous_snap_record",
+    "fantasy_points_ppr_avg_last_5_games",
+    "opportunities_avg_last_5_games",
+    "offense_pct_avg_last_5_games",
+]
+prediction_column = "projected_fantasy_points_ppr"
+source_model_column = "projection_source_model"
+require_zero_duplicate_keys = true
+require_zero_unavailable_keys = true
+require_all_depth_matches = true
+expected_team_count = 32
+expected_game_count = 16
+
