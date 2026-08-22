@@ -16,7 +16,8 @@ implemented, documented, and validated by a controlled historical parity
 replay. The first live 2026 Week 1 target-free feature snapshot is also complete
 and validated. The frozen Version 1 bundle has scored that snapshot, producing
 the first live 2026 Week 1 projections. The next phase is converting the raw
-model output into a decision-focused fantasy workflow.
+model output into a decision-focused fantasy workflow; that phase is now under
+way with the first protected position and FLEX ranking snapshot.
 
 The Version 1 model dataset contains 45,693 player-week observations, 116
 columns, and a strict 102-feature predictor allowlist. Its schema, chronological
@@ -86,10 +87,14 @@ were negative because the ridge model extrapolated for players with unusually
 long gaps since their last recorded game. Those raw values remain unchanged for
 auditability and will be flagged and floored only in the later decision layer.
 
-The protected weekly ranking protocol is now implemented. It separates raw
+The protected weekly ranking workflow is now implemented and has completed its
+first 2026 Week 1 run. It separates raw
 conditional-on-appearance projections from depth-based role eligibility, applies
 the documented 12-team position and FLEX demand, and preserves confidence and
-availability caveats. See [the weekly-ranking guide](docs/weekly_rankings.md).
+availability caveats. The 808-row output contains 283 role-eligible players and
+exactly 84 provisional lineup slots: 12 QB, 24 RB, 24 WR, 12 TE, and 12 FLEX.
+Current 2026 injury context remains unavailable, so these are not final start/sit
+calls. See [the weekly-ranking guide](docs/weekly_rankings.md).
 
 ## Decisions supported
 

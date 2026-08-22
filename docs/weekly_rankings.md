@@ -2,8 +2,17 @@
 
 ## Status
 
-The protected Version 1 weekly ranking protocol is implemented. Its first live
-run will use the already frozen 2026 Week 1 feature and projection snapshots.
+The protected Version 1 weekly ranking workflow and its first live 2026 Week 1
+run are complete. The accepted data run was created at
+`2026-08-22 08:10:06 UTC` from ranking commit `a8bba90`.
+
+All feature, prediction, and depth-snapshot hashes reconciled. The output kept
+all 808 candidates, retained all 32 teams and 16 games, identified 283
+role-eligible players, and filled exactly 84 provisional lineup slots. All 84
+selected rows met the configured `HIGH` historical-evidence threshold.
+
+The data ranking status is `PASS_WITH_INJURY_CAVEAT`. This is a structural and
+reasonableness acceptance, not a forecast-accuracy result.
 
 ## Decision and audience
 
@@ -110,7 +119,7 @@ The workflow verifies the feature, projection, and depth-snapshot hashes against
 their tracked manifests before ranking. It refuses to overwrite existing
 outputs.
 
-## Planned outputs
+## Outputs
 
 Output                                                         Git treatment
 -------------------------------------------------------------  --------------------------
@@ -119,8 +128,37 @@ Output                                                         Git treatment
 `results/tables/weekly_rankings_2026_week_01_manifest.csv`      Tracked run evidence
 `results/reports/weekly_rankings_2026_week_01_artifact.json`    Tracked report source
 
-The portable report HTML is packaged from the validated artifact JSON. It is not
-hand-authored or allowed to replace the CSV as the analytical source of truth.
+The canonical report artifact passed package/schema validation, but no portable
+HTML report was accepted. Browser QA repeatedly detected a small page-level
+horizontal overflow at the 1,440-pixel desktop viewport, including after the
+native evidence table was removed and the chart was reduced to a four-bar,
+single-series comparison. The artifact-specific content rendered in the failure
+preview, so the remaining issue is isolated to the portable-reader verification
+path. Temporary failure screenshots were removed, and no failed HTML was kept.
+
+The tracked CSV remains the analytical source of truth. The report artifact is
+retained as the reproducible reader source until its HTML can pass browser QA.
+
+## Observed run controls
+
+```text
+ranking_rows=808
+role_eligible_rows=283
+depth_position_mismatch_rows=5
+projected_lineup_rows=84
+projected_lineup_slots=QB:12,RB:24,WR:24,TE:12,FLEX:12
+projected_lineup_confidence=HIGH:84
+raw_negative_projection_rows=3
+display_floored_projection_rows=3
+injury_report_rows=0
+duplicate_keys=0
+unavailable_keys=0
+target_column_loaded=False
+ranking_status=PASS_WITH_INJURY_CAVEAT
+```
+
+The five roster/model-versus-depth position conflicts remain in the full audit
+output, are not role eligible, and carry `DEPTH_POSITION_MISMATCH`.
 
 ## Acceptance criteria
 

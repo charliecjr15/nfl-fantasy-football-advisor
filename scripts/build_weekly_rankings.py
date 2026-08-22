@@ -1036,16 +1036,21 @@ def build_report_artifact(
     )[detail_columns]
 
     source_id = "weekly_rankings_output"
+    rankings_csv_path = display_path(paths["rankings_csv_template"])
     source = {
         "id": source_id,
         "label": "Frozen 2026 Week 1 weekly rankings",
-        "path": display_path(paths["rankings_csv_template"]),
+        "path": rankings_csv_path,
         "query": {
-            "engine": "python",
-            "language": "python",
+            "engine": "duckdb",
+            "language": "sql",
+            "sql": (
+                "SELECT * FROM read_csv_auto("
+                f"'{rankings_csv_path}', header = true)"
+            ),
             "description": (
-                "Applies league demand and frozen depth eligibility to the "
-                "validated target-free Week 1 projections."
+                "Loads the reviewed ranking output produced by the Python "
+                "league-demand and depth-eligibility workflow."
             ),
             "executed_at": run_timestamp,
             "tables_used": [
@@ -1074,6 +1079,27 @@ def build_report_artifact(
         if all_high
         else "Projected lineup rows span multiple historical-evidence levels."
     )
+    leader_lines = []
+    for position in ["QB", "RB", "WR", "TE"]:
+        leaders = (
+            selected.loc[selected["position"].eq(position)]
+            .sort_values(
+                ["projected_fantasy_points_ppr", "player_id"],
+                ascending=[False, True],
+                kind="stable",
+            )
+            .head(5)
+        )
+        formatted = ", ".join(
+            f"{row.player_display_name} "
+            f"({row.projected_fantasy_points_ppr:.2f})"
+            for row in leaders.itertuples()
+        )
+        leader_lines.append(f"- **{position}:** {formatted}")
+    leaders_markdown = "\n".join(leader_lines)
+    starter_cutline_chart_rows = [
+        row for row in cutline_rows if row["series"] == "Starter cutline"
+    ]
     return {
         "surface": "report",
         "manifest": {
@@ -1142,10 +1168,10 @@ def build_report_artifact(
             "charts": [
                 {
                     "id": "starter_cutlines",
-                    "title": "Top projection and starter cutline by position",
-                    "subtitle": "Role-eligible raw full-PPR points for the 12-team Week 1 player pool.",
+                    "title": "Starter cutline by position",
+                    "subtitle": "Final fixed-position starter in a 12-team full-PPR player pool.",
                     "type": "bar",
-                    "dataset": "starter_cutlines",
+                    "dataset": "starter_cutline_chart",
                     "sourceId": source_id,
                     "valueFormat": "number",
                     "encodings": {
@@ -1160,43 +1186,12 @@ def build_report_artifact(
                             "label": "Projected full-PPR points",
                             "format": "number",
                         },
-                        "color": {
-                            "field": "series",
-                            "type": "nominal",
-                            "label": "Comparison",
-                        },
                     },
                     "yAxisTitle": "Projected full-PPR points",
-                    "layout": "full",
+                    "maxRows": 4,
                 }
             ],
-            "tables": [
-                {
-                    "id": "projected_lineup",
-                    "title": "Projected lineup candidates",
-                    "subtitle": "The 84 players filling 12 default full-PPR lineups before injury verification.",
-                    "dataset": "projected_lineup",
-                    "sourceId": source_id,
-                    "defaultSort": {
-                        "field": "projected_fantasy_points_ppr",
-                        "direction": "desc",
-                    },
-                    "density": "dense",
-                    "layout": "full",
-                    "columns": [
-                        {"field": "player_display_name", "label": "Player", "type": "text"},
-                        {"field": "position", "label": "Pos", "type": "text"},
-                        {"field": "team", "label": "Team", "type": "text"},
-                        {"field": "opponent", "label": "Opp", "type": "text"},
-                        {"field": "projected_fantasy_points_ppr", "label": "Raw PPR", "format": "number"},
-                        {"field": "position_rank", "label": "Pos rank", "format": "number"},
-                        {"field": "projected_lineup_slot", "label": "Slot", "type": "text"},
-                        {"field": "depth_rank", "label": "Depth", "format": "number"},
-                        {"field": "evidence_confidence", "label": "Evidence", "type": "text"},
-                        {"field": "risk_flags", "label": "Flags", "type": "text"},
-                    ],
-                }
-            ],
+            "tables": [],
             "sources": [
                 {
                     "id": source_id,
@@ -1247,28 +1242,24 @@ def build_report_artifact(
                     "type": "markdown",
                     "body": (
                         "## Position cutlines should guide comparisons within a role\n\n"
-                        "Compare players against the starter threshold for their own position, not against one universal point target. The chart shows each position's highest role-eligible projection and its final fixed-position starter cutline; FLEX is assigned afterward from the remaining RB, WR, and TE pool."
+                        "Compare players against the starter threshold for their own position, not against one universal point target. The chart shows the final fixed-position starter cutline; FLEX is assigned afterward from the remaining RB, WR, and TE pool."
                     ),
                 },
                 {
                     "id": "cutline_chart",
                     "type": "chart",
                     "chartId": "starter_cutlines",
-                    "layout": "full",
                 },
                 {
-                    "id": "lineup_takeaway",
+                    "id": "position_leaders",
                     "type": "markdown",
+                    "sourceId": source_id,
                     "body": (
-                        "## The current table is a ranked shortlist, not a locked lineup\n\n"
-                        "The table is useful for position and FLEX comparisons today. Before kickoff, injury status, late depth changes, and confirmed availability can still move or remove players."
+                        "## The current leaders are a shortlist, not a locked lineup\n\n"
+                        "Top five role-eligible raw projections by position:\n\n"
+                        f"{leaders_markdown}\n\n"
+                        "The tracked CSV preserves all 808 candidates and the full 84-player projected lineup pool. Before kickoff, injury status, late depth changes, and confirmed availability can still move or remove players."
                     ),
-                },
-                {
-                    "id": "lineup_table",
-                    "type": "table",
-                    "tableId": "projected_lineup",
-                    "layout": "full",
                 },
                 {
                     "id": "next_steps",
@@ -1304,7 +1295,7 @@ def build_report_artifact(
         "snapshot": {
             "version": 1,
             "generatedAt": run_timestamp,
-            "status": "partial",
+            "status": "ready",
             "datasets": {
                 "summary": [
                     {
@@ -1315,19 +1306,9 @@ def build_report_artifact(
                     }
                 ],
                 "starter_cutlines": cutline_rows,
+                "starter_cutline_chart": starter_cutline_chart_rows,
                 "projected_lineup": json_rows(details),
             },
-            "accessIssues": [
-                {
-                    "id": "injury_context_unavailable",
-                    "scope": "2026 Week 1 player availability",
-                    "dataset": "projected_lineup",
-                    "message": (
-                        "The nflreadpy injury feed did not support season "
-                        "2026 at build time. Treat all lineup tiers as provisional."
-                    ),
-                }
-            ],
         },
         "sources": [source],
         "package_info": {

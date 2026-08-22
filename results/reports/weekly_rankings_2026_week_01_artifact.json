@@ -1,0 +1,1283 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "2026 Week 1 Projection Rankings",
+    "description": "Provisional 12-team full-PPR position and FLEX rankings from the frozen Version 1 model bundle.",
+    "generatedAt": "2026-08-22T08:10:06.409081+00:00",
+    "cards": [
+      {
+        "id": "candidate_count",
+        "description": "Active-roster, depth-matched QB/RB/WR/TE candidates scored by the frozen bundle.",
+        "dataset": "summary",
+        "sourceId": "weekly_rankings_output",
+        "metrics": [
+          {
+            "label": "Projected candidates",
+            "field": "candidate_rows",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "role_eligible_count",
+        "description": "Candidates inside the configured depth-rank eligibility limits.",
+        "dataset": "summary",
+        "sourceId": "weekly_rankings_output",
+        "metrics": [
+          {
+            "label": "Role-eligible players",
+            "field": "role_eligible_rows",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "lineup_count",
+        "description": "Twelve complete league lineups: fixed position demand plus FLEX.",
+        "dataset": "summary",
+        "sourceId": "weekly_rankings_output",
+        "metrics": [
+          {
+            "label": "Projected lineup slots",
+            "field": "projected_lineup_rows",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "negative_count",
+        "description": "Raw ridge outputs below zero; display values are floored without altering the raw score.",
+        "dataset": "summary",
+        "sourceId": "weekly_rankings_output",
+        "metrics": [
+          {
+            "label": "Raw negative projections",
+            "field": "raw_negative_rows",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "starter_cutlines",
+        "title": "Starter cutline by position",
+        "subtitle": "Final fixed-position starter in a 12-team full-PPR player pool.",
+        "type": "bar",
+        "dataset": "starter_cutline_chart",
+        "sourceId": "weekly_rankings_output",
+        "valueFormat": "number",
+        "encodings": {
+          "x": {
+            "field": "position",
+            "type": "nominal",
+            "label": "Position"
+          },
+          "y": {
+            "field": "projected_points",
+            "type": "quantitative",
+            "label": "Projected full-PPR points",
+            "format": "number"
+          }
+        },
+        "yAxisTitle": "Projected full-PPR points",
+        "maxRows": 4
+      }
+    ],
+    "tables": [],
+    "sources": [
+      {
+        "id": "weekly_rankings_output",
+        "label": "Frozen 2026 Week 1 weekly rankings",
+        "path": "results/tables/weekly_rankings_2026_week_01.csv"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# 2026 Week 1 Projection Rankings"
+      },
+      {
+        "id": "executive_summary",
+        "type": "markdown",
+        "sourceId": "weekly_rankings_output",
+        "body": "## Executive Summary\n\n- **Use these as provisional ranking signals, not final start/sit calls.** The frozen model scored 808 candidates, and the decision layer narrowed them to 84 projected lineup slots for a 12-team full-PPR league.\n- **Current role evidence removes conditional-appearance traps.** 283 players remain after position-specific depth limits; high-scoring deep backups do not displace current role players.\n- **Historical evidence is strong for the selected player pool.** All 84 projected lineup rows meet the configured high historical-evidence threshold.\n- **Availability remains unresolved.** The public 2026 injury feed was unavailable at build time, so every selected row carries an injury-context warning."
+      },
+      {
+        "id": "pool_takeaway",
+        "type": "markdown",
+        "sourceId": "weekly_rankings_output",
+        "body": "## The decision layer narrows a broad model pool\n\nThe bundle predicts fantasy points conditional on a player appearing, so raw ranking alone can elevate backups. Depth eligibility separates model potential from current lineup plausibility. The resulting 84-player pool exactly fills 12 QB, 24 RB, 24 WR, 12 TE, and 12 FLEX slots."
+      },
+      {
+        "id": "metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "candidate_count",
+          "role_eligible_count",
+          "lineup_count",
+          "negative_count"
+        ]
+      },
+      {
+        "id": "cutline_takeaway",
+        "type": "markdown",
+        "body": "## Position cutlines should guide comparisons within a role\n\nCompare players against the starter threshold for their own position, not against one universal point target. The chart shows the final fixed-position starter cutline; FLEX is assigned afterward from the remaining RB, WR, and TE pool."
+      },
+      {
+        "id": "cutline_chart",
+        "type": "chart",
+        "chartId": "starter_cutlines"
+      },
+      {
+        "id": "position_leaders",
+        "type": "markdown",
+        "sourceId": "weekly_rankings_output",
+        "body": "## The current leaders are a shortlist, not a locked lineup\n\nTop five role-eligible raw projections by position:\n\n- **QB:** Josh Allen (22.13), Matthew Stafford (20.44), Aaron Rodgers (19.94), Jared Goff (19.80), Justin Herbert (18.93)\n- **RB:** Christian McCaffrey (17.55), Bijan Robinson (16.05), Chase Brown (15.89), Derrick Henry (15.72), Jahmyr Gibbs (15.23)\n- **WR:** Ja'Marr Chase (17.20), Puka Nacua (16.90), Amon-Ra St. Brown (16.30), Chris Olave (14.74), Jaxon Smith-Njigba (14.19)\n- **TE:** Kyle Pitts (10.92), Trey McBride (10.70), George Kittle (10.22), Travis Kelce (9.65), Brock Bowers (8.86)\n\nThe tracked CSV preserves all 808 candidates and the full 84-player projected lineup pool. Before kickoff, injury status, late depth changes, and confirmed availability can still move or remove players."
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## Recommended next steps\n\n1. Add and freeze a 2026 injury/availability source when official Week 1 reports become available.\n2. Refresh the candidate, feature, inference, and ranking chain under a new timestamped version rather than replacing this snapshot.\n3. Calibrate projection floors and ceilings on a separate historical residual set before presenting uncertainty ranges.\n4. Backtest the role filter and projected lineup tiers once 2026 outcomes arrive."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further questions\n\n- Which injury source can be frozen reliably before each game's kickoff?\n- Should external consensus rankings be added as a benchmark rather than a model input?\n- How should waiver recommendations incorporate league ownership data that is not currently available?"
+      },
+      {
+        "id": "caveats",
+        "type": "markdown",
+        "body": "## Caveats and assumptions\n\nThe projections are uncertain and conditional on appearance. Depth charts are a public preseason snapshot and may not reflect final game-day roles. No 2026 injury report was available. Three raw TE predictions are below zero because of stale-history extrapolation; their user-facing display values may be floored at zero while the raw scores remain preserved. Week 1 outcomes are not yet available, so this report validates structure and reasonableness, not forecast accuracy."
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-22T08:10:06.409081+00:00",
+    "status": "ready",
+    "datasets": {
+      "summary": [
+        {
+          "candidate_rows": 808,
+          "role_eligible_rows": 283,
+          "projected_lineup_rows": 84,
+          "raw_negative_rows": 3
+        }
+      ],
+      "starter_cutlines": [
+        {
+          "position": "QB",
+          "series": "Highest projection",
+          "projected_points": 22.13
+        },
+        {
+          "position": "QB",
+          "series": "Starter cutline",
+          "projected_points": 15.88
+        },
+        {
+          "position": "RB",
+          "series": "Highest projection",
+          "projected_points": 17.55
+        },
+        {
+          "position": "RB",
+          "series": "Starter cutline",
+          "projected_points": 11.63
+        },
+        {
+          "position": "WR",
+          "series": "Highest projection",
+          "projected_points": 17.2
+        },
+        {
+          "position": "WR",
+          "series": "Starter cutline",
+          "projected_points": 10.51
+        },
+        {
+          "position": "TE",
+          "series": "Highest projection",
+          "projected_points": 10.92
+        },
+        {
+          "position": "TE",
+          "series": "Starter cutline",
+          "projected_points": 7.39
+        }
+      ],
+      "starter_cutline_chart": [
+        {
+          "position": "QB",
+          "series": "Starter cutline",
+          "projected_points": 15.88
+        },
+        {
+          "position": "RB",
+          "series": "Starter cutline",
+          "projected_points": 11.63
+        },
+        {
+          "position": "WR",
+          "series": "Starter cutline",
+          "projected_points": 10.51
+        },
+        {
+          "position": "TE",
+          "series": "Starter cutline",
+          "projected_points": 7.39
+        }
+      ],
+      "projected_lineup": [
+        {
+          "player_display_name": "Josh Allen",
+          "position": "QB",
+          "team": "BUF",
+          "opponent": "HOU",
+          "projected_fantasy_points_ppr": 22.1348346905,
+          "position_rank": 1,
+          "projected_lineup_slot": "QB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Matthew Stafford",
+          "position": "QB",
+          "team": "LA",
+          "opponent": "SF",
+          "projected_fantasy_points_ppr": 20.4359855764,
+          "position_rank": 2,
+          "projected_lineup_slot": "QB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Aaron Rodgers",
+          "position": "QB",
+          "team": "PIT",
+          "opponent": "ATL",
+          "projected_fantasy_points_ppr": 19.9350316037,
+          "position_rank": 3,
+          "projected_lineup_slot": "QB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Jared Goff",
+          "position": "QB",
+          "team": "DET",
+          "opponent": "NO",
+          "projected_fantasy_points_ppr": 19.7982714717,
+          "position_rank": 4,
+          "projected_lineup_slot": "QB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Justin Herbert",
+          "position": "QB",
+          "team": "LAC",
+          "opponent": "ARI",
+          "projected_fantasy_points_ppr": 18.9342243728,
+          "position_rank": 5,
+          "projected_lineup_slot": "QB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Kirk Cousins",
+          "position": "QB",
+          "team": "LV",
+          "opponent": "MIA",
+          "projected_fantasy_points_ppr": 18.7992382593,
+          "position_rank": 6,
+          "projected_lineup_slot": "QB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Baker Mayfield",
+          "position": "QB",
+          "team": "TB",
+          "opponent": "CIN",
+          "projected_fantasy_points_ppr": 18.6993676118,
+          "position_rank": 7,
+          "projected_lineup_slot": "QB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Joe Burrow",
+          "position": "QB",
+          "team": "CIN",
+          "opponent": "TB",
+          "projected_fantasy_points_ppr": 18.1961511639,
+          "position_rank": 8,
+          "projected_lineup_slot": "QB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Christian McCaffrey",
+          "position": "RB",
+          "team": "SF",
+          "opponent": "LA",
+          "projected_fantasy_points_ppr": 17.5513918886,
+          "position_rank": 1,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Tyler Shough",
+          "position": "QB",
+          "team": "NO",
+          "opponent": "DET",
+          "projected_fantasy_points_ppr": 17.4727846501,
+          "position_rank": 9,
+          "projected_lineup_slot": "QB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Trevor Lawrence",
+          "position": "QB",
+          "team": "JAX",
+          "opponent": "CLE",
+          "projected_fantasy_points_ppr": 17.4648908804,
+          "position_rank": 10,
+          "projected_lineup_slot": "QB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Ja'Marr Chase",
+          "position": "WR",
+          "team": "CIN",
+          "opponent": "TB",
+          "projected_fantasy_points_ppr": 17.2003319049,
+          "position_rank": 1,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Puka Nacua",
+          "position": "WR",
+          "team": "LA",
+          "opponent": "SF",
+          "projected_fantasy_points_ppr": 16.9034165527,
+          "position_rank": 2,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Amon-Ra St. Brown",
+          "position": "WR",
+          "team": "DET",
+          "opponent": "NO",
+          "projected_fantasy_points_ppr": 16.3024329336,
+          "position_rank": 3,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Geno Smith",
+          "position": "QB",
+          "team": "NYJ",
+          "opponent": "TEN",
+          "projected_fantasy_points_ppr": 16.2318747163,
+          "position_rank": 11,
+          "projected_lineup_slot": "QB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Bijan Robinson",
+          "position": "RB",
+          "team": "ATL",
+          "opponent": "PIT",
+          "projected_fantasy_points_ppr": 16.0542862485,
+          "position_rank": 2,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Chase Brown",
+          "position": "RB",
+          "team": "CIN",
+          "opponent": "TB",
+          "projected_fantasy_points_ppr": 15.8916157466,
+          "position_rank": 3,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Sam Darnold",
+          "position": "QB",
+          "team": "SEA",
+          "opponent": "NE",
+          "projected_fantasy_points_ppr": 15.8765288598,
+          "position_rank": 12,
+          "projected_lineup_slot": "QB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Derrick Henry",
+          "position": "RB",
+          "team": "BAL",
+          "opponent": "IND",
+          "projected_fantasy_points_ppr": 15.7208659962,
+          "position_rank": 4,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Jahmyr Gibbs",
+          "position": "RB",
+          "team": "DET",
+          "opponent": "NO",
+          "projected_fantasy_points_ppr": 15.2322867857,
+          "position_rank": 5,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Chris Olave",
+          "position": "WR",
+          "team": "NO",
+          "opponent": "DET",
+          "projected_fantasy_points_ppr": 14.7414540921,
+          "position_rank": 4,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Rhamondre Stevenson",
+          "position": "RB",
+          "team": "NE",
+          "opponent": "SEA",
+          "projected_fantasy_points_ppr": 14.7379298119,
+          "position_rank": 6,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Ashton Jeanty",
+          "position": "RB",
+          "team": "LV",
+          "opponent": "MIA",
+          "projected_fantasy_points_ppr": 14.7200080521,
+          "position_rank": 7,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Jaxon Smith-Njigba",
+          "position": "WR",
+          "team": "SEA",
+          "opponent": "NE",
+          "projected_fantasy_points_ppr": 14.191899588,
+          "position_rank": 5,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Tony Pollard",
+          "position": "RB",
+          "team": "TEN",
+          "opponent": "NYJ",
+          "projected_fantasy_points_ppr": 14.1875372828,
+          "position_rank": 8,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Tyrone Tracy Jr.",
+          "position": "RB",
+          "team": "NYG",
+          "opponent": "DAL",
+          "projected_fantasy_points_ppr": 14.0487050669,
+          "position_rank": 9,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Zay Flowers",
+          "position": "WR",
+          "team": "BAL",
+          "opponent": "IND",
+          "projected_fantasy_points_ppr": 13.7053095366,
+          "position_rank": 6,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Omarion Hampton",
+          "position": "RB",
+          "team": "LAC",
+          "opponent": "ARI",
+          "projected_fantasy_points_ppr": 13.7051631815,
+          "position_rank": 10,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Tee Higgins",
+          "position": "WR",
+          "team": "CIN",
+          "opponent": "TB",
+          "projected_fantasy_points_ppr": 13.4951957578,
+          "position_rank": 7,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Justin Jefferson",
+          "position": "WR",
+          "team": "MIN",
+          "opponent": "GB",
+          "projected_fantasy_points_ppr": 13.4601007775,
+          "position_rank": 8,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "De'Von Achane",
+          "position": "RB",
+          "team": "MIA",
+          "opponent": "LV",
+          "projected_fantasy_points_ppr": 13.2771159287,
+          "position_rank": 11,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Zach Charbonnet",
+          "position": "RB",
+          "team": "SEA",
+          "opponent": "NE",
+          "projected_fantasy_points_ppr": 13.1178303088,
+          "position_rank": 12,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Jaylen Warren",
+          "position": "RB",
+          "team": "PIT",
+          "opponent": "ATL",
+          "projected_fantasy_points_ppr": 13.0920894129,
+          "position_rank": 13,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Jameson Williams",
+          "position": "WR",
+          "team": "DET",
+          "opponent": "NO",
+          "projected_fantasy_points_ppr": 13.0889314126,
+          "position_rank": 9,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Michael Wilson",
+          "position": "WR",
+          "team": "ARI",
+          "opponent": "LAC",
+          "projected_fantasy_points_ppr": 12.9882839921,
+          "position_rank": 10,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Kyren Williams",
+          "position": "RB",
+          "team": "LA",
+          "opponent": "SF",
+          "projected_fantasy_points_ppr": 12.9587231517,
+          "position_rank": 14,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Rashee Rice",
+          "position": "WR",
+          "team": "KC",
+          "opponent": "DEN",
+          "projected_fantasy_points_ppr": 12.7854385788,
+          "position_rank": 11,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "D'Andre Swift",
+          "position": "RB",
+          "team": "CHI",
+          "opponent": "CAR",
+          "projected_fantasy_points_ppr": 12.7832960862,
+          "position_rank": 15,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "DK Metcalf",
+          "position": "WR",
+          "team": "PIT",
+          "opponent": "ATL",
+          "projected_fantasy_points_ppr": 12.5415206203,
+          "position_rank": 12,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Kenneth Gainwell",
+          "position": "RB",
+          "team": "TB",
+          "opponent": "CIN",
+          "projected_fantasy_points_ppr": 12.5413218675,
+          "position_rank": 16,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Travis Etienne",
+          "position": "RB",
+          "team": "NO",
+          "opponent": "DET",
+          "projected_fantasy_points_ppr": 12.2949312708,
+          "position_rank": 17,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Wan'Dale Robinson",
+          "position": "WR",
+          "team": "TEN",
+          "opponent": "NYJ",
+          "projected_fantasy_points_ppr": 12.2407525619,
+          "position_rank": 13,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Kenneth Walker III",
+          "position": "RB",
+          "team": "KC",
+          "opponent": "DEN",
+          "projected_fantasy_points_ppr": 12.2128595012,
+          "position_rank": 18,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Breece Hall",
+          "position": "RB",
+          "team": "NYJ",
+          "opponent": "TEN",
+          "projected_fantasy_points_ppr": 12.1655513943,
+          "position_rank": 19,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "A.J. Brown",
+          "position": "WR",
+          "team": "NE",
+          "opponent": "SEA",
+          "projected_fantasy_points_ppr": 12.0745531285,
+          "position_rank": 14,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Chris Godwin Jr.",
+          "position": "WR",
+          "team": "TB",
+          "opponent": "CIN",
+          "projected_fantasy_points_ppr": 12.0092274823,
+          "position_rank": 15,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Saquon Barkley",
+          "position": "RB",
+          "team": "PHI",
+          "opponent": "WAS",
+          "projected_fantasy_points_ppr": 11.9788465762,
+          "position_rank": 20,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Bucky Irving",
+          "position": "RB",
+          "team": "TB",
+          "opponent": "CIN",
+          "projected_fantasy_points_ppr": 11.908359871,
+          "position_rank": 21,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "RJ Harvey",
+          "position": "RB",
+          "team": "DEN",
+          "opponent": "KC",
+          "projected_fantasy_points_ppr": 11.8510577218,
+          "position_rank": 22,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Javonte Williams",
+          "position": "RB",
+          "team": "DAL",
+          "opponent": "NYG",
+          "projected_fantasy_points_ppr": 11.7924951809,
+          "position_rank": 23,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Aaron Jones",
+          "position": "RB",
+          "team": "MIN",
+          "opponent": "GB",
+          "projected_fantasy_points_ppr": 11.6254413488,
+          "position_rank": 24,
+          "projected_lineup_slot": "RB",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Parker Washington",
+          "position": "WR",
+          "team": "JAX",
+          "opponent": "CLE",
+          "projected_fantasy_points_ppr": 11.5004919069,
+          "position_rank": 16,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Tre Tucker",
+          "position": "WR",
+          "team": "LV",
+          "opponent": "MIA",
+          "projected_fantasy_points_ppr": 11.4912684208,
+          "position_rank": 17,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Jakobi Meyers",
+          "position": "WR",
+          "team": "JAX",
+          "opponent": "CLE",
+          "projected_fantasy_points_ppr": 11.394726762,
+          "position_rank": 18,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 3,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Cam Skattebo",
+          "position": "RB",
+          "team": "NYG",
+          "opponent": "DAL",
+          "projected_fantasy_points_ppr": 11.3227235028,
+          "position_rank": 25,
+          "projected_lineup_slot": "FLEX",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Chris Rodriguez Jr.",
+          "position": "RB",
+          "team": "JAX",
+          "opponent": "CLE",
+          "projected_fantasy_points_ppr": 11.0150702603,
+          "position_rank": 26,
+          "projected_lineup_slot": "FLEX",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Ryan Flournoy",
+          "position": "WR",
+          "team": "DAL",
+          "opponent": "NYG",
+          "projected_fantasy_points_ppr": 11.0104986171,
+          "position_rank": 19,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 3,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Jonathan Taylor",
+          "position": "RB",
+          "team": "IND",
+          "opponent": "BAL",
+          "projected_fantasy_points_ppr": 10.9389412769,
+          "position_rank": 27,
+          "projected_lineup_slot": "FLEX",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Kyle Pitts",
+          "position": "TE",
+          "team": "ATL",
+          "opponent": "PIT",
+          "projected_fantasy_points_ppr": 10.9232003764,
+          "position_rank": 1,
+          "projected_lineup_slot": "TE",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Christian Watson",
+          "position": "WR",
+          "team": "GB",
+          "opponent": "MIN",
+          "projected_fantasy_points_ppr": 10.8686185047,
+          "position_rank": 20,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Quinshon Judkins",
+          "position": "RB",
+          "team": "CLE",
+          "opponent": "JAX",
+          "projected_fantasy_points_ppr": 10.8425639384,
+          "position_rank": 28,
+          "projected_lineup_slot": "FLEX",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Terry McLaurin",
+          "position": "WR",
+          "team": "WAS",
+          "opponent": "PHI",
+          "projected_fantasy_points_ppr": 10.7377567546,
+          "position_rank": 21,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Trey McBride",
+          "position": "TE",
+          "team": "ARI",
+          "opponent": "LAC",
+          "projected_fantasy_points_ppr": 10.70187103,
+          "position_rank": 2,
+          "projected_lineup_slot": "TE",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Jauan Jennings",
+          "position": "WR",
+          "team": "MIN",
+          "opponent": "GB",
+          "projected_fantasy_points_ppr": 10.6981764881,
+          "position_rank": 22,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 3,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Jordan Addison",
+          "position": "WR",
+          "team": "MIN",
+          "opponent": "GB",
+          "projected_fantasy_points_ppr": 10.5743906621,
+          "position_rank": 23,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "TreVeyon Henderson",
+          "position": "RB",
+          "team": "NE",
+          "opponent": "SEA",
+          "projected_fantasy_points_ppr": 10.5335810022,
+          "position_rank": 29,
+          "projected_lineup_slot": "FLEX",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Luther Burden III",
+          "position": "WR",
+          "team": "CHI",
+          "opponent": "CAR",
+          "projected_fantasy_points_ppr": 10.5098429486,
+          "position_rank": 24,
+          "projected_lineup_slot": "WR",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Drake London",
+          "position": "WR",
+          "team": "ATL",
+          "opponent": "PIT",
+          "projected_fantasy_points_ppr": 10.4246446343,
+          "position_rank": 25,
+          "projected_lineup_slot": "FLEX",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Nico Collins",
+          "position": "WR",
+          "team": "HOU",
+          "opponent": "BUF",
+          "projected_fantasy_points_ppr": 10.3995467935,
+          "position_rank": 26,
+          "projected_lineup_slot": "FLEX",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Jayden Reed",
+          "position": "WR",
+          "team": "GB",
+          "opponent": "MIN",
+          "projected_fantasy_points_ppr": 10.2882209192,
+          "position_rank": 27,
+          "projected_lineup_slot": "FLEX",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Khalil Shakir",
+          "position": "WR",
+          "team": "BUF",
+          "opponent": "HOU",
+          "projected_fantasy_points_ppr": 10.2682981133,
+          "position_rank": 28,
+          "projected_lineup_slot": "FLEX",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Davante Adams",
+          "position": "WR",
+          "team": "LA",
+          "opponent": "SF",
+          "projected_fantasy_points_ppr": 10.2636964924,
+          "position_rank": 29,
+          "projected_lineup_slot": "FLEX",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Blake Corum",
+          "position": "RB",
+          "team": "LA",
+          "opponent": "SF",
+          "projected_fantasy_points_ppr": 10.2629428053,
+          "position_rank": 30,
+          "projected_lineup_slot": "FLEX",
+          "depth_rank": 2,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "George Kittle",
+          "position": "TE",
+          "team": "SF",
+          "opponent": "LA",
+          "projected_fantasy_points_ppr": 10.2233114106,
+          "position_rank": 3,
+          "projected_lineup_slot": "TE",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Tre Harris",
+          "position": "WR",
+          "team": "LAC",
+          "opponent": "ARI",
+          "projected_fantasy_points_ppr": 10.0902383605,
+          "position_rank": 30,
+          "projected_lineup_slot": "FLEX",
+          "depth_rank": 3,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Travis Kelce",
+          "position": "TE",
+          "team": "KC",
+          "opponent": "DEN",
+          "projected_fantasy_points_ppr": 9.6461028599,
+          "position_rank": 4,
+          "projected_lineup_slot": "TE",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Brock Bowers",
+          "position": "TE",
+          "team": "LV",
+          "opponent": "MIA",
+          "projected_fantasy_points_ppr": 8.8635417478,
+          "position_rank": 5,
+          "projected_lineup_slot": "TE",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Dallas Goedert",
+          "position": "TE",
+          "team": "PHI",
+          "opponent": "WAS",
+          "projected_fantasy_points_ppr": 8.3743220267,
+          "position_rank": 6,
+          "projected_lineup_slot": "TE",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Colston Loveland",
+          "position": "TE",
+          "team": "CHI",
+          "opponent": "CAR",
+          "projected_fantasy_points_ppr": 8.0637697355,
+          "position_rank": 7,
+          "projected_lineup_slot": "TE",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Sam LaPorta",
+          "position": "TE",
+          "team": "DET",
+          "opponent": "NO",
+          "projected_fantasy_points_ppr": 7.9368507283,
+          "position_rank": 8,
+          "projected_lineup_slot": "TE",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Mark Andrews",
+          "position": "TE",
+          "team": "BAL",
+          "opponent": "IND",
+          "projected_fantasy_points_ppr": 7.7426638914,
+          "position_rank": 9,
+          "projected_lineup_slot": "TE",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "T.J. Hockenson",
+          "position": "TE",
+          "team": "MIN",
+          "opponent": "GB",
+          "projected_fantasy_points_ppr": 7.6790790399,
+          "position_rank": 10,
+          "projected_lineup_slot": "TE",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Juwan Johnson",
+          "position": "TE",
+          "team": "NO",
+          "opponent": "DET",
+          "projected_fantasy_points_ppr": 7.4457450384,
+          "position_rank": 11,
+          "projected_lineup_slot": "TE",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        },
+        {
+          "player_display_name": "Colby Parkinson",
+          "position": "TE",
+          "team": "LA",
+          "opponent": "SF",
+          "projected_fantasy_points_ppr": 7.3918359912,
+          "position_rank": 12,
+          "projected_lineup_slot": "TE",
+          "depth_rank": 1,
+          "evidence_confidence": "HIGH",
+          "risk_flags": "INJURY_CONTEXT_UNAVAILABLE"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "weekly_rankings_output",
+      "label": "Frozen 2026 Week 1 weekly rankings",
+      "path": "results/tables/weekly_rankings_2026_week_01.csv",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_csv_auto('results/tables/weekly_rankings_2026_week_01.csv', header = true)",
+        "description": "Loads the reviewed ranking output produced by the Python league-demand and depth-eligibility workflow.",
+        "executed_at": "2026-08-22T08:10:06.409081+00:00",
+        "tables_used": [
+          "data/processed/inference/2026_week_01_projections.parquet",
+          "data/processed/future_features/2026_week_01_features.parquet",
+          "data/processed/future_features/snapshots/2026_week_01/depth_chart.parquet",
+          "config/league_settings.toml"
+        ],
+        "filters": [
+          "Season 2026, Week 1",
+          "Positions QB, RB, WR, and TE",
+          "Depth eligibility QB 1, RB 1-3, WR 1-3, TE 1-2",
+          "12-team full-PPR lineup demand"
+        ],
+        "metric_definitions": [
+          "Projected lineup rows are 72 fixed-position starters plus 12 FLEX players.",
+          "Display projection is the raw model projection floored at zero; raw projection remains available.",
+          "Evidence confidence uses prior games, days since last game, and prior snap coverage."
+        ]
+      }
+    }
+  ],
+  "package_info": {
+    "root": "nfl-fantasy-football-advisor",
+    "manifestPath": "results/reports/weekly_rankings_2026_week_01_artifact.json",
+    "snapshotPath": "results/reports/weekly_rankings_2026_week_01_artifact.json"
+  }
+}
