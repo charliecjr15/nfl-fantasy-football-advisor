@@ -8,14 +8,20 @@ from app_support import (
     comparison_frame,
     current_games,
     dst_projection_frame,
+    filter_completed_kicker_results,
     filter_completed_dst_results,
     filter_completed_results,
     filter_rankings,
+    flex_projections,
+    kicker_projection_frame,
+    normalize_completed_kicker_results,
     normalize_completed_dst_results,
     normalize_completed_results,
     normalize_dst_rankings,
+    normalize_kicker_rankings,
     normalize_rankings,
     optimize_lineup,
+    season_totals_frame,
     top_projections,
 )
 
@@ -126,6 +132,15 @@ def test_top_projections_and_games_are_compact() -> None:
     ]
 
 
+def test_flex_projections_include_only_rb_wr_and_te() -> None:
+    rankings = sample_rankings()
+
+    flex = flex_projections(rankings, limit=4)
+
+    assert flex["position"].tolist() == ["WR", "RB", "WR", "RB"]
+    assert "QB" not in set(flex["position"])
+
+
 def test_previous_week_results_filter_to_requested_week_and_position() -> None:
     completed = normalize_completed_results(
         pd.DataFrame(
@@ -219,4 +234,82 @@ def test_dst_helpers_switch_between_espn_and_yahoo() -> None:
     assert yahoo["projected_points"].tolist() == [9.0, 7.0]
     assert actual.to_dict("records") == [
         {"team": "AAA", "opponent": "BBB", "actual_points": 12.0}
+    ]
+
+
+def test_kicker_helpers_and_season_totals_switch_profiles() -> None:
+    rankings = normalize_kicker_rankings(
+        pd.DataFrame(
+            [
+                {
+                    "season": 2026,
+                    "week": 1,
+                    "game_id": "game-1",
+                    "game_date": "2026-09-10",
+                    "player_id": "k1",
+                    "player_display_name": "Kicker One",
+                    "position": "K",
+                    "team": "AAA",
+                    "opponent": "BBB",
+                    "espn_projected_points": 8.0,
+                    "espn_rank": 2,
+                    "yahoo_projected_points": 10.0,
+                    "yahoo_rank": 1,
+                }
+            ]
+        )
+    )
+    completed_kickers = normalize_completed_kicker_results(
+        pd.DataFrame(
+            [
+                {
+                    "season": 2025,
+                    "week": 18,
+                    "game_id": "game-0",
+                    "game_date": "2026-01-03",
+                    "player_id": "k1",
+                    "player_display_name": "Kicker One",
+                    "position": "K",
+                    "team": "AAA",
+                    "opponent": "BBB",
+                    "espn_fantasy_points": 9.0,
+                    "yahoo_fantasy_points": 11.0,
+                }
+            ]
+        )
+    )
+    completed_players = normalize_completed_results(
+        pd.DataFrame(
+            [
+                {
+                    "season": 2025,
+                    "week": 18,
+                    "game_id": "game-0",
+                    "game_date": "2026-01-03",
+                    "player_id": "rb1",
+                    "player_display_name": "Running One",
+                    "position": "RB",
+                    "team": "AAA",
+                    "opponent": "BBB",
+                    "fantasy_points_ppr": 20.0,
+                }
+            ]
+        )
+    )
+
+    yahoo = kicker_projection_frame(rankings, "Yahoo")
+    previous = filter_completed_kicker_results(
+        completed_kickers, 2025, 18, "ESPN"
+    )
+    totals = season_totals_frame(
+        completed_players, completed_kickers, 2025, "All", "Yahoo"
+    )
+
+    assert yahoo["projected_points"].tolist() == [10.0]
+    assert previous["actual_points"].tolist() == [9.0]
+    assert totals[["player_display_name", "total_points"]].to_dict(
+        "records"
+    ) == [
+        {"player_display_name": "Running One", "total_points": 20.0},
+        {"player_display_name": "Kicker One", "total_points": 11.0},
     ]

@@ -18,6 +18,7 @@ from publish_latest import (  # noqa: E402
     publish,
     validate_completed_results,
     validate_dst_publication,
+    validate_kicker_publication,
     validate_publication,
 )
 
@@ -175,6 +176,23 @@ def test_publish_includes_validated_completed_results(tmp_path: Path) -> None:
     )
     public_dst_rankings = tmp_path / "latest_dst_rankings.csv"
     public_completed_dst = tmp_path / "completed_dst_results.csv"
+    kicker_rankings = (
+        PROJECT_ROOT
+        / "results"
+        / "tables"
+        / "kicker_rankings_2026_week_01.csv"
+    )
+    kicker_manifest = (
+        PROJECT_ROOT
+        / "results"
+        / "tables"
+        / "kicker_rankings_2026_week_01_manifest.csv"
+    )
+    completed_kickers = (
+        PROJECT_ROOT / "results" / "public" / "completed_kicker_results.csv"
+    )
+    public_kicker_rankings = tmp_path / "latest_kicker_rankings.csv"
+    public_completed_kickers = tmp_path / "completed_kicker_results.csv"
 
     payload = publish(
         rankings_path,
@@ -190,15 +208,24 @@ def test_publish_includes_validated_completed_results(tmp_path: Path) -> None:
         completed_dst,
         public_dst_rankings,
         public_completed_dst,
+        kicker_rankings,
+        kicker_manifest,
+        completed_kickers,
+        public_kicker_rankings,
+        public_completed_kickers,
     )
 
     assert public_completed.exists()
     assert public_dst_rankings.exists()
     assert public_completed_dst.exists()
+    assert public_kicker_rankings.exists()
+    assert public_completed_kickers.exists()
     assert payload["completed_results_rows"] == 6037
     assert payload["completed_results_sha256"]
     assert payload["dst_row_count"] == 32
     assert payload["completed_dst_rows"] == 544
+    assert payload["kicker_row_count"] == 32
+    assert payload["completed_kicker_rows"] == 543
 
 
 def test_dst_snapshot_passes_publication_contract() -> None:
@@ -222,22 +249,46 @@ def test_dst_snapshot_passes_publication_contract() -> None:
     assert summary["completed_dst_latest_week"] == 18
 
 
-def test_streamlit_default_view_is_compact_and_has_six_tabs() -> None:
+def test_kicker_snapshot_passes_publication_contract() -> None:
+    rankings, completed, summary = validate_kicker_publication(
+        PROJECT_ROOT
+        / "results"
+        / "tables"
+        / "kicker_rankings_2026_week_01.csv",
+        PROJECT_ROOT
+        / "results"
+        / "tables"
+        / "kicker_rankings_2026_week_01_manifest.csv",
+        PROJECT_ROOT / "results" / "public" / "completed_kicker_results.csv",
+        2026,
+        1,
+    )
+
+    assert len(rankings) == 32
+    assert len(completed) == 543
+    assert summary["kicker_game_count"] == 16
+    assert summary["completed_kicker_latest_week"] == 18
+
+
+def test_streamlit_default_view_is_compact_and_has_requested_tabs() -> None:
     app = AppTest.from_file(str(PROJECT_ROOT / "app.py"), default_timeout=30)
     app.run()
     assert not app.exception
-    assert len(app.tabs) == 6
+    assert len(app.tabs) == 9
     assert [tab.label for tab in app.tabs] == [
         "Top projections",
         "My lineup",
         "Compare players",
+        "Flex",
+        "Kickers",
         "D/ST",
         "This week's games",
         "Previous weeks",
+        "Season totals",
     ]
     assert len(app.metric) == 0
     assert len(app.warning) == 1
-    assert len(app.dataframe) == 4
+    assert len(app.dataframe) == 7
     assert len(app.get("vega_lite_chart")) == 0
     assert list(app.dataframe[0].value.columns) == [
         "player_display_name",
@@ -247,27 +298,66 @@ def test_streamlit_default_view_is_compact_and_has_six_tabs() -> None:
         "display_projected_fantasy_points_ppr",
     ]
     assert list(app.dataframe[1].value.columns) == [
+        "player_display_name",
+        "position",
+        "team",
+        "opponent",
+        "display_projected_fantasy_points_ppr",
+    ]
+    assert list(app.dataframe[2].value.columns) == [
+        "player_display_name",
+        "position",
         "team",
         "opponent",
         "projected_points",
     ]
+    assert list(app.dataframe[3].value.columns) == [
+        "team",
+        "opponent",
+        "projected_points",
+    ]
+    assert list(app.dataframe[-1].value.columns) == [
+        "player_display_name",
+        "position",
+        "team",
+        "total_points",
+    ]
 
 
-def test_streamlit_switches_dst_profile_and_previous_results() -> None:
+def test_streamlit_switches_kicker_dst_and_previous_results() -> None:
     app = AppTest.from_file(str(PROJECT_ROOT / "app.py"), default_timeout=30)
     app.run()
 
-    app.selectbox[4].set_value("Yahoo").run()
-    assert app.dataframe[1].value.iloc[0].to_dict() == {
+    app.selectbox[7].set_value("Yahoo").run()
+    assert app.dataframe[2].value.iloc[0].to_dict() == {
+        "player_display_name": "Brandon Aubrey",
+        "position": "K",
+        "team": "DAL",
+        "opponent": "NYG",
+        "projected_points": 11.84,
+    }
+
+    app.selectbox[8].set_value("Yahoo").run()
+    assert app.dataframe[3].value.iloc[0].to_dict() == {
         "team": "DEN",
         "opponent": "KC",
         "projected_points": 10.8,
     }
 
     app.radio[0].set_value("D/ST").run()
-    assert list(app.dataframe[-1].value.columns) == [
+    assert list(app.dataframe[-2].value.columns) == [
         "team",
         "opponent",
         "actual_points",
     ]
-    assert len(app.dataframe[-1].value) == 32
+    assert len(app.dataframe[-2].value) == 32
+
+    app.radio[0].set_value("Kickers").run()
+    assert list(app.dataframe[-2].value.columns) == [
+        "player_display_name",
+        "position",
+        "team",
+        "opponent",
+        "actual_points",
+    ]
+    assert len(app.dataframe[-2].value) >= 31

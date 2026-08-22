@@ -44,6 +44,34 @@ DST_RESULT_COLUMNS = {
     "espn_fantasy_points",
     "yahoo_fantasy_points",
 }
+KICKER_RANKING_COLUMNS = {
+    "season",
+    "week",
+    "game_id",
+    "game_date",
+    "player_id",
+    "player_display_name",
+    "position",
+    "team",
+    "opponent",
+    "espn_projected_points",
+    "espn_rank",
+    "yahoo_projected_points",
+    "yahoo_rank",
+}
+KICKER_RESULT_COLUMNS = {
+    "season",
+    "week",
+    "game_id",
+    "game_date",
+    "player_id",
+    "player_display_name",
+    "position",
+    "team",
+    "opponent",
+    "espn_fantasy_points",
+    "yahoo_fantasy_points",
+}
 
 
 def normalize_rankings(dataframe: pd.DataFrame) -> pd.DataFrame:
@@ -101,6 +129,30 @@ def top_projections(
         ascending=[False, True],
         kind="stable",
     ).head(limit).reset_index(drop=True)
+
+
+def flex_projections(
+    rankings: pd.DataFrame,
+    limit: int = 25,
+) -> pd.DataFrame:
+    """Return the highest role-eligible RB, WR, and TE FLEX choices."""
+
+    return (
+        rankings.loc[
+            rankings["role_eligible"]
+            & rankings["position"].isin(FLEX_POSITIONS)
+        ]
+        .sort_values(
+            [
+                "display_projected_fantasy_points_ppr",
+                "player_display_name",
+            ],
+            ascending=[False, True],
+            kind="stable",
+        )
+        .head(limit)
+        .reset_index(drop=True)
+    )
 
 
 def current_games(rankings: pd.DataFrame) -> pd.DataFrame:
@@ -267,6 +319,215 @@ def filter_completed_dst_results(
         )
         .reset_index(drop=True)
     )
+
+
+def normalize_kicker_rankings(dataframe: pd.DataFrame) -> pd.DataFrame:
+    """Normalize separately published kicker projections."""
+
+    missing = sorted(KICKER_RANKING_COLUMNS - set(dataframe.columns))
+    if missing:
+        raise ValueError(
+            "Kicker rankings are missing columns: " + ", ".join(missing)
+        )
+    rankings = dataframe.copy()
+    for column in [
+        "season",
+        "week",
+        "espn_projected_points",
+        "espn_rank",
+        "yahoo_projected_points",
+        "yahoo_rank",
+    ]:
+        rankings[column] = pd.to_numeric(rankings[column], errors="raise")
+    rankings["kicker_label"] = (
+        rankings["player_display_name"].astype(str)
+        + " | K | "
+        + rankings["team"].astype(str)
+        + " | vs "
+        + rankings["opponent"].astype(str)
+    )
+    return rankings
+
+
+def kicker_projection_frame(
+    rankings: pd.DataFrame,
+    profile: str,
+) -> pd.DataFrame:
+    """Return compact kicker projections for one platform."""
+
+    normalized_profile = profile.strip().lower()
+    if normalized_profile not in {"espn", "yahoo"}:
+        raise ValueError(f"Unknown kicker scoring profile: {profile}")
+    points_column = f"{normalized_profile}_projected_points"
+    rank_column = f"{normalized_profile}_rank"
+    return (
+        rankings.loc[
+            :,
+            [
+                "player_id",
+                "player_display_name",
+                "position",
+                "team",
+                "opponent",
+                points_column,
+                rank_column,
+            ],
+        ]
+        .rename(
+            columns={points_column: "projected_points", rank_column: "rank"}
+        )
+        .sort_values(["rank", "player_display_name"], kind="stable")
+        .reset_index(drop=True)
+    )
+
+
+def normalize_completed_kicker_results(dataframe: pd.DataFrame) -> pd.DataFrame:
+    """Normalize actual kicker scores for history and season totals."""
+
+    missing = sorted(KICKER_RESULT_COLUMNS - set(dataframe.columns))
+    if missing:
+        raise ValueError(
+            "Completed kicker results are missing columns: "
+            + ", ".join(missing)
+        )
+    completed = dataframe.copy()
+    for column in [
+        "season",
+        "week",
+        "espn_fantasy_points",
+        "yahoo_fantasy_points",
+    ]:
+        completed[column] = pd.to_numeric(completed[column], errors="raise")
+    completed["game_date"] = pd.to_datetime(
+        completed["game_date"], errors="raise"
+    )
+    return completed
+
+
+def filter_completed_kicker_results(
+    completed: pd.DataFrame,
+    season: int,
+    week: int,
+    profile: str,
+) -> pd.DataFrame:
+    """Return one completed week of kicker scores for a platform."""
+
+    normalized_profile = profile.strip().lower()
+    if normalized_profile not in {"espn", "yahoo"}:
+        raise ValueError(f"Unknown kicker scoring profile: {profile}")
+    points_column = f"{normalized_profile}_fantasy_points"
+    return (
+        completed.loc[
+            completed["season"].eq(season) & completed["week"].eq(week),
+            [
+                "player_display_name",
+                "position",
+                "team",
+                "opponent",
+                points_column,
+            ],
+        ]
+        .rename(columns={points_column: "actual_points"})
+        .sort_values(
+            ["actual_points", "player_display_name"],
+            ascending=[False, True],
+            kind="stable",
+        )
+        .reset_index(drop=True)
+    )
+
+
+def selectable_kickers(rankings: pd.DataFrame) -> dict[str, str]:
+    """Return stable kicker label-to-player mappings."""
+
+    ordered = rankings.sort_values(
+        ["team", "player_display_name"], kind="stable"
+    )
+    return dict(zip(ordered["kicker_label"], ordered["player_id"]))
+
+
+def season_totals_frame(
+    completed_players: pd.DataFrame,
+    completed_kickers: pd.DataFrame,
+    season: int,
+    position: str = "All",
+    kicker_profile: str = "ESPN",
+) -> pd.DataFrame:
+    """Aggregate completed player and kicker points for an entire season."""
+
+    offense = completed_players.loc[
+        completed_players["season"].eq(season)
+    ].copy()
+    offense["_points"] = offense["fantasy_points_ppr"]
+    normalized_profile = kicker_profile.strip().lower()
+    if normalized_profile not in {"espn", "yahoo"}:
+        raise ValueError(f"Unknown kicker scoring profile: {kicker_profile}")
+    kicker_points = f"{normalized_profile}_fantasy_points"
+    kickers = completed_kickers.loc[
+        completed_kickers["season"].eq(season)
+    ].copy()
+    kickers["_points"] = kickers[kicker_points]
+    combined = pd.concat(
+        [
+            offense[
+                [
+                    "game_date",
+                    "player_id",
+                    "player_display_name",
+                    "position",
+                    "team",
+                    "_points",
+                ]
+            ],
+            kickers[
+                [
+                    "game_date",
+                    "player_id",
+                    "player_display_name",
+                    "position",
+                    "team",
+                    "_points",
+                ]
+            ],
+        ],
+        ignore_index=True,
+    )
+    if position == "FLEX":
+        combined = combined.loc[combined["position"].isin(FLEX_POSITIONS)]
+    elif position != "All":
+        combined = combined.loc[combined["position"].eq(position)]
+    if combined.empty:
+        return pd.DataFrame(
+            columns=[
+                "player_display_name",
+                "position",
+                "team",
+                "total_points",
+            ]
+        )
+    latest_team = (
+        combined.sort_values("game_date", kind="stable")
+        .drop_duplicates("player_id", keep="last")
+        .loc[:, ["player_id", "team"]]
+    )
+    totals = (
+        combined.groupby(
+            ["player_id", "player_display_name", "position"],
+            as_index=False,
+            sort=False,
+        )["_points"]
+        .sum()
+        .rename(columns={"_points": "total_points"})
+        .merge(latest_team, on="player_id", how="left", validate="one_to_one")
+    )
+    totals["total_points"] = totals["total_points"].round(2)
+    return totals[
+        ["player_display_name", "position", "team", "total_points"]
+    ].sort_values(
+        ["total_points", "player_display_name"],
+        ascending=[False, True],
+        kind="stable",
+    ).reset_index(drop=True)
 
 
 def filter_rankings(

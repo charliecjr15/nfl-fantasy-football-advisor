@@ -1,0 +1,25 @@
+[kicker_scoring.espn]
+label = "ESPN default"
+field_goal_0_19 = 3.0
+field_goal_20_29 = 3.0
+field_goal_30_39 = 3.0
+field_goal_40_49 = 4.0
+field_goal_50_59 = 5.0
+field_goal_60_plus = 6.0
+extra_point_made = 1.0
+field_goal_missed = -1.0
+
+[kicker_scoring.yahoo]
+label = "Yahoo default"
+field_goal_0_19 = 3.0
+field_goal_20_29 = 3.0
+field_goal_30_39 = 3.0
+field_goal_40_49 = 4.0
+field_goal_50_59 = 5.0
+field_goal_60_plus = 5.0
+extra_point_made = 1.0
+field_goal_missed = 0.0
+
+[lineage]
+espn_source = "https://support.espn.com/hc/en-us/articles/360003914032-Scoring-Formats"
+yahoo_source = "https://help.yahoo.com/kb/SLN6489.html"

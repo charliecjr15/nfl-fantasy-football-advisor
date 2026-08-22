@@ -48,6 +48,16 @@ COMPLETED_DST_RESULTS = (
 PUBLIC_COMPLETED_DST_RESULTS = (
     PROJECT_ROOT / "results" / "public" / "completed_dst_results.csv"
 )
+COMPLETED_KICKER_RESULTS = (
+    PROJECT_ROOT
+    / "data"
+    / "processed"
+    / "runtime_history"
+    / "completed_kicker_results.csv"
+)
+PUBLIC_COMPLETED_KICKER_RESULTS = (
+    PROJECT_ROOT / "results" / "public" / "completed_kicker_results.csv"
+)
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -171,6 +181,7 @@ def publish_command(
     week: int,
     completed_results: Path | None = None,
     completed_dst_results: Path | None = None,
+    completed_kicker_results: Path | None = None,
 ) -> list[str]:
     """Return the validated-publication command."""
 
@@ -196,6 +207,18 @@ def publish_command(
                 str(paths["dst_rankings_manifest"]),
                 "--completed-dst-results",
                 str(completed_dst_results),
+            ]
+        )
+    if completed_kicker_results is not None:
+        paths = output_paths(season, week)
+        command.extend(
+            [
+                "--kicker-rankings",
+                str(paths["kicker_rankings_csv"]),
+                "--kicker-manifest",
+                str(paths["kicker_rankings_manifest"]),
+                "--completed-kicker-results",
+                str(completed_kicker_results),
             ]
         )
     return command
@@ -250,6 +273,18 @@ def output_paths(season: int, week: int) -> dict[str, Path]:
             / "tables"
             / f"dst_rankings_{prefix}_manifest.csv"
         ),
+        "kicker_rankings_csv": (
+            PROJECT_ROOT
+            / "results"
+            / "tables"
+            / f"kicker_rankings_{prefix}.csv"
+        ),
+        "kicker_rankings_manifest": (
+            PROJECT_ROOT
+            / "results"
+            / "tables"
+            / f"kicker_rankings_{prefix}_manifest.csv"
+        ),
     }
 
 
@@ -270,6 +305,7 @@ def main() -> None:
                 week,
                 PUBLIC_COMPLETED_RESULTS,
                 PUBLIC_COMPLETED_DST_RESULTS,
+                PUBLIC_COMPLETED_KICKER_RESULTS,
             )
         )
         return
@@ -280,6 +316,8 @@ def main() -> None:
         paths["rankings_manifest"],
         paths["dst_rankings_csv"],
         paths["dst_rankings_manifest"],
+        paths["kicker_rankings_csv"],
+        paths["kicker_rankings_manifest"],
     ]
     if any(path.exists() for path in archive_paths):
         if not all(path.exists() for path in archive_paths):
@@ -293,6 +331,7 @@ def main() -> None:
                 week,
                 PUBLIC_COMPLETED_RESULTS,
                 PUBLIC_COMPLETED_DST_RESULTS,
+                PUBLIC_COMPLETED_KICKER_RESULTS,
             )
         )
         print("weekly_pipeline_status=ALREADY_PUBLISHED")
@@ -400,11 +439,30 @@ def main() -> None:
         ]
     )
     run_command(
+        [
+            sys.executable,
+            str(PROJECT_ROOT / "scripts" / "build_kicker_rankings.py"),
+            "--season",
+            str(arguments.season),
+            "--week",
+            str(week),
+            "--as-of",
+            as_of.isoformat(),
+            "--rankings-output",
+            str(paths["kicker_rankings_csv"]),
+            "--completed-results-output",
+            str(COMPLETED_KICKER_RESULTS),
+            "--manifest-output",
+            str(paths["kicker_rankings_manifest"]),
+        ]
+    )
+    run_command(
         publish_command(
             arguments.season,
             week,
             COMPLETED_RESULTS,
             COMPLETED_DST_RESULTS,
+            COMPLETED_KICKER_RESULTS,
         )
     )
     print("weekly_pipeline_status=PASS")

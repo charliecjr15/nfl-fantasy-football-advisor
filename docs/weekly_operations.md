@@ -18,8 +18,10 @@ One successful weekly run performs these operations in order:
 5. Score the frozen position-specific model bundle.
 6. Apply role eligibility plus 12-team position and FLEX demand.
 7. Build ESPN and Yahoo D/ST projections from strict-prior team-game history.
-8. Validate hashes, keys, coverage, predictions, and publication status.
-9. Replace the public `latest` snapshot only after every required control passes.
+8. Build ESPN and Yahoo kicker projections from strict-prior team-game history
+   and the latest active roster/depth-chart evidence.
+9. Validate hashes, keys, coverage, predictions, and publication status.
+10. Replace the public `latest` snapshot only after every required control passes.
 
 If a stage fails, the existing public snapshot remains unchanged.
 
@@ -30,7 +32,7 @@ From the project directory:
 ```powershell
 .\.venv\Scripts\Activate.ps1
 python -m pip install --requirement requirements.txt
-python scripts\publish_latest.py --season 2026 --week 1
+python scripts\run_weekly_pipeline.py --season 2026 --week 1 --publish-existing
 python -m streamlit run app.py
 ```
 
@@ -42,6 +44,8 @@ The app reads only:
 - `results/public/completed_week_results.csv`
 - `results/public/latest_dst_rankings.csv`
 - `results/public/completed_dst_results.csv`
+- `results/public/latest_kicker_rankings.csv`
+- `results/public/completed_kicker_results.csv`
 - `results/public/latest_run.json`
 
 It does not connect to MySQL, load model objects, or expose credentials to a
@@ -162,6 +166,12 @@ The public snapshot is rejected when any of these conditions occurs:
 - D/ST projections do not cover the same teams and games as player rankings.
 - Completed D/ST results include the projection week, a future week, missing
   prior weeks, duplicate team-game keys, or invalid scoring values.
+- Kicker scoring rules differ from the separately hashed kicker configuration.
+- Kicker rankings do not contain exactly one selected player for every
+  target-week team and game represented in the player rankings.
+- Completed kicker results include the projection week, a future week, missing
+  prior weeks, duplicate player/team-game keys, or field-goal and PAT totals
+  that do not reconcile to their attempts.
 
 Schedule coverage is derived from the target-week source evidence rather than
 hard-coded to 32 teams and 16 games, so regular-season bye weeks remain valid.
@@ -172,3 +182,8 @@ The installed injury reader does not yet provide the 2026 injury report. The
 workflow does not interpret missing injury data as healthy. Until a validated
 replacement is added, the app displays the explicit injury warning and the
 publication status remains `PASS_WITH_INJURY_CAVEAT`.
+
+Kicker jobs can change late in preseason or during the week. The app uses the
+latest primary depth-chart kicker who is also active on the roster, then labels
+an active-roster fallback when the two sources do not yet match. Check the final
+team depth chart before kickoff.

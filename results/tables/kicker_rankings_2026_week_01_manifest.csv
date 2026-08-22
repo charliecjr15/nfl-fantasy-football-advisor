@@ -1,0 +1,20 @@
+manifest_key,manifest_value
+run_timestamp_utc,2026-08-22T17:19:09.834129+00:00
+ranking_version,v1_kicker_recent_form
+start_season,2023
+target_season,2026
+target_week,1
+output_rows,32
+candidate_teams,32
+candidate_games,16
+fallback_kickers,1
+rookie_or_new_kickers,3
+duplicate_keys,0
+unavailable_keys,0
+selection_evidence,"{""profiles"": {""espn"": {""selected_method"": ""team_60_opponent_40"", ""test_metrics"": {""mae"": 3.9167587476979744, ""rmse"": 4.932006192501478, ""rows"": 543}, ""validation_mae"": {""balanced_last_5"": 4.034438305709023, ""opponent_last_5"": 4.258563535911603, ""team_40_opponent_60"": 4.057458563535911, ""team_60_opponent_40"": 4.026003683241253, ""team_last_3"": 4.378759975445059, ""team_last_5"": 4.1889502762430935}}, ""yahoo"": {""selected_method"": ""team_60_opponent_40"", ""test_metrics"": {""mae"": 3.841473296500921, ""rmse"": 4.82691716127053, ""rows"": 543}, ""validation_mae"": {""balanced_last_5"": 3.946224677716391, ""opponent_last_5"": 4.1425414364640885, ""team_40_opponent_60"": 3.9636832412523018, ""team_60_opponent_40"": 3.9424677716390426, ""team_last_3"": 4.286065070595456, ""team_last_5"": 4.083609576427255}}}, ""test_season"": 2025, ""validation_season"": 2024}"
+scoring_sources,"{""espn_source"": ""https://support.espn.com/hc/en-us/articles/360003914032-Scoring-Formats"", ""yahoo_source"": ""https://help.yahoo.com/kb/SLN6489.html""}"
+scoring_config_sha256,b9b227e70fc742c86bf1121036e1d403dc662cb6544e7286e2bcd035956851a1
+rankings_csv_sha256,f86b18e538e7052e9de9a76f2bc01286f9b8573b39b7e5757578774135fc9cd0
+completed_results_rows,543
+completed_results_csv_sha256,83563fe5f623d3dd69b9457824c8abfeea83b4e3b0716a2c351b2ea6df74746f
+ranking_status,PASS
