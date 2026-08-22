@@ -2,9 +2,17 @@
 
 ## Status
 
-The target-free inference workflow is implemented but has not yet been executed.
+The target-free inference workflow and its controlled historical smoke test are
+complete.
 
-The historical smoke test must be run only after the inference configuration, script, documentation, and README are committed with a clean Git worktree.
+The smoke test ran from inference commit `967d88b` on the 6,037 frozen 2025 test
+rows. All position and overall reconciliation checks passed with zero prediction
+or source-model mismatches. The maximum absolute prediction difference was
+`7.105427357601002e-15`, below the configured `1e-10` tolerance.
+
+The run excluded the target from the inference frame, performed no model fitting
+or model reselection, and did not recalculate evaluation metrics. Its tracked
+sample, verification table, and run manifest preserve the reviewable evidence.
 
 ## Purpose
 
@@ -215,7 +223,7 @@ The smoke test passes only when:
 - No model fitting or model selection occurred.
 - All lineage and artifact hashes pass.
 
-Expected final controls:
+Observed final controls:
 
 bundle_hash_validation=PASS
 artifact_hash_validation=PASS
@@ -226,13 +234,16 @@ model_fitting_performed=False
 model_reselection_performed=False
 inference_status=PASS
 
-## Smoke-test command
+## Smoke-test command and rerun guard
 
-Run this only after the inference protocol has been committed and git status --short is empty:
+The completed smoke test was run only after the inference protocol had been
+committed and `git status --short` was empty:
 
 python scripts\predict_with_bundle.py --smoke-test --confirm-inference RUN_V1_BUNDLE_INFERENCE
 
-Because output replacement is disabled, do not rerun the smoke test after it succeeds.
+Because output replacement is disabled and the completed evidence now exists,
+do not rerun the smoke test. A rerun requires a separately justified protocol
+and new non-conflicting output paths; prior evidence must not be replaced.
 
 ## General batch-inference mode
 

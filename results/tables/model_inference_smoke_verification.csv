@@ -1,0 +1,6 @@
+scope,position,algorithm,row_count,prediction_mismatch_rows,source_model_mismatch_rows,maximum_absolute_difference,mean_absolute_difference,verification_status
+position,QB,hist_gradient_boosting,664,0,0,3.552713678800501e-15,4.752515315691158e-16,PASS
+position,RB,random_forest,1575,0,0,7.105427357601002e-15,6.662043051258638e-16,PASS
+position,WR,ridge,2511,0,0,3.552713678800501e-15,1.754915284178365e-16,PASS
+position,TE,ridge,1287,0,0,1.7763568394002505e-15,1.2589280498676905e-16,PASS
+overall,ALL,position_champion,6037,0,0,7.105427357601002e-15,3.2591056243337547e-16,PASS

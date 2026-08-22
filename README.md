@@ -10,10 +10,10 @@ The first version targets a default 12-team, full-PPR redraft league. A later ph
 Work in progress. The Version 1 historical data pipeline, MySQL staging layer,
 clean analytical tables, leakage-safe feature engineering, model-data export,
 baseline evaluation, validation-only model selection, one-time final test
-evaluation, and reproducible evaluated model bundle are complete. A target-free
-inference workflow is implemented and documented, but its historical smoke test
-has not yet been executed. The next phase is committing the inference protocol,
-then running and validating that smoke test.
+evaluation, reproducible evaluated model bundle, and target-free historical
+inference smoke test are complete. The next phase is building a leakage-safe
+future-week feature-preparation workflow, then using its projections in the
+fantasy-football decision workflow.
 
 The Version 1 model dataset contains 45,693 player-week observations, 116
 columns, and a strict 102-feature predictor allowlist. Its schema, chronological
@@ -56,8 +56,9 @@ model-artifact hashes before deserialization, loads only the permitted metadata
 and 102 predictors, routes rows through the frozen position-specific models, and
 prevents output replacement. Its input contract and execution modes are
 documented in [the inference guide](docs/model_inference.md). The historical
-smoke test remains pending and will not fit models, reselect models, or
-recalculate test metrics.
+smoke test reproduced all 6,037 frozen 2025 projections with zero prediction or
+source-model mismatches and a maximum absolute difference of `7.11e-15`. It did
+not load the target, fit models, reselect models, or recalculate test metrics.
 
 ## Decisions supported
 
