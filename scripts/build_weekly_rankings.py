@@ -861,7 +861,12 @@ def atomic_write_csv(dataframe: pd.DataFrame, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
     try:
-        dataframe.to_csv(temporary, index=False, encoding="utf-8")
+        dataframe.to_csv(
+            temporary,
+            index=False,
+            encoding="utf-8",
+            lineterminator="\n",
+        )
         os.replace(temporary, path)
     finally:
         if temporary.exists():

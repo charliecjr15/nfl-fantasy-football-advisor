@@ -14,6 +14,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 from build_weekly_rankings import (  # noqa: E402
     assign_confidence,
     assign_rankings,
+    atomic_write_csv,
     validate_schedule_coverage,
 )
 
@@ -62,6 +63,14 @@ def test_bye_week_coverage_uses_feature_evidence() -> None:
     assert validate_schedule_coverage(
         rankings, feature_manifest, configuration()
     ) == (28, 14)
+
+
+def test_csv_evidence_uses_portable_lf_endings(tmp_path: Path) -> None:
+    output = tmp_path / "evidence.csv"
+    atomic_write_csv(pd.DataFrame({"value": [1, 2]}), output)
+    payload = output.read_bytes()
+    assert b"\r\n" not in payload
+    assert payload == b"value\n1\n2\n"
 
 
 def league_settings() -> dict:
