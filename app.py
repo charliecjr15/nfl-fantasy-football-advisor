@@ -2,26 +2,31 @@
 
 from __future__ import annotations
 
+import importlib
 import json
 from pathlib import Path
 
 import pandas as pd
 import streamlit as st
 
-from app_support import (
-    comparison_frame,
-    current_games,
-    dst_projection_frame,
-    filter_completed_dst_results,
-    filter_completed_results,
-    normalize_completed_dst_results,
-    normalize_completed_results,
-    normalize_dst_rankings,
-    normalize_rankings,
-    optimize_lineup,
-    selectable_players,
-    top_projections,
-)
+import app_support as _app_support
+
+
+# Streamlit can rerun this file while retaining an older imported helper module.
+# Reload it so an app deployment and its matching helper changes stay in sync.
+_app_support = importlib.reload(_app_support)
+comparison_frame = _app_support.comparison_frame
+current_games = _app_support.current_games
+dst_projection_frame = _app_support.dst_projection_frame
+filter_completed_dst_results = _app_support.filter_completed_dst_results
+filter_completed_results = _app_support.filter_completed_results
+normalize_completed_dst_results = _app_support.normalize_completed_dst_results
+normalize_completed_results = _app_support.normalize_completed_results
+normalize_dst_rankings = _app_support.normalize_dst_rankings
+normalize_rankings = _app_support.normalize_rankings
+optimize_lineup = _app_support.optimize_lineup
+selectable_players = _app_support.selectable_players
+top_projections = _app_support.top_projections
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent
