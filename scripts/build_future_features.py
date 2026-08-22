@@ -31,6 +31,15 @@ DEFAULT_CONFIG = (
 )
 VALID_IDENTIFIER = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 
+TEAM_ALIASES = {
+    "AZ": "ARI",
+    "ARZ": "ARI",
+    "JAC": "JAX",
+    "OAK": "LV",
+    "SD": "LAC",
+    "STL": "LA",
+}
+
 PLAYER_HISTORY_COLUMNS = [
     "season",
     "week",
@@ -673,6 +682,16 @@ def require_source_columns(
     return dataframe.select(columns)
 
 
+def normalize_team_columns(
+    dataframe: pl.DataFrame, columns: list[str]
+) -> pl.DataFrame:
+    """Normalize known cross-source NFL team abbreviations."""
+
+    return dataframe.with_columns(
+        [pl.col(column).replace(TEAM_ALIASES) for column in columns]
+    )
+
+
 def expand_team_schedule(schedule: pd.DataFrame) -> pd.DataFrame:
     """Expand one game row into reciprocal team-week context rows."""
 
@@ -775,7 +794,29 @@ def load_live_candidates(
         name: sha256_file(path) for name, path in snapshot_paths.items()
     }
 
-    schedule_week = schedules.filter(
+    schedule_alias_rows = int(
+        schedules.select(
+            pl.col("away_team").is_in(list(TEAM_ALIASES)).sum()
+            + pl.col("home_team").is_in(list(TEAM_ALIASES)).sum()
+        ).item()
+    )
+    roster_alias_rows = int(
+        rosters.select(
+            pl.col("team").is_in(list(TEAM_ALIASES)).sum()
+        ).item()
+    )
+    depth_alias_rows = int(
+        depth.select(
+            pl.col("team").is_in(list(TEAM_ALIASES)).sum()
+        ).item()
+    )
+    normalized_schedules = normalize_team_columns(
+        schedules, ["away_team", "home_team"]
+    )
+    normalized_rosters = normalize_team_columns(rosters, ["team"])
+    normalized_depth = normalize_team_columns(depth, ["team"])
+
+    schedule_week = normalized_schedules.filter(
         (pl.col("season") == season)
         & (pl.col("game_type") == "REG")
         & (pl.col("week") == week)
@@ -802,14 +843,14 @@ def load_live_candidates(
     statuses = list(
         configuration["future_features"]["candidate_roster_statuses"]
     )
-    roster_candidates = rosters.filter(
+    roster_candidates = normalized_rosters.filter(
         pl.col("position").is_in(supported_positions)
         & pl.col("status").is_in(statuses)
         & pl.col("gsis_id").is_not_null()
         & (pl.col("gsis_id").str.strip_chars() != "")
     )
 
-    depth_with_time = depth.with_columns(
+    depth_with_time = normalized_depth.with_columns(
         pl.col("dt")
         .str.to_datetime(time_zone="UTC", strict=True)
         .alias("depth_timestamp")
@@ -876,6 +917,14 @@ def load_live_candidates(
     if len(candidates) != len(roster_frame):
         raise ValueError("Candidate teams did not fully match the schedule.")
 
+    candidate_teams = candidates["team"].nunique()
+    candidate_games = candidates["game_id"].nunique()
+    if candidate_teams != 32 or candidate_games != 16:
+        raise ValueError(
+            "Live candidates do not cover all 32 teams and 16 games: "
+            f"teams={candidate_teams}, games={candidate_games}."
+        )
+
     candidates = candidates.rename(
         columns={
             "gsis_id": "player_id",
@@ -897,6 +946,11 @@ def load_live_candidates(
         "depth_matched_candidate_rows": depth_matched_rows,
         "depth_unmatched_candidate_rows": depth_unmatched_rows,
         "candidate_rows": len(candidates),
+        "candidate_teams": candidate_teams,
+        "candidate_games": candidate_games,
+        "schedule_team_alias_rows": schedule_alias_rows,
+        "roster_team_alias_rows": roster_alias_rows,
+        "depth_team_alias_rows": depth_alias_rows,
         "maximum_selected_depth_timestamp": latest_depth[
             "depth_timestamp"
         ].max(),

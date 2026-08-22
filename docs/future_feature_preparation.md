@@ -151,6 +151,11 @@ the selected source snapshots under `data/processed/`. The snapshots and full
 feature file are Git-ignored, while their hashes and compact evidence are
 recorded in tracked artifacts.
 
+Known cross-source team aliases are normalized before joins. This includes the
+current roster source's `AZ` value, which is mapped to the schedule and depth
+source convention `ARI`. The workflow fails unless the final candidate frame
+covers all 32 teams and all 16 target games.
+
 For Version 1, a live candidate must:
 
 - Have a roster position of QB, RB, WR, or TE.
