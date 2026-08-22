@@ -2,8 +2,8 @@
 
 ## Status
 
-The target-free inference workflow and its controlled historical smoke test are
-complete.
+The target-free inference workflow, controlled historical smoke test, and first
+live 2026 Week 1 inference run are complete.
 
 The smoke test ran from inference commit `967d88b` on the 6,037 frozen 2025 test
 rows. All position and overall reconciliation checks passed with zero prediction
@@ -13,6 +13,13 @@ or source-model mismatches. The maximum absolute prediction difference was
 The run excluded the target from the inference frame, performed no model fitting
 or model reselection, and did not recalculate evaluation metrics. Its tracked
 sample, verification table, and run manifest preserve the reviewable evidence.
+
+The live run scored all 808 rows in the frozen 2026 Week 1 future-feature
+snapshot from inference commit `10d4a68`. It produced one finite prediction per
+input row with no duplicate or unavailable keys. The target was absent, and the
+workflow performed no fitting or model reselection. The tracked live manifest
+preserves the input hash, prediction hash, bundle lineage, position routing,
+package contract, and run controls.
 
 ## Purpose
 
@@ -271,6 +278,55 @@ A custom run-manifest path can be supplied with:
 
 The requested prediction and manifest output paths must not already exist.
 
+## Observed live 2026 Week 1 run
+
+The completed live run used the feature snapshot documented in
+`docs/future_feature_preparation.md`:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\predict_with_bundle.py `
+  --input data\processed\future_features\2026_week_01_features.parquet `
+  --output data\processed\inference\2026_week_01_projections.parquet `
+  --manifest-output results\tables\inference_2026_week_01_manifest.csv `
+  --confirm-inference RUN_V1_BUNDLE_INFERENCE
+```
+
+Observed controls:
+
+```text
+input_rows=808
+output_rows=808
+position_rows=QB:110,RB:179,WR:344,TE:175
+missing_predictions=0
+infinite_predictions=0
+duplicate_keys=0
+unavailable_keys=0
+source_contains_target_column=False
+target_column_loaded=False
+model_fitting_performed=False
+model_reselection_performed=False
+input_sha256=f88aac8b6e29e445728c5004e8a3263839b0c1443ae8a9d45d15a08e78cfb207
+predictions_sha256=6dceb7908c51aec3666ba89eed8a7f5c2b5c4a1bd3bec855d11e2dc30d0c2802
+inference_status=PASS
+```
+
+The complete 808-row Parquet output is generated and Git-ignored. Its tracked
+manifest is:
+
+```text
+results/tables/inference_2026_week_01_manifest.csv
+```
+
+A distribution reasonableness check found three negative TE projections. The
+affected players had 1,001 to 2,079 days since their last recorded game; the TE
+ridge model extrapolated that feature downward. The raw inference output remains
+unchanged so the saved-model result is auditable. A downstream ranking or user
+display must flag these out-of-range cases and may floor their displayed points
+at zero without replacing the raw prediction.
+
+This is a structural and reasonableness validation, not an accuracy evaluation:
+2026 Week 1 outcomes are not yet available.
+
 ## Interpretation
 
 The projection is the model’s estimate of configured full-PPR fantasy points for the supplied player-week context.
@@ -280,15 +336,12 @@ inactive announcements, and other information not represented in the input featu
 
 ## Current limitation
 
-This workflow scores an already prepared model-feature file. It does not yet build future-week features from live NFL source data.
+The historical smoke test proves saved-artifact reproduction, while the live run
+proves the feature-to-prediction path works on a frozen future-week snapshot.
+Neither proves future forecast accuracy.
 
-The historical smoke test proves that the saved artifacts, feature contract, position routing, and target-free prediction path reproduce the frozen
-evaluation predictions. It does not prove that a future live-data feature pipeline is complete.
-
-Future production work must separately:
-
-1. Extract current source data.
-2. Apply the same leakage-safe feature definitions.
-3. Create all required metadata and 102 predictors.
-4. Enforce a documented pregame information cutoff.
-5. Pass the inference input controls before scoring.
+The current candidate set is intentionally broad. It includes active-roster,
+depth-matched QB, RB, WR, and TE players, including backups and players with
+little or stale history. Production recommendations must still incorporate
+current role, injury, availability, and confidence controls, then distinguish
+raw projections from display-adjusted ranking values.

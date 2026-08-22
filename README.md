@@ -14,8 +14,9 @@ evaluation, reproducible evaluated model bundle, and target-free historical
 inference smoke test are complete. A leakage-safe future-week feature builder is
 implemented, documented, and validated by a controlled historical parity
 replay. The first live 2026 Week 1 target-free feature snapshot is also complete
-and validated. The next phase is generating current projections from that frozen
-snapshot, then converting them into a decision-focused fantasy workflow.
+and validated. The frozen Version 1 bundle has scored that snapshot, producing
+the first live 2026 Week 1 projections. The next phase is converting the raw
+model output into a decision-focused fantasy workflow.
 
 The Version 1 model dataset contains 45,693 player-week observations, 116
 columns, and a strict 102-feature predictor allowlist. Its schema, chronological
@@ -76,6 +77,14 @@ The live 2026 Week 1 snapshot was frozen at `2026-08-22 07:46:47 UTC`. It
 contains 808 active-roster, depth-matched candidates across all 32 teams and 16
 games. The 107-column target-free frame passed its key, timing, contract,
 missingness, infinity, reopened-output, and hash controls.
+
+The frozen position models then generated 808 live Week 1 projections: 110 QB,
+179 RB, 344 WR, and 175 TE rows. The run loaded no target, fit no model,
+reselected no model, produced no missing or infinite predictions, and preserved
+the exact feature-input hash in its tracked manifest. Three raw TE projections
+were negative because the ridge model extrapolated for players with unusually
+long gaps since their last recorded game. Those raw values remain unchanged for
+auditability and will be flagged and floored only in the later decision layer.
 
 ## Decisions supported
 

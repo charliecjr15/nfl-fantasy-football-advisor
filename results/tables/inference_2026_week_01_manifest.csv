@@ -1,0 +1,37 @@
+manifest_key,manifest_value
+run_timestamp_utc,2026-08-22T07:49:49.992921+00:00
+run_mode,general_inference
+inference_commit,10d4a688df727fa9dca6f0b942bb760d4d769b77
+bundle_protocol_commit,9f8f72b08593dfce45cf0678948c86ea136289f6
+bundle_evidence_commit,11730dc6fb86b659b90a3279907c557e6d703bb0
+inference_configuration_sha256,d7a0f19be187b58c7ba6cded16493afe05fdc7bfb366be26a112a4b849dcec8b
+bundle_manifest_sha256,f9b222521a7bd04bca879537ebe80432fe1ea29bfebeaf74e2a90cabf92d6ce9
+bundle_verification_sha256,a4478a73a94d47f9928aafddcf9fe2edb99995bfaa9908cc2522af67eb7772c5
+bundle_metadata_sha256,96c8d238c16bf2d1e34a7059273243480b083464bd8a07725abacb9e4be9ad31
+inference_version,v1_bundle_inference
+model_bundle_version,v1_evaluated_2025
+input_path,data/processed/future_features/2026_week_01_features.parquet
+input_sha256,f88aac8b6e29e445728c5004e8a3263839b0c1443ae8a9d45d15a08e78cfb207
+input_format,.parquet
+data_split_filter,NONE
+input_rows,808
+output_rows,808
+position_row_counts,"{""QB"": 110, ""RB"": 179, ""TE"": 175, ""WR"": 344}"
+position_models,"{""QB"": ""hist_gradient_boosting"", ""RB"": ""random_forest"", ""TE"": ""ridge"", ""WR"": ""ridge""}"
+artifact_sha256,"{""QB"": ""969e9a8006e0af0520ca1c22123840aa7caab5f6ee3c4d96da114ec57e123759"", ""RB"": ""f3a26b6f47f842ef01f3a6cc0344a8124f0587410cf5cfc832e44bd28debae0c"", ""TE"": ""888c63cfa03ef07e45557e5052860f765121d44378dc5647d38faa681b337554"", ""WR"": ""abdbcdb4b78f1df394d18879d7b8555d285b7508cb7f1c2a1edc0433f1304986""}"
+predictor_count,102
+source_contains_target_column,false
+target_column_loaded,false
+model_fitting_performed,false
+model_reselection_performed,false
+reference_verification_performed,false
+reference_prediction_mismatch_rows,NOT_APPLICABLE
+maximum_reference_prediction_difference,NOT_APPLICABLE
+predictions_path,data/processed/inference/2026_week_01_projections.parquet
+predictions_sha256,6dceb7908c51aec3666ba89eed8a7f5c2b5c4a1bd3bec855d11e2dc30d0c2802
+sample_path,NOT_APPLICABLE
+sample_sha256,NOT_APPLICABLE
+verification_path,NOT_APPLICABLE
+verification_sha256,NOT_APPLICABLE
+prediction_column,projected_fantasy_points_ppr
+source_model_column,projection_source_model
