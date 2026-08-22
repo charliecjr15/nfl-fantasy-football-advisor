@@ -104,15 +104,17 @@ Current 2026 injury context remains unavailable, so these are not final start/si
 calls. See [the weekly-ranking guide](docs/weekly_rankings.md).
 
 The public application reads only the last manifest-validated snapshot. It
-uses a compact five-tab layout for top projections, a manual-roster lineup
-optimizer, player comparison, all target-week games, and actual points from
-previous weeks. Projection tables show only player, position, team, opponent,
-and projected PPR. Completed outcomes are published in a separate display-only
-file and cannot enter target-week model inputs. The portable history path
+uses a compact layout for top projections, a manual-roster lineup optimizer,
+player comparison, ESPN/Yahoo D/ST rankings, all target-week games, and actual
+points from previous weeks. Projection tables show only player, position, team,
+opponent, and projected PPR. D/ST tables show only defense, opponent, and
+projected points. Completed outcomes are published in separate display-only
+files and cannot enter target-week model inputs. The portable history path
 reproduced the complete 2025 Week 18 frozen feature replay with zero text or
 numeric mismatches at the `1e-10` acceptance tolerance. See
-[weekly app operations](docs/weekly_operations.md) for local use, weekly
-scoring, model-release packaging, GitHub automation, and deployment.
+[weekly app operations](docs/weekly_operations.md) and
+[D/ST methodology](docs/dst_rankings.md) for local use, weekly scoring,
+model-release packaging, GitHub automation, and deployment.
 
 ## Run the application
 
@@ -186,7 +188,8 @@ Version 1 will include:
 9. Preseason draft rankings
 10. Exported tables, charts, and a weekly recommendation interface
 
-Kicker and defense projections will follow the validated QB, RB, WR, and TE workflow.
+Defense/Special Teams projections now support ESPN and Yahoo public default
+scoring. Kicker projections remain a later extension.
 
 ## Data source
 

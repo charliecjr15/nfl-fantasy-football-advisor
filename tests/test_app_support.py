@@ -7,9 +7,13 @@ import pandas as pd
 from app_support import (
     comparison_frame,
     current_games,
+    dst_projection_frame,
+    filter_completed_dst_results,
     filter_completed_results,
     filter_rankings,
+    normalize_completed_dst_results,
     normalize_completed_results,
+    normalize_dst_rankings,
     normalize_rankings,
     optimize_lineup,
     top_projections,
@@ -158,3 +162,61 @@ def test_previous_week_results_filter_to_requested_week_and_position() -> None:
 
     assert selected["player_id"].tolist() == ["rb1"]
     assert selected["fantasy_points_ppr"].item() == 22.5
+
+
+def test_dst_helpers_switch_between_espn_and_yahoo() -> None:
+    rankings = normalize_dst_rankings(
+        pd.DataFrame(
+            [
+                {
+                    "season": 2026,
+                    "week": 1,
+                    "game_id": "game-1",
+                    "game_date": "2026-09-10",
+                    "team": "AAA",
+                    "opponent": "BBB",
+                    "espn_projected_points": 8.5,
+                    "espn_rank": 1,
+                    "yahoo_projected_points": 7.0,
+                    "yahoo_rank": 2,
+                },
+                {
+                    "season": 2026,
+                    "week": 1,
+                    "game_id": "game-1",
+                    "game_date": "2026-09-10",
+                    "team": "BBB",
+                    "opponent": "AAA",
+                    "espn_projected_points": 6.0,
+                    "espn_rank": 2,
+                    "yahoo_projected_points": 9.0,
+                    "yahoo_rank": 1,
+                },
+            ]
+        )
+    )
+    completed = normalize_completed_dst_results(
+        pd.DataFrame(
+            [
+                {
+                    "season": 2025,
+                    "week": 18,
+                    "game_id": "game-0",
+                    "game_date": "2026-01-03",
+                    "team": "AAA",
+                    "opponent": "BBB",
+                    "espn_fantasy_points": 12.0,
+                    "yahoo_fantasy_points": 10.0,
+                }
+            ]
+        )
+    )
+
+    yahoo = dst_projection_frame(rankings, "Yahoo")
+    actual = filter_completed_dst_results(completed, 2025, 18, "ESPN")
+
+    assert yahoo["team"].tolist() == ["BBB", "AAA"]
+    assert yahoo["projected_points"].tolist() == [9.0, 7.0]
+    assert actual.to_dict("records") == [
+        {"team": "AAA", "opponent": "BBB", "actual_points": 12.0}
+    ]

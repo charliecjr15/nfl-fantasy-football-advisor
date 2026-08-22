@@ -17,8 +17,9 @@ One successful weekly run performs these operations in order:
 4. Build the 102 target-free predictors using strict prior-week history.
 5. Score the frozen position-specific model bundle.
 6. Apply role eligibility plus 12-team position and FLEX demand.
-7. Validate hashes, keys, coverage, predictions, and publication status.
-8. Replace the public `latest` snapshot only after every required control passes.
+7. Build ESPN and Yahoo D/ST projections from strict-prior team-game history.
+8. Validate hashes, keys, coverage, predictions, and publication status.
+9. Replace the public `latest` snapshot only after every required control passes.
 
 If a stage fails, the existing public snapshot remains unchanged.
 
@@ -39,6 +40,8 @@ The app reads only:
 
 - `results/public/latest_rankings.csv`
 - `results/public/completed_week_results.csv`
+- `results/public/latest_dst_rankings.csv`
+- `results/public/completed_dst_results.csv`
 - `results/public/latest_run.json`
 
 It does not connect to MySQL, load model objects, or expose credentials to a
@@ -155,6 +158,10 @@ The public snapshot is rejected when any of these conditions occurs:
 - Completed results include the projection week or a future week.
 - Completed results have missing fields, duplicate player-game keys, invalid
   positions, non-finite actual points, or an unexpected schema.
+- D/ST scoring rules differ from the rules hashed in the ranking manifest.
+- D/ST projections do not cover the same teams and games as player rankings.
+- Completed D/ST results include the projection week, a future week, missing
+  prior weeks, duplicate team-game keys, or invalid scoring values.
 
 Schedule coverage is derived from the target-week source evidence rather than
 hard-coded to 32 teams and 16 games, so regular-season bye weeks remain valid.

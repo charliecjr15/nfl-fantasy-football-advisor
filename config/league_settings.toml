@@ -31,3 +31,48 @@ receiving_touchdowns = 6.0
 special_teams_touchdowns = 6.0
 two_point_conversions = 2.0
 fumbles_lost = -2.0
+
+[dst_scoring.common]
+sacks = 1.0
+interceptions = 2.0
+fumble_recoveries = 2.0
+defensive_touchdowns = 6.0
+special_teams_touchdowns = 6.0
+blocked_kicks = 2.0
+safeties = 2.0
+
+[dst_scoring.espn]
+label = "ESPN default"
+points_allowed_bands = [
+    [0, 5],
+    [6, 4],
+    [13, 3],
+    [17, 1],
+    [27, 0],
+    [34, -1],
+    [45, -3],
+    [999, -5],
+]
+yards_allowed_bands = [
+    [99, 5],
+    [199, 3],
+    [299, 2],
+    [349, 0],
+    [399, -1],
+    [449, -3],
+    [499, -5],
+    [549, -6],
+    [9999, -7],
+]
+
+[dst_scoring.yahoo]
+label = "Yahoo default"
+points_allowed_bands = [
+    [0, 10],
+    [6, 7],
+    [13, 4],
+    [20, 1],
+    [27, 0],
+    [34, -1],
+    [999, -4],
+]

@@ -11,8 +11,12 @@ import streamlit as st
 from app_support import (
     comparison_frame,
     current_games,
+    dst_projection_frame,
+    filter_completed_dst_results,
     filter_completed_results,
+    normalize_completed_dst_results,
     normalize_completed_results,
+    normalize_dst_rankings,
     normalize_rankings,
     optimize_lineup,
     selectable_players,
@@ -25,6 +29,8 @@ PUBLIC_DIRECTORY = PROJECT_ROOT / "results" / "public"
 RANKINGS_PATH = PUBLIC_DIRECTORY / "latest_rankings.csv"
 METADATA_PATH = PUBLIC_DIRECTORY / "latest_run.json"
 COMPLETED_RESULTS_PATH = PUBLIC_DIRECTORY / "completed_week_results.csv"
+DST_RANKINGS_PATH = PUBLIC_DIRECTORY / "latest_dst_rankings.csv"
+COMPLETED_DST_RESULTS_PATH = PUBLIC_DIRECTORY / "completed_dst_results.csv"
 
 PLAYER_COLUMNS = [
     "player_display_name",
@@ -74,6 +80,20 @@ def load_completed_results(path: str) -> pd.DataFrame:
     return normalize_completed_results(pd.read_csv(path, low_memory=False))
 
 
+@st.cache_data(show_spinner=False)
+def load_dst_rankings(path: str) -> pd.DataFrame:
+    """Read and normalize the separately validated D/ST projections."""
+
+    return normalize_dst_rankings(pd.read_csv(path, low_memory=False))
+
+
+@st.cache_data(show_spinner=False)
+def load_completed_dst_results(path: str) -> pd.DataFrame:
+    """Read and normalize actual team D/ST scores."""
+
+    return normalize_completed_dst_results(pd.read_csv(path, low_memory=False))
+
+
 def projection_table(dataframe: pd.DataFrame) -> None:
     """Display only the five requested player projection fields."""
 
@@ -85,7 +105,31 @@ def projection_table(dataframe: pd.DataFrame) -> None:
     )
 
 
-if not RANKINGS_PATH.exists() or not METADATA_PATH.exists():
+def dst_table(dataframe: pd.DataFrame, points_label: str) -> None:
+    """Display a compact D/ST team, opponent, and points table."""
+
+    st.dataframe(
+        dataframe[["team", "opponent", "projected_points"]],
+        hide_index=True,
+        width="stretch",
+        column_config={
+            "team": "Defense",
+            "opponent": "Opponent",
+            "projected_points": st.column_config.NumberColumn(
+                points_label, format="%.2f"
+            ),
+        },
+    )
+
+
+required_public_files = [
+    RANKINGS_PATH,
+    METADATA_PATH,
+    COMPLETED_RESULTS_PATH,
+    DST_RANKINGS_PATH,
+    COMPLETED_DST_RESULTS_PATH,
+]
+if not all(path.exists() for path in required_public_files):
     st.error("No validated weekly projections are available yet.")
     st.stop()
 
@@ -96,6 +140,10 @@ try:
         load_completed_results(str(COMPLETED_RESULTS_PATH))
         if COMPLETED_RESULTS_PATH.exists()
         else pd.DataFrame()
+    )
+    dst_rankings = load_dst_rankings(str(DST_RANKINGS_PATH))
+    completed_dst_results = load_completed_dst_results(
+        str(COMPLETED_DST_RESULTS_PATH)
     )
 except (OSError, ValueError, json.JSONDecodeError) as error:
     st.error(f"The weekly data could not be loaded: {error}")
@@ -120,6 +168,7 @@ elif not status.startswith("PASS"):
     projections_tab,
     lineup_tab,
     compare_tab,
+    dst_tab,
     games_tab,
     previous_tab,
 ) = st.tabs(
@@ -127,6 +176,7 @@ elif not status.startswith("PASS"):
         "Top projections",
         "My lineup",
         "Compare players",
+        "D/ST",
         "This week's games",
         "Previous weeks",
     ]
@@ -182,6 +232,29 @@ with lineup_tab:
                 **PLAYER_COLUMN_CONFIG,
             },
         )
+    st.markdown("#### Defense/Special Teams")
+    defense_map = dict(
+        zip(dst_rankings["defense_label"], dst_rankings["team"])
+    )
+    defense_columns = st.columns(2)
+    with defense_columns[0]:
+        lineup_dst_profile = st.selectbox(
+            "D/ST scoring", ["ESPN", "Yahoo"], key="lineup_dst_scoring"
+        )
+    with defense_columns[1]:
+        selected_defense = st.selectbox(
+            "Your D/ST",
+            ["None", *defense_map],
+            key="lineup_defense",
+        )
+    if selected_defense != "None":
+        defense_projection = dst_projection_frame(
+            dst_rankings, lineup_dst_profile
+        )
+        defense_projection = defense_projection.loc[
+            defense_projection["team"].eq(defense_map[selected_defense])
+        ]
+        dst_table(defense_projection, "Projected Points")
 
 with compare_tab:
     st.subheader("Compare players")
@@ -201,6 +274,18 @@ with compare_tab:
     else:
         projection_table(comparison)
 
+with dst_tab:
+    st.subheader("Defense/Special Teams projections")
+    st.caption(
+        "Choose your platform's default scoring. Custom league settings may "
+        "produce different totals."
+    )
+    dst_profile = st.selectbox(
+        "Scoring", ["ESPN", "Yahoo"], key="dst_tab_scoring"
+    )
+    dst_projections = dst_projection_frame(dst_rankings, dst_profile)
+    dst_table(dst_projections, "Projected Points")
+
 with games_tab:
     st.subheader(f"All games — Week {week}")
     games = current_games(rankings)
@@ -213,16 +298,19 @@ with games_tab:
 
 with previous_tab:
     st.subheader("Previous weeks")
-    st.caption("Actual full-PPR points from completed games.")
-    if completed_results.empty:
-        st.info("Completed-week results will appear after games are played.")
-    else:
+    result_type = st.radio(
+        "Results", ["Players", "D/ST"], horizontal=True
+    )
+    if result_type == "Players":
+        st.caption("Actual full-PPR points from completed games.")
         prior_seasons = sorted(
             completed_results["season"].astype(int).unique(), reverse=True
         )
         previous_filter_columns = st.columns(3)
         with previous_filter_columns[0]:
-            prior_season = st.selectbox("Season", prior_seasons)
+            prior_season = st.selectbox(
+                "Season", prior_seasons, key="player_history_season"
+            )
         available_weeks = sorted(
             completed_results.loc[
                 completed_results["season"].eq(prior_season), "week"
@@ -232,7 +320,9 @@ with previous_tab:
             reverse=True,
         )
         with previous_filter_columns[1]:
-            prior_week = st.selectbox("Week", available_weeks)
+            prior_week = st.selectbox(
+                "Week", available_weeks, key="player_history_week"
+            )
         with previous_filter_columns[2]:
             prior_position = st.selectbox(
                 "Position",
@@ -261,6 +351,52 @@ with previous_tab:
                 "opponent": "Opponent",
                 "fantasy_points_ppr": st.column_config.NumberColumn(
                     "Actual PPR", format="%.2f"
+                ),
+            },
+        )
+    else:
+        st.caption("Actual D/ST points using the selected platform default.")
+        dst_seasons = sorted(
+            completed_dst_results["season"].astype(int).unique(), reverse=True
+        )
+        dst_history_columns = st.columns(3)
+        with dst_history_columns[0]:
+            dst_season = st.selectbox(
+                "Season", dst_seasons, key="dst_history_season"
+            )
+        dst_weeks = sorted(
+            completed_dst_results.loc[
+                completed_dst_results["season"].eq(dst_season), "week"
+            ]
+            .astype(int)
+            .unique(),
+            reverse=True,
+        )
+        with dst_history_columns[1]:
+            dst_week = st.selectbox(
+                "Week", dst_weeks, key="dst_history_week"
+            )
+        with dst_history_columns[2]:
+            dst_history_profile = st.selectbox(
+                "Scoring",
+                ["ESPN", "Yahoo"],
+                key="dst_history_scoring",
+            )
+        previous_dst = filter_completed_dst_results(
+            completed_dst_results,
+            dst_season,
+            dst_week,
+            dst_history_profile,
+        )
+        st.dataframe(
+            previous_dst,
+            hide_index=True,
+            width="stretch",
+            column_config={
+                "team": "Defense",
+                "opponent": "Opponent",
+                "actual_points": st.column_config.NumberColumn(
+                    "Actual Points", format="%.2f"
                 ),
             },
         )

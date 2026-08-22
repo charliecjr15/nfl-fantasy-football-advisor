@@ -22,6 +22,28 @@ COMPLETED_RESULTS_COLUMNS = {
     "opponent",
     "fantasy_points_ppr",
 }
+DST_RANKING_COLUMNS = {
+    "season",
+    "week",
+    "game_id",
+    "game_date",
+    "team",
+    "opponent",
+    "espn_projected_points",
+    "espn_rank",
+    "yahoo_projected_points",
+    "yahoo_rank",
+}
+DST_RESULT_COLUMNS = {
+    "season",
+    "week",
+    "game_id",
+    "game_date",
+    "team",
+    "opponent",
+    "espn_fantasy_points",
+    "yahoo_fantasy_points",
+}
 
 
 def normalize_rankings(dataframe: pd.DataFrame) -> pd.DataFrame:
@@ -147,6 +169,104 @@ def filter_completed_results(
         ascending=[False, True],
         kind="stable",
     ).reset_index(drop=True)
+
+
+def normalize_dst_rankings(dataframe: pd.DataFrame) -> pd.DataFrame:
+    """Normalize the separately published team D/ST projections."""
+
+    missing = sorted(DST_RANKING_COLUMNS - set(dataframe.columns))
+    if missing:
+        raise ValueError(
+            "D/ST rankings are missing columns: " + ", ".join(missing)
+        )
+    rankings = dataframe.copy()
+    for column in [
+        "season",
+        "week",
+        "espn_projected_points",
+        "espn_rank",
+        "yahoo_projected_points",
+        "yahoo_rank",
+    ]:
+        rankings[column] = pd.to_numeric(rankings[column], errors="raise")
+    rankings["defense_label"] = (
+        rankings["team"].astype(str)
+        + " D/ST | vs "
+        + rankings["opponent"].astype(str)
+    )
+    return rankings
+
+
+def dst_projection_frame(
+    rankings: pd.DataFrame,
+    profile: str,
+) -> pd.DataFrame:
+    """Return a compact projection table for one scoring platform."""
+
+    normalized_profile = profile.strip().lower()
+    if normalized_profile not in {"espn", "yahoo"}:
+        raise ValueError(f"Unknown D/ST scoring profile: {profile}")
+    points_column = f"{normalized_profile}_projected_points"
+    rank_column = f"{normalized_profile}_rank"
+    return (
+        rankings.loc[:, ["team", "opponent", points_column, rank_column]]
+        .rename(
+            columns={points_column: "projected_points", rank_column: "rank"}
+        )
+        .sort_values(["rank", "team"], kind="stable")
+        .reset_index(drop=True)
+    )
+
+
+def normalize_completed_dst_results(dataframe: pd.DataFrame) -> pd.DataFrame:
+    """Normalize actual team D/ST scores for previous-week display."""
+
+    missing = sorted(DST_RESULT_COLUMNS - set(dataframe.columns))
+    if missing:
+        raise ValueError(
+            "Completed D/ST results are missing columns: "
+            + ", ".join(missing)
+        )
+    completed = dataframe.copy()
+    for column in [
+        "season",
+        "week",
+        "espn_fantasy_points",
+        "yahoo_fantasy_points",
+    ]:
+        completed[column] = pd.to_numeric(completed[column], errors="raise")
+    completed["game_date"] = pd.to_datetime(
+        completed["game_date"], errors="raise"
+    )
+    return completed
+
+
+def filter_completed_dst_results(
+    completed: pd.DataFrame,
+    season: int,
+    week: int,
+    profile: str,
+) -> pd.DataFrame:
+    """Return one completed week of D/ST scores for a platform."""
+
+    normalized_profile = profile.strip().lower()
+    if normalized_profile not in {"espn", "yahoo"}:
+        raise ValueError(f"Unknown D/ST scoring profile: {profile}")
+    points_column = f"{normalized_profile}_fantasy_points"
+    return (
+        completed.loc[
+            completed["season"].eq(season)
+            & completed["week"].eq(week),
+            ["team", "opponent", points_column],
+        ]
+        .rename(columns={points_column: "actual_points"})
+        .sort_values(
+            ["actual_points", "team"],
+            ascending=[False, True],
+            kind="stable",
+        )
+        .reset_index(drop=True)
+    )
 
 
 def filter_rankings(

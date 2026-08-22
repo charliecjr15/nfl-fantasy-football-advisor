@@ -38,6 +38,16 @@ COMPLETED_RESULTS = (
 PUBLIC_COMPLETED_RESULTS = (
     PROJECT_ROOT / "results" / "public" / "completed_week_results.csv"
 )
+COMPLETED_DST_RESULTS = (
+    PROJECT_ROOT
+    / "data"
+    / "processed"
+    / "runtime_history"
+    / "completed_dst_results.csv"
+)
+PUBLIC_COMPLETED_DST_RESULTS = (
+    PROJECT_ROOT / "results" / "public" / "completed_dst_results.csv"
+)
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -160,6 +170,7 @@ def publish_command(
     season: int,
     week: int,
     completed_results: Path | None = None,
+    completed_dst_results: Path | None = None,
 ) -> list[str]:
     """Return the validated-publication command."""
 
@@ -174,6 +185,18 @@ def publish_command(
     if completed_results is not None:
         command.extend(
             ["--completed-results", str(completed_results)]
+        )
+    if completed_dst_results is not None:
+        paths = output_paths(season, week)
+        command.extend(
+            [
+                "--dst-rankings",
+                str(paths["dst_rankings_csv"]),
+                "--dst-manifest",
+                str(paths["dst_rankings_manifest"]),
+                "--completed-dst-results",
+                str(completed_dst_results),
+            ]
         )
     return command
 
@@ -215,6 +238,18 @@ def output_paths(season: int, week: int) -> dict[str, Path]:
             / "tables"
             / f"weekly_rankings_{prefix}_manifest.csv"
         ),
+        "dst_rankings_csv": (
+            PROJECT_ROOT
+            / "results"
+            / "tables"
+            / f"dst_rankings_{prefix}.csv"
+        ),
+        "dst_rankings_manifest": (
+            PROJECT_ROOT
+            / "results"
+            / "tables"
+            / f"dst_rankings_{prefix}_manifest.csv"
+        ),
     }
 
 
@@ -231,24 +266,33 @@ def main() -> None:
     if arguments.publish_existing:
         run_command(
             publish_command(
-                arguments.season, week, PUBLIC_COMPLETED_RESULTS
+                arguments.season,
+                week,
+                PUBLIC_COMPLETED_RESULTS,
+                PUBLIC_COMPLETED_DST_RESULTS,
             )
         )
         return
 
     paths = output_paths(arguments.season, week)
-    if paths["rankings_csv"].exists() or paths["rankings_manifest"].exists():
-        if not (
-            paths["rankings_csv"].exists()
-            and paths["rankings_manifest"].exists()
-        ):
+    archive_paths = [
+        paths["rankings_csv"],
+        paths["rankings_manifest"],
+        paths["dst_rankings_csv"],
+        paths["dst_rankings_manifest"],
+    ]
+    if any(path.exists() for path in archive_paths):
+        if not all(path.exists() for path in archive_paths):
             raise RuntimeError(
                 "Only part of the archived ranking evidence exists for the "
                 "target week. Repair the archive before automation continues."
             )
         run_command(
             publish_command(
-                arguments.season, week, PUBLIC_COMPLETED_RESULTS
+                arguments.season,
+                week,
+                PUBLIC_COMPLETED_RESULTS,
+                PUBLIC_COMPLETED_DST_RESULTS,
             )
         )
         print("weekly_pipeline_status=ALREADY_PUBLISHED")
@@ -338,8 +382,29 @@ def main() -> None:
         ]
     )
     run_command(
+        [
+            sys.executable,
+            str(PROJECT_ROOT / "scripts" / "build_dst_rankings.py"),
+            "--season",
+            str(arguments.season),
+            "--week",
+            str(week),
+            "--as-of",
+            as_of.isoformat(),
+            "--rankings-output",
+            str(paths["dst_rankings_csv"]),
+            "--completed-results-output",
+            str(COMPLETED_DST_RESULTS),
+            "--manifest-output",
+            str(paths["dst_rankings_manifest"]),
+        ]
+    )
+    run_command(
         publish_command(
-            arguments.season, week, COMPLETED_RESULTS
+            arguments.season,
+            week,
+            COMPLETED_RESULTS,
+            COMPLETED_DST_RESULTS,
         )
     )
     print("weekly_pipeline_status=PASS")
