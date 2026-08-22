@@ -2,12 +2,21 @@
 
 ## Status
 
-The target-free future-week feature builder is implemented but has not yet been
-executed as a controlled run.
+The target-free future-week feature builder and its controlled historical replay
+are complete.
 
-The historical replay must be run only after the configuration, script,
-documentation, and README are committed with a clean Git worktree. Live feature
-preparation must wait until the replay evidence passes and is committed.
+The replay ran from future-feature commit `0b86159` for the 350 observed player
+rows in 2025 Week 18. All 107 unique output columns reconciled with zero
+mismatched rows. The maximum absolute numeric difference was
+`7.105427357601002e-15`, below the configured `1e-10` tolerance.
+
+The run loaded 45,343 player-history rows and 16,867 opponent-history rows, all
+from weeks strictly earlier than the target. It loaded no target-week outcome,
+produced no duplicate or unavailable key, contained no infinite value, and
+passed its reopened-output and hash controls.
+
+Live 2026 Week 1 feature preparation remains pending until the tracked replay
+evidence is committed with a clean Git worktree.
 
 ## Purpose
 
@@ -114,6 +123,21 @@ The replay passes only when:
 - No numeric feature contains infinity.
 - Reopened written outputs and hashes reconcile.
 
+### Observed replay controls
+
+```text
+replay_candidate_rows=350
+player_history_rows=45,343
+opponent_history_rows=16,867
+same_week_history_rows_loaded=0
+future_feature_columns=107
+predictor_count=102
+replay_verified_columns=107
+replay_mismatch_rows=0
+replay_maximum_absolute_difference=7.105427357601002e-15
+historical_replay_reconciliation=PASS
+```
+
 ## Live candidate sources
 
 Live mode uses the installed `nflreadpy` package to load:
@@ -162,12 +186,15 @@ Existing outputs are never overwritten.
 
 ## Controlled commands
 
-Run the historical replay only after the protocol commit leaves
+The completed historical replay was run after the protocol commit left
 `git status --short` empty:
 
 ```powershell
 python scripts\build_future_features.py --replay --confirm-build BUILD_V1_FUTURE_FEATURES
 ```
+
+Do not rerun it now that the protected replay outputs exist. Prior evidence must
+not be replaced.
 
 After the replay evidence is committed, live 2026 Week 1 preparation requires
 an explicit UTC-aware cutoff:

@@ -1,0 +1,41 @@
+manifest_key,manifest_value
+run_timestamp_utc,2026-08-22T07:41:53.366266+00:00
+run_mode,replay
+future_feature_commit,0b86159faf50fe7e900d53c4b0d3c7d866988968
+feature_pipeline_commit,75db96b
+future_feature_configuration_sha256,0e7594d3f57332188439ea542db836c9e6968b960baf7af80fe66915a2d44625
+model_settings_sha256,67cda074536f1c047b752567eb62e7332a6c240b7ee5785dc6c6f7a3479bf623
+feature_sql_sha256,b684da06d5e1df447e5e585efd5b552fdfd1c4ea75f4a60f29709b3e844d48b6
+future_feature_version,v1_prior_game_future
+model_feature_version,v1_prior_game
+target_season,2025
+target_week,18
+as_of_utc,not_applicable
+history_cutoff_rule,strict_prior_week
+same_week_history_rows_loaded,0
+target_week_outcome_loaded,false
+prior_completed_outcomes_used_as_history,true
+database_name,nfl_fantasy_advisor
+player_history_rows,45343
+opponent_history_rows,16867
+maximum_player_history_date,2025-12-29T00:00:00
+maximum_opponent_history_date,2025-12-29T00:00:00
+source_sha256,"{""replay_reference"": ""6733ff26d86b8966d0c3aa76c592c2f41b35e555433c99738ccb4c01b42f3fe3""}"
+source_summary,"{""candidate_rows"": 350, ""reference_source_contains_target"": true, ""target_week_outcome_loaded"": false}"
+output_rows,350
+output_columns,107
+predictor_count,102
+position_counts,"{""QB"": 43, ""RB"": 92, ""TE"": 74, ""WR"": 141}"
+players_without_prior_games,6
+players_without_current_season_history,9
+missing_numeric_values,1387
+duplicate_keys,0
+unavailable_keys,0
+infinite_numeric_values,0
+features_path,data/processed/future_features/2025_week_18_replay_features.parquet
+features_sha256,80611160c389699b71d07141f7070bd234c29d73636d73358ef792a841f5a7d5
+sample_path,data/sample/future_features_2025_week_18_replay_sample.csv
+sample_sha256,231c506cd04c6ca17ed1ab37508f9e3d58c67d798147453a58c34de9a92c7946
+verification_path,results/tables/future_features_2025_week_18_replay_verification.csv
+verification_sha256,bbd69e1999c3cf0f9662909eea0b2c79b79481f2eeb6d2793ad1a66bdfcdd0c6
+replay_feature_mismatch_rows,0

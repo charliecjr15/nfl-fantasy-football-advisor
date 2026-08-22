@@ -12,9 +12,9 @@ clean analytical tables, leakage-safe feature engineering, model-data export,
 baseline evaluation, validation-only model selection, one-time final test
 evaluation, reproducible evaluated model bundle, and target-free historical
 inference smoke test are complete. A leakage-safe future-week feature builder is
-implemented and documented, but its historical parity replay has not yet been
-executed as a controlled run. The next phase is committing that protocol, then
-running the replay before preparing live inputs.
+implemented, documented, and validated by a controlled historical parity
+replay. The next phase is preparing and validating the live 2026 Week 1 feature
+snapshot before generating current projections.
 
 The Version 1 model dataset contains 45,693 player-week observations, 116
 columns, and a strict 102-feature predictor allowlist. Its schema, chronological
@@ -67,6 +67,9 @@ candidate and schedule context, and emits the exact frozen target-free feature
 contract. Its timing rules, replay controls, live candidate policy, and current
 limitations are documented in
 [the future-feature preparation guide](docs/future_feature_preparation.md).
+The 2025 Week 18 replay rebuilt all 350 rows and reconciled all 107 unique output
+columns with zero mismatched rows and a maximum absolute numeric difference of
+`7.11e-15`.
 
 ## Decisions supported
 
