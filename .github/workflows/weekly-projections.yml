@@ -82,6 +82,9 @@ jobs:
           fi
           python scripts/run_weekly_pipeline.py "${arguments[@]}"
 
+      - name: Build advisor context and weather
+        run: python scripts/build_advisor_context.py
+
       - name: Commit validated public evidence
         shell: bash
         run: |

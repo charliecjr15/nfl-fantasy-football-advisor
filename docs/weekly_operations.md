@@ -22,6 +22,8 @@ One successful weekly run performs these operations in order:
    and the latest active roster/depth-chart evidence.
 9. Validate hashes, keys, coverage, predictions, and publication status.
 10. Replace the public `latest` snapshot only after every required control passes.
+11. Build calibrated projection ranges, frozen model accuracy, the complete
+    season schedule, bye weeks, and target-week weather context.
 
 If a stage fails, the existing public snapshot remains unchanged.
 
@@ -33,6 +35,7 @@ From the project directory:
 .\.venv\Scripts\Activate.ps1
 python -m pip install --requirement requirements.txt
 python scripts\run_weekly_pipeline.py --season 2026 --week 1 --publish-existing
+python scripts\build_advisor_context.py
 python -m streamlit run app.py
 ```
 
@@ -47,6 +50,11 @@ The app reads only:
 - `results/public/latest_kicker_rankings.csv`
 - `results/public/completed_kicker_results.csv`
 - `results/public/latest_run.json`
+- `results/public/projection_calibration.csv`
+- `results/public/model_accuracy.csv`
+- `results/public/season_schedule.csv`
+- `results/public/game_context.csv`
+- `results/public/advisor_context.json`
 
 It does not connect to MySQL, load model objects, or expose credentials to a
 visitor.
@@ -147,6 +155,13 @@ No Streamlit secrets are required for the read-only public application. A
 successful GitHub Actions commit updates the public result files, which causes
 the deployed app to refresh from the repository.
 
+The app provides a manual shareable roster link and CSV export. Automatic
+Yahoo roster sync would require a Yahoo OAuth client, secure callback handling,
+and per-user token storage. True in-game point tracking would require a
+separate live-stat provider. Neither is presented as connected until those
+external requirements exist. ESPN does not provide a supported public fantasy
+league API.
+
 ## Publication gates
 
 The public snapshot is rejected when any of these conditions occurs:
@@ -187,3 +202,8 @@ Kicker jobs can change late in preseason or during the week. The app uses the
 latest primary depth-chart kicker who is also active on the roster, then labels
 an active-roster fallback when the two sources do not yet match. Check the final
 team depth chart before kickoff.
+
+Weather is display-only context. Outdoor forecasts are retrieved only when a
+game enters the supported 16-day Open-Meteo window; before then the app labels
+the forecast as pending. See [advisor context](advisor_context.md) for the
+calibration, schedule, weather, rest-of-season proxy, and integration contract.

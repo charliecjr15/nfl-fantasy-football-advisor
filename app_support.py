@@ -150,6 +150,278 @@ def search_projection_pool(
     return rankings.loc[matches].copy()
 
 
+def apply_projection_intervals(
+    rankings: pd.DataFrame, calibration: pd.DataFrame
+) -> pd.DataFrame:
+    """Apply position residual ranges calibrated on prior validation data."""
+
+    required = {"position", "lower_residual", "upper_residual"}
+    missing = sorted(required - set(calibration.columns))
+    if missing:
+        raise ValueError(
+            "Projection calibration is missing columns: " + ", ".join(missing)
+        )
+    if calibration["position"].duplicated().any():
+        raise ValueError("Projection calibration positions are not unique.")
+    enriched = rankings.merge(
+        calibration[["position", "lower_residual", "upper_residual"]],
+        on="position",
+        how="left",
+        validate="many_to_one",
+    )
+    if enriched[["lower_residual", "upper_residual"]].isna().any().any():
+        missing_positions = sorted(
+            enriched.loc[
+                enriched["lower_residual"].isna(), "position"
+            ].unique()
+        )
+        raise ValueError(
+            "Projection ranges are unavailable for positions: "
+            + ", ".join(missing_positions)
+        )
+    projection = enriched["display_projected_fantasy_points_ppr"]
+    enriched["projection_floor_ppr"] = (
+        projection + enriched["lower_residual"]
+    ).clip(lower=0).round(2)
+    enriched["projection_ceiling_ppr"] = (
+        projection + enriched["upper_residual"]
+    ).clip(lower=0).round(2)
+    enriched["projection_ceiling_ppr"] = enriched[
+        ["projection_floor_ppr", "projection_ceiling_ppr"]
+    ].max(axis="columns")
+    return enriched
+
+
+def schedule_team_frame(schedule: pd.DataFrame) -> pd.DataFrame:
+    """Return one team-opponent row for each scheduled game appearance."""
+
+    required = {
+        "season",
+        "week",
+        "game_id",
+        "away_team",
+        "home_team",
+    }
+    missing = sorted(required - set(schedule.columns))
+    if missing:
+        raise ValueError("Season schedule is missing columns: " + ", ".join(missing))
+    away = schedule[
+        ["season", "week", "game_id", "away_team", "home_team"]
+    ].rename(columns={"away_team": "team", "home_team": "opponent"})
+    away["venue"] = "Away"
+    home = schedule[
+        ["season", "week", "game_id", "home_team", "away_team"]
+    ].rename(columns={"home_team": "team", "away_team": "opponent"})
+    home["venue"] = "Home"
+    appearances = pd.concat([away, home], ignore_index=True)
+    appearances["week"] = pd.to_numeric(
+        appearances["week"], errors="raise"
+    ).astype(int)
+    if appearances[["season", "week", "team"]].duplicated().any():
+        raise ValueError("Schedule contains duplicate team-week appearances.")
+    return appearances.sort_values(["team", "week"], kind="stable").reset_index(
+        drop=True
+    )
+
+
+def team_bye_weeks(schedule: pd.DataFrame) -> pd.DataFrame:
+    """Resolve the one missing regular-season week for every team."""
+
+    appearances = schedule_team_frame(schedule)
+    rows: list[dict[str, object]] = []
+    for team, games in appearances.groupby("team", sort=True):
+        missing = sorted(set(range(1, 19)) - set(games["week"]))
+        if len(missing) != 1:
+            raise ValueError(
+                f"Team {team} must resolve to exactly one bye week."
+            )
+        rows.append({"team": team, "bye_week": missing[0]})
+    if len(rows) != 32:
+        raise ValueError(f"Expected 32 bye-week rows, observed {len(rows)}.")
+    return pd.DataFrame(rows)
+
+
+def season_outlook_frame(
+    rankings: pd.DataFrame,
+    schedule: pd.DataFrame,
+    current_week: int,
+    position: str = "All",
+    limit: int = 50,
+) -> pd.DataFrame:
+    """Build a transparent current-rate rest-of-season planning proxy."""
+
+    appearances = schedule_team_frame(schedule)
+    remaining = (
+        appearances.loc[appearances["week"].ge(current_week)]
+        .groupby("team", as_index=False)
+        .size()
+        .rename(columns={"size": "games_remaining"})
+    )
+    byes = team_bye_weeks(schedule)
+    selected = rankings.loc[rankings["role_eligible"]].copy()
+    if position == "FLEX":
+        selected = selected.loc[selected["position"].isin(FLEX_POSITIONS)]
+    elif position != "All":
+        selected = selected.loc[selected["position"].eq(position)]
+    selected = selected.merge(remaining, on="team", how="left", validate="many_to_one")
+    selected = selected.merge(byes, on="team", how="left", validate="many_to_one")
+    if selected[["games_remaining", "bye_week"]].isna().any().any():
+        raise ValueError("Season outlook could not reconcile every player team.")
+    selected["ros_points_proxy"] = (
+        selected["display_projected_fantasy_points_ppr"]
+        * selected["games_remaining"]
+    ).round(2)
+    columns = [
+        "player_id",
+        "player_display_name",
+        "position",
+        "team",
+        "bye_week",
+        "games_remaining",
+        "display_projected_fantasy_points_ppr",
+        "ros_points_proxy",
+        "evidence_confidence",
+    ]
+    for optional in ["projection_floor_ppr", "projection_ceiling_ppr"]:
+        if optional in selected:
+            columns.append(optional)
+    return (
+        selected.sort_values(
+            ["ros_points_proxy", "player_display_name"],
+            ascending=[False, True],
+            kind="stable",
+        )[columns]
+        .head(limit)
+        .reset_index(drop=True)
+    )
+
+
+def bye_week_frame(
+    rankings: pd.DataFrame,
+    schedule: pd.DataFrame,
+    player_ids: Iterable[str],
+    current_week: int,
+) -> pd.DataFrame:
+    """Return one compact bye-planning row per selected roster player."""
+
+    selected_ids = {str(player_id) for player_id in player_ids}
+    roster = rankings.loc[
+        rankings["player_id"].astype(str).isin(selected_ids),
+        ["player_display_name", "position", "team"],
+    ].copy()
+    if roster.empty:
+        return pd.DataFrame(
+            columns=[
+                "player_display_name",
+                "position",
+                "team",
+                "bye_week",
+                "bye_status",
+            ]
+        )
+    roster = roster.merge(
+        team_bye_weeks(schedule), on="team", how="left", validate="many_to_one"
+    )
+    roster["bye_status"] = roster["bye_week"].map(
+        lambda bye: (
+            "THIS WEEK"
+            if int(bye) == current_week
+            else "UPCOMING"
+            if int(bye) > current_week
+            else "COMPLETED"
+        )
+    )
+    return roster.sort_values(
+        ["bye_week", "position", "player_display_name"], kind="stable"
+    ).reset_index(drop=True)
+
+
+def waiver_shortlist(
+    rankings: pd.DataFrame,
+    roster_player_ids: Iterable[str],
+    unavailable_player_ids: Iterable[str] = (),
+    position: str = "All",
+    limit: int = 15,
+) -> pd.DataFrame:
+    """Rank non-roster players while labeling the ownership assumption."""
+
+    roster_ids = {str(player_id) for player_id in roster_player_ids}
+    unavailable_ids = {str(player_id) for player_id in unavailable_player_ids}
+    candidates = rankings.loc[
+        rankings["role_eligible"]
+        & ~rankings["player_id"].astype(str).isin(roster_ids | unavailable_ids)
+    ].copy()
+    if position == "FLEX":
+        candidates = candidates.loc[candidates["position"].isin(FLEX_POSITIONS)]
+    elif position != "All":
+        candidates = candidates.loc[candidates["position"].eq(position)]
+
+    roster = rankings.loc[
+        rankings["player_id"].astype(str).isin(roster_ids)
+        & rankings["role_eligible"]
+    ].copy()
+    weakest_by_position = roster.groupby("position")[
+        "display_projected_fantasy_points_ppr"
+    ].min()
+    candidates["upgrade_vs_roster"] = candidates.apply(
+        lambda row: (
+            row["display_projected_fantasy_points_ppr"]
+            - weakest_by_position.get(row["position"], float("nan"))
+        ),
+        axis="columns",
+    ).round(2)
+    columns = [
+        "player_id",
+        "player_display_name",
+        "position",
+        "team",
+        "opponent",
+        "display_projected_fantasy_points_ppr",
+        "upgrade_vs_roster",
+    ]
+    for optional in ["projection_floor_ppr", "projection_ceiling_ppr"]:
+        if optional in candidates:
+            columns.append(optional)
+    return (
+        candidates.sort_values(
+            [
+                "display_projected_fantasy_points_ppr",
+                "player_display_name",
+            ],
+            ascending=[False, True],
+            kind="stable",
+        )[columns]
+        .head(limit)
+        .reset_index(drop=True)
+    )
+
+
+def trade_side_summary(
+    outlook: pd.DataFrame, player_ids: Iterable[str]
+) -> dict[str, float | int]:
+    """Summarize a proposed trade side using transparent planning measures."""
+
+    selected_ids = {str(player_id) for player_id in player_ids}
+    selected = outlook.loc[
+        outlook["player_id"].astype(str).isin(selected_ids)
+    ]
+    result: dict[str, float | int] = {
+        "players": len(selected),
+        "weekly_projection": round(
+            float(selected["display_projected_fantasy_points_ppr"].sum()), 2
+        ),
+        "ros_points_proxy": round(float(selected["ros_points_proxy"].sum()), 2),
+    }
+    if "projection_floor_ppr" in selected:
+        result["weekly_floor"] = round(
+            float(selected["projection_floor_ppr"].sum()), 2
+        )
+        result["weekly_ceiling"] = round(
+            float(selected["projection_ceiling_ppr"].sum()), 2
+        )
+    return result
+
+
 def flex_projections(
     rankings: pd.DataFrame,
     limit: int = 25,
@@ -613,9 +885,9 @@ def filter_rankings(
 
 
 def selectable_players(rankings: pd.DataFrame) -> dict[str, str]:
-    """Return stable UI label-to-player mappings."""
+    """Return stable UI mappings for players with a usable weekly role."""
 
-    ordered = rankings.sort_values(
+    ordered = rankings.loc[rankings["role_eligible"]].sort_values(
         [
             "position",
             "display_projected_fantasy_points_ppr",
@@ -633,11 +905,16 @@ def selectable_players(rankings: pd.DataFrame) -> dict[str, str]:
 
 
 def optimize_lineup(
-    rankings: pd.DataFrame, player_ids: Iterable[str]
+    rankings: pd.DataFrame,
+    player_ids: Iterable[str],
+    unavailable_player_ids: Iterable[str] = (),
 ) -> tuple[pd.DataFrame, list[str]]:
     """Choose a legal 1-QB, 2-RB, 2-WR, 1-TE, 1-FLEX lineup."""
 
     selected_ids = {str(player_id) for player_id in player_ids}
+    unavailable_ids = {
+        str(player_id) for player_id in unavailable_player_ids
+    }
     roster = rankings.loc[
         rankings["player_id"].astype(str).isin(selected_ids)
     ].copy()
@@ -649,7 +926,10 @@ def optimize_lineup(
     roster["recommended_slot"] = "BENCH"
     roster["lineup_status"] = "BENCH"
 
-    eligible = roster.loc[roster["role_eligible"]].copy()
+    eligible = roster.loc[
+        roster["role_eligible"]
+        & ~roster["player_id"].astype(str).isin(unavailable_ids)
+    ].copy()
     used_player_ids: set[str] = set()
     gaps: list[str] = []
 
@@ -686,6 +966,10 @@ def optimize_lineup(
         ~roster["role_eligible"],
         ["recommended_slot", "lineup_status"],
     ] = ["INELIGIBLE", "CHECK ROLE"]
+    roster.loc[
+        roster["player_id"].astype(str).isin(unavailable_ids),
+        ["recommended_slot", "lineup_status"],
+    ] = ["UNAVAILABLE", "SIT"]
     slot_order = {"QB": 0, "RB": 1, "WR": 2, "TE": 3, "FLEX": 4}
     roster["_slot_order"] = roster["recommended_slot"].map(
         slot_order
@@ -708,16 +992,20 @@ def comparison_frame(
     """Return a projection-sorted comparison for selected players."""
 
     selected_ids = {str(player_id) for player_id in player_ids}
+    columns = [
+        "player_display_name",
+        "position",
+        "team",
+        "opponent",
+        "display_projected_fantasy_points_ppr",
+    ]
+    for optional in ["projection_floor_ppr", "projection_ceiling_ppr"]:
+        if optional in rankings:
+            columns.append(optional)
     return (
         rankings.loc[
             rankings["player_id"].astype(str).isin(selected_ids),
-            [
-                "player_display_name",
-                "position",
-                "team",
-                "opponent",
-                "display_projected_fantasy_points_ppr",
-            ],
+            columns,
         ]
         .sort_values(
             "display_projected_fantasy_points_ppr",

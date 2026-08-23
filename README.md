@@ -103,20 +103,22 @@ exactly 84 provisional lineup slots: 12 QB, 24 RB, 24 WR, 12 TE, and 12 FLEX.
 Current 2026 injury context remains unavailable, so these are not final start/sit
 calls. See [the weekly-ranking guide](docs/weekly_rankings.md).
 
-The public application reads only the last manifest-validated snapshot. It
-uses a compact NFL-themed layout for searchable top projections, a
-manual-roster lineup optimizer with a projected lineup total, player comparison
-with a projected edge, a dedicated RB/WR/TE FLEX list, ESPN/Yahoo kicker and
-D/ST rankings, all target-week games, previous-week results, and full-season
-offense, kicker, and D/ST totals. Projection tables show only player, position,
-team, opponent, and projected points. Completed outcomes are published in
+The public application reads only the last manifest-validated snapshot. Its
+five decision areas are Rankings, My Team, Compare, Game Center, and Season.
+They include searchable offense and FLEX rankings, ESPN/Yahoo kicker and D/ST
+profiles, a waiver shortlist, shareable saved rosters, manual availability
+flags, a legal-lineup optimizer, start/sit and trade comparison, calibrated
+projection ranges, all weekly matchups, venue and weather context, previous
+results, season totals, bye planning, a transparent rest-of-season proxy, and
+the frozen model scorecard. Completed outcomes and contextual artifacts remain
 separate display-only files and cannot enter target-week model inputs. The
 portable history path
 reproduced the complete 2025 Week 18 frozen feature replay with zero text or
 numeric mismatches at the `1e-10` acceptance tolerance. See
 [weekly app operations](docs/weekly_operations.md) and
 [D/ST methodology](docs/dst_rankings.md), and
-[kicker methodology](docs/kicker_rankings.md) for local use, weekly scoring,
+[kicker methodology](docs/kicker_rankings.md), and
+[advisor context](docs/advisor_context.md) for local use, weekly scoring,
 model-release packaging, GitHub automation, and deployment.
 
 ## Run the application
@@ -127,6 +129,7 @@ From PowerShell in the repository root:
 .\.venv\Scripts\Activate.ps1
 python -m pip install --requirement requirements.txt
 python scripts\run_weekly_pipeline.py --season 2026 --week 1 --publish-existing
+python scripts\build_advisor_context.py
 python -m streamlit run app.py
 ```
 
@@ -144,6 +147,9 @@ The completed advisor will help a fantasy manager decide:
 - Which available players are promising waiver-wire candidates
 - Which players have favorable or unfavorable matchups
 - Why one player is recommended over another
+- Where roster bye-week conflicts exist
+- How two trade sides compare under a transparent current-rate season proxy
+- How much historical error surrounds a point projection
 
 See the complete project brief (docs/project_brief.md).
 
@@ -193,8 +199,8 @@ Version 1 will include:
 9. Preseason draft rankings
 10. Exported tables, charts, and a weekly recommendation interface
 
-Defense/Special Teams projections now support ESPN and Yahoo public default
-scoring. Kicker projections remain a later extension.
+Defense/Special Teams and kicker projections support ESPN and Yahoo public
+default scoring.
 
 ## Data source
 

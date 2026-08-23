@@ -2,9 +2,13 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import pandas as pd
 
 from app_support import (
+    apply_projection_intervals,
+    bye_week_frame,
     comparison_frame,
     current_games,
     dst_projection_frame,
@@ -22,9 +26,16 @@ from app_support import (
     normalize_rankings,
     optimize_lineup,
     search_projection_pool,
+    season_outlook_frame,
     season_totals_frame,
+    team_bye_weeks,
     top_projections,
+    trade_side_summary,
+    waiver_shortlist,
 )
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
 def sample_rankings() -> pd.DataFrame:
@@ -95,6 +106,19 @@ def test_optimizer_fills_legal_slots_and_best_remaining_flex() -> None:
     )
 
 
+def test_optimizer_sits_manual_unavailable_player() -> None:
+    rankings = sample_rankings()
+
+    lineup, gaps = optimize_lineup(
+        rankings, rankings["player_id"], unavailable_player_ids=["qb1"]
+    )
+
+    assert "QB: missing 1" in gaps
+    unavailable = lineup.loc[lineup["player_id"].eq("qb1")].iloc[0]
+    assert unavailable["recommended_slot"] == "UNAVAILABLE"
+    assert unavailable["lineup_status"] == "SIT"
+
+
 def test_filter_and_comparison_preserve_requested_players() -> None:
     rankings = sample_rankings()
     filtered = filter_rankings(
@@ -143,6 +167,24 @@ def test_projection_search_matches_player_team_position_and_opponent() -> None:
     assert len(search_projection_pool(rankings, "QB")) == 1
     assert len(search_projection_pool(rankings, "BBB")) == len(rankings)
     assert search_projection_pool(rankings, "").equals(rankings)
+
+
+def test_projection_intervals_apply_position_residuals_and_floor_at_zero() -> None:
+    rankings = sample_rankings()
+    calibration = pd.DataFrame(
+        [
+            {"position": "QB", "lower_residual": -25.0, "upper_residual": 8.0},
+            {"position": "RB", "lower_residual": -5.0, "upper_residual": 7.0},
+            {"position": "WR", "lower_residual": -6.0, "upper_residual": 8.0},
+            {"position": "TE", "lower_residual": -4.0, "upper_residual": 6.0},
+        ]
+    )
+
+    enriched = apply_projection_intervals(rankings, calibration)
+
+    quarterback = enriched.loc[enriched["player_id"].eq("qb1")].iloc[0]
+    assert quarterback["projection_floor_ppr"] == 0.0
+    assert quarterback["projection_ceiling_ppr"] == 28.0
 
 
 def test_flex_projections_include_only_rb_wr_and_te() -> None:
@@ -401,3 +443,52 @@ def test_season_totals_can_include_dst_under_selected_profile() -> None:
             "total_points": 10.0,
         }
     ]
+
+
+def test_bye_outlook_waiver_and_trade_helpers_use_public_schedule() -> None:
+    schedule = pd.read_csv(PROJECT_ROOT / "results/public/season_schedule.csv")
+    rankings = normalize_rankings(
+        pd.read_csv(PROJECT_ROOT / "results/public/latest_rankings.csv")
+    )
+    calibration = pd.read_csv(
+        PROJECT_ROOT / "results/public/projection_calibration.csv"
+    )
+    rankings = apply_projection_intervals(rankings, calibration)
+
+    byes = team_bye_weeks(schedule)
+    assert len(byes) == 32
+    assert byes.loc[byes["team"].eq("BUF"), "bye_week"].item() == 7
+
+    allen_id = rankings.loc[
+        rankings["player_display_name"].eq("Josh Allen"), "player_id"
+    ].item()
+    stafford_id = rankings.loc[
+        rankings["player_display_name"].eq("Matthew Stafford"), "player_id"
+    ].item()
+    bye_plan = bye_week_frame(rankings, schedule, [allen_id], 1)
+    assert bye_plan[["team", "bye_week", "bye_status"]].to_dict(
+        "records"
+    ) == [{"team": "BUF", "bye_week": 7, "bye_status": "UPCOMING"}]
+
+    outlook = season_outlook_frame(rankings, schedule, 1, "QB", 120)
+    allen = outlook.loc[outlook["player_id"].astype(str).eq(str(allen_id))].iloc[0]
+    assert allen["games_remaining"] == 17
+    assert allen["ros_points_proxy"] == round(
+        allen["display_projected_fantasy_points_ppr"] * 17, 2
+    )
+
+    waivers = waiver_shortlist(
+        rankings,
+        [allen_id],
+        unavailable_player_ids=[stafford_id],
+        position="QB",
+        limit=3,
+    )
+    assert "Josh Allen" not in set(waivers["player_display_name"])
+    assert "Matthew Stafford" not in set(waivers["player_display_name"])
+    assert waivers.iloc[0]["player_display_name"] == "Aaron Rodgers"
+
+    summary = trade_side_summary(outlook, [allen_id, stafford_id])
+    assert summary["players"] == 2
+    assert summary["weekly_projection"] > 40
+    assert summary["weekly_ceiling"] > summary["weekly_projection"]

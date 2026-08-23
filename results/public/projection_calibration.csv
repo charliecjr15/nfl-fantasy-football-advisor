@@ -1,0 +1,5 @@
+position,interval_level,lower_residual,upper_residual,calibration_rows,test_rows,test_coverage_pct,mean_interval_width,calibration_season,evaluation_season
+QB,0.8,-9.3291,10.2212,664,664,75.45,19.5503,2024,2025
+RB,0.8,-6.2361,7.6717,1536,1575,79.62,13.9078,2024,2025
+WR,0.8,-6.6093,8.3162,2441,2511,82.44,14.9254,2024,2025
+TE,0.8,-4.8448,6.5323,1223,1287,79.18,11.3771,2024,2025

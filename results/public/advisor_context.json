@@ -1,0 +1,40 @@
+{
+  "artifact_version": "v1_advisor_context",
+  "built_at_utc": "2026-08-23T04:00:00+00:00",
+  "context_status": "PASS",
+  "game_context": {
+    "forecast_status_counts": {
+      "FORECAST_NOT_AVAILABLE_YET": 11,
+      "INDOORS": 5
+    },
+    "path": "results/public/game_context.csv",
+    "rows": 16,
+    "sha256": "6f38030a758c6695c35d0e127939156f97e40b9f08cb86ef816b47096d81467c",
+    "weather_source": "https://open-meteo.com/en/docs"
+  },
+  "model_accuracy": {
+    "path": "results/public/model_accuracy.csv",
+    "rows": 5,
+    "sha256": "f5f4d4da9f8933bb23f545c16cd09f44002e9fb9482dd93899e1ddc01cd3f308"
+  },
+  "projection_calibration": {
+    "calibration_source": "results/tables/model_validation_predictions.csv",
+    "evaluation_source": "results/tables/final_test_predictions.csv",
+    "path": "results/public/projection_calibration.csv",
+    "rows": 4,
+    "sha256": "0ce34c40eca9b354ba93db3eec1be6c8d695d570b59bc49cc7ea841cccf83ea1"
+  },
+  "season": 2026,
+  "season_schedule": {
+    "path": "results/public/season_schedule.csv",
+    "rows": 272,
+    "sha256": "3996687ca2b12f17049a7e9f5f82ff846da6de45ccd3d18091762d7b9ad32205",
+    "source": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  "venue_mapping": {
+    "path": "config/stadium_locations.csv",
+    "sha256": "7032115c6eab5c66905c2cd1f4b28328afc7bef01d2337086e8ea0f7d88b53e3",
+    "source": "https://github.com/nflverse/nflverse-data/issues/57"
+  },
+  "week": 1
+}

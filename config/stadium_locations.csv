@@ -1,0 +1,39 @@
+match_type,match_value,venue_label,latitude,longitude,timezone,location_source
+stadium_id,ATL97,Atlanta,33.75539625,-84.4008156749447,America/New_York,nflverse_stadium_mapping
+stadium_id,BAL00,Baltimore,39.2779664,-76.6238093083547,America/New_York,nflverse_stadium_mapping
+stadium_id,BOS00,Foxborough,42.0912526,-71.2644646105907,America/New_York,nflverse_stadium_mapping
+stadium_id,BUF00,Orchard Park,42.7737131,-78.7869032106025,America/New_York,nflverse_stadium_mapping
+stadium_id,CAR00,Charlotte,35.225737,-80.8536869740441,America/New_York,nflverse_stadium_mapping
+stadium_id,CHI98,Chicago,41.86245145,-87.6167151470407,America/Chicago,nflverse_stadium_mapping
+stadium_id,CIN00,Cincinnati,39.0954645,-84.5160488350198,America/New_York,nflverse_stadium_mapping
+stadium_id,CLE00,Cleveland,41.5060559,-81.6997118452595,America/New_York,nflverse_stadium_mapping
+stadium_id,DAL00,Arlington,32.74785025,-97.0928337073774,America/Chicago,nflverse_stadium_mapping
+stadium_id,DEN00,Denver,39.743952,-105.019222812368,America/Denver,nflverse_stadium_mapping
+stadium_id,DET00,Detroit,42.33995675,-83.045616574037,America/Detroit,nflverse_stadium_mapping
+stadium_id,GNB00,Green Bay,44.50095825,-88.0610340437601,America/Chicago,nflverse_stadium_mapping
+stadium_id,HOU00,Houston,29.6848581,-95.4108014532699,America/Chicago,nflverse_stadium_mapping
+stadium_id,IND00,Indianapolis,39.760085,-86.1637037946731,America/Indiana/Indianapolis,nflverse_stadium_mapping
+stadium_id,JAX00,Jacksonville,30.32398105,-81.6373045703404,America/New_York,nflverse_stadium_mapping
+stadium_id,KAN00,Kansas City,39.04894045,-94.4849938110271,America/Chicago,nflverse_stadium_mapping
+stadium_id,LAX01,Inglewood,33.95354625,-118.338793383194,America/Los_Angeles,nflverse_stadium_mapping
+stadium_id,MIA00,Miami Gardens,25.95790315,-80.2388497396752,America/New_York,nflverse_stadium_mapping
+stadium_id,MIN01,Minneapolis,44.9749861,-93.2598737,America/Chicago,nflverse_stadium_mapping
+stadium_id,NAS00,Nashville,36.16649655,-86.7712644420847,America/Chicago,nflverse_stadium_mapping
+stadium_id,NOR00,New Orleans,29.9510489,-90.082307625389,America/Chicago,nflverse_stadium_mapping
+stadium_id,NYC01,East Rutherford,40.81352375,-74.0734007489118,America/New_York,nflverse_stadium_mapping
+stadium_id,PHI00,Philadelphia,39.9009099,-75.167489156059,America/New_York,nflverse_stadium_mapping
+stadium_id,PHO00,Glendale,33.52770765,-112.262564902643,America/Phoenix,nflverse_stadium_mapping
+stadium_id,PIT00,Pittsburgh,40.44671645,-80.0157549334943,America/New_York,nflverse_stadium_mapping
+stadium_id,SEA00,Seattle,47.5953459,-122.331644311961,America/Los_Angeles,nflverse_stadium_mapping
+stadium_id,SFO01,Santa Clara,37.40303995,-121.969681705055,America/Los_Angeles,nflverse_stadium_mapping
+stadium_id,TAM00,Tampa,27.97597925,-82.5042179967362,America/New_York,nflverse_stadium_mapping
+stadium_id,VEG00,Las Vegas,36.09083455,-115.182477977026,America/Los_Angeles,nflverse_stadium_mapping
+stadium_id,WAS00,Landover,38.9077002,-76.8633260869022,America/New_York,nflverse_stadium_mapping
+stadium_name,Bernabeu,Madrid,40.4531,-3.6883,Europe/Madrid,international_venue_override
+stadium_name,Maracana Stadium,Rio de Janeiro,-22.9121,-43.2302,America/Sao_Paulo,international_venue_override
+stadium_name,FC Bayern Munich Stadium,Munich,48.2188,11.6247,Europe/Berlin,international_venue_override
+stadium_name,Melbourne Cricket Ground,Melbourne,-37.8199,144.9834,Australia/Melbourne,international_venue_override
+stadium_name,Stade de France,Paris,48.9245,2.3602,Europe/Paris,international_venue_override
+stadium_name,Tottenham Hotspur Stadium,London,51.6043,-0.0664,Europe/London,international_venue_override
+stadium_name,Wembley Stadium,London,51.5560,-0.2796,Europe/London,international_venue_override
+stadium_name,Estadio Banorte,Mexico City,19.3029,-99.1505,America/Mexico_City,international_venue_override

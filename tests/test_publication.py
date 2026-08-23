@@ -270,66 +270,57 @@ def test_kicker_snapshot_passes_publication_contract() -> None:
     assert summary["completed_kicker_latest_week"] == 18
 
 
+def _element_with_label(elements: object, label: str) -> object:
+    return next(element for element in elements if element.label == label)
+
+
 def test_streamlit_default_view_is_compact_and_has_requested_tabs() -> None:
     app = AppTest.from_file(str(PROJECT_ROOT / "app.py"), default_timeout=30)
     app.run()
     assert not app.exception
-    assert len(app.tabs) == 9
+    assert not app.error
+    assert len(app.tabs) == 5
     assert [tab.label for tab in app.tabs] == [
-        "Top projections",
-        "My lineup",
-        "Compare players",
-        "Flex",
-        "Kickers",
-        "D/ST",
-        "This week's games",
-        "Previous weeks",
-        "Season totals",
+        "Rankings",
+        "My Team",
+        "Compare",
+        "Game Center",
+        "Season",
     ]
     assert len(app.metric) == 0
-    assert len(app.warning) == 1
-    assert len(app.dataframe) == 7
+    assert len(app.dataframe) == 1
     assert len(app.get("vega_lite_chart")) == 0
-    assert list(app.dataframe[0].value.columns) == [
-        "player_display_name",
-        "position",
-        "team",
-        "opponent",
-        "display_projected_fantasy_points_ppr",
-    ]
-    assert list(app.dataframe[1].value.columns) == [
-        "player_display_name",
-        "position",
-        "team",
-        "opponent",
-        "display_projected_fantasy_points_ppr",
-    ]
-    assert list(app.dataframe[2].value.columns) == [
-        "player_display_name",
-        "position",
-        "team",
-        "opponent",
-        "projected_points",
-    ]
-    assert list(app.dataframe[3].value.columns) == [
-        "team",
-        "opponent",
-        "projected_points",
-    ]
     assert list(app.dataframe[-1].value.columns) == [
         "player_display_name",
         "position",
         "team",
-        "total_points",
+        "opponent",
+        "fantasy_points_ppr",
     ]
+    player_boards = [
+        markdown.value
+        for markdown in app.markdown
+        if 'class="se-player-board"' in markdown.value
+    ]
+    game_boards = [
+        markdown.value
+        for markdown in app.markdown
+        if 'class="se-game-grid"' in markdown.value
+    ]
+    assert len(player_boards) == 1
+    assert player_boards[0].count('class="se-player-row"') == 10
+    assert len(game_boards) == 1
+    assert game_boards[0].count('class="se-game-card"') == 16
 
 
 def test_streamlit_switches_kicker_dst_and_previous_results() -> None:
     app = AppTest.from_file(str(PROJECT_ROOT / "app.py"), default_timeout=30)
     app.run()
 
-    app.selectbox[7].set_value("Yahoo").run()
-    assert app.dataframe[2].value.iloc[0].to_dict() == {
+    _element_with_label(app.radio, "League scoring").set_value("Yahoo")
+    _element_with_label(app.radio, "Ranking view").set_value("Kickers")
+    app.run()
+    assert app.dataframe[0].value.iloc[0].to_dict() == {
         "player_display_name": "Brandon Aubrey",
         "position": "K",
         "team": "DAL",
@@ -337,30 +328,30 @@ def test_streamlit_switches_kicker_dst_and_previous_results() -> None:
         "projected_points": 11.84,
     }
 
-    app.selectbox[8].set_value("Yahoo").run()
-    assert app.dataframe[3].value.iloc[0].to_dict() == {
+    _element_with_label(app.radio, "Ranking view").set_value("D/ST").run()
+    assert app.dataframe[0].value.iloc[0].to_dict() == {
         "team": "DEN",
         "opponent": "KC",
         "projected_points": 10.8,
     }
 
-    app.radio[0].set_value("D/ST").run()
-    assert list(app.dataframe[-2].value.columns) == [
+    _element_with_label(app.radio, "Result type").set_value("D/ST").run()
+    assert list(app.dataframe[-1].value.columns) == [
         "team",
         "opponent",
         "actual_points",
     ]
-    assert len(app.dataframe[-2].value) == 32
+    assert len(app.dataframe[-1].value) == 32
 
-    app.radio[0].set_value("Kickers").run()
-    assert list(app.dataframe[-2].value.columns) == [
+    _element_with_label(app.radio, "Result type").set_value("Kickers").run()
+    assert list(app.dataframe[-1].value.columns) == [
         "player_display_name",
         "position",
         "team",
         "opponent",
         "actual_points",
     ]
-    assert len(app.dataframe[-2].value) >= 31
+    assert len(app.dataframe[-1].value) >= 31
 
 
 def test_streamlit_search_lineup_summary_and_dst_season_totals() -> None:
@@ -368,9 +359,14 @@ def test_streamlit_search_lineup_summary_and_dst_season_totals() -> None:
     app.run()
 
     app.text_input[0].set_value("Josh Allen").run()
-    assert app.dataframe[0].value["player_display_name"].tolist() == [
-        "Josh Allen"
+    player_boards = [
+        markdown.value
+        for markdown in app.markdown
+        if 'class="se-player-board"' in markdown.value
     ]
+    assert len(player_boards) == 1
+    assert "Josh Allen" in player_boards[0]
+    assert player_boards[0].count('class="se-player-row"') == 1
 
     allen_label = next(
         option
@@ -381,11 +377,45 @@ def test_streamlit_search_lineup_summary_and_dst_season_totals() -> None:
     lineup_summary = [
         markdown.value
         for markdown in app.markdown
-        if 'class="se-lineup-total"' in markdown.value
+        if "Projected lineup" in markdown.value
     ]
     assert len(lineup_summary) == 1
-    assert "22.13 pts" in lineup_summary[0]
+    assert "22.13" in lineup_summary[0]
 
-    app.selectbox[13].set_value("D/ST").run()
+    _element_with_label(app.radio, "Season view").set_value("Totals").run()
+    next(
+        element
+        for element in app.selectbox
+        if element.label == "Position" and "D/ST" in element.options
+    ).set_value("D/ST").run()
     assert set(app.dataframe[-1].value["position"]) == {"D/ST"}
     assert len(app.dataframe[-1].value) == 32
+
+
+def test_streamlit_compare_trade_outlook_and_accuracy_workflows() -> None:
+    app = AppTest.from_file(str(PROJECT_ROOT / "app.py"), default_timeout=30)
+    app.run()
+    comparison = _element_with_label(app.multiselect, "Players to compare")
+    allen = next(option for option in comparison.options if option.startswith("Josh Allen |"))
+    stafford = next(option for option in comparison.options if option.startswith("Matthew Stafford |"))
+    comparison.set_value([allen, stafford]).run()
+    assert not app.exception
+    assert any("Recommended start" in markdown.value for markdown in app.markdown)
+
+    _element_with_label(app.radio, "Comparison type").set_value("Trade").run()
+    _element_with_label(app.multiselect, "Side A").set_value([allen])
+    _element_with_label(app.multiselect, "Side B").set_value([stafford])
+    app.run()
+    assert not app.exception
+    assert len(app.success) == 1
+
+    _element_with_label(app.radio, "Season view").set_value("Model Accuracy").run()
+    assert list(app.dataframe[-1].value.columns) == [
+        "Position",
+        "Players",
+        "MAE",
+        "RMSE",
+        "Rank correlation",
+        "80% range coverage",
+    ]
+    assert len(app.dataframe[-1].value) == 5

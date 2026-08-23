@@ -1,4 +1,4 @@
-"""Simple public Streamlit interface for the NFL fantasy advisor."""
+"""Public Streamlit interface for the Sunday Edge fantasy advisor."""
 
 from __future__ import annotations
 
@@ -14,28 +14,32 @@ import app_support as _app_support
 
 
 # Streamlit can rerun this file while retaining an older imported helper module.
-# Reload it so an app deployment and its matching helper changes stay in sync.
 _app_support = importlib.reload(_app_support)
+apply_projection_intervals = _app_support.apply_projection_intervals
+bye_week_frame = _app_support.bye_week_frame
 comparison_frame = _app_support.comparison_frame
-current_games = _app_support.current_games
 dst_projection_frame = _app_support.dst_projection_frame
-filter_completed_kicker_results = _app_support.filter_completed_kicker_results
 filter_completed_dst_results = _app_support.filter_completed_dst_results
+filter_completed_kicker_results = _app_support.filter_completed_kicker_results
 filter_completed_results = _app_support.filter_completed_results
 flex_projections = _app_support.flex_projections
 kicker_projection_frame = _app_support.kicker_projection_frame
-normalize_completed_kicker_results = _app_support.normalize_completed_kicker_results
 normalize_completed_dst_results = _app_support.normalize_completed_dst_results
+normalize_completed_kicker_results = _app_support.normalize_completed_kicker_results
 normalize_completed_results = _app_support.normalize_completed_results
-normalize_kicker_rankings = _app_support.normalize_kicker_rankings
 normalize_dst_rankings = _app_support.normalize_dst_rankings
+normalize_kicker_rankings = _app_support.normalize_kicker_rankings
 normalize_rankings = _app_support.normalize_rankings
 optimize_lineup = _app_support.optimize_lineup
+season_outlook_frame = _app_support.season_outlook_frame
 season_totals_frame = _app_support.season_totals_frame
 search_projection_pool = _app_support.search_projection_pool
 selectable_kickers = _app_support.selectable_kickers
 selectable_players = _app_support.selectable_players
+team_bye_weeks = _app_support.team_bye_weeks
 top_projections = _app_support.top_projections
+trade_side_summary = _app_support.trade_side_summary
+waiver_shortlist = _app_support.waiver_shortlist
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent
@@ -46,9 +50,12 @@ COMPLETED_RESULTS_PATH = PUBLIC_DIRECTORY / "completed_week_results.csv"
 DST_RANKINGS_PATH = PUBLIC_DIRECTORY / "latest_dst_rankings.csv"
 COMPLETED_DST_RESULTS_PATH = PUBLIC_DIRECTORY / "completed_dst_results.csv"
 KICKER_RANKINGS_PATH = PUBLIC_DIRECTORY / "latest_kicker_rankings.csv"
-COMPLETED_KICKER_RESULTS_PATH = (
-    PUBLIC_DIRECTORY / "completed_kicker_results.csv"
-)
+COMPLETED_KICKER_RESULTS_PATH = PUBLIC_DIRECTORY / "completed_kicker_results.csv"
+CALIBRATION_PATH = PUBLIC_DIRECTORY / "projection_calibration.csv"
+MODEL_ACCURACY_PATH = PUBLIC_DIRECTORY / "model_accuracy.csv"
+SEASON_SCHEDULE_PATH = PUBLIC_DIRECTORY / "season_schedule.csv"
+GAME_CONTEXT_PATH = PUBLIC_DIRECTORY / "game_context.csv"
+ADVISOR_CONTEXT_PATH = PUBLIC_DIRECTORY / "advisor_context.json"
 
 PLAYER_COLUMNS = [
     "player_display_name",
@@ -99,30 +106,25 @@ def published_label(value: object) -> str:
 def render_app_header(
     metadata: dict[str, object], season: int, week: int
 ) -> None:
-    """Render a compact NFL-inspired header with useful slate context."""
+    """Render the compact scoreboard-style masthead."""
 
-    games = int(metadata.get("game_count", 0))
-    players = int(metadata.get("role_eligible_rows", 0))
     freshness = escape(published_label(metadata.get("published_at_utc")))
     st.markdown(
         f"""
         <section class="se-hero">
-          <div class="se-hero__content">
-            <div class="se-brand">
-              <span class="se-ball">SE</span>
-              Game-day decision desk
+          <div class="se-hero__brand">
+            <span class="se-mark">SE</span>
+            <div>
+              <div class="se-eyebrow">Fantasy decision desk</div>
+              <h1>Sunday Edge</h1>
+              <p>Clear calls for your next lineup decision.</p>
             </div>
-            <h1>Sunday Edge</h1>
-            <div class="se-hero__subtitle">
-              A focused fantasy football advisor for faster lineup decisions.
-            </div>
-            <div class="se-hero__meta">
-              <span class="se-chip"><span class="se-status-dot"></span>Projections ready</span>
-              <span class="se-chip">{season} · Week {week}</span>
-              <span class="se-chip">{games} games</span>
-              <span class="se-chip">{players} eligible players</span>
-              <span class="se-chip">{freshness}</span>
-            </div>
+          </div>
+          <div class="se-scoreboard">
+            <div><span>Season</span><strong>{season}</strong></div>
+            <div><span>Week</span><strong>{week}</strong></div>
+            <div><span>Games</span><strong>{int(metadata.get('game_count', 0))}</strong></div>
+            <small><i></i>{freshness}</small>
           </div>
         </section>
         """,
@@ -130,74 +132,59 @@ def render_app_header(
     )
 
 
-apply_app_styles(PROJECT_ROOT / "assets" / "app.css")
+def section_intro(kicker: str, title: str, body: str) -> None:
+    """Give each decision area a consistent, restrained heading."""
 
-
-@st.cache_data(show_spinner=False)
-def load_public_rankings(path: str) -> pd.DataFrame:
-    """Read and normalize the validated public snapshot."""
-
-    return normalize_rankings(pd.read_csv(path, low_memory=False))
-
-
-@st.cache_data(show_spinner=False)
-def load_public_metadata(path: str) -> dict[str, object]:
-    """Read the publication metadata."""
-
-    with Path(path).open("r", encoding="utf-8") as file_handle:
-        return json.load(file_handle)
-
-
-@st.cache_data(show_spinner=False)
-def load_completed_results(path: str) -> pd.DataFrame:
-    """Read and normalize the separately published actual results."""
-
-    return normalize_completed_results(pd.read_csv(path, low_memory=False))
-
-
-@st.cache_data(show_spinner=False)
-def load_dst_rankings(path: str) -> pd.DataFrame:
-    """Read and normalize the separately validated D/ST projections."""
-
-    return normalize_dst_rankings(pd.read_csv(path, low_memory=False))
-
-
-@st.cache_data(show_spinner=False)
-def load_completed_dst_results(path: str) -> pd.DataFrame:
-    """Read and normalize actual team D/ST scores."""
-
-    return normalize_completed_dst_results(pd.read_csv(path, low_memory=False))
-
-
-@st.cache_data(show_spinner=False)
-def load_kicker_rankings(path: str) -> pd.DataFrame:
-    """Read and normalize separately validated kicker projections."""
-
-    return normalize_kicker_rankings(pd.read_csv(path, low_memory=False))
-
-
-@st.cache_data(show_spinner=False)
-def load_completed_kicker_results(path: str) -> pd.DataFrame:
-    """Read and normalize actual kicker scores."""
-
-    return normalize_completed_kicker_results(
-        pd.read_csv(path, low_memory=False)
+    st.markdown(
+        f"""
+        <div class="se-section-head">
+          <span>{escape(kicker)}</span>
+          <h2>{escape(title)}</h2>
+          <p>{escape(body)}</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
 
 
-def projection_table(dataframe: pd.DataFrame) -> None:
-    """Display only the five requested player projection fields."""
+def render_player_board(dataframe: pd.DataFrame, limit: int | None = None) -> None:
+    """Render a scan-friendly leaderboard with projection ranges."""
 
-    st.dataframe(
-        dataframe[PLAYER_COLUMNS],
-        hide_index=True,
-        width="stretch",
-        column_config=PLAYER_COLUMN_CONFIG,
+    board = dataframe.head(limit) if limit else dataframe
+    if board.empty:
+        st.info("No players match these filters.")
+        return
+    rows: list[str] = []
+    for rank, (_, player) in enumerate(board.iterrows(), start=1):
+        name = escape(str(player["player_display_name"]))
+        position = escape(str(player["position"]))
+        team = escape(str(player["team"]))
+        opponent = escape(str(player["opponent"]))
+        projection = float(player["display_projected_fantasy_points_ppr"])
+        range_text = ""
+        if {
+            "projection_floor_ppr",
+            "projection_ceiling_ppr",
+        }.issubset(board.columns):
+            floor = float(player["projection_floor_ppr"])
+            ceiling = float(player["projection_ceiling_ppr"])
+            range_text = f"<small>range {floor:.1f}-{ceiling:.1f}</small>"
+        rows.append(
+            f'<div class="se-player-row">'
+            f'<div class="se-rank">{rank}</div>'
+            f'<div class="se-player-name"><strong>{name}</strong><span>{team} vs {opponent}</span></div>'
+            f'<span class="se-position se-position--{position.lower()}">{position}</span>'
+            f'<div class="se-projection"><strong>{projection:.2f}</strong><span>PPR</span>{range_text}</div>'
+            "</div>"
+        )
+    st.markdown(
+        '<div class="se-player-board">' + "".join(rows) + "</div>",
+        unsafe_allow_html=True,
     )
 
 
 def dst_table(dataframe: pd.DataFrame, points_label: str) -> None:
-    """Display a compact D/ST team, opponent, and points table."""
+    """Display a compact D/ST projection table."""
 
     st.dataframe(
         dataframe[["team", "opponent", "projected_points"]],
@@ -213,8 +200,8 @@ def dst_table(dataframe: pd.DataFrame, points_label: str) -> None:
     )
 
 
-def kicker_table(dataframe: pd.DataFrame, points_column: str) -> None:
-    """Display compact player, position, matchup, and kicker points."""
+def kicker_table(dataframe: pd.DataFrame) -> None:
+    """Display compact kicker projections."""
 
     st.dataframe(
         dataframe[
@@ -223,7 +210,7 @@ def kicker_table(dataframe: pd.DataFrame, points_column: str) -> None:
                 "position",
                 "team",
                 "opponent",
-                points_column,
+                "projected_points",
             ]
         ],
         hide_index=True,
@@ -233,12 +220,93 @@ def kicker_table(dataframe: pd.DataFrame, points_column: str) -> None:
             "position": "POS",
             "team": "Team",
             "opponent": "Opponent",
-            points_column: st.column_config.NumberColumn(
+            "projected_points": st.column_config.NumberColumn(
                 "Projected Points", format="%.2f"
             ),
         },
     )
 
+
+def render_summary_card(label: str, value: str, detail: str) -> None:
+    """Render one decision summary without a bulky metric widget."""
+
+    st.markdown(
+        f"""
+        <div class="se-summary-card">
+          <span>{escape(label)}</span>
+          <strong>{escape(value)}</strong>
+          <small>{escape(detail)}</small>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_game_cards(games: pd.DataFrame) -> None:
+    """Render the weekly schedule as matchup cards."""
+
+    cards: list[str] = []
+    for _, game in games.iterrows():
+        risk = str(game["weather_risk"])
+        if risk == "INDOORS":
+            risk_class = "indoors"
+        elif risk == "LOW_WEATHER_RISK":
+            risk_class = "low"
+        elif any(flag in risk for flag in ["HIGH_WIND", "STRONG_GUSTS"]):
+            risk_class = "high"
+        elif any(flag in risk for flag in ["PRECIPITATION", "FREEZING", "EXTREME_HEAT"]):
+            risk_class = "moderate"
+        else:
+            risk_class = "pending"
+        line_parts: list[str] = []
+        if pd.notna(game.get("total_line")):
+            line_parts.append(f"O/U {float(game['total_line']):.1f}")
+        if pd.notna(game.get("spread_line")):
+            line_parts.append(f"Spread {float(game['spread_line']):+.1f}")
+        weather = escape(str(game["forecast_note"]))
+        if str(game["forecast_status"]) in {
+            "FORECAST_AVAILABLE",
+            "RECORDED_GAME_WEATHER",
+        }:
+            weather_values: list[str] = []
+            if pd.notna(game.get("temperature_f")):
+                weather_values.append(f"{float(game['temperature_f']):.0f} F")
+            if pd.notna(game.get("wind_mph")):
+                weather_values.append(f"wind {float(game['wind_mph']):.0f} mph")
+            if weather_values:
+                weather = " - ".join(weather_values)
+        cards.append(
+            f'<article class="se-game-card">'
+            f'<div class="se-game-card__time">{escape(str(game["kickoff_et"]))}</div>'
+            f'<div class="se-matchup"><b>{escape(str(game["away_team"]))}</b><span>@</span><b>{escape(str(game["home_team"]))}</b></div>'
+            f'<div class="se-venue">{escape(str(game["venue_label"]))} - {escape(str(game["roof"]).title())}</div>'
+            f'<div class="se-game-lines">{" - ".join(line_parts) if line_parts else "Lines pending"}</div>'
+            f'<div class="se-weather se-weather--{risk_class}"><i></i>{escape(risk.replace("_", " ").title())}</div>'
+            f"<p>{weather}</p>"
+            "</article>"
+        )
+    st.markdown(
+        '<div class="se-game-grid">' + "".join(cards) + "</div>",
+        unsafe_allow_html=True,
+    )
+
+
+@st.cache_data(show_spinner=False)
+def load_csv(path: str) -> pd.DataFrame:
+    """Load a checked-in public CSV."""
+
+    return pd.read_csv(path, low_memory=False)
+
+
+@st.cache_data(show_spinner=False)
+def load_json(path: str) -> dict[str, object]:
+    """Load a checked-in public JSON document."""
+
+    with Path(path).open("r", encoding="utf-8") as file_handle:
+        return json.load(file_handle)
+
+
+apply_app_styles(PROJECT_ROOT / "assets" / "app.css")
 
 required_public_files = [
     RANKINGS_PATH,
@@ -248,125 +316,198 @@ required_public_files = [
     COMPLETED_DST_RESULTS_PATH,
     KICKER_RANKINGS_PATH,
     COMPLETED_KICKER_RESULTS_PATH,
+    CALIBRATION_PATH,
+    MODEL_ACCURACY_PATH,
+    SEASON_SCHEDULE_PATH,
+    GAME_CONTEXT_PATH,
+    ADVISOR_CONTEXT_PATH,
 ]
 if not all(path.exists() for path in required_public_files):
     st.error("No validated weekly projections are available yet.")
     st.stop()
 
 try:
-    rankings = load_public_rankings(str(RANKINGS_PATH))
-    metadata = load_public_metadata(str(METADATA_PATH))
-    completed_results = (
-        load_completed_results(str(COMPLETED_RESULTS_PATH))
-        if COMPLETED_RESULTS_PATH.exists()
-        else pd.DataFrame()
-    )
-    dst_rankings = load_dst_rankings(str(DST_RANKINGS_PATH))
-    completed_dst_results = load_completed_dst_results(
-        str(COMPLETED_DST_RESULTS_PATH)
-    )
-    kicker_rankings = load_kicker_rankings(str(KICKER_RANKINGS_PATH))
-    completed_kicker_results = load_completed_kicker_results(
-        str(COMPLETED_KICKER_RESULTS_PATH)
-    )
+    metadata = load_json(str(METADATA_PATH))
+    advisor_context = load_json(str(ADVISOR_CONTEXT_PATH))
+    rankings = normalize_rankings(load_csv(str(RANKINGS_PATH)))
+    calibration = load_csv(str(CALIBRATION_PATH))
+    rankings = apply_projection_intervals(rankings, calibration)
+    completed_results = normalize_completed_results(load_csv(str(COMPLETED_RESULTS_PATH)))
+    dst_rankings = normalize_dst_rankings(load_csv(str(DST_RANKINGS_PATH)))
+    completed_dst_results = normalize_completed_dst_results(load_csv(str(COMPLETED_DST_RESULTS_PATH)))
+    kicker_rankings = normalize_kicker_rankings(load_csv(str(KICKER_RANKINGS_PATH)))
+    completed_kicker_results = normalize_completed_kicker_results(load_csv(str(COMPLETED_KICKER_RESULTS_PATH)))
+    model_accuracy = load_csv(str(MODEL_ACCURACY_PATH))
+    season_schedule = load_csv(str(SEASON_SCHEDULE_PATH))
+    game_context = load_csv(str(GAME_CONTEXT_PATH))
 except (OSError, ValueError, json.JSONDecodeError) as error:
     st.error(f"The weekly data could not be loaded: {error}")
     st.stop()
 
-
 season = int(metadata["season"])
 week = int(metadata["week"])
+if (
+    int(advisor_context.get("season", -1)) != season
+    or int(advisor_context.get("week", -1)) != week
+    or not str(advisor_context.get("context_status", "")).startswith("PASS")
+):
+    st.error("The decision context does not match the published projection week.")
+    st.stop()
+
 render_app_header(metadata, season, week)
 
-status = str(metadata.get("publication_status", "UNKNOWN"))
-if "INJURY_CAVEAT" in status:
-    st.warning(
-        "Injury data is unavailable for this update. Check player status "
-        "before setting your lineup."
+profile_param = str(st.query_params.get("platform", "ESPN")).upper()
+if profile_param not in {"ESPN", "YAHOO"}:
+    profile_param = "ESPN"
+profile_column, note_column = st.columns([1, 2.6], vertical_alignment="bottom")
+with profile_column:
+    scoring_profile = st.radio(
+        "League scoring",
+        ["ESPN", "Yahoo"],
+        index=0 if profile_param == "ESPN" else 1,
+        horizontal=True,
+        key="global_scoring_profile",
+        help="Applies to kicker and D/ST projections and results. Offense uses full PPR.",
     )
-elif not status.startswith("PASS"):
+with note_column:
+    st.markdown(
+        '<div class="se-profile-note"><b>Full PPR offense</b><span>Platform profile applies to K and D/ST everywhere.</span></div>',
+        unsafe_allow_html=True,
+    )
+
+player_map = selectable_players(rankings)
+id_to_player_label = {player_id: label for label, player_id in player_map.items()}
+saved_roster_ids = [
+    player_id
+    for player_id in str(st.query_params.get("roster", "")).split(",")
+    if player_id in id_to_player_label
+]
+if "roster_players" not in st.session_state:
+    st.session_state["roster_players"] = [id_to_player_label[player_id] for player_id in saved_roster_ids]
+
+status = str(metadata.get("publication_status", "UNKNOWN"))
+if not status.startswith("PASS"):
     st.error("This weekly update is not ready for lineup decisions.")
 
-(
-    projections_tab,
-    lineup_tab,
-    compare_tab,
-    flex_tab,
-    kickers_tab,
-    dst_tab,
-    games_tab,
-    previous_tab,
-    season_totals_tab,
-) = st.tabs(
-    [
-        "Top projections",
-        "My lineup",
-        "Compare players",
-        "Flex",
-        "Kickers",
-        "D/ST",
-        "This week's games",
-        "Previous weeks",
-        "Season totals",
-    ]
+rankings_tab, team_tab, compare_tab, games_tab, season_tab = st.tabs(
+    ["Rankings", "My Team", "Compare", "Game Center", "Season"]
 )
 
-with projections_tab:
-    st.subheader("Highest projected players")
-    filter_column, count_column, search_column = st.columns([1, 1, 2])
-    with filter_column:
-        selected_position = st.selectbox(
-            "Position", ["All", "QB", "RB", "WR", "TE"]
-        )
-    with count_column:
-        player_limit = st.selectbox(
-            "Players to show", [10, 25, 50], index=1
-        )
-    with search_column:
-        projection_search = st.text_input(
-            "Search",
-            placeholder="Player, position, team, or opponent",
-            key="projection_search",
-        )
-    projection_pool = search_projection_pool(rankings, projection_search)
-    leaders = top_projections(
-        projection_pool, selected_position, player_limit
+with rankings_tab:
+    section_intro(
+        "Week board",
+        "Find the best play",
+        "Start with the projected leaders, then narrow the board only when you need to.",
     )
-    if leaders.empty:
-        st.info("No players are available for this position.")
+    ranking_view = st.radio(
+        "Ranking view",
+        ["Offense", "FLEX", "Kickers", "D/ST", "Waivers"],
+        horizontal=True,
+        label_visibility="collapsed",
+        key="ranking_view",
+    )
+    if ranking_view == "Offense":
+        filter_column, count_column, search_column = st.columns([1, 1, 2])
+        with filter_column:
+            selected_position = st.selectbox("Position", ["All", "QB", "RB", "WR", "TE"])
+        with count_column:
+            player_limit = st.selectbox("Show", [10, 20, 40], index=0)
+        with search_column:
+            projection_search = st.text_input(
+                "Search",
+                placeholder="Player, team, position, or opponent",
+                key="projection_search",
+            )
+        projection_pool = search_projection_pool(rankings, projection_search)
+        leaders = top_projections(projection_pool, selected_position, player_limit)
+        render_player_board(leaders)
+        st.caption(
+            "The range is an 80% historical residual interval, not a guarantee. "
+            "The point projection remains the ranking value."
+        )
+    elif ranking_view == "FLEX":
+        flex_count = st.selectbox("Show", [10, 20, 40], index=1, key="flex_count")
+        render_player_board(flex_projections(rankings, flex_count))
+        st.caption("FLEX includes RB, WR, and TE players.")
+    elif ranking_view == "Kickers":
+        st.caption(f"{scoring_profile} default scoring. Confirm the final depth chart before kickoff.")
+        kicker_table(kicker_projection_frame(kicker_rankings, scoring_profile))
+    elif ranking_view == "D/ST":
+        st.caption(f"{scoring_profile} default scoring. Custom league settings can change these totals.")
+        dst_table(dst_projection_frame(dst_rankings, scoring_profile), "Projected Points")
     else:
-        projection_table(leaders)
+        roster_labels = st.session_state.get("roster_players", [])
+        roster_ids = [player_map[label] for label in roster_labels if label in player_map]
+        waiver_position = st.selectbox(
+            "Position", ["All", "QB", "RB", "WR", "TE", "FLEX"], key="waiver_position"
+        )
+        waivers = waiver_shortlist(rankings, roster_ids, position=waiver_position, limit=20)
+        st.caption(
+            "Suggested player pool only. Sunday Edge cannot see your league's ownership, "
+            "so confirm availability in ESPN or Yahoo."
+        )
+        waiver_columns = [
+            "player_display_name",
+            "position",
+            "team",
+            "opponent",
+            "display_projected_fantasy_points_ppr",
+        ]
+        if roster_ids:
+            waiver_columns.append("upgrade_vs_roster")
+        st.dataframe(
+            waivers[waiver_columns],
+            hide_index=True,
+            width="stretch",
+            column_config={
+                **PLAYER_COLUMN_CONFIG,
+                "upgrade_vs_roster": st.column_config.NumberColumn("vs weakest roster player", format="%+.2f"),
+            },
+        )
 
-with lineup_tab:
-    st.subheader("My lineup")
-    st.caption("Choose your roster to see the highest projected legal lineup.")
-    player_map = selectable_players(rankings)
+with team_tab:
+    section_intro(
+        "Roster room",
+        "Set your best legal lineup",
+        "Save your roster once, flag unavailable players, and let the optimizer fill every slot.",
+    )
     selected_labels = st.multiselect(
         "Roster players",
         list(player_map),
-        placeholder="Search and select your players",
+        placeholder="Search and select your QB, RB, WR, and TE players",
+        key="roster_players",
     )
-    offense_total = 0.0
-    offense_starters = 0
+    available_unavailable_labels = [label for label in selected_labels if label in player_map]
+    if "unavailable_players" in st.session_state:
+        st.session_state["unavailable_players"] = [
+            label for label in st.session_state["unavailable_players"] if label in available_unavailable_labels
+        ]
+    unavailable_labels = st.multiselect(
+        "Out / doubtful / unavailable",
+        available_unavailable_labels,
+        placeholder="Optional manual availability check",
+        key="unavailable_players",
+        help="The 2026 injury feed is not published yet, so this manual flag keeps the optimizer honest.",
+    )
+    roster_ids = [player_map[label] for label in selected_labels]
+    unavailable_ids = [player_map[label] for label in unavailable_labels]
+
+    lineup, gaps = optimize_lineup(rankings, roster_ids, unavailable_ids)
+    starter_rows = lineup.loc[lineup["lineup_status"].eq("START")]
+    offense_total = float(starter_rows["display_projected_fantasy_points_ppr"].sum())
     if not selected_labels:
-        st.info("Select your roster players to build a lineup.")
+        st.info("Add your roster to build a lineup, bye plan, and waiver shortlist.")
     else:
-        lineup, gaps = optimize_lineup(
-            rankings, [player_map[label] for label in selected_labels]
-        )
         if gaps:
             st.warning("Roster gaps: " + "; ".join(gaps))
-        starter_rows = lineup.loc[lineup["lineup_status"].eq("START")]
-        offense_starters = len(starter_rows)
-        offense_total = float(
-            starter_rows["display_projected_fantasy_points_ppr"].sum()
-        )
         st.dataframe(
             lineup[
                 [
                     "recommended_slot",
                     "lineup_status",
                     *PLAYER_COLUMNS,
+                    "projection_floor_ppr",
+                    "projection_ceiling_ppr",
                 ]
             ],
             hide_index=True,
@@ -375,392 +516,385 @@ with lineup_tab:
                 "recommended_slot": "Slot",
                 "lineup_status": "Decision",
                 **PLAYER_COLUMN_CONFIG,
+                "projection_floor_ppr": st.column_config.NumberColumn("Floor", format="%.2f"),
+                "projection_ceiling_ppr": st.column_config.NumberColumn("Ceiling", format="%.2f"),
             },
         )
-    st.markdown("#### Kicker")
-    lineup_kicker_columns = st.columns(2)
-    with lineup_kicker_columns[0]:
-        lineup_kicker_profile = st.selectbox(
-            "Kicker scoring",
-            ["ESPN", "Yahoo"],
-            key="lineup_kicker_scoring",
-        )
+
+    specialist_columns = st.columns(2)
     kicker_map = selectable_kickers(kicker_rankings)
-    with lineup_kicker_columns[1]:
+    saved_kicker = str(st.query_params.get("kicker", ""))
+    kicker_options = ["None", *kicker_map]
+    saved_kicker_label = next(
+        (label for label, player_id in kicker_map.items() if str(player_id) == saved_kicker), "None"
+    )
+    with specialist_columns[0]:
         selected_kicker = st.selectbox(
-            "Your kicker",
-            ["None", *kicker_map],
-            key="lineup_kicker",
+            "Kicker", kicker_options, index=kicker_options.index(saved_kicker_label), key="lineup_kicker"
         )
+    defense_map = dict(zip(dst_rankings["defense_label"], dst_rankings["team"]))
+    saved_defense = str(st.query_params.get("dst", ""))
+    defense_options = ["None", *defense_map]
+    saved_defense_label = next(
+        (label for label, team in defense_map.items() if str(team) == saved_defense), "None"
+    )
+    with specialist_columns[1]:
+        selected_defense = st.selectbox(
+            "D/ST", defense_options, index=defense_options.index(saved_defense_label), key="lineup_defense"
+        )
+
     selected_kicker_points = 0.0
     if selected_kicker != "None":
-        kicker_projection = kicker_projection_frame(
-            kicker_rankings, lineup_kicker_profile
-        )
-        kicker_projection = kicker_projection.loc[
-            kicker_projection["player_id"].astype(str).eq(
-                str(kicker_map[selected_kicker])
-            )
+        kicker_rows = kicker_projection_frame(kicker_rankings, scoring_profile)
+        kicker_rows = kicker_rows.loc[
+            kicker_rows["player_id"].astype(str).eq(str(kicker_map[selected_kicker]))
         ]
-        kicker_table(kicker_projection, "projected_points")
-        if not kicker_projection.empty:
-            selected_kicker_points = float(
-                kicker_projection["projected_points"].iloc[0]
-            )
-
-    st.markdown("#### Defense/Special Teams")
-    defense_map = dict(
-        zip(dst_rankings["defense_label"], dst_rankings["team"])
-    )
-    defense_columns = st.columns(2)
-    with defense_columns[0]:
-        lineup_dst_profile = st.selectbox(
-            "D/ST scoring", ["ESPN", "Yahoo"], key="lineup_dst_scoring"
-        )
-    with defense_columns[1]:
-        selected_defense = st.selectbox(
-            "Your D/ST",
-            ["None", *defense_map],
-            key="lineup_defense",
-        )
+        if not kicker_rows.empty:
+            selected_kicker_points = float(kicker_rows["projected_points"].iloc[0])
     selected_defense_points = 0.0
     if selected_defense != "None":
-        defense_projection = dst_projection_frame(
-            dst_rankings, lineup_dst_profile
-        )
-        defense_projection = defense_projection.loc[
-            defense_projection["team"].eq(defense_map[selected_defense])
-        ]
-        dst_table(defense_projection, "Projected Points")
-        if not defense_projection.empty:
-            selected_defense_points = float(
-                defense_projection["projected_points"].iloc[0]
-            )
+        defense_rows = dst_projection_frame(dst_rankings, scoring_profile)
+        defense_rows = defense_rows.loc[defense_rows["team"].eq(defense_map[selected_defense])]
+        if not defense_rows.empty:
+            selected_defense_points = float(defense_rows["projected_points"].iloc[0])
+    lineup_total = offense_total + selected_kicker_points + selected_defense_points
 
-    if (
-        selected_labels
-        or selected_kicker != "None"
-        or selected_defense != "None"
-    ):
-        lineup_total = (
-            offense_total
-            + selected_kicker_points
-            + selected_defense_points
+    summary_columns = st.columns(3)
+    with summary_columns[0]:
+        render_summary_card("Projected lineup", f"{lineup_total:.2f}", "total points")
+    with summary_columns[1]:
+        render_summary_card("Offense", f"{offense_total:.2f}", f"{len(starter_rows)} starters")
+    with summary_columns[2]:
+        render_summary_card(
+            "Special teams", f"{selected_kicker_points + selected_defense_points:.2f}", f"{scoring_profile} profile"
         )
-        st.markdown(
-            f"""
-            <div class="se-lineup-total">
-              <div>
-                <div class="se-lineup-total__label">Selected lineup projection</div>
-                <div class="se-lineup-total__value">{lineup_total:.2f} pts</div>
-              </div>
-              <div class="se-lineup-total__breakdown">
-                {offense_starters} offensive starters ·
-                Offense {offense_total:.2f} ·
-                K {selected_kicker_points:.2f} ·
-                D/ST {selected_defense_points:.2f}
-              </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
+
+    action_columns = st.columns([1, 1, 2])
+    with action_columns[0]:
+        if st.button("Save roster link", type="primary", use_container_width=True):
+            st.query_params["roster"] = ",".join(roster_ids)
+            st.query_params["platform"] = scoring_profile.upper()
+            if selected_kicker != "None":
+                st.query_params["kicker"] = str(kicker_map[selected_kicker])
+            elif "kicker" in st.query_params:
+                del st.query_params["kicker"]
+            if selected_defense != "None":
+                st.query_params["dst"] = str(defense_map[selected_defense])
+            elif "dst" in st.query_params:
+                del st.query_params["dst"]
+            st.toast("Roster saved in this page link. Bookmark or share it.")
+    roster_export = rankings.loc[
+        rankings["player_id"].astype(str).isin(set(roster_ids)),
+        ["player_display_name", "position", "team", "opponent", "display_projected_fantasy_points_ppr"],
+    ]
+    with action_columns[1]:
+        st.download_button(
+            "Download roster",
+            roster_export.to_csv(index=False).encode("utf-8"),
+            file_name=f"sunday_edge_{season}_week_{week}_roster.csv",
+            mime="text/csv",
+            use_container_width=True,
         )
+    with action_columns[2]:
+        st.caption("Saved links store player IDs in the URL. No account or private league data is uploaded.")
+
+    st.markdown("#### Bye-week planner")
+    roster_byes = bye_week_frame(rankings, season_schedule, roster_ids, week)
+    if roster_byes.empty:
+        st.caption("Add roster players to see bye-week conflicts.")
+    else:
+        st.dataframe(
+            roster_byes,
+            hide_index=True,
+            width="stretch",
+            column_config={
+                "player_display_name": "Player",
+                "position": "POS",
+                "team": "Team",
+                "bye_week": "Bye",
+                "bye_status": "Status",
+            },
+        )
+    st.markdown(
+        '<div class="se-caveat"><b>Injury status:</b> The 2026 weekly injury source is not available yet. Use the manual unavailable list above and confirm official game status in ESPN or Yahoo before kickoff.</div>',
+        unsafe_allow_html=True,
+    )
 
 with compare_tab:
-    st.subheader("Compare players")
-    comparison_map = selectable_players(rankings)
-    comparison_labels = st.multiselect(
-        "Players to compare",
-        list(comparison_map),
-        max_selections=4,
-        placeholder="Select up to four players",
+    section_intro(
+        "Decision lab",
+        "Compare the choices that matter",
+        "Use the weekly model for start/sit calls or the current-rate outlook for trade planning.",
     )
-    comparison = comparison_frame(
-        rankings,
-        [comparison_map[label] for label in comparison_labels],
+    compare_mode = st.radio(
+        "Comparison type", ["Start / Sit", "Trade"], horizontal=True, label_visibility="collapsed", key="compare_mode"
     )
-    if comparison.empty:
-        st.info("Select at least one player to compare.")
+    if compare_mode == "Start / Sit":
+        comparison_labels = st.multiselect(
+            "Players to compare",
+            list(player_map),
+            max_selections=4,
+            placeholder="Select up to four players",
+            key="comparison_players",
+        )
+        comparison = comparison_frame(rankings, [player_map[label] for label in comparison_labels])
+        if comparison.empty:
+            st.info("Select at least one player to compare.")
+        else:
+            render_player_board(comparison)
+            if len(comparison) >= 2:
+                leader = comparison.iloc[0]
+                runner_up = comparison.iloc[1]
+                edge = float(
+                    leader["display_projected_fantasy_points_ppr"]
+                    - runner_up["display_projected_fantasy_points_ppr"]
+                )
+                overlaps = float(leader["projection_floor_ppr"]) <= float(runner_up["projection_ceiling_ppr"])
+                confidence = "Close call - ranges overlap" if overlaps else "Clear projected edge"
+                render_summary_card(
+                    "Recommended start",
+                    str(leader["player_display_name"]),
+                    f"+{edge:.2f} PPR - {confidence}",
+                )
     else:
-        projection_table(comparison)
-        if len(comparison) >= 2:
-            leader = comparison.iloc[0]
-            runner_up = comparison.iloc[1]
-            edge = float(
-                leader["display_projected_fantasy_points_ppr"]
-                - runner_up["display_projected_fantasy_points_ppr"]
+        full_outlook = season_outlook_frame(rankings, season_schedule, week, limit=1000)
+        trade_columns = st.columns(2)
+        with trade_columns[0]:
+            side_a_labels = st.multiselect(
+                "Side A", list(player_map), max_selections=5, placeholder="Players received by Side A", key="trade_side_a"
             )
-            leader_name = escape(str(leader["player_display_name"]))
-            runner_up_name = escape(str(runner_up["player_display_name"]))
-            st.markdown(
-                f"""
-                <div class="se-compare-edge">
-                  <div>
-                    <div class="se-compare-edge__label">Projected edge</div>
-                    <div class="se-compare-edge__value">{leader_name}</div>
-                  </div>
-                  <div class="se-compare-edge__detail">
-                    +{edge:.2f} PPR over {runner_up_name}
-                  </div>
-                </div>
-                """,
-                unsafe_allow_html=True,
+        with trade_columns[1]:
+            side_b_labels = st.multiselect(
+                "Side B", list(player_map), max_selections=5, placeholder="Players received by Side B", key="trade_side_b"
             )
-
-with flex_tab:
-    st.subheader("Flex projections")
-    st.caption("RB, WR, and TE players eligible for your FLEX spot.")
-    flex_limit = st.selectbox(
-        "Players to show", [10, 25, 50], index=1, key="flex_limit"
-    )
-    flex_players = flex_projections(rankings, flex_limit)
-    projection_table(flex_players)
-
-with kickers_tab:
-    st.subheader("Kicker projections")
-    st.caption(
-        "Choose your platform's default scoring. Check the final depth chart "
-        "before kickoff."
-    )
-    kicker_profile = st.selectbox(
-        "Scoring", ["ESPN", "Yahoo"], key="kicker_tab_scoring"
-    )
-    kicker_projections = kicker_projection_frame(
-        kicker_rankings, kicker_profile
-    )
-    kicker_table(kicker_projections, "projected_points")
-
-with dst_tab:
-    st.subheader("Defense/Special Teams projections")
-    st.caption(
-        "Choose your platform's default scoring. Custom league settings may "
-        "produce different totals."
-    )
-    dst_profile = st.selectbox(
-        "Scoring", ["ESPN", "Yahoo"], key="dst_tab_scoring"
-    )
-    dst_projections = dst_projection_frame(dst_rankings, dst_profile)
-    dst_table(dst_projections, "Projected Points")
+        side_a_ids = [player_map[label] for label in side_a_labels]
+        side_b_ids = [player_map[label] for label in side_b_labels]
+        if set(side_a_ids) & set(side_b_ids):
+            st.warning("A player cannot appear on both sides of a trade.")
+        summary_a = trade_side_summary(full_outlook, side_a_ids)
+        summary_b = trade_side_summary(full_outlook, side_b_ids)
+        summary_columns = st.columns(2)
+        with summary_columns[0]:
+            render_summary_card(
+                "Side A value", f"{summary_a['ros_points_proxy']:.1f}", f"ROS proxy - {summary_a['weekly_projection']:.1f} weekly"
+            )
+        with summary_columns[1]:
+            render_summary_card(
+                "Side B value", f"{summary_b['ros_points_proxy']:.1f}", f"ROS proxy - {summary_b['weekly_projection']:.1f} weekly"
+            )
+        if side_a_ids and side_b_ids and not (set(side_a_ids) & set(side_b_ids)):
+            difference = float(summary_a["ros_points_proxy"]) - float(summary_b["ros_points_proxy"])
+            favored = "Side A" if difference > 0 else "Side B" if difference < 0 else "Neither side"
+            st.success(f"{favored} leads the current-rate ROS proxy by {abs(difference):.1f} points.")
+        st.caption(
+            "Trade value is a planning proxy: this week's projection multiplied by scheduled games remaining. "
+            "It does not predict future injuries, depth-chart changes, or weekly matchup shifts."
+        )
 
 with games_tab:
-    st.subheader(f"All games — Week {week}")
-    games = current_games(rankings)
-    st.dataframe(
-        games,
-        hide_index=True,
-        width="stretch",
-        column_config={"game_date": "Date", "matchup": "Matchup"},
+    section_intro(
+        "Game center",
+        f"Every matchup in Week {week}",
+        "Kickoff, venue, betting context, and weather risk in one weekly board.",
+    )
+    status_cards = st.columns(4)
+    with status_cards[0]:
+        render_summary_card("Projections", "Ready", f"{len(rankings)} player rows")
+    weather_ready = int(
+        game_context["forecast_status"]
+        .isin(["FORECAST_AVAILABLE", "RECORDED_GAME_WEATHER"])
+        .sum()
+    )
+    weather_pending = int(game_context["forecast_status"].eq("FORECAST_NOT_AVAILABLE_YET").sum())
+    with status_cards[1]:
+        render_summary_card("Weather", f"{weather_ready} ready", f"{weather_pending} waiting on forecast window")
+    with status_cards[2]:
+        render_summary_card("Injuries", "Manual", "2026 source not published")
+    with status_cards[3]:
+        render_summary_card("Live scoring", "Not connected", "provider credentials required")
+    render_game_cards(game_context)
+    st.markdown(
+        """
+        <div class="se-live-note">
+          <b>About live tracking</b>
+          <span>True in-game scoring needs a licensed live-stat feed. Yahoo roster sync also needs each user's OAuth approval; ESPN does not provide a supported public fantasy-league API. The app keeps these states explicit instead of showing delayed data as live.</span>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
 
-with previous_tab:
-    st.subheader("Previous weeks")
-    result_type = st.radio(
-        "Results", ["Players", "Kickers", "D/ST"], horizontal=True
+with season_tab:
+    section_intro(
+        "Season room",
+        "Results, outlook, and model scorecard",
+        "Review what happened, plan the schedule ahead, and see how the projection model performed.",
     )
-    if result_type == "Players":
-        st.caption("Actual full-PPR points from completed games.")
-        prior_seasons = sorted(
-            completed_results["season"].astype(int).unique(), reverse=True
-        )
-        previous_filter_columns = st.columns(3)
-        with previous_filter_columns[0]:
-            prior_season = st.selectbox(
-                "Season", prior_seasons, key="player_history_season"
+    season_view = st.radio(
+        "Season view",
+        ["Results", "Totals", "ROS Outlook", "Bye Weeks", "Model Accuracy"],
+        horizontal=True,
+        label_visibility="collapsed",
+        key="season_view",
+    )
+    if season_view == "Results":
+        result_type = st.radio("Result type", ["Players", "Kickers", "D/ST"], horizontal=True)
+        if result_type == "Players":
+            prior_seasons = sorted(completed_results["season"].astype(int).unique(), reverse=True)
+            filters = st.columns(3)
+            with filters[0]:
+                prior_season = st.selectbox("Season", prior_seasons, key="history_season")
+            available_weeks = sorted(
+                completed_results.loc[completed_results["season"].eq(prior_season), "week"].astype(int).unique(),
+                reverse=True,
             )
-        available_weeks = sorted(
-            completed_results.loc[
-                completed_results["season"].eq(prior_season), "week"
-            ]
-            .astype(int)
-            .unique(),
+            with filters[1]:
+                prior_week = st.selectbox("Week", available_weeks, key="history_week")
+            with filters[2]:
+                prior_position = st.selectbox(
+                    "Position", ["All", "QB", "RB", "WR", "TE"], key="history_position"
+                )
+            previous = filter_completed_results(completed_results, prior_season, prior_week, prior_position)
+            st.dataframe(
+                previous[["player_display_name", "position", "team", "opponent", "fantasy_points_ppr"]],
+                hide_index=True,
+                width="stretch",
+                column_config={
+                    "player_display_name": "Player",
+                    "position": "POS",
+                    "team": "Team",
+                    "opponent": "Opponent",
+                    "fantasy_points_ppr": st.column_config.NumberColumn("Actual PPR", format="%.2f"),
+                },
+            )
+        elif result_type == "Kickers":
+            kicker_seasons = sorted(completed_kicker_results["season"].astype(int).unique(), reverse=True)
+            filters = st.columns(2)
+            with filters[0]:
+                kicker_season = st.selectbox("Season", kicker_seasons, key="k_history_season")
+            kicker_weeks = sorted(
+                completed_kicker_results.loc[completed_kicker_results["season"].eq(kicker_season), "week"].astype(int).unique(),
+                reverse=True,
+            )
+            with filters[1]:
+                kicker_week = st.selectbox("Week", kicker_weeks, key="k_history_week")
+            previous_kickers = filter_completed_kicker_results(
+                completed_kicker_results, kicker_season, kicker_week, scoring_profile
+            )
+            st.dataframe(previous_kickers, hide_index=True, width="stretch")
+        else:
+            dst_seasons = sorted(completed_dst_results["season"].astype(int).unique(), reverse=True)
+            filters = st.columns(2)
+            with filters[0]:
+                dst_season = st.selectbox("Season", dst_seasons, key="dst_history_season")
+            dst_weeks = sorted(
+                completed_dst_results.loc[completed_dst_results["season"].eq(dst_season), "week"].astype(int).unique(),
+                reverse=True,
+            )
+            with filters[1]:
+                dst_week = st.selectbox("Week", dst_weeks, key="dst_history_week")
+            previous_dst = filter_completed_dst_results(
+                completed_dst_results, dst_season, dst_week, scoring_profile
+            )
+            st.dataframe(previous_dst, hide_index=True, width="stretch")
+    elif season_view == "Totals":
+        total_seasons = sorted(
+            set(completed_results["season"].astype(int))
+            | set(completed_kicker_results["season"].astype(int))
+            | set(completed_dst_results["season"].astype(int)),
             reverse=True,
         )
-        with previous_filter_columns[1]:
-            prior_week = st.selectbox(
-                "Week", available_weeks, key="player_history_week"
+        filters = st.columns(2)
+        with filters[0]:
+            totals_season = st.selectbox("Season", total_seasons, key="totals_season")
+        with filters[1]:
+            totals_position = st.selectbox(
+                "Position", ["All", "QB", "RB", "WR", "TE", "FLEX", "K", "D/ST"], key="totals_position"
             )
-        with previous_filter_columns[2]:
-            prior_position = st.selectbox(
-                "Position",
-                ["All", "QB", "RB", "WR", "TE"],
-                key="previous_position",
-            )
-        previous = filter_completed_results(
-            completed_results, prior_season, prior_week, prior_position
+        totals = season_totals_frame(
+            completed_results,
+            completed_kicker_results,
+            totals_season,
+            totals_position,
+            scoring_profile,
+            completed_dst_results,
+            scoring_profile,
         )
         st.dataframe(
-            previous[
+            totals,
+            hide_index=True,
+            width="stretch",
+            column_config={
+                "player_display_name": "Player",
+                "position": "POS",
+                "team": "Latest Team",
+                "total_points": st.column_config.NumberColumn("Season Points", format="%.2f"),
+            },
+        )
+    elif season_view == "ROS Outlook":
+        outlook_position = st.selectbox(
+            "Position", ["All", "QB", "RB", "WR", "TE", "FLEX"], key="outlook_position"
+        )
+        outlook = season_outlook_frame(rankings, season_schedule, week, outlook_position, 100)
+        st.dataframe(
+            outlook[
                 [
                     "player_display_name",
                     "position",
                     "team",
-                    "opponent",
-                    "fantasy_points_ppr",
+                    "bye_week",
+                    "games_remaining",
+                    "display_projected_fantasy_points_ppr",
+                    "ros_points_proxy",
                 ]
             ],
             hide_index=True,
             width="stretch",
             column_config={
-                "player_display_name": "Player",
-                "position": "POS",
-                "team": "Team",
-                "opponent": "Opponent",
-                "fantasy_points_ppr": st.column_config.NumberColumn(
-                    "Actual PPR", format="%.2f"
-                ),
+                **PLAYER_COLUMN_CONFIG,
+                "bye_week": "Bye",
+                "games_remaining": "Games Left",
+                "ros_points_proxy": st.column_config.NumberColumn("ROS Proxy", format="%.2f"),
             },
         )
-    elif result_type == "Kickers":
-        st.caption("Actual kicker points using the selected platform default.")
-        kicker_seasons = sorted(
-            completed_kicker_results["season"].astype(int).unique(), reverse=True
+        st.caption(
+            "ROS Proxy equals this week's projection times scheduled games remaining. "
+            "It is a transparent planning baseline, not a weekly reforecast."
         )
-        kicker_history_columns = st.columns(3)
-        with kicker_history_columns[0]:
-            kicker_season = st.selectbox(
-                "Season", kicker_seasons, key="kicker_history_season"
-            )
-        kicker_weeks = sorted(
-            completed_kicker_results.loc[
-                completed_kicker_results["season"].eq(kicker_season), "week"
-            ]
-            .astype(int)
-            .unique(),
-            reverse=True,
-        )
-        with kicker_history_columns[1]:
-            kicker_week = st.selectbox(
-                "Week", kicker_weeks, key="kicker_history_week"
-            )
-        with kicker_history_columns[2]:
-            kicker_history_profile = st.selectbox(
-                "Scoring",
-                ["ESPN", "Yahoo"],
-                key="kicker_history_scoring",
-            )
-        previous_kickers = filter_completed_kicker_results(
-            completed_kicker_results,
-            kicker_season,
-            kicker_week,
-            kicker_history_profile,
-        )
+    elif season_view == "Bye Weeks":
+        byes = team_bye_weeks(season_schedule)
         st.dataframe(
-            previous_kickers,
-            hide_index=True,
-            width="stretch",
-            column_config={
-                "player_display_name": "Player",
-                "position": "POS",
-                "team": "Team",
-                "opponent": "Opponent",
-                "actual_points": st.column_config.NumberColumn(
-                    "Actual Points", format="%.2f"
-                ),
-            },
+            byes, hide_index=True, width="stretch", column_config={"team": "Team", "bye_week": "Bye Week"}
         )
     else:
-        st.caption("Actual D/ST points using the selected platform default.")
-        dst_seasons = sorted(
-            completed_dst_results["season"].astype(int).unique(), reverse=True
+        st.caption(
+            "Held-out 2025 results. Lower MAE and RMSE are better; higher rank correlation and interval coverage are better."
         )
-        dst_history_columns = st.columns(3)
-        with dst_history_columns[0]:
-            dst_season = st.selectbox(
-                "Season", dst_seasons, key="dst_history_season"
-            )
-        dst_weeks = sorted(
-            completed_dst_results.loc[
-                completed_dst_results["season"].eq(dst_season), "week"
-            ]
-            .astype(int)
-            .unique(),
-            reverse=True,
-        )
-        with dst_history_columns[1]:
-            dst_week = st.selectbox(
-                "Week", dst_weeks, key="dst_history_week"
-            )
-        with dst_history_columns[2]:
-            dst_history_profile = st.selectbox(
-                "Scoring",
-                ["ESPN", "Yahoo"],
-                key="dst_history_scoring",
-            )
-        previous_dst = filter_completed_dst_results(
-            completed_dst_results,
-            dst_season,
-            dst_week,
-            dst_history_profile,
-        )
-        st.dataframe(
-            previous_dst,
-            hide_index=True,
-            width="stretch",
-            column_config={
-                "team": "Defense",
-                "opponent": "Opponent",
-                "actual_points": st.column_config.NumberColumn(
-                    "Actual Points", format="%.2f"
-                ),
-            },
-        )
-
-with season_totals_tab:
-    st.subheader("Season totals")
-    st.caption(
-        "Completed full-PPR offense plus kicker and D/ST points under the "
-        "selected platform default."
-    )
-    total_seasons = sorted(
-        set(completed_results["season"].astype(int))
-        | set(completed_kicker_results["season"].astype(int))
-        | set(completed_dst_results["season"].astype(int)),
-        reverse=True,
-    )
-    season_total_columns = st.columns(3)
-    with season_total_columns[0]:
-        totals_season = st.selectbox(
-            "Season", total_seasons, key="totals_season"
-        )
-    with season_total_columns[1]:
-        totals_position = st.selectbox(
-            "Position",
-            ["All", "QB", "RB", "WR", "TE", "FLEX", "K", "D/ST"],
-            key="totals_position",
-        )
-    with season_total_columns[2]:
-        totals_platform_profile = st.selectbox(
-            "Platform scoring",
-            ["ESPN", "Yahoo"],
-            key="totals_platform_scoring",
-        )
-    season_totals = season_totals_frame(
-        completed_results,
-        completed_kicker_results,
-        totals_season,
-        totals_position,
-        totals_platform_profile,
-        completed_dst_results,
-        totals_platform_profile,
-    )
-    st.dataframe(
-        season_totals,
-        hide_index=True,
-        width="stretch",
-        column_config={
-            "player_display_name": "Player",
-            "position": "POS",
-            "team": "Latest Team",
-            "total_points": st.column_config.NumberColumn(
-                "Season Points", format="%.2f"
-            ),
-        },
-    )
+        accuracy_display = model_accuracy.rename(
+            columns={
+                "position": "Position",
+                "row_count": "Players",
+                "mae": "MAE",
+                "rmse": "RMSE",
+                "spearman": "Rank correlation",
+                "test_coverage_pct": "80% range coverage",
+            }
+        )[["Position", "Players", "MAE", "RMSE", "Rank correlation", "80% range coverage"]]
+        st.dataframe(accuracy_display, hide_index=True, width="stretch")
+        overall = model_accuracy.loc[model_accuracy["position"].eq("ALL")].iloc[0]
+        accuracy_cards = st.columns(3)
+        with accuracy_cards[0]:
+            render_summary_card("Overall MAE", f"{float(overall['mae']):.2f}", "fantasy points")
+        with accuracy_cards[1]:
+            render_summary_card("Rank correlation", f"{float(overall['spearman']):.2f}", "held-out 2025")
+        with accuracy_cards[2]:
+            render_summary_card("Range coverage", f"{float(overall['test_coverage_pct']):.1f}%", "target interval: 80%")
 
 st.markdown(
     """
-    <div class="se-footer">
-      Sunday Edge · Full-PPR offense · ESPN and Yahoo kicker/D/ST profiles
-    </div>
+    <footer class="se-footer">
+      <b>Sunday Edge</b>
+      <span>Full-PPR offense - ESPN & Yahoo specialist profiles - Decisions, not noise.</span>
+    </footer>
     """,
     unsafe_allow_html=True,
 )
