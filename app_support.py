@@ -131,6 +131,25 @@ def top_projections(
     ).head(limit).reset_index(drop=True)
 
 
+def search_projection_pool(
+    rankings: pd.DataFrame, search_text: str = ""
+) -> pd.DataFrame:
+    """Search the compact projection fields without changing ranking order."""
+
+    search = search_text.strip()
+    if not search:
+        return rankings.copy()
+    searchable = rankings[
+        ["player_display_name", "position", "team", "opponent"]
+    ].fillna("")
+    matches = searchable.apply(
+        lambda column: column.astype(str).str.contains(
+            search, case=False, regex=False, na=False
+        )
+    ).any(axis="columns")
+    return rankings.loc[matches].copy()
+
+
 def flex_projections(
     rankings: pd.DataFrame,
     limit: int = 25,
@@ -452,8 +471,10 @@ def season_totals_frame(
     season: int,
     position: str = "All",
     kicker_profile: str = "ESPN",
+    completed_dst: pd.DataFrame | None = None,
+    dst_profile: str | None = None,
 ) -> pd.DataFrame:
-    """Aggregate completed player and kicker points for an entire season."""
+    """Aggregate completed offensive, kicker, and optional D/ST points."""
 
     offense = completed_players.loc[
         completed_players["season"].eq(season)
@@ -467,31 +488,57 @@ def season_totals_frame(
         completed_kickers["season"].eq(season)
     ].copy()
     kickers["_points"] = kickers[kicker_points]
-    combined = pd.concat(
-        [
-            offense[
-                [
-                    "game_date",
-                    "player_id",
-                    "player_display_name",
-                    "position",
-                    "team",
-                    "_points",
-                ]
-            ],
-            kickers[
-                [
-                    "game_date",
-                    "player_id",
-                    "player_display_name",
-                    "position",
-                    "team",
-                    "_points",
-                ]
-            ],
+    frames = [
+        offense[
+            [
+                "game_date",
+                "player_id",
+                "player_display_name",
+                "position",
+                "team",
+                "_points",
+            ]
         ],
-        ignore_index=True,
-    )
+        kickers[
+            [
+                "game_date",
+                "player_id",
+                "player_display_name",
+                "position",
+                "team",
+                "_points",
+            ]
+        ],
+    ]
+    if completed_dst is not None:
+        normalized_dst_profile = (
+            dst_profile if dst_profile is not None else kicker_profile
+        ).strip().lower()
+        if normalized_dst_profile not in {"espn", "yahoo"}:
+            raise ValueError(f"Unknown D/ST scoring profile: {dst_profile}")
+        dst_points = f"{normalized_dst_profile}_fantasy_points"
+        defenses = completed_dst.loc[
+            completed_dst["season"].eq(season)
+        ].copy()
+        defenses["player_id"] = "DST_" + defenses["team"].astype(str)
+        defenses["player_display_name"] = (
+            defenses["team"].astype(str) + " D/ST"
+        )
+        defenses["position"] = "D/ST"
+        defenses["_points"] = defenses[dst_points]
+        frames.append(
+            defenses[
+                [
+                    "game_date",
+                    "player_id",
+                    "player_display_name",
+                    "position",
+                    "team",
+                    "_points",
+                ]
+            ]
+        )
+    combined = pd.concat(frames, ignore_index=True)
     if position == "FLEX":
         combined = combined.loc[combined["position"].isin(FLEX_POSITIONS)]
     elif position != "All":

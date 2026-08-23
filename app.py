@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import importlib
 import json
+from html import escape
 from pathlib import Path
 
 import pandas as pd
@@ -31,6 +32,7 @@ normalize_dst_rankings = _app_support.normalize_dst_rankings
 normalize_rankings = _app_support.normalize_rankings
 optimize_lineup = _app_support.optimize_lineup
 season_totals_frame = _app_support.season_totals_frame
+search_projection_pool = _app_support.search_projection_pool
 selectable_kickers = _app_support.selectable_kickers
 selectable_players = _app_support.selectable_players
 top_projections = _app_support.top_projections
@@ -72,6 +74,63 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed",
 )
+
+
+def apply_app_styles(path: Path) -> None:
+    """Load the checked-in visual theme without runtime dependencies."""
+
+    if path.exists():
+        st.markdown(
+            f"<style>{path.read_text(encoding='utf-8')}</style>",
+            unsafe_allow_html=True,
+        )
+
+
+def published_label(value: object) -> str:
+    """Return a compact UTC freshness label for the public snapshot."""
+
+    try:
+        timestamp = pd.to_datetime(value, utc=True, errors="raise")
+    except (TypeError, ValueError):
+        return "Latest validated update"
+    return timestamp.strftime("Updated %b %d, %Y at %H:%M UTC")
+
+
+def render_app_header(
+    metadata: dict[str, object], season: int, week: int
+) -> None:
+    """Render a compact NFL-inspired header with useful slate context."""
+
+    games = int(metadata.get("game_count", 0))
+    players = int(metadata.get("role_eligible_rows", 0))
+    freshness = escape(published_label(metadata.get("published_at_utc")))
+    st.markdown(
+        f"""
+        <section class="se-hero">
+          <div class="se-hero__content">
+            <div class="se-brand">
+              <span class="se-ball">SE</span>
+              Game-day decision desk
+            </div>
+            <h1>Sunday Edge</h1>
+            <div class="se-hero__subtitle">
+              A focused fantasy football advisor for faster lineup decisions.
+            </div>
+            <div class="se-hero__meta">
+              <span class="se-chip"><span class="se-status-dot"></span>Projections ready</span>
+              <span class="se-chip">{season} · Week {week}</span>
+              <span class="se-chip">{games} games</span>
+              <span class="se-chip">{players} eligible players</span>
+              <span class="se-chip">{freshness}</span>
+            </div>
+          </div>
+        </section>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+apply_app_styles(PROJECT_ROOT / "assets" / "app.css")
 
 
 @st.cache_data(show_spinner=False)
@@ -217,8 +276,7 @@ except (OSError, ValueError, json.JSONDecodeError) as error:
 
 season = int(metadata["season"])
 week = int(metadata["week"])
-st.title("Sunday Edge Fantasy Advisor")
-st.caption(f"{season} Week {week} full-PPR projections")
+render_app_header(metadata, season, week)
 
 status = str(metadata.get("publication_status", "UNKNOWN"))
 if "INJURY_CAVEAT" in status:
@@ -255,7 +313,7 @@ elif not status.startswith("PASS"):
 
 with projections_tab:
     st.subheader("Highest projected players")
-    filter_column, count_column = st.columns(2)
+    filter_column, count_column, search_column = st.columns([1, 1, 2])
     with filter_column:
         selected_position = st.selectbox(
             "Position", ["All", "QB", "RB", "WR", "TE"]
@@ -264,7 +322,16 @@ with projections_tab:
         player_limit = st.selectbox(
             "Players to show", [10, 25, 50], index=1
         )
-    leaders = top_projections(rankings, selected_position, player_limit)
+    with search_column:
+        projection_search = st.text_input(
+            "Search",
+            placeholder="Player, position, team, or opponent",
+            key="projection_search",
+        )
+    projection_pool = search_projection_pool(rankings, projection_search)
+    leaders = top_projections(
+        projection_pool, selected_position, player_limit
+    )
     if leaders.empty:
         st.info("No players are available for this position.")
     else:
@@ -279,6 +346,8 @@ with lineup_tab:
         list(player_map),
         placeholder="Search and select your players",
     )
+    offense_total = 0.0
+    offense_starters = 0
     if not selected_labels:
         st.info("Select your roster players to build a lineup.")
     else:
@@ -287,6 +356,11 @@ with lineup_tab:
         )
         if gaps:
             st.warning("Roster gaps: " + "; ".join(gaps))
+        starter_rows = lineup.loc[lineup["lineup_status"].eq("START")]
+        offense_starters = len(starter_rows)
+        offense_total = float(
+            starter_rows["display_projected_fantasy_points_ppr"].sum()
+        )
         st.dataframe(
             lineup[
                 [
@@ -318,6 +392,7 @@ with lineup_tab:
             ["None", *kicker_map],
             key="lineup_kicker",
         )
+    selected_kicker_points = 0.0
     if selected_kicker != "None":
         kicker_projection = kicker_projection_frame(
             kicker_rankings, lineup_kicker_profile
@@ -328,6 +403,10 @@ with lineup_tab:
             )
         ]
         kicker_table(kicker_projection, "projected_points")
+        if not kicker_projection.empty:
+            selected_kicker_points = float(
+                kicker_projection["projected_points"].iloc[0]
+            )
 
     st.markdown("#### Defense/Special Teams")
     defense_map = dict(
@@ -344,6 +423,7 @@ with lineup_tab:
             ["None", *defense_map],
             key="lineup_defense",
         )
+    selected_defense_points = 0.0
     if selected_defense != "None":
         defense_projection = dst_projection_frame(
             dst_rankings, lineup_dst_profile
@@ -352,6 +432,38 @@ with lineup_tab:
             defense_projection["team"].eq(defense_map[selected_defense])
         ]
         dst_table(defense_projection, "Projected Points")
+        if not defense_projection.empty:
+            selected_defense_points = float(
+                defense_projection["projected_points"].iloc[0]
+            )
+
+    if (
+        selected_labels
+        or selected_kicker != "None"
+        or selected_defense != "None"
+    ):
+        lineup_total = (
+            offense_total
+            + selected_kicker_points
+            + selected_defense_points
+        )
+        st.markdown(
+            f"""
+            <div class="se-lineup-total">
+              <div>
+                <div class="se-lineup-total__label">Selected lineup projection</div>
+                <div class="se-lineup-total__value">{lineup_total:.2f} pts</div>
+              </div>
+              <div class="se-lineup-total__breakdown">
+                {offense_starters} offensive starters ·
+                Offense {offense_total:.2f} ·
+                K {selected_kicker_points:.2f} ·
+                D/ST {selected_defense_points:.2f}
+              </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
 with compare_tab:
     st.subheader("Compare players")
@@ -370,6 +482,29 @@ with compare_tab:
         st.info("Select at least one player to compare.")
     else:
         projection_table(comparison)
+        if len(comparison) >= 2:
+            leader = comparison.iloc[0]
+            runner_up = comparison.iloc[1]
+            edge = float(
+                leader["display_projected_fantasy_points_ppr"]
+                - runner_up["display_projected_fantasy_points_ppr"]
+            )
+            leader_name = escape(str(leader["player_display_name"]))
+            runner_up_name = escape(str(runner_up["player_display_name"]))
+            st.markdown(
+                f"""
+                <div class="se-compare-edge">
+                  <div>
+                    <div class="se-compare-edge__label">Projected edge</div>
+                    <div class="se-compare-edge__value">{leader_name}</div>
+                  </div>
+                  <div class="se-compare-edge__detail">
+                    +{edge:.2f} PPR over {runner_up_name}
+                  </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
 
 with flex_tab:
     st.subheader("Flex projections")
@@ -572,12 +707,13 @@ with previous_tab:
 with season_totals_tab:
     st.subheader("Season totals")
     st.caption(
-        "Completed full-PPR player points plus kicker points under the "
+        "Completed full-PPR offense plus kicker and D/ST points under the "
         "selected platform default."
     )
     total_seasons = sorted(
         set(completed_results["season"].astype(int))
-        | set(completed_kicker_results["season"].astype(int)),
+        | set(completed_kicker_results["season"].astype(int))
+        | set(completed_dst_results["season"].astype(int)),
         reverse=True,
     )
     season_total_columns = st.columns(3)
@@ -588,21 +724,23 @@ with season_totals_tab:
     with season_total_columns[1]:
         totals_position = st.selectbox(
             "Position",
-            ["All", "QB", "RB", "WR", "TE", "FLEX", "K"],
+            ["All", "QB", "RB", "WR", "TE", "FLEX", "K", "D/ST"],
             key="totals_position",
         )
     with season_total_columns[2]:
-        totals_kicker_profile = st.selectbox(
-            "Kicker scoring",
+        totals_platform_profile = st.selectbox(
+            "Platform scoring",
             ["ESPN", "Yahoo"],
-            key="totals_kicker_scoring",
+            key="totals_platform_scoring",
         )
     season_totals = season_totals_frame(
         completed_results,
         completed_kicker_results,
         totals_season,
         totals_position,
-        totals_kicker_profile,
+        totals_platform_profile,
+        completed_dst_results,
+        totals_platform_profile,
     )
     st.dataframe(
         season_totals,
@@ -617,3 +755,12 @@ with season_totals_tab:
             ),
         },
     )
+
+st.markdown(
+    """
+    <div class="se-footer">
+      Sunday Edge · Full-PPR offense · ESPN and Yahoo kicker/D/ST profiles
+    </div>
+    """,
+    unsafe_allow_html=True,
+)

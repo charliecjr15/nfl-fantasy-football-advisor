@@ -76,5 +76,5 @@ goal range. Use the values as comparative rankings, not guaranteed totals.
 
 The My Lineup view includes a separate kicker selector. Previous Weeks shows
 actual kicker points under either profile. Season Totals combines completed
-full-PPR offense with kicker points from the selected profile; D/ST remains a
-team entry and is intentionally excluded from the player totals table.
+full-PPR offense with kicker and D/ST points from the selected ESPN or Yahoo
+profile, and the position filter can isolate any of the three groups.

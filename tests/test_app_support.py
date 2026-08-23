@@ -21,6 +21,7 @@ from app_support import (
     normalize_kicker_rankings,
     normalize_rankings,
     optimize_lineup,
+    search_projection_pool,
     season_totals_frame,
     top_projections,
 )
@@ -130,6 +131,18 @@ def test_top_projections_and_games_are_compact() -> None:
     assert games.to_dict("records") == [
         {"game_date": "Thu, Sep 10", "matchup": "AAA vs BBB"}
     ]
+
+
+def test_projection_search_matches_player_team_position_and_opponent() -> None:
+    rankings = sample_rankings()
+
+    assert search_projection_pool(
+        rankings, "wide one"
+    )["player_id"].tolist() == ["wr1"]
+    assert len(search_projection_pool(rankings, "AAA")) == len(rankings)
+    assert len(search_projection_pool(rankings, "QB")) == 1
+    assert len(search_projection_pool(rankings, "BBB")) == len(rankings)
+    assert search_projection_pool(rankings, "").equals(rankings)
 
 
 def test_flex_projections_include_only_rb_wr_and_te() -> None:
@@ -312,4 +325,79 @@ def test_kicker_helpers_and_season_totals_switch_profiles() -> None:
     ) == [
         {"player_display_name": "Running One", "total_points": 20.0},
         {"player_display_name": "Kicker One", "total_points": 11.0},
+    ]
+
+
+def test_season_totals_can_include_dst_under_selected_profile() -> None:
+    completed_players = normalize_completed_results(
+        pd.DataFrame(
+            [
+                {
+                    "season": 2025,
+                    "week": 18,
+                    "game_id": "game-0",
+                    "game_date": "2026-01-03",
+                    "player_id": "rb1",
+                    "player_display_name": "Running One",
+                    "position": "RB",
+                    "team": "AAA",
+                    "opponent": "BBB",
+                    "fantasy_points_ppr": 20.0,
+                }
+            ]
+        )
+    )
+    completed_kickers = normalize_completed_kicker_results(
+        pd.DataFrame(
+            [
+                {
+                    "season": 2025,
+                    "week": 18,
+                    "game_id": "game-0",
+                    "game_date": "2026-01-03",
+                    "player_id": "k1",
+                    "player_display_name": "Kicker One",
+                    "position": "K",
+                    "team": "AAA",
+                    "opponent": "BBB",
+                    "espn_fantasy_points": 9.0,
+                    "yahoo_fantasy_points": 11.0,
+                }
+            ]
+        )
+    )
+    completed_dst = normalize_completed_dst_results(
+        pd.DataFrame(
+            [
+                {
+                    "season": 2025,
+                    "week": 18,
+                    "game_id": "game-0",
+                    "game_date": "2026-01-03",
+                    "team": "AAA",
+                    "opponent": "BBB",
+                    "espn_fantasy_points": 12.0,
+                    "yahoo_fantasy_points": 10.0,
+                }
+            ]
+        )
+    )
+
+    totals = season_totals_frame(
+        completed_players,
+        completed_kickers,
+        2025,
+        "D/ST",
+        "Yahoo",
+        completed_dst,
+        "Yahoo",
+    )
+
+    assert totals.to_dict("records") == [
+        {
+            "player_display_name": "AAA D/ST",
+            "position": "D/ST",
+            "team": "AAA",
+            "total_points": 10.0,
+        }
     ]

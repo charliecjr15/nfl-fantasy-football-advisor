@@ -104,12 +104,14 @@ Current 2026 injury context remains unavailable, so these are not final start/si
 calls. See [the weekly-ranking guide](docs/weekly_rankings.md).
 
 The public application reads only the last manifest-validated snapshot. It
-uses a compact layout for top projections, a manual-roster lineup optimizer,
-player comparison, a dedicated RB/WR/TE FLEX list, ESPN/Yahoo kicker and D/ST
-rankings, all target-week games, previous-week results, and full-season player
-totals. Projection tables show only player, position, team, opponent, and
-projected points. Completed outcomes are published in separate display-only
-files and cannot enter target-week model inputs. The portable history path
+uses a compact NFL-themed layout for searchable top projections, a
+manual-roster lineup optimizer with a projected lineup total, player comparison
+with a projected edge, a dedicated RB/WR/TE FLEX list, ESPN/Yahoo kicker and
+D/ST rankings, all target-week games, previous-week results, and full-season
+offense, kicker, and D/ST totals. Projection tables show only player, position,
+team, opponent, and projected points. Completed outcomes are published in
+separate display-only files and cannot enter target-week model inputs. The
+portable history path
 reproduced the complete 2025 Week 18 frozen feature replay with zero text or
 numeric mismatches at the `1e-10` acceptance tolerance. See
 [weekly app operations](docs/weekly_operations.md) and
@@ -138,7 +140,7 @@ The completed advisor will help a fantasy manager decide:
 - Which players to start or sit each week
 - Which RB, WR, or TE should fill the FLEX position
 - Which kicker or D/ST to start under ESPN or Yahoo default scoring
-- Which players have accumulated the most points over a completed season
+- Which players or D/ST units have accumulated the most points over a completed season
 - Which available players are promising waiver-wire candidates
 - Which players have favorable or unfavorable matchups
 - Why one player is recommended over another

@@ -361,3 +361,31 @@ def test_streamlit_switches_kicker_dst_and_previous_results() -> None:
         "actual_points",
     ]
     assert len(app.dataframe[-2].value) >= 31
+
+
+def test_streamlit_search_lineup_summary_and_dst_season_totals() -> None:
+    app = AppTest.from_file(str(PROJECT_ROOT / "app.py"), default_timeout=30)
+    app.run()
+
+    app.text_input[0].set_value("Josh Allen").run()
+    assert app.dataframe[0].value["player_display_name"].tolist() == [
+        "Josh Allen"
+    ]
+
+    allen_label = next(
+        option
+        for option in app.multiselect[0].options
+        if option.startswith("Josh Allen |")
+    )
+    app.multiselect[0].set_value([allen_label]).run()
+    lineup_summary = [
+        markdown.value
+        for markdown in app.markdown
+        if 'class="se-lineup-total"' in markdown.value
+    ]
+    assert len(lineup_summary) == 1
+    assert "22.13 pts" in lineup_summary[0]
+
+    app.selectbox[13].set_value("D/ST").run()
+    assert set(app.dataframe[-1].value["position"]) == {"D/ST"}
+    assert len(app.dataframe[-1].value) == 32
