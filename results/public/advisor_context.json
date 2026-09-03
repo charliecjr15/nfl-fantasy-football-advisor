@@ -1,6 +1,6 @@
 {
   "artifact_version": "v1_advisor_context",
-  "built_at_utc": "2026-09-03T04:37:44.112595+00:00",
+  "built_at_utc": "2026-09-03T04:47:25.928660+00:00",
   "context_status": "PASS",
   "game_context": {
     "forecast_status_counts": {
@@ -10,7 +10,7 @@
     },
     "path": "results/public/game_context.csv",
     "rows": 16,
-    "sha256": "5312660ae52959546a704c15d83124ee9ce5f7e04fc044d5c8b807e7aa15a9dd",
+    "sha256": "a7a0d1e53d6da732ca3c78d0bb40f6aea1ed8266c2ce56dbcd04d3948bc161cf",
     "weather_source": "https://open-meteo.com/en/docs"
   },
   "model_accuracy": {
