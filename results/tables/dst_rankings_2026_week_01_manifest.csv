@@ -11,7 +11,7 @@ duplicate_keys,0
 unavailable_keys,0
 selection_evidence,"{""profiles"": {""espn"": {""selected_method"": ""defense_40_opponent_60"", ""test_metrics"": {""mae"": 4.7441176470588236, ""rmse"": 6.048039059942341, ""rows"": 544}, ""validation_mae"": {""balanced_last_5"": 4.729411764705882, ""defense_40_opponent_60"": 4.700220588235294, ""defense_60_opponent_40"": 4.784779411764706, ""defense_last_3"": 5.382352941176471, ""defense_last_5"": 5.204044117647059, ""opponent_last_5"": 4.895220588235294}}, ""yahoo"": {""selected_method"": ""defense_40_opponent_60"", ""test_metrics"": {""mae"": 4.475514705882353, ""rmse"": 5.738723213193599, ""rows"": 544}, ""validation_mae"": {""balanced_last_5"": 4.285477941176471, ""defense_40_opponent_60"": 4.271838235294118, ""defense_60_opponent_40"": 4.321911764705882, ""defense_last_3"": 4.879289215686274, ""defense_last_5"": 4.711029411764706, ""opponent_last_5"": 4.47389705882353}}}, ""test_season"": 2025, ""validation_season"": 2024}"
 scoring_sources,"{""espn"": ""https://support.espn.com/hc/en-us/articles/360003914032-Scoring-Formats"", ""yahoo"": ""https://help.yahoo.com/kb/SLN6489.html""}"
-scoring_config_sha256,62afdce1152770cb515ac11015e50d1cc3da32d8c15b1abeb42234aa4d4f729c
+scoring_config_sha256,210dec904071176ff02d3f675a9f7450db1e279ef58903f4144204eb374f2476
 rankings_csv_sha256,767f4a4abfe54e5f3bca41c5c83d5d953c6534444ef7541b0b6ff167e271f746
 completed_results_rows,544
 completed_results_csv_sha256,a54f72e50f93be7acdddf20659c204d510800526bd64b472718b50c9dfe4aa4f
