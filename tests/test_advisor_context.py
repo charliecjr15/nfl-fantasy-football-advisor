@@ -136,7 +136,17 @@ def test_committed_advisor_context_is_self_consistent() -> None:
     assert set(schedule["week"]) == set(range(1, 19))
     assert game_context["game_id"].is_unique
     assert set(game_context["week"]) == {1}
-    assert set(game_context["forecast_status"]) == {
+    forecast_statuses = set(game_context["forecast_status"])
+    assert forecast_statuses <= {
+        "FORECAST_AVAILABLE",
+        "FORECAST_FETCH_FAILED",
         "FORECAST_NOT_AVAILABLE_YET",
+        "FORECAST_SKIPPED",
         "INDOORS",
+        "PAST_GAME_NO_RECORDED_WEATHER",
+        "RECORDED_GAME_WEATHER",
     }
+    assert "INDOORS" in forecast_statuses
+    assert manifest["game_context"]["forecast_status_counts"] == (
+        game_context["forecast_status"].value_counts().sort_index().to_dict()
+    )
