@@ -1,30 +1,30 @@
 season,week,game_id,gameday,weekday,gametime,away_team,home_team,stadium_id,stadium,roof,surface,spread_line,total_line,temp,wind,venue_label,latitude,longitude,timezone,location_source
 2026,1,2026_01_NE_SEA,2026-09-09,Wednesday,20:20,NE,SEA,SEA00,Lumen Field,outdoors,fieldturf,3.5,44.5,,,Seattle,47.5953459,-122.331644311961,America/Los_Angeles,nflverse_stadium_mapping
-2026,1,2026_01_SF_LA,2026-09-10,Thursday,20:35,SF,LA,LAX01,Melbourne Cricket Ground,dome,matrixturf,3.5,48.5,,,Melbourne,-37.8199,144.9834,Australia/Melbourne,international_venue_override
-2026,1,2026_01_ATL_PIT,2026-09-13,Sunday,13:00,ATL,PIT,PIT00,Acrisure Stadium,outdoors,grass,3.0,42.5,,,Pittsburgh,40.44671645,-80.0157549334943,America/New_York,nflverse_stadium_mapping
+2026,1,2026_01_SF_LA,2026-09-10,Thursday,20:35,SF,LA,MEL00,Melbourne Cricket Ground,dome,matrixturf,3.5,48.5,,,Melbourne,-37.8199,144.9834,Australia/Melbourne,international_venue_override
+2026,1,2026_01_ATL_PIT,2026-09-13,Sunday,13:00,ATL,PIT,PIT00,Acrisure Stadium,outdoors,grass,3.5,42.5,,,Pittsburgh,40.44671645,-80.0157549334943,America/New_York,nflverse_stadium_mapping
 2026,1,2026_01_BAL_IND,2026-09-13,Sunday,13:00,BAL,IND,IND00,Lucas Oil Stadium,unknown,fieldturf,-3.5,48.5,,,Indianapolis,39.760085,-86.1637037946731,America/Indiana/Indianapolis,nflverse_stadium_mapping
 2026,1,2026_01_BUF_HOU,2026-09-13,Sunday,13:00,BUF,HOU,HOU00,Reliant Stadium,unknown,astroturf,-1.5,44.5,,,Houston,29.6848581,-95.4108014532699,America/Chicago,nflverse_stadium_mapping
 2026,1,2026_01_CHI_CAR,2026-09-13,Sunday,13:00,CHI,CAR,CAR00,Bank of America Stadium,outdoors,grass,-2.5,47.5,,,Charlotte,35.225737,-80.8536869740441,America/New_York,nflverse_stadium_mapping
 2026,1,2026_01_CLE_JAX,2026-09-13,Sunday,13:00,CLE,JAX,JAX00,EverBank Stadium,outdoors,grass,7.5,40.5,,,Jacksonville,30.32398105,-81.6373045703404,America/New_York,nflverse_stadium_mapping
-2026,1,2026_01_NO_DET,2026-09-13,Sunday,13:00,NO,DET,DET00,Ford Field,dome,fieldturf,7.0,48.5,,,Detroit,42.33995675,-83.045616574037,America/Detroit,nflverse_stadium_mapping
-2026,1,2026_01_NYJ_TEN,2026-09-13,Sunday,13:00,NYJ,TEN,NAS00,Nissan Stadium,outdoors,grass,3.0,38.5,,,Nashville,36.16649655,-86.7712644420847,America/Chicago,nflverse_stadium_mapping
-2026,1,2026_01_TB_CIN,2026-09-13,Sunday,13:00,TB,CIN,CIN00,Paycor Stadium,outdoors,fieldturf,3.5,51.5,,,Cincinnati,39.0954645,-84.5160488350198,America/New_York,nflverse_stadium_mapping
+2026,1,2026_01_NO_DET,2026-09-13,Sunday,13:00,NO,DET,DET00,Ford Field,dome,fieldturf,7.0,49.5,,,Detroit,42.33995675,-83.045616574037,America/Detroit,nflverse_stadium_mapping
+2026,1,2026_01_NYJ_TEN,2026-09-13,Sunday,13:00,NYJ,TEN,NAS00,Nissan Stadium,outdoors,grass,1.5,38.5,,,Nashville,36.16649655,-86.7712644420847,America/Chicago,nflverse_stadium_mapping
+2026,1,2026_01_TB_CIN,2026-09-13,Sunday,13:00,TB,CIN,CIN00,Paycor Stadium,outdoors,fieldturf,3.5,50.5,,,Cincinnati,39.0954645,-84.5160488350198,America/New_York,nflverse_stadium_mapping
 2026,1,2026_01_ARI_LAC,2026-09-13,Sunday,16:25,ARI,LAC,LAX01,SoFi Stadium,dome,matrixturf,10.5,46.5,,,Inglewood,33.95354625,-118.338793383194,America/Los_Angeles,nflverse_stadium_mapping
 2026,1,2026_01_GB_MIN,2026-09-13,Sunday,16:25,GB,MIN,MIN01,U.S. Bank Stadium,dome,sportturf,1.5,45.5,,,Minneapolis,44.9749861,-93.2598737,America/Chicago,nflverse_stadium_mapping
 2026,1,2026_01_MIA_LV,2026-09-13,Sunday,16:25,MIA,LV,VEG00,Allegiant Stadium,dome,grass,3.5,40.5,,,Las Vegas,36.09083455,-115.182477977026,America/Los_Angeles,nflverse_stadium_mapping
-2026,1,2026_01_WAS_PHI,2026-09-13,Sunday,16:25,WAS,PHI,PHI00,Lincoln Financial Field,outdoors,grass,4.5,47.5,,,Philadelphia,39.9009099,-75.167489156059,America/New_York,nflverse_stadium_mapping
+2026,1,2026_01_WAS_PHI,2026-09-13,Sunday,16:25,WAS,PHI,PHI00,Lincoln Financial Field,outdoors,grass,5.5,45.5,,,Philadelphia,39.9009099,-75.167489156059,America/New_York,nflverse_stadium_mapping
 2026,1,2026_01_DAL_NYG,2026-09-13,Sunday,20:20,DAL,NYG,NYC01,MetLife Stadium,outdoors,fieldturf,-2.5,48.5,,,East Rutherford,40.81352375,-74.0734007489118,America/New_York,nflverse_stadium_mapping
 2026,1,2026_01_DEN_KC,2026-09-14,Monday,20:15,DEN,KC,KAN00,GEHA Field at Arrowhead Stadium,outdoors,grass,3.0,42.5,,,Kansas City,39.04894045,-94.4849938110271,America/Chicago,nflverse_stadium_mapping
 2026,2,2026_02_DET_BUF,2026-09-17,Thursday,20:15,DET,BUF,BUF00,Highmark Stadium,outdoors,a_turf,3.0,52.5,,,Orchard Park,42.7737131,-78.7869032106025,America/New_York,nflverse_stadium_mapping
 2026,2,2026_02_CAR_ATL,2026-09-20,Sunday,13:00,CAR,ATL,ATL97,Mercedes-Benz Stadium,unknown,fieldturf,1.5,43.5,,,Atlanta,33.75539625,-84.4008156749447,America/New_York,nflverse_stadium_mapping
 2026,2,2026_02_CIN_HOU,2026-09-20,Sunday,13:00,CIN,HOU,HOU00,Reliant Stadium,unknown,astroturf,2.5,46.5,,,Houston,29.6848581,-95.4108014532699,America/Chicago,nflverse_stadium_mapping
-2026,2,2026_02_CLE_TB,2026-09-20,Sunday,13:00,CLE,TB,TAM00,Raymond James Stadium,outdoors,grass,5.5,42.5,,,Tampa,27.97597925,-82.5042179967362,America/New_York,nflverse_stadium_mapping
+2026,2,2026_02_CLE_TB,2026-09-20,Sunday,13:00,CLE,TB,TAM00,Raymond James Stadium,outdoors,grass,6.5,42.5,,,Tampa,27.97597925,-82.5042179967362,America/New_York,nflverse_stadium_mapping
 2026,2,2026_02_GB_NYJ,2026-09-20,Sunday,13:00,GB,NYJ,NYC01,MetLife Stadium,outdoors,fieldturf,-5.5,42.5,,,East Rutherford,40.81352375,-74.0734007489118,America/New_York,nflverse_stadium_mapping
 2026,2,2026_02_MIN_CHI,2026-09-20,Sunday,13:00,MIN,CHI,CHI98,Soldier Field,outdoors,grass,3.5,45.5,,,Chicago,41.86245145,-87.6167151470407,America/Chicago,nflverse_stadium_mapping
 2026,2,2026_02_NO_BAL,2026-09-20,Sunday,13:00,NO,BAL,BAL00,M&T Bank Stadium,outdoors,grass,7.5,46.5,,,Baltimore,39.2779664,-76.6238093083547,America/New_York,nflverse_stadium_mapping
 2026,2,2026_02_PHI_TEN,2026-09-20,Sunday,13:00,PHI,TEN,NAS00,Nissan Stadium,outdoors,grass,-4.5,42.5,,,Nashville,36.16649655,-86.7712644420847,America/Chicago,nflverse_stadium_mapping
 2026,2,2026_02_PIT_NE,2026-09-20,Sunday,13:00,PIT,NE,BOS00,Gillette Stadium,outdoors,fieldturf,4.5,43.5,,,Foxborough,42.0912526,-71.2644646105907,America/New_York,nflverse_stadium_mapping
-2026,2,2026_02_JAX_DEN,2026-09-20,Sunday,16:05,JAX,DEN,DEN00,Empower Field at Mile High,outdoors,grass,2.5,43.5,,,Denver,39.743952,-105.019222812368,America/Denver,nflverse_stadium_mapping
+2026,2,2026_02_JAX_DEN,2026-09-20,Sunday,16:05,JAX,DEN,DEN00,Empower Field at Mile High,outdoors,grass,3.0,43.5,,,Denver,39.743952,-105.019222812368,America/Denver,nflverse_stadium_mapping
 2026,2,2026_02_LV_LAC,2026-09-20,Sunday,16:05,LV,LAC,LAX01,SoFi Stadium,dome,matrixturf,8.5,42.5,,,Inglewood,33.95354625,-118.338793383194,America/Los_Angeles,nflverse_stadium_mapping
 2026,2,2026_02_MIA_SF,2026-09-20,Sunday,16:25,MIA,SF,SFO01,Levi's Stadium,outdoors,grass,10.5,46.5,,,Santa Clara,37.40303995,-121.969681705055,America/Los_Angeles,nflverse_stadium_mapping
 2026,2,2026_02_SEA_ARI,2026-09-20,Sunday,16:25,SEA,ARI,PHO00,State Farm Stadium,unknown,grass,-10.0,44.5,,,Glendale,33.52770765,-112.262564902643,America/Phoenix,nflverse_stadium_mapping
@@ -43,12 +43,12 @@ season,week,game_id,gameday,weekday,gametime,away_team,home_team,stadium_id,stad
 2026,3,2026_03_TEN_NYG,2026-09-27,Sunday,13:00,TEN,NYG,NYC01,MetLife Stadium,outdoors,fieldturf,3.0,44.5,,,East Rutherford,40.81352375,-74.0734007489118,America/New_York,nflverse_stadium_mapping
 2026,3,2026_03_ARI_SF,2026-09-27,Sunday,16:05,ARI,SF,SFO01,Levi's Stadium,outdoors,grass,11.5,46.5,,,Santa Clara,37.40303995,-121.969681705055,America/Los_Angeles,nflverse_stadium_mapping
 2026,3,2026_03_MIN_TB,2026-09-27,Sunday,16:05,MIN,TB,TAM00,Raymond James Stadium,outdoors,grass,1.5,44.5,,,Tampa,27.97597925,-82.5042179967362,America/New_York,nflverse_stadium_mapping
-2026,3,2026_03_BAL_DAL,2026-09-27,Sunday,16:25,BAL,DAL,DAL00,Maracana Stadium,unknown,matrixturf,-2.5,51.5,,,Rio de Janeiro,-22.9121,-43.2302,America/Sao_Paulo,international_venue_override
+2026,3,2026_03_BAL_DAL,2026-09-27,Sunday,16:25,BAL,DAL,RIO00,Maracana Stadium,unknown,matrixturf,-2.5,51.5,,,Rio de Janeiro,-22.9121,-43.2302,America/Sao_Paulo,international_venue_override
 2026,3,2026_03_LV_NO,2026-09-27,Sunday,16:25,LV,NO,NOR00,Caesars Superdome,dome,sportturf,3.5,42.5,,,New Orleans,29.9510489,-90.082307625389,America/Chicago,nflverse_stadium_mapping
 2026,3,2026_03_LA_DEN,2026-09-27,Sunday,20:20,LA,DEN,DEN00,Empower Field at Mile High,outdoors,grass,-3.0,45.5,,,Denver,39.743952,-105.019222812368,America/Denver,nflverse_stadium_mapping
 2026,3,2026_03_PHI_CHI,2026-09-28,Monday,20:15,PHI,CHI,CHI98,Soldier Field,outdoors,grass,1.5,46.5,,,Chicago,41.86245145,-87.6167151470407,America/Chicago,nflverse_stadium_mapping
 2026,4,2026_04_PIT_CLE,2026-10-01,Thursday,20:15,PIT,CLE,CLE00,Huntington Bank Field,outdoors,grass,-2.5,40.5,,,Cleveland,41.5060559,-81.6997118452595,America/New_York,nflverse_stadium_mapping
-2026,4,2026_04_IND_WAS,2026-10-04,Sunday,09:30,IND,WAS,WAS00,Tottenham Hotspur Stadium,outdoors,grass,1.5,50.5,,,London,51.6043,-0.0664,Europe/London,international_venue_override
+2026,4,2026_04_IND_WAS,2026-10-04,Sunday,09:30,IND,WAS,LON02,Tottenham Hotspur Stadium,outdoors,grass,1.5,50.5,,,London,51.6043,-0.0664,Europe/London,international_venue_override
 2026,4,2026_04_ARI_NYG,2026-10-04,Sunday,13:00,ARI,NYG,NYC01,MetLife Stadium,outdoors,fieldturf,7.0,45.5,,,East Rutherford,40.81352375,-74.0734007489118,America/New_York,nflverse_stadium_mapping
 2026,4,2026_04_DAL_HOU,2026-10-04,Sunday,13:00,DAL,HOU,HOU00,Reliant Stadium,unknown,astroturf,2.5,47.5,,,Houston,29.6848581,-95.4108014532699,America/Chicago,nflverse_stadium_mapping
 2026,4,2026_04_GB_TB,2026-10-04,Sunday,13:00,GB,TB,TAM00,Raymond James Stadium,outdoors,grass,-1.5,47.5,,,Tampa,27.97597925,-82.5042179967362,America/New_York,nflverse_stadium_mapping
@@ -66,12 +66,12 @@ season,week,game_id,gameday,weekday,gametime,away_team,home_team,stadium_id,stad
 2026,5,2026_05_TB_DAL,2026-10-08,Thursday,20:15,TB,DAL,DAL00,AT&T Stadium,unknown,matrixturf,3.5,52.5,,,Arlington,32.74785025,-97.0928337073774,America/Chicago,nflverse_stadium_mapping
 2026,5,2026_05_PHI_JAX,2026-10-11,Sunday,09:30,PHI,JAX,JAX00,Tottenham Hotspur Stadium,outdoors,grass,-1.5,45.5,,,London,51.6043,-0.0664,Europe/London,international_venue_override
 2026,5,2026_05_CIN_MIA,2026-10-11,Sunday,13:00,CIN,MIA,MIA00,Hard Rock Stadium,outdoors,grass,-6.0,49.5,,,Miami Gardens,25.95790315,-80.2388497396752,America/New_York,nflverse_stadium_mapping
-2026,5,2026_05_CLE_NYJ,2026-10-11,Sunday,13:00,CLE,NYJ,NYC01,MetLife Stadium,outdoors,fieldturf,1.5,39.5,,,East Rutherford,40.81352375,-74.0734007489118,America/New_York,nflverse_stadium_mapping
+2026,5,2026_05_CLE_NYJ,2026-10-11,Sunday,13:00,CLE,NYJ,NYC01,MetLife Stadium,outdoors,fieldturf,2.5,39.5,,,East Rutherford,40.81352375,-74.0734007489118,America/New_York,nflverse_stadium_mapping
 2026,5,2026_05_HOU_TEN,2026-10-11,Sunday,13:00,HOU,TEN,NAS00,Nissan Stadium,outdoors,grass,-3.5,43.5,,,Nashville,36.16649655,-86.7712644420847,America/Chicago,nflverse_stadium_mapping
 2026,5,2026_05_IND_PIT,2026-10-11,Sunday,13:00,IND,PIT,PIT00,Acrisure Stadium,outdoors,grass,2.5,47.5,,,Pittsburgh,40.44671645,-80.0157549334943,America/New_York,nflverse_stadium_mapping
 2026,5,2026_05_LV_NE,2026-10-11,Sunday,13:00,LV,NE,BOS00,Gillette Stadium,outdoors,fieldturf,8.5,44.5,,,Foxborough,42.0912526,-71.2644646105907,America/New_York,nflverse_stadium_mapping
 2026,5,2026_05_MIN_NO,2026-10-11,Sunday,13:00,MIN,NO,NOR00,Caesars Superdome,dome,sportturf,-1.5,44.5,,,New Orleans,29.9510489,-90.082307625389,America/Chicago,nflverse_stadium_mapping
-2026,5,2026_05_NYG_WAS,2026-10-11,Sunday,13:00,NYG,WAS,WAS00,Northwest Stadium,outdoors,grass,2.5,48.5,,,Landover,38.9077002,-76.8633260869022,America/New_York,nflverse_stadium_mapping
+2026,5,2026_05_NYG_WAS,2026-10-11,Sunday,13:00,NYG,WAS,WAS00,Northwest Stadium,outdoors,grass,1.5,48.5,,,Landover,38.9077002,-76.8633260869022,America/New_York,nflverse_stadium_mapping
 2026,5,2026_05_DEN_LAC,2026-10-11,Sunday,16:05,DEN,LAC,LAX01,SoFi Stadium,dome,matrixturf,2.5,44.5,,,Inglewood,33.95354625,-118.338793383194,America/Los_Angeles,nflverse_stadium_mapping
 2026,5,2026_05_CHI_GB,2026-10-11,Sunday,16:25,CHI,GB,GNB00,Lambeau Field,outdoors,grass,3.0,49.5,,,Green Bay,44.50095825,-88.0610340437601,America/Chicago,nflverse_stadium_mapping
 2026,5,2026_05_DET_ARI,2026-10-11,Sunday,16:25,DET,ARI,PHO00,State Farm Stadium,unknown,grass,-8.5,48.5,,,Glendale,33.52770765,-112.262564902643,America/Phoenix,nflverse_stadium_mapping
@@ -79,7 +79,7 @@ season,week,game_id,gameday,weekday,gametime,away_team,home_team,stadium_id,stad
 2026,5,2026_05_BAL_ATL,2026-10-11,Sunday,20:20,BAL,ATL,ATL97,Mercedes-Benz Stadium,unknown,fieldturf,-4.5,48.5,,,Atlanta,33.75539625,-84.4008156749447,America/New_York,nflverse_stadium_mapping
 2026,5,2026_05_BUF_LA,2026-10-12,Monday,20:15,BUF,LA,LAX01,SoFi Stadium,dome,matrixturf,3.0,53.5,,,Inglewood,33.95354625,-118.338793383194,America/Los_Angeles,nflverse_stadium_mapping
 2026,6,2026_06_SEA_DEN,2026-10-15,Thursday,20:15,SEA,DEN,DEN00,Empower Field at Mile High,outdoors,grass,-2.5,43.5,,,Denver,39.743952,-105.019222812368,America/Denver,nflverse_stadium_mapping
-2026,6,2026_06_HOU_JAX,2026-10-18,Sunday,09:30,HOU,JAX,JAX00,Wembley Stadium,outdoors,grass,1.5,42.5,,,London,51.556,-0.2796,Europe/London,international_venue_override
+2026,6,2026_06_HOU_JAX,2026-10-18,Sunday,09:30,HOU,JAX,LON00,Wembley Stadium,outdoors,grass,1.5,42.5,,,London,51.556,-0.2796,Europe/London,international_venue_override
 2026,6,2026_06_BAL_CLE,2026-10-18,Sunday,13:00,BAL,CLE,CLE00,Huntington Bank Field,outdoors,grass,-6.5,44.5,,,Cleveland,41.5060559,-81.6997118452595,America/New_York,nflverse_stadium_mapping
 2026,6,2026_06_CAR_PHI,2026-10-18,Sunday,13:00,CAR,PHI,PHI00,Lincoln Financial Field,outdoors,grass,6.5,43.5,,,Philadelphia,39.9009099,-75.167489156059,America/New_York,nflverse_stadium_mapping
 2026,6,2026_06_CHI_ATL,2026-10-18,Sunday,13:00,CHI,ATL,ATL97,Mercedes-Benz Stadium,unknown,fieldturf,-3.0,47.5,,,Atlanta,33.75539625,-84.4008156749447,America/New_York,nflverse_stadium_mapping
@@ -93,14 +93,14 @@ season,week,game_id,gameday,weekday,gametime,away_team,home_team,stadium_id,stad
 2026,6,2026_06_DAL_GB,2026-10-18,Sunday,20:20,DAL,GB,GNB00,Lambeau Field,outdoors,grass,3.0,51.5,,,Green Bay,44.50095825,-88.0610340437601,America/Chicago,nflverse_stadium_mapping
 2026,6,2026_06_WAS_SF,2026-10-19,Monday,20:15,WAS,SF,SFO01,Levi's Stadium,outdoors,grass,5.5,50.5,,,Santa Clara,37.40303995,-121.969681705055,America/Los_Angeles,nflverse_stadium_mapping
 2026,7,2026_07_NE_CHI,2026-10-22,Thursday,20:15,NE,CHI,CHI98,Soldier Field,outdoors,grass,1.5,47.5,,,Chicago,41.86245145,-87.6167151470407,America/Chicago,nflverse_stadium_mapping
-2026,7,2026_07_PIT_NO,2026-10-25,Sunday,09:30,PIT,NO,NOR00,Stade de France,dome,sportturf,-2.5,42.5,,,Paris,48.9245,2.3602,Europe/Paris,international_venue_override
+2026,7,2026_07_PIT_NO,2026-10-25,Sunday,09:30,PIT,NO,PAR00,Stade de France,dome,sportturf,-2.5,42.5,,,Paris,48.9245,2.3602,Europe/Paris,international_venue_override
 2026,7,2026_07_CIN_BAL,2026-10-25,Sunday,13:00,CIN,BAL,BAL00,M&T Bank Stadium,outdoors,grass,3.5,51.5,,,Baltimore,39.2779664,-76.6238093083547,America/New_York,nflverse_stadium_mapping
-2026,7,2026_07_CLE_TEN,2026-10-25,Sunday,13:00,CLE,TEN,NAS00,Nissan Stadium,outdoors,grass,2.5,40.5,,,Nashville,36.16649655,-86.7712644420847,America/Chicago,nflverse_stadium_mapping
+2026,7,2026_07_CLE_TEN,2026-10-25,Sunday,13:00,CLE,TEN,NAS00,Nissan Stadium,outdoors,grass,,,,,Nashville,36.16649655,-86.7712644420847,America/Chicago,nflverse_stadium_mapping
 2026,7,2026_07_IND_MIN,2026-10-25,Sunday,13:00,IND,MIN,MIN01,U.S. Bank Stadium,dome,sportturf,2.5,46.5,,,Minneapolis,44.9749861,-93.2598737,America/Chicago,nflverse_stadium_mapping
 2026,7,2026_07_MIA_NYJ,2026-10-25,Sunday,13:00,MIA,NYJ,NYC01,MetLife Stadium,outdoors,fieldturf,,,,,East Rutherford,40.81352375,-74.0734007489118,America/New_York,nflverse_stadium_mapping
 2026,7,2026_07_NYG_HOU,2026-10-25,Sunday,13:00,NYG,HOU,HOU00,Reliant Stadium,unknown,astroturf,5.5,43.5,,,Houston,29.6848581,-95.4108014532699,America/Chicago,nflverse_stadium_mapping
 2026,7,2026_07_SF_ATL,2026-10-25,Sunday,13:00,SF,ATL,ATL97,Mercedes-Benz Stadium,unknown,fieldturf,-4.5,47.5,,,Atlanta,33.75539625,-84.4008156749447,America/New_York,nflverse_stadium_mapping
-2026,7,2026_07_TB_CAR,2026-10-25,Sunday,13:00,TB,CAR,CAR00,Bank of America Stadium,outdoors,grass,,,,,Charlotte,35.225737,-80.8536869740441,America/New_York,nflverse_stadium_mapping
+2026,7,2026_07_TB_CAR,2026-10-25,Sunday,13:00,TB,CAR,CAR00,Bank of America Stadium,outdoors,grass,-1.5,45.5,,,Charlotte,35.225737,-80.8536869740441,America/New_York,nflverse_stadium_mapping
 2026,7,2026_07_DEN_ARI,2026-10-25,Sunday,16:05,DEN,ARI,PHO00,State Farm Stadium,unknown,grass,,,,,Glendale,33.52770765,-112.262564902643,America/Phoenix,nflverse_stadium_mapping
 2026,7,2026_07_GB_DET,2026-10-25,Sunday,16:25,GB,DET,DET00,Ford Field,dome,fieldturf,,,,,Detroit,42.33995675,-83.045616574037,America/Detroit,nflverse_stadium_mapping
 2026,7,2026_07_LA_LV,2026-10-25,Sunday,16:25,LA,LV,VEG00,Allegiant Stadium,dome,grass,,,,,Las Vegas,36.09083455,-115.182477977026,America/Los_Angeles,nflverse_stadium_mapping
@@ -121,7 +121,7 @@ season,week,game_id,gameday,weekday,gametime,away_team,home_team,stadium_id,stad
 2026,8,2026_08_PHI_WAS,2026-11-01,Sunday,20:20,PHI,WAS,WAS00,Northwest Stadium,outdoors,grass,,,,,Landover,38.9077002,-76.8633260869022,America/New_York,nflverse_stadium_mapping
 2026,8,2026_08_CHI_SEA,2026-11-02,Monday,20:15,CHI,SEA,SEA00,Lumen Field,outdoors,fieldturf,,,,,Seattle,47.5953459,-122.331644311961,America/Los_Angeles,nflverse_stadium_mapping
 2026,9,2026_09_JAX_BAL,2026-11-05,Thursday,20:15,JAX,BAL,BAL00,M&T Bank Stadium,outdoors,grass,,,,,Baltimore,39.2779664,-76.6238093083547,America/New_York,nflverse_stadium_mapping
-2026,9,2026_09_CIN_ATL,2026-11-08,Sunday,09:30,CIN,ATL,ATL97,Bernabeu,unknown,fieldturf,-4.5,49.5,,,Madrid,40.4531,-3.6883,Europe/Madrid,international_venue_override
+2026,9,2026_09_CIN_ATL,2026-11-08,Sunday,09:30,CIN,ATL,MAD01,Bernabeu,unknown,fieldturf,-4.5,49.5,,,Madrid,40.4531,-3.6883,Europe/Madrid,international_venue_override
 2026,9,2026_09_CLE_NO,2026-11-08,Sunday,13:00,CLE,NO,NOR00,Caesars Superdome,dome,sportturf,,,,,New Orleans,29.9510489,-90.082307625389,America/Chicago,nflverse_stadium_mapping
 2026,9,2026_09_DAL_IND,2026-11-08,Sunday,13:00,DAL,IND,IND00,Lucas Oil Stadium,unknown,fieldturf,,,,,Indianapolis,39.760085,-86.1637037946731,America/Indiana/Indianapolis,nflverse_stadium_mapping
 2026,9,2026_09_DEN_CAR,2026-11-08,Sunday,13:00,DEN,CAR,CAR00,Bank of America Stadium,outdoors,grass,,,,,Charlotte,35.225737,-80.8536869740441,America/New_York,nflverse_stadium_mapping
@@ -136,7 +136,7 @@ season,week,game_id,gameday,weekday,gametime,away_team,home_team,stadium_id,stad
 2026,9,2026_09_TB_CHI,2026-11-08,Sunday,20:20,TB,CHI,CHI98,Soldier Field,outdoors,grass,,,,,Chicago,41.86245145,-87.6167151470407,America/Chicago,nflverse_stadium_mapping
 2026,9,2026_09_BUF_MIN,2026-11-09,Monday,20:15,BUF,MIN,MIN01,U.S. Bank Stadium,dome,sportturf,,,,,Minneapolis,44.9749861,-93.2598737,America/Chicago,nflverse_stadium_mapping
 2026,10,2026_10_WAS_NYG,2026-11-12,Thursday,20:15,WAS,NYG,NYC01,MetLife Stadium,outdoors,fieldturf,,,,,East Rutherford,40.81352375,-74.0734007489118,America/New_York,nflverse_stadium_mapping
-2026,10,2026_10_NE_DET,2026-11-15,Sunday,09:30,NE,DET,DET00,FC Bayern Munich Stadium,dome,fieldturf,1.5,49.5,,,Munich,48.2188,11.6247,Europe/Berlin,international_venue_override
+2026,10,2026_10_NE_DET,2026-11-15,Sunday,09:30,NE,DET,MUN01,FC Bayern Munich Stadium,dome,fieldturf,-1.5,49.5,,,Munich,48.2188,11.6247,Europe/Berlin,international_venue_override
 2026,10,2026_10_BUF_NYJ,2026-11-15,Sunday,13:00,BUF,NYJ,NYC01,MetLife Stadium,outdoors,fieldturf,,,,,East Rutherford,40.81352375,-74.0734007489118,America/New_York,nflverse_stadium_mapping
 2026,10,2026_10_CAR_NO,2026-11-15,Sunday,13:00,CAR,NO,NOR00,Caesars Superdome,dome,sportturf,,,,,New Orleans,29.9510489,-90.082307625389,America/Chicago,nflverse_stadium_mapping
 2026,10,2026_10_HOU_CLE,2026-11-15,Sunday,13:00,HOU,CLE,CLE00,Huntington Bank Field,outdoors,grass,,,,,Cleveland,41.5060559,-81.6997118452595,America/New_York,nflverse_stadium_mapping
@@ -160,7 +160,7 @@ season,week,game_id,gameday,weekday,gametime,away_team,home_team,stadium_id,stad
 2026,11,2026_11_NYJ_LAC,2026-11-22,Sunday,16:05,NYJ,LAC,LAX01,SoFi Stadium,dome,matrixturf,,,,,Inglewood,33.95354625,-118.338793383194,America/Los_Angeles,nflverse_stadium_mapping
 2026,11,2026_11_LV_DEN,2026-11-22,Sunday,16:25,LV,DEN,DEN00,Empower Field at Mile High,outdoors,grass,,,,,Denver,39.743952,-105.019222812368,America/Denver,nflverse_stadium_mapping
 2026,11,2026_11_PIT_PHI,2026-11-22,Sunday,16:25,PIT,PHI,PHI00,Lincoln Financial Field,outdoors,grass,,,,,Philadelphia,39.9009099,-75.167489156059,America/New_York,nflverse_stadium_mapping
-2026,11,2026_11_MIN_SF,2026-11-22,Sunday,20:20,MIN,SF,SFO01,Estadio Banorte,outdoors,grass,4.5,47.5,,,Mexico City,19.3029,-99.1505,America/Mexico_City,international_venue_override
+2026,11,2026_11_MIN_SF,2026-11-22,Sunday,20:20,MIN,SF,MEX00,Estadio Banorte,outdoors,grass,4.5,47.5,,,Mexico City,19.3029,-99.1505,America/Mexico_City,international_venue_override
 2026,11,2026_11_CIN_WAS,2026-11-23,Monday,20:15,CIN,WAS,WAS00,Northwest Stadium,outdoors,grass,,,,,Landover,38.9077002,-76.8633260869022,America/New_York,nflverse_stadium_mapping
 2026,12,2026_12_GB_LA,2026-11-25,Wednesday,20:00,GB,LA,LAX01,SoFi Stadium,dome,matrixturf,5.5,48.5,,,Inglewood,33.95354625,-118.338793383194,America/Los_Angeles,nflverse_stadium_mapping
 2026,12,2026_12_CHI_DET,2026-11-26,Thursday,13:00,CHI,DET,DET00,Ford Field,dome,fieldturf,2.5,53.5,,,Detroit,42.33995675,-83.045616574037,America/Detroit,nflverse_stadium_mapping
